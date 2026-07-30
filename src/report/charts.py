@@ -14,6 +14,7 @@ from pathlib import Path
 import matplotlib
 
 matplotlib.use("Agg")
+import matplotlib.dates as mdates  # noqa: E402
 import matplotlib.font_manager as fm  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
@@ -129,33 +130,98 @@ def chart_factors(factors: dict, session, outdir: Path) -> Path | None:
     return p
 
 
+# FRED 시리즈 ID를 그대로 범례에 쓰면 독자에게 아무 의미가 없다(BAMLH0A0HYM2).
+# 1번 블록 표는 한글 라벨을 쓰므로 차트도 같은 어휘로 맞춘다.
+MACRO_LABELS = {
+    "DGS2": ("2년물", "2Y"),
+    "DGS10": ("10년물", "10Y"),
+    "BAMLH0A0HYM2": ("하이일드 OAS", "HY OAS"),
+    "T10Y2Y": ("10Y-2Y", "10Y-2Y"),
+    "VIXCLS": ("VIX", "VIX"),
+    "T10YIE": ("기대인플레", "10Y BEI"),
+    "DTWEXBGS": ("달러지수", "USD Index"),
+    "DFF": ("EFFR", "EFFR"),
+}
+
+
+def macro_window(macro_wide: pd.DataFrame, session, lookback: int = 120) -> pd.DataFrame:
+    """차트에 쓸 구간을 자른다. **관측이 있는 영업일만** 남긴다.
+
+    macro는 달력일 인덱스다. tail(lookback)을 그대로 쓰면 주말이 포함된 달력
+    120일(관측 30% 결측, 실제 ~82거래일)이 잡히고, 선이 매주 끊겨 파선처럼 보이며
+    제목의 '거래일'이 거짓이 된다(2026-07-30 실측). 잘라내는 순서가 중요하다 --
+    반드시 결측·주말을 **먼저** 버리고 그 다음에 tail을 취해야 한다.
+    """
+    if macro_wide is None or macro_wide.empty:
+        return pd.DataFrame()
+    w = macro_wide[macro_wide.index <= pd.Timestamp(session)]
+    w = w.dropna(how="all")
+    w = w[w.index.dayofweek < 5]
+    return w.tail(lookback)
+
+
 def chart_macro(macro_wide: pd.DataFrame, session, outdir: Path, lookback: int = 120) -> Path | None:
-    """3. 금리·크레딧·변동성 3패널"""
+    """3. 금리·크레딧·변동성 3패널
+
+    주의 두 가지:
+    1. **주말·휴일 행을 먼저 버린다.** macro는 달력일 인덱스라 tail(120)을 그대로
+       쓰면 30% 이상이 NaN인 120 달력일(≈82거래일)이 잡히고, 선이 매주 끊겨 파선처럼
+       보인다. 제목의 '거래일'도 거짓이 된다(2026-07-30 실측).
+    2. **10Y-2Y를 HY OAS와 같은 축에 두지 않는다.** 레벨이 0.35 vs 2.8이라 스프레드가
+       납작하게 깔려 변화가 전혀 안 보인다. 오른쪽 축으로 분리한다.
+    """
     if macro_wide is None or macro_wide.empty:
         return None
-    w = macro_wide[macro_wide.index <= pd.Timestamp(session)].tail(lookback)
+    w = macro_window(macro_wide, session, lookback)
     if w.empty:
         return None
 
     panels = [
-        (["DGS2", "DGS10"], _t("미국채 금리 (%)", "UST Yields (%)")),
-        (["BAMLH0A0HYM2", "T10Y2Y"], _t("하이일드 OAS / 10Y-2Y (%p)", "HY OAS / 10Y-2Y (%p)")),
-        (["VIXCLS"], _t("VIX", "VIX")),
+        (["DGS2", "DGS10"], _t("미국채 금리 (%)", "UST Yields (%)"), None),
+        (["BAMLH0A0HYM2"], _t("하이일드 OAS (%p)", "HY OAS (%p)"), "T10Y2Y"),
+        (["VIXCLS"], _t("VIX", "VIX"), None),
     ]
-    panels = [(cols, t) for cols, t in panels if any(c in w.columns for c in cols)]
+    panels = [(c, t, r) for c, t, r in panels if any(x in w.columns for x in c)]
     if not panels:
         return None
+
+    def _lab(col: str) -> str:
+        ko, en = MACRO_LABELS.get(col, (col, col))
+        return _t(ko, en)
 
     fig, axes = plt.subplots(len(panels), 1, figsize=(8.3, 2.1 * len(panels)), sharex=True)
     axes = np.atleast_1d(axes)
     palette = [ACCENT, UP, DOWN]
-    for ax, (cols, title) in zip(axes, panels):
+    for ax, (cols, title, right_col) in zip(axes, panels):
+        handles = []
         for i, c in enumerate(cols):
             if c in w.columns and w[c].notna().any():
-                ax.plot(w.index, w[c], lw=1.5, color=palette[i % len(palette)], label=c)
+                s = w[c].dropna()     # 단일 결측에서 선이 끊기지 않게 한다
+                ln, = ax.plot(s.index, s.values, lw=1.5,
+                              color=palette[i % len(palette)], label=_lab(c))
+                handles.append(ln)
+        if right_col and right_col in w.columns and w[right_col].notna().any():
+            ax2 = ax.twinx()
+            s = w[right_col].dropna()
+            ln, = ax2.plot(s.index, s.values, lw=1.5, color=UP, label=_lab(right_col))
+            handles.append(ln)
+            ax2.set_ylabel(_lab(right_col), fontsize=8.5, color=UP)
+            ax2.tick_params(axis="y", labelsize=8, colors=UP)
+            ax2.grid(False)           # 격자 두 겹은 읽기를 방해한다
         ax.set_title(title, fontsize=10.5, loc="left")
-        if len(cols) > 1:
-            ax.legend(fontsize=8, ncol=2, loc="upper left")
+        if len(handles) > 1:
+            # 범례를 데이터 위에 두면 선을 가리고, 제목과 같은 왼쪽에 두면 제목을 덮는다.
+            # 제목은 왼쪽, 범례는 같은 행 오른쪽으로 나눈다.
+            ax.legend(handles, [h.get_label() for h in handles], fontsize=8, ncol=2,
+                      loc="lower right", bbox_to_anchor=(1.0, 1.0), frameon=False,
+                      handlelength=1.4, columnspacing=1.2)
+
+    # x축 라벨이 서로 겹쳐 읽을 수 없었다. 눈금 수를 제한하고 기울인다.
+    axes[-1].xaxis.set_major_locator(mdates.AutoDateLocator(minticks=4, maxticks=7))
+    axes[-1].xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
+    for lb in axes[-1].get_xticklabels():
+        lb.set_rotation(20)
+        lb.set_horizontalalignment("right")
     axes[-1].set_xlabel("")
     fig.suptitle(_t(f"매크로 신호 · 최근 {len(w)}거래일", f"Macro Signals · last {len(w)} sessions"),
                  fontsize=13, fontweight="bold", y=1.0)

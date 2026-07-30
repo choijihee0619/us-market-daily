@@ -206,6 +206,30 @@ def test_macro_no_fake_zero_in_title():
     print("  서술에 기준일·미공개 표기 확인")
 
 
+def test_macro_chart_window_excludes_weekends():
+    """차트 구간이 '거래일'이어야 한다. 달력일로 자르면 선이 매주 끊긴다."""
+    from src.report.charts import macro_window
+
+    # 달력일 인덱스 6개월. 주말 행은 전부 NaN (FRED 실제 형태)
+    idx = pd.date_range("2026-01-01", "2026-07-29", freq="D")
+    df = pd.DataFrame({"DGS10": np.where(idx.dayofweek < 5, 4.5, np.nan)}, index=idx)
+
+    w = macro_window(df, pd.Timestamp("2026-07-29"), lookback=120)
+    assert len(w) == 120, f"120행이 나와야 한다: {len(w)}"
+    assert set(w.index.dayofweek) <= {0, 1, 2, 3, 4}, "주말이 섞였다"
+    assert w["DGS10"].isna().sum() == 0, f"결측 {w['DGS10'].isna().sum()}건 -- 선이 끊긴다"
+
+    # 120거래일이면 달력으로 약 168일이어야 한다(주말 제외 효과 확인)
+    span = (w.index.max() - w.index.min()).days
+    assert span > 150, f"달력 구간 {span}일 -- 여전히 달력일로 자르고 있다"
+
+    # 순서가 중요하다: tail을 먼저 하면 안 된다
+    naive = df[df.index <= pd.Timestamp("2026-07-29")].tail(120)
+    assert naive["DGS10"].isna().sum() > 30, "전제 불성립 (naive 방식에 결측이 없다)"
+    print(f"  거래일 {len(w)}행, 결측 0, 달력 구간 {span}일 "
+          f"(naive 방식은 결측 {naive['DGS10'].isna().sum()}건)")
+
+
 if __name__ == "__main__":
     print("\n[1] novelty 자기비교 (2번 블록 소실)")
     test_novelty_excludes_self()
@@ -216,4 +240,6 @@ if __name__ == "__main__":
     print("\n[3] FRED 공개 지연 (없는 사실 +0bp)")
     test_macro_staggered_publication()
     test_macro_no_fake_zero_in_title()
+    print("\n[4] 매크로 차트 구간 (선 끊김 · 거짓 '거래일')")
+    test_macro_chart_window_excludes_weekends()
     print("\n전체 통과")
