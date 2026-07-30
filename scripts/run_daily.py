@@ -345,7 +345,8 @@ def main() -> int:
         news_win = N.filter_window(news, start, end) if not news.empty else pd.DataFrame()
 
     # --dry-run에서도 회사명·섹터가 필요하다. 파일이 있으면 읽고, 없으면 None으로 둔다.
-    ctx = build_context(cfg, session, news_win, resolve_universe(cfg))
+    universe_df = resolve_universe(cfg)
+    ctx = build_context(cfg, session, news_win, universe_df)
 
     outdir = OUT_DIR / session.strftime("%Y-%m-%d")
     charts = C.build_all(ctx, outdir / "images", int(cfg.get_path("report.charts.dpi", 144)))
@@ -406,7 +407,29 @@ def main() -> int:
         made.append(f"tistory  {p}")
 
     if "naver" in channels:
-        p = NAVER.write_package(session, title, ctx, charts, OUT_DIR, canonical)
+        # 네이버는 티스토리 요약본이 아니라 **뉴스 중심 리포트**다. 서술 축이 달라야
+        # 중복 콘텐츠가 되지 않는다. 인사이트도 별도 프롬프트로 생성한다.
+        topics = list(cfg.get_path("llm.topics", []))
+        uni_set = set(universe_df["ticker"]) if universe_df is not None and not universe_df.empty else set()
+        digest = NAVER._news_digest(news_win, topics, limit=2, universe=uni_set)
+        news_map = ctx.get("outlier_news", {})
+        allout = ctx["cross_section"].get("top", []) + ctx["cross_section"].get("bottom", [])
+        insight_ctx = {
+            "session": str(session.date()),
+            "topic_digest": digest,
+            "matched": [{"ticker": r["ticker"], "name": r.get("name"),
+                         "sector": r.get("sector"), "ret": r["ret"],
+                         "headline": news_map.get(r["ticker"])}
+                        for r in allout if r["ticker"] in news_map][:8],
+            "unmatched": [{"ticker": r["ticker"], "name": r.get("name"), "ret": r["ret"]}
+                          for r in allout if r["ticker"] not in news_map][:8],
+            "benchmarks": ctx.get("benchmarks", {}),
+            "sectors": ctx.get("sectors", [])[:3],
+        }
+        insight = provider.write_news_insight(insight_ctx)
+        p = NAVER.write_package(session, title, ctx, charts, OUT_DIR, canonical,
+                                news_win=news_win, topics=topics, insight=insight,
+                                universe=uni_set)
         made.append(f"naver    {p}")
 
     print()

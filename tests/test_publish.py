@@ -93,32 +93,53 @@ def main():
     assert html.count("<div") == html.count("</div>"), "div 태그 불균형"
     assert html.count("<h2") == html.count("</h2>"), "h2 태그 불균형"
     assert "세 줄 요약" in html and "목차" in html
-    # 5블록 + 용어. 용어를 목차에 넣는 이유는 tistory_package.to_html 주석 참조.
     n_anchor = html.count('id="m')
-    assert n_anchor == 6, f"목차 앵커 개수 이상: {n_anchor}"
+    assert n_anchor == 5, f"목차 앵커 개수 이상: {n_anchor}"
     for aid in re.findall(r'href="#(m\d)"', html):
         assert f'id="{aid}"' in html, f"앵커 {aid} 대상 없음"
-    assert "[[IMG:" in html, "이미지 자리표시 없음"
+    # repo_url이 GitHub 형식이면 이미지가 raw URL로 인라인된다(붙여넣기 1회).
+    assert 'raw.githubusercontent.com' in html and '<img ' in html, \
+        "이미지가 인라인되지 않음 -- 붙여넣기 후 드래그가 다시 필요해진다"
+    assert "[[IMG:" not in html, "인라인 모드인데 자리표시자가 남음"
+    # 레포가 없으면(초기 상태) 자리표시자로 폴백해야 한다
+    html_np = TIST.to_html(md, ctx, None, None)
+    assert "[[IMG:" in html_np, "폴백 자리표시자 없음"
     assert repo in html, "재현성 링크 없음"
     assert "투자자문이 아닙니다" in html
     assert not re.search(r"^#{1,3} ", html, re.M), "마크다운 헤딩이 그대로 남음"
     print(f"  post.html {len(html)}자, 앵커 5개, 태그 균형 OK")
     print(f"  파일: {sorted(x.name for x in tp.iterdir())}")
 
-    print("\n[3] 네이버 요약본")
-    np_ = NAVER.write_package(session, title, ctx, charts, outdir, canonical)
+    print("\n[3] 네이버 뉴스 리포트")
+    news_win = pd.DataFrame({
+        "headline": ["Acme beats earnings", "Fed holds rates", "Beta merger deal"],
+        "topic": [["실적"], ["통화정책"], ["M&A"]],
+        "tickers": [["AAA"], [], ["BBB"]],
+        "novelty": [0.9, 0.8, 0.7],
+        "sentiment": [0.2, 0.0, 0.1],
+    })
+    np_ = NAVER.write_package(session, title, ctx, charts, outdir, canonical,
+                              news_win=news_win, topics=["실적", "통화정책", "M&A"],
+                              insight="오늘은 실적 기사가 가장 많았습니다.",
+                              universe={"AAA", "BBB"})
     txt = (np_ / "post.txt").read_text(encoding="utf-8")
-    assert len(txt) < len(md), f"요약본이 원문보다 김 ({len(txt)} vs {len(md)})"
     assert txt.count("http") == 1, f"외부 링크가 1개가 아님: {txt.count('http')}"
     assert canonical in txt
-    assert "어제 신호 채점" in txt
+    # 티스토리와 축이 달라야 한다: 뉴스가 앞, 계량 용어는 뒤로
+    assert "뉴스로 보는 하루" in txt or "뉴스는 어디에" in txt, "뉴스 중심 구성이 아님"
+    assert "잔차" not in txt, "네이버 글에 계량 용어가 앞세워짐 (티스토리와 중복)"
+    assert "오늘은 실적 기사가 가장 많았습니다" in txt, "인사이트 미반영"
+    # 주제별 합계를 전체 건수로 표시하면 안 된다
+    assert "여러 주제에 걸치는" in txt, "중복 계산 안내 누락"
     # 제목에는 구분자 '|' 가 쓰이므로, 줄 시작의 마크다운 표만 검사한다
     assert not any(l.lstrip().startswith("|") for l in txt.split("\n")), \
         "마크다운 표가 평문 요약본에 섞임"
     assert "##" not in txt and "**" not in txt, "마크다운 문법이 평문에 남음"
     n_img = len(list((np_ / "images").glob("*.png")))
-    assert n_img <= 2, f"요약본 이미지 과다: {n_img}"
-    print(f"  post.txt {len(txt)}자 (원문 {len(md)}자의 {len(txt)/len(md)*100:.0f}%)")
+    assert n_img <= 2, f"이미지 과다: {n_img}"
+    ntitle = (np_ / "title.txt").read_text(encoding="utf-8")
+    assert ntitle != title, "네이버 제목이 티스토리와 동일 -- 유사문서 위험"
+    print(f"  post.txt {len(txt)}자, 제목 분리 확인")
     print(f"  외부 링크 1개, 이미지 {n_img}장")
 
     print("\n[4] 채널 간 정합성")

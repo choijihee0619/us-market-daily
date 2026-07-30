@@ -6,8 +6,8 @@ import logging
 from typing import Sequence
 
 from ..config import env
-from .anthropic_provider import CLASSIFY_SYSTEM, WRITE_SYSTEM
-from .base import LLMProvider, build_narrative_prompt
+from .anthropic_provider import CLASSIFY_SYSTEM, NEWS_SYSTEM, WRITE_SYSTEM
+from .base import LLMProvider, build_narrative_prompt, build_news_insight_prompt
 
 log = logging.getLogger(__name__)
 
@@ -66,3 +66,13 @@ class OpenAIProvider(LLMProvider):
             from .rule_provider import RuleProvider
 
             return RuleProvider(self.cfg).write_narrative(context)
+
+    def write_news_insight(self, context: dict) -> str:
+        try:
+            return self._chat(self.write_model, NEWS_SYSTEM,
+                              build_news_insight_prompt(context), 700)
+        except Exception as e:
+            log.warning("OpenAI 뉴스 인사이트 실패: %s -- 룰베이스로 폴백", e)
+            from .rule_provider import RuleProvider
+
+            return RuleProvider(self.cfg).write_news_insight(context)

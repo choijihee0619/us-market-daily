@@ -137,7 +137,11 @@ llm:
   # anthropic 프로바이더용 (provider를 anthropic으로 바꿀 때 쓰인다)
   classify_model: claude-haiku-4-5-20251001
   write_model: claude-sonnet-5
-  max_articles_to_classify: 120
+  # AV 토픽 매핑을 정확한 3개로 줄이면서 사전분류가 줄었다. 그만큼 LLM 분류로
+  # 넘어가므로 예산을 올린다. gpt-4o-mini는 40건 배치라 300건이면 8회 호출이고
+  # 비용은 무시할 수준이다. 정확한 토픽이 2번 블록 회귀의 입력이라 여기서 아끼면
+  # 뒤 분석이 통째로 흔들린다.
+  max_articles_to_classify: 300
   topics:
     - 통화정책
     - 인플레이션

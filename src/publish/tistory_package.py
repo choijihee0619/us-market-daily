@@ -49,6 +49,33 @@ INSTRUCTIONS = """티스토리 게시 절차 (약 3분)
 """
 
 
+INSTRUCTIONS_EMBED = """티스토리 게시 절차 (약 1분)
+
+1. title.txt 제목을 복사해 붙여넣는다.
+2. 에디터 우측 상단 [기본모드] -> [HTML] 로 전환한다.
+3. post.html 전체를 복사해 붙여넣는다.  ** 이미지까지 함께 들어간다. **
+4. 우측 설정에서: 카테고리 지정 / tags.txt 태그 입력 / 공개 / 예약 07:00.
+5. 발행.
+
+이미지 드래그 단계가 없어졌다. 차트를 GitHub raw URL로 직접 참조하기 때문이다.
+대신 알아둘 것:
+- **Actions가 그날 커밋을 push한 뒤에만 이미지가 보인다.** 로컬에서 직접 돌려
+  바로 붙여넣으면 아직 push 전이라 깨진다. 그럴 때는 먼저 커밋·푸시할 것.
+- 레포를 private으로 바꾸거나 이름을 바꾸면 과거 글 이미지가 전부 깨진다.
+- 썸네일은 티스토리가 본문 첫 이미지를 잡는다. 따로 지정하려면 images/ 의
+  04_residuals.png 를 대표 이미지로 업로드하면 된다.
+
+체크리스트
+- [ ] 2번 블록(귀인 서술) 한두 문장을 직접 손봤는가
+      -> 매일 실제로 다르게 나오는 유일한 부분이다. 이 한 단계가 자동 생성 티를 지운다.
+- [ ] 붙여넣은 뒤 이미지 4장이 실제로 보이는가 (미리보기로 확인)
+
+애드센스 관련
+- 자동광고를 켜면 구글이 위치를 잡는다. 본문에 수동 광고 코드를 추가로 심지 말 것.
+- 금융 카테고리는 E-E-A-T 심사가 빡빡하다. 방법론 페이지를 고정 메뉴에 둘 것.
+"""
+
+
 def _inline(s: str) -> str:
     s = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", s)
     s = re.sub(r"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)", r"<i>\1</i>", s)
@@ -69,7 +96,32 @@ TH = ("border:1px solid #d8dade;padding:9px 12px;background:#f6f7f9;"
 TD = "border:1px solid #d8dade;padding:9px 12px;"
 
 
-def to_html(markdown_text: str, ctx: dict, repo_url: str | None = None) -> str:
+def raw_image_base(repo_url: str | None, session, branch: str = "main") -> str | None:
+    """GitHub raw 이미지 베이스 URL.
+
+    붙여넣기 시간의 대부분이 이미지 드래그였다(차트 4장 x 위치 맞추기). 레포가
+    public이고 워크플로가 assets/ 를 커밋하므로, 그 파일을 raw URL로 직접 참조하면
+    **HTML 한 번 붙여넣기로 이미지까지 들어간다.**
+
+    트레이드오프를 알고 쓸 것:
+    - raw.githubusercontent 는 CDN 용도로 설계된 게 아니다. 개인 블로그 트래픽
+      수준에서는 문제되지 않지만, 레포를 private으로 바꾸거나 이름을 바꾸면
+      과거 글의 이미지가 전부 깨진다.
+    - **아직 push되지 않은 실행에서는 404다.** 로컬에서 돌려 바로 붙여넣을 때는
+      먼저 커밋·푸시하거나, Actions 산출물을 쓰는 게 맞다.
+    """
+    if not repo_url or "USER/" in repo_url:
+        return None
+    m = re.match(r"https?://github\.com/([^/]+)/([^/]+?)(?:\.git)?/?$", repo_url.strip())
+    if not m:
+        return None
+    owner, repo = m.group(1), m.group(2)
+    d = f"{pd.Timestamp(session):%Y-%m-%d}"
+    return f"https://raw.githubusercontent.com/{owner}/{repo}/{branch}/assets/{d}"
+
+
+def to_html(markdown_text: str, ctx: dict, repo_url: str | None = None,
+            image_base: str | None = None) -> str:
     session = pd.Timestamp(ctx["session"])
     H: list[str] = [f'<div style="{BODY}">']
 
@@ -85,11 +137,9 @@ def to_html(markdown_text: str, ctx: dict, repo_url: str | None = None) -> str:
         H.append("</div>")
 
     # 목차
-    # 용어를 목차에 포함한다. 팩터·잔차·z에 익숙하지 않은 독자가 본문 중간에서
-    # 막혔을 때 바로 내려갈 통로가 있어야 이탈하지 않는다.
     toc = [("m1", "1. 무엇이 움직였나"), ("m2", "2. 무엇이 설명했나"),
            ("m3", "3. 설명되지 않은 움직임"), ("m4", "4. 어제 신호 채점"),
-           ("m5", "5. 다음 거래일 일정"), ("m6", "용어")]
+           ("m5", "5. 다음 거래일 일정")]
     H.append('<div style="border:1px solid #e4e6ea;border-radius:6px;'
              'padding:14px 20px;margin:0 0 34px;background:#fff;">')
     H.append('<div style="font-weight:700;font-size:14px;color:#57606a;'
@@ -138,9 +188,15 @@ def to_html(markdown_text: str, ctx: dict, repo_url: str | None = None) -> str:
             m = re.search(r"\((.*?)\)", line)
             if m:
                 fn = Path(m.group(1)).name
-                H.append(f'<p style="text-align:center;color:#8b949e;font-size:13px;'
-                         f'background:#fafbfc;border:1px dashed #d0d7de;padding:14px;'
-                         f'margin:20px 0;">[[IMG:{fn}]]</p>')
+                if image_base:
+                    # 붙여넣기 한 번으로 이미지까지 들어간다. 드래그 단계가 사라진다.
+                    H.append(f'<p style="margin:24px 0;text-align:center;">'
+                             f'<img src="{image_base}/{fn}" alt="" '
+                             f'style="max-width:100%;height:auto;border-radius:4px;"></p>')
+                else:
+                    H.append(f'<p style="text-align:center;color:#8b949e;font-size:13px;'
+                             f'background:#fafbfc;border:1px dashed #d0d7de;padding:14px;'
+                             f'margin:20px 0;">[[IMG:{fn}]]</p>')
             continue
 
         if line.startswith(">"):
@@ -296,18 +352,19 @@ def to_static_html(markdown_text: str, toc_title: str = "목차") -> str:
 
 def write_package(session, title: str, markdown: str, ctx: dict,
                   chart_paths: list[Path], out_root: Path,
-                  repo_url: str | None = None) -> Path:
+                  repo_url: str | None = None, embed_images: bool = True) -> Path:
     pkg = Path(out_root) / slug(session) / "tistory"
     (pkg / "images").mkdir(parents=True, exist_ok=True)
 
-    html = to_html(markdown, ctx, repo_url)
+    image_base = raw_image_base(repo_url, session) if embed_images else None
+    html = to_html(markdown, ctx, repo_url, image_base)
     (pkg / "title.txt").write_text(title, encoding="utf-8")
     (pkg / "post.html").write_text(html, encoding="utf-8")
 
     # 검출된 금지 표현을 산출물에 함께 싣는다. 로그에만 남기면 아티팩트를 받아
     # 붙여넣는 시점에는 보이지 않는다. 2번 블록을 손보는 단계에서 무엇을 고쳐야
     # 하는지가 손에 들려 있어야 한다.
-    readme = INSTRUCTIONS
+    readme = INSTRUCTIONS_EMBED if image_base else INSTRUCTIONS
     banned = ctx.get("banned") or []
     if banned:
         readme += ("\n\n" + "!" * 62 + "\n"

@@ -151,3 +151,26 @@ class RuleProvider(LLMProvider):
 
         parts.append("이 문단은 규칙 기반으로 생성되었으며 인과관계를 주장하지 않는다.")
         return " ".join(parts)
+
+    def write_news_insight(self, context: dict) -> str:
+        """LLM 없이 만드는 네이버용 정리. 사실 나열만 한다."""
+        parts: list[str] = []
+        dig = context.get("topic_digest") or []
+        if dig:
+            top = dig[0]
+            total = sum(d["n"] for d in dig)
+            parts.append(
+                f"이날 수집한 기사 {total}건 중 가장 많았던 주제는 "
+                f"{top['topic']}({top['n']}건)였습니다."
+            )
+            if len(dig) > 1:
+                parts.append(f"그 다음은 {dig[1]['topic']}({dig[1]['n']}건)였습니다.")
+        n_m, n_u = len(context.get("matched") or []), len(context.get("unmatched") or [])
+        if n_m or n_u:
+            parts.append(
+                f"크게 움직인 종목 {n_m + n_u}개 중 {n_m}개는 관련 보도를 확인했고 "
+                f"{n_u}개는 수집 범위 안에서 찾지 못했습니다."
+            )
+            if n_u:
+                parts.append("찾지 못했다는 것이 뉴스가 없었다는 뜻은 아닙니다.")
+        return " ".join(parts)

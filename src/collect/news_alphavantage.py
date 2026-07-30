@@ -31,21 +31,21 @@ log = logging.getLogger(__name__)
 BASE = "https://www.alphavantage.co/query"
 
 # AV가 지원하는 토픽 슬러그 -> 우리 토픽 체계
+# AV 토픽에는 **뉴스 주제와 산업 섹터가 섞여 있다.** 이걸 구분하지 않고 전부
+# 우리 토픽으로 매핑했더니 오분류가 대량 발생했다(2026-07-30 실측).
+#   financial_markets -> 통화정책  : 금융시장 일반 기사가 전부 통화정책이 됐다.
+#                                    Garmin 실적 기사가 '통화정책' 대표 헤드라인으로 올라왔다.
+#   technology/blockchain -> AI투자 : 기술 섹터 기사 ≠ AI 설비투자 뉴스
+#   finance/life_sciences/real_estate -> 실적 : 섹터를 주제로 바꿔치기한 것이다
+#   economy_macro -> 인플레이션     : macro는 GDP·고용·물가를 모두 포함한다
+#
+# 그래서 **의미가 정확히 일치하는 3개만 남긴다.** 나머지는 LLM 분류로 보낸다.
+# 섹터 토픽 배치를 계속 요청하는 것과는 별개다 -- 그건 종목 커버리지를 위한 것이고
+# (7장 5번), 토픽 라벨로 쓰지 않을 뿐이다.
 AV_TOPICS = {
-    "financial_markets": "통화정책",
     "economy_monetary": "통화정책",
-    "economy_macro": "인플레이션",
-    "economy_fiscal": "규제정책",
     "earnings": "실적",
-    "technology": "AI/데이터센터투자",
-    "energy_transportation": "에너지",
-    "retail_wholesale": "소비",
-    "manufacturing": "공급망",
     "mergers_and_acquisitions": "M&A",
-    "finance": "실적",
-    "life_sciences": "실적",
-    "real_estate": "실적",
-    "blockchain": "AI/데이터센터투자",
 }
 
 # 무료 티어 25/day 안에서 돌리기 위한 기본 배치
@@ -145,10 +145,11 @@ def fetch_news(
                 for t in item.get("ticker_sentiment", [])
                 if t.get("ticker")
             }, ensure_ascii=False)
-            av_topics = [
-                AV_TOPICS[t["topic"]] for t in item.get("topics", [])
-                if t.get("topic") in AV_TOPICS
-            ]
+            # 원시 슬러그를 함께 저장한다. 매핑만 저장하면 나중에 매핑을 고쳐도
+            # 과거 데이터를 다시 만들 수 없어 재수집이 강제된다(2026-07-30에 실제로
+            # 겪었다). 원시값이 있으면 재매핑이 오프라인으로 끝난다.
+            raw_topics = [str(t.get("topic")) for t in item.get("topics", []) if t.get("topic")]
+            av_topics = [AV_TOPICS[t] for t in raw_topics if t in AV_TOPICS]
 
             rows.append({
                 "id": _mk_id(url, title),
@@ -163,6 +164,7 @@ def fetch_news(
                 "av_label": item.get("overall_sentiment_label", ""),
                 "av_relevance": rel,
                 "av_topics": sorted(set(av_topics)),
+                "av_topics_raw": sorted(set(raw_topics)),
             })
 
         time.sleep(13)  # 분당 5요청 제한 -> 12초 이상 간격
@@ -195,8 +197,9 @@ def merge_with_rss(av: pd.DataFrame, rss: pd.DataFrame) -> pd.DataFrame:
     for col, dv in defaults.items():
         if col not in rss_f.columns:
             rss_f[col] = dv
-    if "av_topics" not in rss_f.columns:
-        rss_f["av_topics"] = [[] for _ in range(len(rss_f))]
+    for col in ("av_topics", "av_topics_raw"):
+        if col not in rss_f.columns:
+            rss_f[col] = [[] for _ in range(len(rss_f))]
 
     common = [c for c in av.columns if c in rss_f.columns]
     extra_rss = [c for c in rss_f.columns if c not in common]
@@ -223,4 +226,23 @@ def seed_topics(df: pd.DataFrame) -> pd.DataFrame:
             as_list(av) if len(as_list(av)) > 0 else as_list(t)
             for av, t in zip(df["av_topics"], df["topic"])
         ]
+    return df
+
+
+def remap_topics(df: pd.DataFrame) -> pd.DataFrame:
+    """저장된 av_topics_raw로 av_topics·topic을 다시 계산한다.
+
+    AV_TOPICS 매핑을 고쳤을 때 재수집 없이 과거 데이터를 갱신하는 경로다.
+    raw가 없는 과거 행은 손대지 않는다.
+    """
+    if df.empty or "av_topics_raw" not in df.columns:
+        return df
+    df = df.copy()
+    has_raw = df["av_topics_raw"].apply(lambda v: len(as_list(v)) > 0)
+    if not has_raw.any():
+        return df
+    new = df.loc[has_raw, "av_topics_raw"].apply(
+        lambda v: sorted({AV_TOPICS[t] for t in as_list(v) if t in AV_TOPICS}))
+    df.loc[has_raw, "av_topics"] = new
+    df.loc[has_raw, "topic"] = new
     return df

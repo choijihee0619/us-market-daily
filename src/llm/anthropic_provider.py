@@ -10,7 +10,7 @@ import logging
 from typing import Sequence
 
 from ..config import env
-from .base import LLMProvider, build_narrative_prompt
+from .base import LLMProvider, build_narrative_prompt, build_news_insight_prompt
 
 log = logging.getLogger(__name__)
 
@@ -81,6 +81,29 @@ WRITE_SYSTEM = """당신은 계량금융 연구자의 일간 시장 기록에서
 관측 사실만 쓰면 문장이 짧아지는 게 정상이다. 해석을 덧붙여 늘리지 마라."""
 
 
+NEWS_SYSTEM = """당신은 네이버 블로그에 올릴 '미국 시장 뉴스 정리' 마지막 문단을 쓴다.
+
+## 이 글의 축
+같은 날 데이터로 티스토리에는 팩터·잔차 중심의 계량 기록이 따로 올라간다.
+**여기서는 뉴스가 주인공이다.** 계량 용어(팩터, 잔차, z, Ridge, R²)를 앞세우지 마라.
+"무슨 일이 있었고 어떤 종목이 반응했나"를 일상어로 정리한다.
+
+## 반드시 할 것
+- 그날 뉴스가 어느 주제에 몰렸는지 한 문장으로 요약한다.
+- 그 주제가 왜 시장 전반에 걸리는지(또는 개별 기업 재료인지) 한 문장으로 구분해준다.
+- 보도를 찾지 못한 종목이 있으면 **"뉴스가 없었다는 뜻이 아니라 수집 범위 밖"**
+  이라는 점을 분명히 한다. 이걸 흐리면 독자가 잘못된 결론을 얻는다.
+- 평서형 종결('~습니다' 허용). 네이버 독자용이라 티스토리보다 부드럽게 쓴다.
+
+## 절대 하지 말 것
+- 전망·권유 금지. 오를지 내릴지, 사라 팔라를 말하지 않는다.
+- 인과 단정 금지. "A 때문에 B가 올랐다"가 아니라 "A가 보도된 날 B가 움직였다".
+- 주어지지 않은 숫자 금지. JSON에 없는 값은 쓰지 않는다.
+- 금지 표현: 혼조세, 관망세, 훈풍, 주목된다, 전망된다, 기대된다, 시사한다,
+  호재, 악재, 견인했다.
+- 이모지·불릿·소제목 금지. 3~4문장의 산문."""
+
+
 class AnthropicProvider(LLMProvider):
     name = "anthropic"
 
@@ -139,3 +162,16 @@ class AnthropicProvider(LLMProvider):
             from .rule_provider import RuleProvider
 
             return RuleProvider(self.cfg).write_narrative(context)
+
+    def write_news_insight(self, context: dict) -> str:
+        try:
+            msg = self.client.messages.create(
+                model=self.write_model, max_tokens=700, system=NEWS_SYSTEM,
+                messages=[{"role": "user", "content": build_news_insight_prompt(context)}],
+            )
+            return msg.content[0].text.strip()
+        except Exception as e:
+            log.warning("Anthropic 뉴스 인사이트 실패: %s -- 룰베이스로 폴백", e)
+            from .rule_provider import RuleProvider
+
+            return RuleProvider(self.cfg).write_news_insight(context)
