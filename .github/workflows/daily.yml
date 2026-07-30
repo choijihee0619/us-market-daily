@@ -69,6 +69,11 @@ jobs:
         if: steps.gate.outputs.ready == 'true'
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          # 이게 빠져 있었다(2026-07-30 발견). 없으면 AV 수집이 "키 없음 -> 건너뜀"
+          # 경고 한 줄만 남기고 통째로 스킵되고, 종목 태깅이 RSS 방식으로 퇴화한다.
+          # RSS 태깅 부정확이 이 파이프라인의 최대 병목이었고 AV가 그걸 해결한 것이므로,
+          # CI에서 이 키가 빠지면 스케줄 실행만 조용히 반쪽이 된다.
+          ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
