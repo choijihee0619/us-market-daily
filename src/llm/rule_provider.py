@@ -10,6 +10,33 @@ from typing import Sequence
 
 from .base import LLMProvider
 
+# 팩터 원시 키(mkt_rf, umd)를 그대로 내보내면 독자가 읽을 수 없다.
+FACTOR_KO = {
+    "mkt_rf": "시장(MKT)", "smb": "규모(SMB)", "hml": "가치(HML)",
+    "rmw": "수익성(RMW)", "cma": "투자(CMA)", "umd": "모멘텀(UMD)", "rf": "무위험",
+}
+
+# 그날 최대 변동 팩터를 한 줄로 풀어 쓰기 위한 설명. 팩터의 '롱숏 방향'을 밝혀야
+# 부호를 해석할 수 있다. 예를 들어 모멘텀이 음(-)이면 최근 오르던 종목이 오히려
+# 더 빠졌다는 뜻이고, 이건 추세 되돌림(reversal)으로 읽힌다.
+FACTOR_MEANING = {
+    "mkt_rf": "시장 전체 초과수익이다. 이 값이 크면 그날 등락의 대부분은 개별 종목 "
+              "이슈가 아니라 시장 방향 하나로 설명된다.",
+    "smb": "소형주에서 대형주를 뺀 수익이다. 양(+)이면 소형주가 우위, 음(-)이면 "
+           "대형주로 자금이 몰린 날이다.",
+    "hml": "저평가(가치)주에서 고평가(성장)주를 뺀 수익이다. 음(-)이면 성장주가 "
+           "우위였다는 뜻이다. Fama-French(2015)는 미국 데이터에서 이 팩터가 상당 부분 "
+           "다른 팩터에 흡수된다고 보고했으므로 해석을 보수적으로 한다.",
+    "rmw": "영업수익성이 높은 기업에서 낮은 기업을 뺀 수익이다. 양(+)이면 質(quality) "
+           "선호가 강했던 날이다.",
+    "cma": "투자를 적게 하는 기업에서 많이 하는 기업을 뺀 수익이다. 양(+)이면 "
+           "보수적 자본배분 기업이 우위였다.",
+    "umd": "최근 12개월 상승률 상위 종목에서 하위 종목을 뺀 수익이다(Carhart 1997). "
+           "양(+)이면 오르던 게 더 올랐고, 음(-)이면 추세가 되돌려진 날이다. "
+           "FF5에는 이 팩터가 없어서 따로 넣는다 — 빼면 모멘텀 노출이 잔차에 남아 "
+           "뉴스 효과로 오인된다.",
+}
+
 TOPIC_KEYWORDS: dict[str, list[str]] = {
     "통화정책": ["fed", "fomc", "powell", "rate cut", "rate hike", "interest rate",
               "monetary", "central bank", "basis point", "dot plot", "hawkish", "dovish",
@@ -70,8 +97,14 @@ class RuleProvider(LLMProvider):
         fb = context.get("factors", {})
         if fb:
             ordered = sorted(fb.items(), key=lambda kv: -abs(kv[1]))
-            desc = ", ".join(f"{k} {v*100:+.2f}%" for k, v in ordered[:4])
+            desc = ", ".join(f"{FACTOR_KO.get(k, k)} {v*100:+.2f}%" for k, v in ordered[:4])
             parts.append(f"팩터 수익률은 {desc} 순으로 절대값이 컸다.")
+            # 그날 가장 크게 움직인 팩터가 무엇을 뜻하는지 한 줄로 풀어준다.
+            # mkt_rf 같은 원시 키를 그대로 내보내면 독자가 읽을 수 없다.
+            k0, v0 = ordered[0]
+            if k0 in FACTOR_MEANING:
+                parts.append(f"{FACTOR_KO.get(k0, k0)} 팩터가 가장 크게 움직였다 — "
+                             f"{FACTOR_MEANING[k0]}")
 
         sect = context.get("sectors", [])
         if sect:

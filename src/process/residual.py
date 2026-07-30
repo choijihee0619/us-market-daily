@@ -146,17 +146,59 @@ def _vasicek(beta: pd.Series, sigma: pd.Series, n: pd.Series) -> pd.Series:
     return w * beta + (1 - w) * beta_bar
 
 
-def cross_section_stats(resid: pd.DataFrame, sigma_cut: float = 2.0) -> dict:
-    """리포트 3번 블록(이례치)용 요약."""
+# 구성종목 파일의 GICS 섹터는 영문이다. 한국어 리포트에 영문 섹터가 섞이면
+# config.yaml의 섹터 ETF 한글명(정보기술, 헬스케어 ...)과 어휘가 어긋난다.
+SECTOR_KO = {
+    "Information Technology": "정보기술",
+    "Financials": "금융",
+    "Health Care": "헬스케어",
+    "Consumer Discretionary": "경기소비재",
+    "Consumer Staples": "필수소비재",
+    "Energy": "에너지",
+    "Industrials": "산업재",
+    "Materials": "소재",
+    "Utilities": "유틸리티",
+    "Real Estate": "부동산",
+    "Communication Services": "커뮤니케이션",
+}
+
+
+def cross_section_stats(resid: pd.DataFrame, sigma_cut: float = 2.0,
+                        universe: pd.DataFrame | None = None) -> dict:
+    """리포트 3번 블록(이례치)용 요약.
+
+    universe를 주면 회사명·섹터를 붙인다. 티커만 나열하면 미국 개별종목에 익숙하지
+    않은 독자에게 GRMN·CTSH·BXP는 아무 정보가 아니다. 구성종목 파일에 name·sector가
+    이미 있으므로 버리지 않고 쓴다.
+    """
     if resid.empty:
         return {"n": 0}
     z = resid["z"].dropna()
+
+    cols = ["ticker", "ret", "residual", "z"]
+    name_map: dict[str, str] = {}
+    sect_map: dict[str, str] = {}
+    if universe is not None and not universe.empty and "ticker" in universe.columns:
+        if "name" in universe.columns:
+            name_map = dict(zip(universe["ticker"], universe["name"]))
+        if "sector" in universe.columns:
+            sect_map = dict(zip(universe["ticker"], universe["sector"]))
+
+    def _recs(df: pd.DataFrame) -> list[dict]:
+        out = []
+        for r in df[cols].to_dict("records"):
+            r["name"] = name_map.get(r["ticker"], r["ticker"])
+            sec = sect_map.get(r["ticker"], "")
+            r["sector"] = SECTOR_KO.get(sec, sec)
+            out.append(r)
+        return out
+
     return {
         "n": int(len(resid)),
         "mean_resid_bp": float(resid["residual"].mean() * 1e4),
         "dispersion_bp": float(resid["residual"].std() * 1e4),
         "n_up_outlier": int((z > sigma_cut).sum()),
         "n_down_outlier": int((z < -sigma_cut).sum()),
-        "top": resid.nlargest(10, "z")[["ticker", "ret", "residual", "z"]].to_dict("records"),
-        "bottom": resid.nsmallest(10, "z")[["ticker", "ret", "residual", "z"]].to_dict("records"),
+        "top": _recs(resid.nlargest(10, "z")),
+        "bottom": _recs(resid.nsmallest(10, "z")),
     }

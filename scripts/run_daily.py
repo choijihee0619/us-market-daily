@@ -25,6 +25,7 @@ from src.storage import as_list  # noqa: E402
 from src.calendar_utils import (  # noqa: E402
     is_dst_in_us, kst_publish_stamp, last_completed_session, news_window, previous_session,
 )
+from src.collect import calendar_events as CAL  # noqa: E402
 from src.collect import factors as F  # noqa: E402
 from src.collect import macro as M  # noqa: E402
 from src.collect import news as N  # noqa: E402
@@ -193,7 +194,8 @@ def classify(cfg, session: pd.Timestamp) -> pd.DataFrame:
     return out
 
 
-def build_context(cfg, session: pd.Timestamp, news_win: pd.DataFrame) -> dict:
+def build_context(cfg, session: pd.Timestamp, news_win: pd.DataFrame,
+                  universe: pd.DataFrame | None = None) -> dict:
     prices = storage.read("prices")
     fac = storage.read("factors")
     mac_long = storage.read("macro")
@@ -239,15 +241,18 @@ def build_context(cfg, session: pd.Timestamp, news_win: pd.DataFrame) -> dict:
         storage.upsert("residuals", resid, ["date", "ticker"])
     ctx["resid_df"] = resid
     ctx["cross_section"] = R.cross_section_stats(
-        resid, float(cfg.get_path("model.outlier_sigma", 2.0))
+        resid, float(cfg.get_path("model.outlier_sigma", 2.0)), universe
     )
 
     topics = list(cfg.get_path("llm.topics", []))
     tmat = A.build_topic_matrix(news_win, topics) if not news_win.empty else pd.DataFrame()
     ctx["topic_regression"] = A.topic_regression(resid, tmat) if not tmat.empty else {"r2": None, "coef": {}, "n": 0}
 
-    # 이례치 종목별 매칭 헤드라인
+    # 이례치 종목별 매칭 헤드라인. URL도 같이 넘긴다 -- 독자가 원문을 확인할 수 있어야
+    # "이 수치가 이 뉴스와 같은 날 발생했다"는 서술이 검증 가능해진다.
     news_map: dict[str, str] = {}
+    news_url: dict[str, str] = {}
+    news_src: dict[str, str] = {}
     if not news_win.empty and "tickers" in news_win.columns:
         ex = news_win.explode("tickers").rename(columns={"tickers": "ticker"})
         cand = {r["ticker"] for r in (ctx["cross_section"].get("top", [])
@@ -255,8 +260,14 @@ def build_context(cfg, session: pd.Timestamp, news_win: pd.DataFrame) -> dict:
         for t in cand:
             sub = ex[ex["ticker"] == t]
             if not sub.empty:
-                news_map[t] = str(sub.sort_values("novelty", ascending=False).iloc[0]["headline"])
+                row = sub.sort_values("novelty", ascending=False).iloc[0]
+                news_map[t] = str(row["headline"])
+                news_url[t] = str(row.get("url") or "")
+                # 'AV/Benzinga' 형태에서 매체명만 남긴다
+                news_src[t] = str(row.get("source") or "").split("/")[-1]
     ctx["outlier_news"] = news_map
+    ctx["outlier_news_url"] = news_url
+    ctx["outlier_news_source"] = news_src
 
     # 신호 저장 + 어제 신호 채점
     sig = S.aggregate_by_ticker(news_win) if not news_win.empty else pd.DataFrame()
@@ -277,6 +288,10 @@ def build_context(cfg, session: pd.Timestamp, news_win: pd.DataFrame) -> dict:
     if sc.get("available"):
         storage.upsert("scorecard", pd.DataFrame([{**sc, "date": session}]), ["date"])
     ctx["scorecard_cum"] = _cum_scorecard()
+
+    # 5번 블록. 전망이 아니라 '다음 거래일이 매크로 이벤트 데이인가'의 예고다.
+    # 그런 날은 횡단면 상관이 커져 3번 블록의 개별종목 해석이 오염된다.
+    ctx["upcoming"] = CAL.fetch_upcoming(env("FRED_API_KEY"), session)
     return ctx
 
 
@@ -329,7 +344,8 @@ def main() -> int:
         start, end = news_window(session)
         news_win = N.filter_window(news, start, end) if not news.empty else pd.DataFrame()
 
-    ctx = build_context(cfg, session, news_win)
+    # --dry-run에서도 회사명·섹터가 필요하다. 파일이 있으면 읽고, 없으면 None으로 둔다.
+    ctx = build_context(cfg, session, news_win, resolve_universe(cfg))
 
     outdir = OUT_DIR / session.strftime("%Y-%m-%d")
     charts = C.build_all(ctx, outdir / "images", int(cfg.get_path("report.charts.dpi", 144)))

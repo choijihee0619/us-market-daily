@@ -77,6 +77,8 @@ def build_markdown(ctx: dict, narrative: str, chart_files: list[str], cfg) -> st
     A(SECTION)
     A("## 1. 무엇이 움직였나")
     A("")
+    A("_이 블록은 숫자만 적는다. 해석은 2번으로 넘긴다._")
+    A("")
     bm = ctx.get("benchmarks", {})
     if bm:
         A("| 지수 | 일간 |")
@@ -133,19 +135,27 @@ def build_markdown(ctx: dict, narrative: str, chart_files: list[str], cfg) -> st
     A(SECTION)
     A("## 2. 무엇이 설명했나")
     A("")
+    A("_개별 종목의 등락은 대부분 '그 종목 고유의 사건'이 아니라 시장 전체·규모·가치·"
+      "모멘텀 같은 **공통 요인(팩터)** 에 대한 노출로 설명된다. 이 블록은 그 공통 요인이 "
+      "그날 얼마나 움직였는지를 먼저 본다._")
+    A("")
     A(narrative.strip())
     A("")
 
     tr = ctx.get("topic_regression", {})
     if tr.get("coef"):
-        A("잔차 횡단면에 대한 토픽 노출 Ridge 회귀 계수 (bp, in-sample):")
+        A("아래는 **팩터로 설명되지 않고 남은 부분(잔차)** 을 뉴스 토픽 노출로 회귀한 "
+          "결과다. 계수가 +면 그날 그 토픽에 노출된 종목들의 잔차가 평균적으로 높았다는 "
+          "뜻이고, 인과관계가 아니라 같은 날 함께 나타난 연관이다.")
         A("")
-        A("| 토픽 | 계수 |")
+        A("| 토픽 | 계수 (bp) |")
         A("|---|---|")
         for k, v in list(tr["coef"].items())[:8]:
             A(f"| {k} | {v:+.1f} |")
         A("")
         A(f"n={tr['n']}, R²={tr['r2']*100:.1f}%. "
+          f"R²는 잔차 횡단면 분산 중 토픽이 설명한 비중이다 — 나머지 "
+          f"{100-tr['r2']*100:.0f}%는 이 토픽 집합으로 설명되지 않았다. "
           "표준오차는 보고하지 않는다. 잔차가 추정된 베타에서 나온 generated regressand라 "
           "2단계 추정오차가 반영되지 않았기 때문이다. 계수는 방향성 참고용이다.")
         A("")
@@ -160,24 +170,53 @@ def build_markdown(ctx: dict, narrative: str, chart_files: list[str], cfg) -> st
     A("")
     cs = ctx.get("cross_section", {})
     if cs.get("n"):
+        A("_**잔차(residual)** 는 '그 종목이 팩터 노출만으로 움직였다면 이랬을 텐데, "
+          "실제로는 이만큼 달랐다'의 차이다. 예를 들어 시장이 -1.5% 빠진 날 어떤 종목이 "
+          "-1.5% 하락했다면 시장을 따라간 것이라 잔차는 0에 가깝다. 반대로 시장이 빠진 날 "
+          "+16% 오르면 팩터로 설명되지 않는 큰 양(+)의 잔차가 남는다. 그 남은 부분이 "
+          "그 종목 고유의 사건 — 실적 발표, 가이던스 수정, M&A 같은 — 을 담고 있을 "
+          "가능성이 높다. 이 블로그가 뉴스와 맞춰보는 대상이 바로 이 잔차다._")
+        A("")
         A(f"위험모형: {ctx.get('spec','ff5_umd')} · 추정창 {ctx.get('beta_window',250)}거래일 · "
           f"유효 종목 {cs['n']}개. 잔차 표준편차 {cs['dispersion_bp']:.0f}bp.")
         A("")
-        A(f"±2σ 이탈: 상방 {cs['n_up_outlier']}개, 하방 {cs['n_down_outlier']}개.")
+        n_out = cs["n_up_outlier"] + cs["n_down_outlier"]
+        share = n_out / cs["n"] * 100 if cs["n"] else 0
+        A(f"±2σ 이탈: 상방 {cs['n_up_outlier']}개, 하방 {cs['n_down_outlier']}개 "
+          f"(전체 {cs['n']}개 중 {share:.1f}%). **z** 는 그 종목의 잔차를 자기 과거 "
+          f"변동성으로 나눈 값이다. z=+3이면 평소 흔들림의 세 배만큼 위로 벗어났다는 뜻이고, "
+          f"정규분포라면 ±2σ 밖은 약 4.6%만 나온다 — 그보다 많으면 그날 개별 사건이 "
+          f"몰렸거나 수익률 분포의 꼬리가 두껍다는 신호다.")
         A("")
-        A("| 종목 | 수익률 | 잔차 | z | 매칭 뉴스 |")
-        A("|---|---|---|---|---|")
+        # 티커만 쓰면 미국 개별종목에 익숙하지 않은 독자에게 정보가 0이다.
+        # 회사명·섹터는 구성종목 파일에 이미 있으므로 함께 싣고, 뉴스는 링크를 걸어
+        # 독자가 원문을 직접 확인할 수 있게 한다(서술의 검증 가능성).
+        A("| 종목 | 회사 | 섹터 | 수익률 | 잔차 | z | 같은 날 보도된 뉴스 |")
+        A("|---|---|---|---|---|---|---|")
         news_map = ctx.get("outlier_news", {})
+        url_map = ctx.get("outlier_news_url", {})
+        src_map = ctx.get("outlier_news_source", {})
         for r in (cs.get("top", [])[:5] + cs.get("bottom", [])[:5]):
-            hl = news_map.get(r["ticker"])
-            hl = (hl[:60] + "…") if hl and len(hl) > 60 else (hl or "**미설명**")
-            A(f"| {r['ticker']} | {_pct(r['ret'])} | {_pct(r['residual'])} | "
-              f"{r['z']:+.1f} | {hl} |")
+            t = r["ticker"]
+            hl = news_map.get(t)
+            if hl:
+                short = (hl[:52] + "…") if len(hl) > 52 else hl
+                short = short.replace("|", "·")          # 표 구분자 깨짐 방지
+                u = url_map.get(t)
+                cell = f"[{short}]({u})" if u else short
+                src = src_map.get(t)
+                if src:
+                    cell += f" _{src}_"
+            else:
+                cell = "**미설명**"
+            A(f"| {t} | {r.get('name', t)} | {r.get('sector', '')} | "
+              f"{_pct(r['ret'])} | {_pct(r['residual'])} | {r['z']:+.1f} | {cell} |")
         A("")
         unexplained = sum(1 for r in (cs.get("top", []) + cs.get("bottom", []))
                           if r["ticker"] not in news_map)
         A(f"이례치 상하위 20종목 중 {unexplained}개는 수집 범위 안에서 매칭되는 뉴스를 "
-          "찾지 못했다. 무료 RSS 커버리지 한계이거나, 실제로 뉴스가 아닌 요인일 수 있다.")
+          "찾지 못했다. 뉴스 커버리지 한계이거나, 실제로 뉴스가 아닌 요인일 수 있다. "
+          "둘을 구분하지 않고 '뉴스로 설명되지 않는다'고 단정하지 않는다.")
         A("")
     else:
         A("잔차 계산에 필요한 최소 관측치를 확보하지 못했다.")
@@ -190,6 +229,11 @@ def build_markdown(ctx: dict, narrative: str, chart_files: list[str], cfg) -> st
     # --- 4. 검증 ---
     A(SECTION)
     A("## 4. 어제 신호 채점")
+    A("")
+    A("_이 블로그의 존재 이유다. 전날 뉴스 감성으로 종목을 5분위로 나눠 놓고, 그 다음 "
+      "거래일에 실제로 상위 분위가 하위 분위보다 높은 잔차를 냈는지 채점한다. **맞은 날과 "
+      "틀린 날을 모두 그대로 남긴다.** 사후에 성공 사례만 고르면 out-of-sample 기록이 "
+      "아니게 되기 때문이다._")
     A("")
     sc = ctx.get("scorecard", {})
     if sc.get("available"):
@@ -216,12 +260,40 @@ def build_markdown(ctx: dict, narrative: str, chart_files: list[str], cfg) -> st
     A("")
     ev = ctx.get("upcoming", [])
     if ev:
-        A("| 시각(ET) | 이벤트 | 컨센서스 |")
+        A("_아래는 다음 거래일에 공개되는 주요 지표다. 여기 있는 항목은 **전 종목의 잔차가 "
+          "같은 방향으로 움직이기 쉬운 날**을 미리 표시해 둔 것이다. 그런 날은 개별 뉴스 "
+          "효과와 매크로 충격이 섞여 3번 블록의 해석이 어려워진다(횡단면 상관이 커진다). "
+          "전망이 아니라 해석 난이도에 대한 예고다._")
+        A("")
+        A("| 발표일 | 지표 | 왜 중요한가 |")
         A("|---|---|---|")
         for e in ev[:10]:
-            A(f"| {e.get('time','—')} | {e.get('name','')} | {e.get('consensus','—')} |")
+            A(f"| {e.get('date','—')} | {e.get('name','')} | {e.get('why','—')} |")
+        A("")
+        A("_일정은 FRED 릴리스 캘린더 기준이며 시각은 지표마다 다르다. "
+          "컨센서스(시장 예상치)는 무료 소스로 확보되지 않아 싣지 않는다._")
     else:
-        A("등록된 일정 없음.")
+        A("_다음 거래일에 예정된 주요 지표가 없다(또는 일정 수집에 실패했다)._")
+    A("")
+
+    # --- 용어 ---
+    # 매일 같은 표가 붙지만, 이 글은 처음 온 독자에게도 자기완결적이어야 한다.
+    # 대신 짧게 유지한다(6항목). 자세한 설명은 고정 방법론 페이지로 넘긴다.
+    A(SECTION)
+    A("## 용어")
+    A("")
+    A("| 용어 | 뜻 |")
+    A("|---|---|")
+    A("| 팩터 | 개별 종목 수익률을 공통으로 움직이는 요인. 시장·규모·가치·수익성·투자·모멘텀 6개를 쓴다 |")
+    A("| 모멘텀 (UMD) | 최근 오른 종목에서 내린 종목을 뺀 수익. 양(+)이면 추세 지속, 음(-)이면 되돌림 |")
+    A("| 잔차 | 팩터 노출로 설명한 뒤 남은 부분. 그 종목 고유의 사건을 담는다 |")
+    A("| z | 잔차를 그 종목의 평소 변동성으로 나눈 값. ±2를 넘으면 이례치로 본다 |")
+    A("| bp | 베이시스포인트. 1bp = 0.01% |")
+    A("| σ (시그마) | 표준편차. 흔들림의 크기 단위 |")
+    A("")
+    A("_위험모형은 Fama-French 5팩터 + Carhart 모멘텀이다. **수익률을 예측하는 모형이 "
+      "아니라 알려진 위험 노출을 걷어내는 귀인 모형**이다. 걷어낸 뒤 남은 잔차가 이 "
+      "기록의 분석 대상이다._")
     A("")
 
     # --- 푸터 ---

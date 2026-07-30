@@ -85,9 +85,11 @@ def to_html(markdown_text: str, ctx: dict, repo_url: str | None = None) -> str:
         H.append("</div>")
 
     # 목차
+    # 용어를 목차에 포함한다. 팩터·잔차·z에 익숙하지 않은 독자가 본문 중간에서
+    # 막혔을 때 바로 내려갈 통로가 있어야 이탈하지 않는다.
     toc = [("m1", "1. 무엇이 움직였나"), ("m2", "2. 무엇이 설명했나"),
            ("m3", "3. 설명되지 않은 움직임"), ("m4", "4. 어제 신호 채점"),
-           ("m5", "5. 다음 거래일 일정")]
+           ("m5", "5. 다음 거래일 일정"), ("m6", "용어")]
     H.append('<div style="border:1px solid #e4e6ea;border-radius:6px;'
              'padding:14px 20px;margin:0 0 34px;background:#fff;">')
     H.append('<div style="font-weight:700;font-size:14px;color:#57606a;'

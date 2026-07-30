@@ -93,8 +93,9 @@ def main():
     assert html.count("<div") == html.count("</div>"), "div 태그 불균형"
     assert html.count("<h2") == html.count("</h2>"), "h2 태그 불균형"
     assert "세 줄 요약" in html and "목차" in html
+    # 5블록 + 용어. 용어를 목차에 넣는 이유는 tistory_package.to_html 주석 참조.
     n_anchor = html.count('id="m')
-    assert n_anchor == 5, f"목차 앵커 개수 이상: {n_anchor}"
+    assert n_anchor == 6, f"목차 앵커 개수 이상: {n_anchor}"
     for aid in re.findall(r'href="#(m\d)"', html):
         assert f'id="{aid}"' in html, f"앵커 {aid} 대상 없음"
     assert "[[IMG:" in html, "이미지 자리표시 없음"

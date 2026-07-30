@@ -25,6 +25,39 @@ class LLMProvider(abc.ABC):
         return True
 
 
+def build_narrative_prompt(context: dict) -> str:
+    """귀인 서술용 user 프롬프트. anthropic·openai가 공유한다.
+
+    시스템 프롬프트가 "팩터 이름에 한 줄 정의를 붙여라", "회사명과 사업 영역을 써라"를
+    요구하므로, **그 재료를 payload에 실어야 한다.** 안 실으면 모델이 정의를
+    기억에서 만들어내고(환각) 프로젝트가 쓰는 정의와 어긋난다. 특히 팩터의 롱숏
+    방향은 부호 해석을 바꾸므로 반드시 우리 쪽 정의를 준다.
+
+    cross_section의 top/bottom에는 이미 name·sector가 들어 있다
+    (residual.cross_section_stats가 구성종목 파일에서 붙인다).
+    """
+    import json
+
+    from .rule_provider import FACTOR_KO, FACTOR_MEANING
+
+    # 그날 실제로 등장한 팩터만 정의를 넘긴다. 전부 넘기면 모델이 안 쓴 팩터까지
+    # 설명하려 든다.
+    used = [k for k in (context.get("factors") or {}) if k in FACTOR_MEANING]
+    ref = {FACTOR_KO[k]: FACTOR_MEANING[k] for k in used}
+
+    return (
+        "다음은 미국 증시 한 거래일의 집계 결과다. 이 숫자만 사용해 2번 블록(귀인 서술)을 "
+        "작성하라.\n\n"
+        "참고 — 팩터 정의(이 정의만 쓸 것, 임의로 바꾸지 말 것):\n"
+        f"```json\n{json.dumps(ref, ensure_ascii=False, indent=2)}\n```\n\n"
+        "집계 결과:\n"
+        f"```json\n{json.dumps(context, ensure_ascii=False, indent=2, default=str)}\n```\n\n"
+        "cross_section.top / cross_section.bottom 의 각 항목에는 ticker 외에 name(회사명)과 "
+        "sector가 들어 있다. 종목을 언급할 때 이 값을 함께 쓰고, 없는 사업 내용을 "
+        "추측해서 붙이지 마라."
+    )
+
+
 def get_provider(cfg) -> LLMProvider:
     from ..config import env
 

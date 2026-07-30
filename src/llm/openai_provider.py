@@ -7,7 +7,7 @@ from typing import Sequence
 
 from ..config import env
 from .anthropic_provider import CLASSIFY_SYSTEM, WRITE_SYSTEM
-from .base import LLMProvider
+from .base import LLMProvider, build_narrative_prompt
 
 log = logging.getLogger(__name__)
 
@@ -58,11 +58,9 @@ class OpenAIProvider(LLMProvider):
         return results
 
     def write_narrative(self, context: dict) -> str:
-        user = ("다음은 미국 증시 한 거래일의 집계 결과다. 이 숫자만 사용해 "
-                "3~5문장의 귀인 서술을 작성하라.\n\n"
-                f"```json\n{json.dumps(context, ensure_ascii=False, indent=2, default=str)}\n```")
+        user = build_narrative_prompt(context)
         try:
-            return self._chat(self.write_model, WRITE_SYSTEM, user, 900)
+            return self._chat(self.write_model, WRITE_SYSTEM, user, 1400)
         except Exception as e:
             log.warning("OpenAI 원고 생성 실패: %s -- 룰베이스로 폴백", e)
             from .rule_provider import RuleProvider
