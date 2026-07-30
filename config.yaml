@@ -56,14 +56,32 @@ news:
 
   alphavantage:
     enabled: true
-    max_calls_per_day: 4       # 무료 티어 25/day 중 여유 있게
-    relevance_min: 0.25        # ticker_sentiment 하한. 실측 후 조정할 것
+
+    # 4 -> 7로 올렸다. 무료 티어 25/day 안이고, 2026-07-30 실측 근거가 있다.
+    #   배치 4개: 유니버스 커버율 39.8%, 이례치 매칭 31/61 (미설명 49.2%)
+    #   배치 7개: 유니버스 커버율 51.9%, 이례치 매칭 41/61 (미설명 32.8%)
+    # 추가 3회로 새로 설명된 이례치가 CNP·ETR·EVRG·LNT·NI(유틸리티),
+    # FANG·EXE(에너지), GD·IEX, GEHC였다. 즉 '미설명'의 상당 부분은 실제 발견이
+    # 아니라 **토픽 배치가 그 섹터를 요청하지 않아서** 생긴 공백이었다.
+    # 비용은 호출당 13초 대기 -> 실행시간 +40초.
+    max_calls_per_day: 7
+
+    # 0.25 유지. 실측 결과 이 값은 아무것도 걸러내지 않는다 -- AV가 돌려준
+    # relevance_score의 **최소값이 0.301**이었다(669쌍, 중위 1.000). 0~0.30 사이
+    # 어떤 값을 넣어도 결과가 같고, 0.40으로 올리면 이례치 커버리지가 깎인다.
+    # 따라서 CLAUDE.md가 '가장 불확실한 값'으로 지목했던 이 파라미터는 병목이
+    # 아니었다. AV가 자체적으로 낮은 relevance를 안 주는 것으로 보인다. [검증 필요]
+    relevance_min: 0.25
     limit: 1000
     topic_batches:
       - economy_monetary,economy_macro
       - earnings
       - technology,blockchain
       - mergers_and_acquisitions,economy_fiscal
+      # 아래 3개가 유틸리티·리츠·에너지·산업재 공백을 메운다
+      - real_estate,retail_wholesale
+      - life_sciences,manufacturing
+      - finance,energy_transportation
 
   # BLS 등 정부기관 피드는 일반 UA를 403으로 막는다. 연락처가 든 UA를 쓴다
   # (2026-07-30 실측: Mozilla/5.0 -> 403, 연락처 UA -> 200). 비우면 SEC_USER_AGENT를 쓴다.
