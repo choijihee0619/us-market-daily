@@ -11,6 +11,13 @@
   2. pd.read_html(url) 은 내부적으로 urllib을 쓴다. macOS framework Python은
      시스템 인증서를 참조하지 않아 CERTIFICATE_VERIFY_FAILED가 났다.
      -> 구성종목이 0개가 되고 유니버스가 ETF 25개로 쪼그라든다.
+  3. feedparser.parse(url) 도 같은 이유로 6개 피드 전부 URLError.
+     추가로 BLS는 일반 UA에 403을 준다.
+     -> RSS 뉴스가 0건이 되고 EDGAR만 남는다.
+
+2번과 3번은 같은 뿌리다. **URL을 직접 받아주는 편의 API(read_html, feedparser.parse)를
+쓰면 urllib으로 나가고, requests를 쓰면 certifi로 나간다.** 이 프로젝트는 requests로
+통일한다.
 """
 from __future__ import annotations
 
@@ -142,6 +149,75 @@ def test_constituents_uses_requests(monkeypatch_requests):
     print(f"  구성종목 {len(df)}건, BRK.B -> BRK-B 변환, snapshot_date 기록")
 
 
+RSS_OK = b"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel><title>Test Feed</title>
+<item><title>Fed holds rates steady</title><link>https://x.test/1</link>
+<description>Summary one</description>
+<pubDate>Wed, 29 Jul 2026 18:30:00 GMT</pubDate></item>
+<item><title>CPI comes in at 2.4%</title><link>https://x.test/2</link>
+<description>Summary two</description>
+<pubDate>Wed, 29 Jul 2026 12:00:00 GMT</pubDate></item>
+</channel></rss>"""
+
+# CNBC가 실제로 반환하던 형태: 유효한 RSS 껍데기, item 0개, HTTP 200
+RSS_EMPTY = (b'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel>'
+             b"<title>CNBC.com</title></channel></rss>")
+
+
+def test_rss_uses_requests_with_ua():
+    """requests로 받고 UA를 실어 보내야 한다 (feedparser 직접 호출 시 SSL·403 실패)."""
+    from src.collect import news as N
+
+    seen: list[dict] = []
+
+    class _Resp:
+        def __init__(self, content, status=200):
+            self.content = content
+            self.status_code = status
+
+        def raise_for_status(self):
+            if self.status_code >= 400:
+                raise RuntimeError(f"HTTP {self.status_code}")
+
+    def fake_get(url, **kw):
+        ua = (kw.get("headers") or {}).get("User-Agent")
+        seen.append({"url": url, "ua": ua})
+        if "empty" in url:
+            return _Resp(RSS_EMPTY)
+        if "blocked" in url:
+            return _Resp(b"", 403)
+        return _Resp(RSS_OK)
+
+    import requests as _rq
+    orig = _rq.get
+    N.requests.get = fake_get                                  # type: ignore[assignment]
+    try:
+        df = N.fetch_rss(
+            [{"name": "Good", "url": "https://x.test/good.rss"},
+             {"name": "Empty", "url": "https://x.test/empty.rss"},
+             {"name": "Blocked", "url": "https://x.test/blocked.rss"}],
+            user_agent="us-market-daily contact@example.com",
+        )
+    finally:
+        N.requests.get = orig                                  # type: ignore[assignment]
+
+    assert len(seen) == 3, f"세 피드 모두 요청해야 한다: {len(seen)}"
+    assert all(s["ua"] == "us-market-daily contact@example.com" for s in seen), \
+        f"UA 미전달 -- BLS가 403으로 막는다: {[s['ua'] for s in seen]}"
+    # 빈 피드와 403은 건너뛰고, 정상 피드만 2건 들어온다 (죽지 않아야 한다)
+    assert len(df) == 2, f"행수 불일치: {len(df)}"
+    assert set(df["source"]) == {"Good"}, set(df["source"])
+    assert "Fed holds rates steady" in set(df["headline"])
+
+    # published_at은 UTC, date는 ET 기준 거래일이어야 한다
+    ts = df.loc[df["headline"] == "Fed holds rates steady", "published_at"].iloc[0]
+    assert str(ts.tz) == "UTC", ts.tz
+    d = df.loc[df["headline"] == "Fed holds rates steady", "date"].iloc[0]
+    assert d == pd.Timestamp("2026-07-29"), f"ET 변환 오류: {d}"
+    print(f"  정상 2건 수집, 빈 피드·403 피드는 건너뜀, UA 전달 확인")
+    print(f"  18:30 UTC -> ET 거래일 {d.date()} (타임스탬프 정렬 유지)")
+
+
 def _monkeypatch_requests_factory():
     """F.requests.get 을 고정 응답으로 바꿔주는 도우미 (pytest 없이 동작)."""
     orig = F.requests.get
@@ -164,6 +240,8 @@ if __name__ == "__main__":
         test_french_merge_keeps_umd(setter)
         print("\n[3] 구성종목 수집 경로 (macOS SSL 회귀)")
         test_constituents_uses_requests(setter)
+        print("\n[4] RSS 수집 경로 (SSL + BLS 403 회귀)")
+        test_rss_uses_requests_with_ua()
     finally:
         restore()
     print("\n전체 통과")

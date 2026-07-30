@@ -82,9 +82,19 @@ class RuleProvider(LLMProvider):
             )
 
         mac = context.get("macro", {})
-        if "DGS10" in mac:
-            parts.append(f"10년물은 {mac['DGS10']['change']:+.0f}bp 변화해 "
-                         f"{mac['DGS10']['level']:.2f}%로 마감했다.")
+        d10 = mac.get("DGS10")
+        if d10 and d10.get("change") is not None:
+            # FRED 공개 지연으로 세션일 값이 없을 수 있다. 그 경우 기준일을 명시한다.
+            # "마감했다"는 세션일 사실을 주장하는 표현이라 stale일 때는 쓰지 않는다.
+            if d10.get("stale"):
+                import pandas as _pd
+                asof = f"{_pd.Timestamp(d10['asof']):%m-%d}"
+                parts.append(f"10년물은 {asof} 기준 {d10['level']:.2f}%이며 "
+                             f"직전 공개일 대비 {d10['change']:+.0f}bp다 "
+                             f"(해당 거래일 값은 FRED 미공개).")
+            else:
+                parts.append(f"10년물은 {d10['change']:+.0f}bp 변화해 "
+                             f"{d10['level']:.2f}%로 마감했다.")
 
         tr = context.get("topic_regression", {})
         if tr.get("r2") is not None:

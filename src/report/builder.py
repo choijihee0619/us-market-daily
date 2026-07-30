@@ -40,8 +40,12 @@ def make_title(ctx: dict) -> str:
     bits: list[str] = []
 
     mac = ctx.get("macro", {})
-    if "DGS10" in mac:
-        bits.append(f"10Y {mac['DGS10']['change']:+.0f}bp")
+    # 세션일 값이 미공개(stale)이거나 변화량이 없으면 제목에 넣지 않는다.
+    # 제목은 그 거래일의 사실이어야 하고, 직전 공개일 변화를 세션 변화처럼
+    # 쓰면 안 된다. 빼면 SPY 수익률이 앞으로 온다.
+    d10 = mac.get("DGS10")
+    if d10 and d10.get("change") is not None and not d10.get("stale"):
+        bits.append(f"10Y {d10['change']:+.0f}bp")
     spy = ctx.get("benchmarks", {}).get("SPY")
     if spy is not None:
         bits.append(f"SPY {spy*100:+.2f}%")
@@ -97,14 +101,28 @@ def build_markdown(ctx: dict, narrative: str, chart_files: list[str], cfg) -> st
         LBL = {"DGS2": "2년물", "DGS10": "10년물", "T10Y2Y": "10Y-2Y",
                "T10YIE": "기대인플레(10Y BEI)", "DTWEXBGS": "달러지수",
                "VIXCLS": "VIX", "BAMLH0A0HYM2": "하이일드 OAS", "DFF": "EFFR"}
-        A("| 신호 | 레벨 | 전일대비 |")
-        A("|---|---|---|")
+        # FRED 공개 지연이 시리즈마다 달라서 기준일을 함께 싣는다. 기준일을 숨기고
+        # 세션일 값처럼 보이게 하면 1번 블록이 팩트가 아니게 된다.
+        A("| 신호 | 레벨 | 직전대비 | 기준일 |")
+        A("|---|---|---|---|")
         for k, label in LBL.items():
-            if k in mac:
-                m = mac[k]
+            if k not in mac:
+                continue
+            m = mac[k]
+            if m.get("change") is None:
+                chg = "—"
+            else:
                 chg = _bp(m["change"]) if m["unit"] == "bp" else f"{m['change']:+.2f}"
-                A(f"| {label} | {m['level']:.2f} | {chg} |")
+            asof = m.get("asof")
+            asof_s = f"{pd.Timestamp(asof):%m-%d}" if asof is not None else "—"
+            if m.get("stale"):
+                asof_s += " (미공개)"
+            A(f"| {label} | {m['level']:.2f} | {chg} | {asof_s} |")
         A("")
+        if any(mac[k].get("stale") for k in LBL if k in mac):
+            A("_'미공개'는 해당 거래일 값이 아직 FRED에 공개되지 않아 직전 공개일 "
+              "기준임을 뜻한다. 확정치가 들어오면 소급 갱신된다._")
+            A("")
 
     if chart_files:
         for f in chart_files[:2]:

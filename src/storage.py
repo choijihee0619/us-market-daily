@@ -8,6 +8,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Sequence
 
+import numpy as np
 import pandas as pd
 
 from .config import DATA_DIR
@@ -26,6 +27,41 @@ SCHEMAS: dict[str, list[str]] = {
 
 def _path(name: str) -> Path:
     return DATA_DIR / f"{name}.parquet"
+
+
+def as_list(v) -> list:
+    """리스트형 셀을 항상 파이썬 list로 정규화한다.
+
+    왜 필요한가: 리스트를 담은 열(news.tickers, news.topic, news.av_topics)을
+    parquet에 쓰고 되읽으면 **list가 numpy.ndarray로 돌아온다.** 그래서
+    `x or []` 나 `if x:` 같은 진리값 검사가 배열에서 ValueError로 터지고
+    (`The truth value of an empty array is ambiguous`), `isinstance(x, list)`
+    검사는 조용히 False가 되어 값이 있는데도 없는 것으로 처리된다.
+
+    실제로 두 가지가 동시에 일어났다(2026-07-30).
+      - build_topic_matrix: --dry-run(=저장소에서 되읽는 경로)에서만 예외
+      - seed_topics: AV 토픽이 있는데도 isinstance 검사에 걸려 전량 폐기
+        -> 'AV 사전분류 0건' + LLM 분류 호출 낭비
+    앞의 것은 죽어서 알았고 뒤의 것은 조용해서 못 알아챘다. 후자가 더 위험하다.
+    """
+    if v is None:
+        return []
+    if isinstance(v, list):
+        return v
+    if isinstance(v, (tuple, set)):
+        return list(v)
+    if isinstance(v, np.ndarray):
+        return v.tolist()
+    if isinstance(v, pd.Series):
+        return v.tolist()
+    if isinstance(v, float) and pd.isna(v):      # 결측은 NaN 스칼라로 온다
+        return []
+    if isinstance(v, str):                       # 문자열은 문자 단위로 쪼개지 않는다
+        return [v] if v else []
+    try:
+        return list(v)
+    except TypeError:
+        return []
 
 
 def read(name: str) -> pd.DataFrame:

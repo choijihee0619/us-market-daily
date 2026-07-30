@@ -132,8 +132,21 @@ def compute_novelty(df: pd.DataFrame, history: pd.DataFrame | None = None) -> pd
     texts = (df["headline"].fillna("") + " " + df.get("summary", "").fillna("")).tolist()
     hist_sets: list[set[str]] = []
     if history is not None and not history.empty:
-        ht = (history["headline"].fillna("") + " " + history.get("summary", "").fillna("")).tolist()
-        hist_sets = [_shingles(t) for t in ht[-3000:]]
+        hist = history
+        # **자기 자신을 먼저 뺀다.** history로 저장소 전체를 넘기는데, 재실행이나
+        # 중복 수집으로 같은 기사가 이미 저장되어 있으면 자기 자신과 비교되어
+        # Jaccard=1 -> novelty=0 이 된다. 첫 실행만 정상이고 이후 모든 실행에서
+        # novelty가 0으로 깔린다(2026-07-30 실측: 1348건 중 1276건이 정확히 0).
+        # 그러면 sentiment_w = sentiment x novelty 가 0이 되고, 토픽 노출 행렬이
+        # 전부 0이 되어 **2번 블록의 토픽 회귀가 통째로 사라진다.** 조용히.
+        for key in ("id", "url"):
+            if key in hist.columns and key in df.columns:
+                own = set(df[key].dropna())
+                if own:
+                    hist = hist[~hist[key].isin(own)]
+        if not hist.empty:
+            ht = (hist["headline"].fillna("") + " " + hist.get("summary", "").fillna("")).tolist()
+            hist_sets = [_shingles(t) for t in ht[-3000:]]
 
     out = []
     seen: list[set[str]] = list(hist_sets)

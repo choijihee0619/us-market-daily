@@ -21,6 +21,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src import storage  # noqa: E402
+from src.storage import as_list  # noqa: E402
 from src.calendar_utils import (  # noqa: E402
     is_dst_in_us, kst_publish_stamp, last_completed_session, news_window, previous_session,
 )
@@ -118,7 +119,10 @@ def collect(cfg, session: pd.Timestamp, lookback_days: int) -> None:
 
     rss = pd.DataFrame()
     if "rss" in providers:
-        rss = N.fetch_rss(cfg.get_path("news.rss_feeds", []))
+        rss = N.fetch_rss(
+            cfg.get_path("news.rss_feeds", []),
+            user_agent=cfg.get_path("news.rss_user_agent") or env("SEC_USER_AGENT"),
+        )
         if cfg.get_path("news.edgar.enabled", False):
             ed = N.fetch_edgar(
                 cfg.get_path("news.edgar.forms", ["8-K"]),
@@ -154,8 +158,12 @@ def classify(cfg, session: pd.Timestamp) -> pd.DataFrame:
     maxn = int(cfg.get_path("llm.max_articles_to_classify", 120))
 
     # Alpha Vantage가 이미 토픽을 붙인 기사는 LLM에 다시 보내지 않는다.
+    # storage.as_list를 거치는 이유: news를 parquet에서 되읽으면 topic이 numpy
+    # 배열로 돌아와 isinstance(v, list) 검사가 전부 False가 된다. 그러면 AV가
+    # 붙여준 토픽 1000여 건이 '미분류'로 잡혀 LLM 호출을 낭비하고, 아래 tail에서
+    # 빈 리스트로 덮어써 실제로 삭제된다(2026-07-30 실측: 사전분류 0건으로 표시).
     def _has_topic(v) -> bool:
-        return isinstance(v, (list, tuple, pd.Series)) and len(v) > 0
+        return len(as_list(v)) > 0
 
     if "topic" not in win.columns:
         win = win.copy()
@@ -175,8 +183,10 @@ def classify(cfg, session: pd.Timestamp) -> pd.DataFrame:
         head = head.copy()
         head["topic"] = provider.classify_topics(head["headline"].fillna("").tolist(), topics)
     if not tail.empty:
+        # 분류 예산을 넘긴 기사는 LLM에 보내지 않을 뿐, 기존 토픽을 지우지 않는다.
+        # 빈 리스트로 덮어쓰면 AV가 붙여준 토픽까지 날아간다.
         tail = tail.copy()
-        tail["topic"] = [[] for _ in range(len(tail))]
+        tail["topic"] = tail["topic"].apply(as_list)
 
     out = pd.concat([pre, head, tail], ignore_index=True)
     storage.upsert("news", out, ["id"])

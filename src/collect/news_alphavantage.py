@@ -24,6 +24,8 @@ from typing import Iterable
 import pandas as pd
 import requests
 
+from ..storage import as_list
+
 log = logging.getLogger(__name__)
 
 BASE = "https://www.alphavantage.co/query"
@@ -215,8 +217,10 @@ def seed_topics(df: pd.DataFrame) -> pd.DataFrame:
     if "topic" not in df.columns:
         df["topic"] = [[] for _ in range(len(df))]
     if "av_topics" in df.columns:
+        # isinstance 검사로는 안 된다. parquet 왕복 후 numpy 배열로 돌아오면
+        # 조용히 False가 되어 AV 토픽이 전량 폐기된다.
         df["topic"] = [
-            list(av) if isinstance(av, (list, tuple)) and len(av) > 0 else (t or [])
+            as_list(av) if len(as_list(av)) > 0 else as_list(t)
             for av, t in zip(df["av_topics"], df["topic"])
         ]
     return df

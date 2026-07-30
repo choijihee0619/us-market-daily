@@ -36,21 +36,38 @@ def _clean(text: str | None) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-def fetch_rss(feeds: Iterable[dict], limit_per_feed: int = 120) -> pd.DataFrame:
+# 정부기관 피드는 일반 UA를 막는다. BLS는 Mozilla/5.0에 403을 주고 연락처가 든
+# UA에는 200을 준다(2026-07-30 실측). SEC EDGAR와 같은 요구다.
+DEFAULT_RSS_UA = "us-market-daily (research)"
+
+
+def fetch_rss(feeds: Iterable[dict], limit_per_feed: int = 120,
+              user_agent: str | None = None) -> pd.DataFrame:
+    """RSS 수집.
+
+    feedparser.parse(url)에 URL을 직접 주면 feedparser가 내부적으로 urllib으로
+    받는다. macOS framework Python은 시스템 인증서를 참조하지 않아 전 피드가
+    URLError로 죽는다(2026-07-30 실측: 6/6 실패). requests는 certifi를 쓰므로
+    받기와 파싱을 분리한다. 덤으로 HTTP 상태코드가 보여서 '피드가 비었다'와
+    '차단당했다'를 구분할 수 있게 된다 -- 원래는 둘 다 같은 경고로 뭉쳐졌다.
+    """
     import feedparser
 
+    ua = user_agent or DEFAULT_RSS_UA
     rows: list[dict[str, Any]] = []
     for feed in feeds:
         name, url = feed.get("name", "rss"), feed.get("url")
         if not url:
             continue
         try:
-            parsed = feedparser.parse(url)
+            r = requests.get(url, headers={"User-Agent": ua}, timeout=25)
+            r.raise_for_status()
+            parsed = feedparser.parse(r.content)
         except Exception as e:
-            log.warning("RSS %s 실패: %s", name, e)
+            log.warning("RSS %s 수집 실패: %s", name, e)
             continue
-        if getattr(parsed, "bozo", 0) and not parsed.entries:
-            log.warning("RSS %s 파싱 실패", name)
+        if not parsed.entries:
+            log.warning("RSS %s 항목 0건 (피드가 비었거나 구조가 바뀌었다)", name)
             continue
 
         for e in parsed.entries[:limit_per_feed]:

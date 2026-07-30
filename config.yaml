@@ -65,14 +65,17 @@ news:
       - technology,blockchain
       - mergers_and_acquisitions,economy_fiscal
 
+  # BLS 등 정부기관 피드는 일반 UA를 403으로 막는다. 연락처가 든 UA를 쓴다
+  # (2026-07-30 실측: Mozilla/5.0 -> 403, 연락처 UA -> 200). 비우면 SEC_USER_AGENT를 쓴다.
+  rss_user_agent: "us-market-daily heeppiness@pukyong.ac.kr"
+
   # 무료 RSS 소스. 헤드라인+요약+링크까지만 저장 (전문 저장은 저작권 이슈)
+  # CNBC(search.cnbc.com/rs/search/combinedcms)는 제거했다. 2026-07-30 실측에서
+  # 모든 id가 항목 0건인 683바이트 빈 채널을 반환한다(HTTP 200이라 조용히 실패했다).
+  # 게다가 Markets/Economy 두 항목의 URL이 동일해 실질 소스는 하나였다.
   rss_feeds:
     - name: Yahoo Finance
       url: https://finance.yahoo.com/news/rssindex
-    - name: CNBC Markets
-      url: https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss25&id=20910258
-    - name: CNBC Economy
-      url: https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss25&id=20910258
     - name: MarketWatch Top
       url: https://feeds.content.dowjones.io/public/rss/mw_topstories
     - name: Federal Reserve Press

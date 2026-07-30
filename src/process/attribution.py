@@ -10,6 +10,8 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
+from ..storage import as_list
+
 
 def sector_breakdown(prices: pd.DataFrame, session: pd.Timestamp,
                      sector_map: dict[str, str]) -> pd.DataFrame:
@@ -91,7 +93,9 @@ def build_topic_matrix(news: pd.DataFrame, topics: list[str]) -> pd.DataFrame:
     for tkr, g in ex.groupby("ticker"):
         row = {"ticker": tkr}
         for t in topics:
-            m = g["topic"].apply(lambda x, t=t: t in (x or []))
+            # storage.as_list: parquet 왕복 후 topic이 numpy 배열로 돌아와
+            # `x or []` 가 ValueError로 터진다. --dry-run에서만 재현됐다.
+            m = g["topic"].apply(lambda x, t=t: t in as_list(x))
             row[t] = float(g.loc[m, "sentiment_w"].sum()) if m.any() else 0.0
         rows.append(row)
     return pd.DataFrame(rows)

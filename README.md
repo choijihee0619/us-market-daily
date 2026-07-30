@@ -26,6 +26,7 @@ python tests/test_weekly_analytics.py
 python tests/test_url_registry.py
 python tests/test_site_audit.py
 python tests/test_collect_parsing.py
+python tests/test_silent_failures.py
 
 # 2) 과거 데이터 적재 (베타 추정에 250거래일 필요, 최초 1회)
 python scripts/run_daily.py --backfill 500
