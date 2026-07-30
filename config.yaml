@@ -123,8 +123,18 @@ sentiment:
   novelty_threshold: 0.85    # 이 이상이면 재탕 기사로 간주해 가중 축소
 
 llm:
-  provider: rule             # rule | anthropic | openai
-  # 분류/요약은 저가 모델, 최종 원고만 상위 모델
+  # 2026-07-30 rule -> openai. 룰베이스로 파이프라인을 먼저 검증한 뒤 바꾼다는
+  # 설계 순서를 지켰고, 그 과정에서 무증상 버그 5건을 찾았다(CLAUDE.md 4장).
+  # 되돌리려면 rule로만 바꾸면 된다. 키·SDK가 없으면 base.get_provider가
+  # 자동으로 룰베이스로 폴백하므로 파이프라인이 죽지는 않는다.
+  provider: openai           # rule | anthropic | openai
+
+  # 분류/요약은 저가 모델, 최종 원고만 상위 모델.
+  # 분류는 AV가 대부분 사전 처리해서 하루 10건 미만이고 원고는 1회라 비용은 미미하다.
+  openai_classify_model: gpt-4o-mini
+  openai_write_model: gpt-4o
+
+  # anthropic 프로바이더용 (provider를 anthropic으로 바꿀 때 쓰인다)
   classify_model: claude-haiku-4-5-20251001
   write_model: claude-sonnet-5
   max_articles_to_classify: 120

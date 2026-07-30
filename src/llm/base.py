@@ -61,16 +61,33 @@ def build_narrative_prompt(context: dict) -> str:
 def get_provider(cfg) -> LLMProvider:
     from ..config import env
 
+    import logging
+
+    log = logging.getLogger(__name__)
     provider = str(cfg.get_path("llm.provider", "rule")).lower()
 
+    # SDK 미설치·초기화 실패를 여기서 흡수한다. 예전에는 예외가 그대로 올라가
+    # 파이프라인이 죽었다. requirements.txt에서 openai/anthropic이 선택 의존성이라
+    # **로컬은 설치되어 있고 CI는 아닌 상태가 실제로 발생한다.** 리포트가 조금
+    # 밋밋해지는 것과 그날 기록이 아예 없는 것은 비교할 문제가 아니다.
     if provider == "anthropic" and env("ANTHROPIC_API_KEY"):
-        from .anthropic_provider import AnthropicProvider
+        try:
+            from .anthropic_provider import AnthropicProvider
 
-        return AnthropicProvider(cfg)
+            return AnthropicProvider(cfg)
+        except Exception as e:
+            log.warning("anthropic 프로바이더 초기화 실패: %s -- 룰베이스로 폴백 "
+                        "(pip install anthropic)", e)
     if provider == "openai" and env("OPENAI_API_KEY"):
-        from .openai_provider import OpenAIProvider
+        try:
+            from .openai_provider import OpenAIProvider
 
-        return OpenAIProvider(cfg)
+            return OpenAIProvider(cfg)
+        except Exception as e:
+            log.warning("openai 프로바이더 초기화 실패: %s -- 룰베이스로 폴백 "
+                        "(pip install openai)", e)
+    elif provider in ("anthropic", "openai"):
+        log.warning("llm.provider=%s 인데 API 키가 없다 -- 룰베이스로 폴백", provider)
 
     from .rule_provider import RuleProvider
 

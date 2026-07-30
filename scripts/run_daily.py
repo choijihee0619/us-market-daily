@@ -360,6 +360,7 @@ def main() -> int:
     narrative = provider.write_narrative(narrative_ctx)
 
     banned = B.check_banned(narrative)
+    ctx["banned"] = banned
     if banned:
         log.warning("금지 표현 발견: %s -- 원고를 확인할 것", banned)
 

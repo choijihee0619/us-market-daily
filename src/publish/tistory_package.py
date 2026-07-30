@@ -303,7 +303,21 @@ def write_package(session, title: str, markdown: str, ctx: dict,
     html = to_html(markdown, ctx, repo_url)
     (pkg / "title.txt").write_text(title, encoding="utf-8")
     (pkg / "post.html").write_text(html, encoding="utf-8")
-    (pkg / "README.txt").write_text(INSTRUCTIONS, encoding="utf-8")
+
+    # 검출된 금지 표현을 산출물에 함께 싣는다. 로그에만 남기면 아티팩트를 받아
+    # 붙여넣는 시점에는 보이지 않는다. 2번 블록을 손보는 단계에서 무엇을 고쳐야
+    # 하는지가 손에 들려 있어야 한다.
+    readme = INSTRUCTIONS
+    banned = ctx.get("banned") or []
+    if banned:
+        readme += ("\n\n" + "!" * 62 + "\n"
+                   "[손볼 곳] 2번 블록에서 아래 표현이 검출됐다. 고치고 발행할 것.\n"
+                   + "\n".join(f"  - {b}" for b in banned)
+                   + "\n\n이 표현들은 상관을 원인처럼 읽히게 하거나 정보량이 없다.\n"
+                     "  '시사한다/의미한다' -> '~였다', '~로 관측됐다'\n"
+                     "  '두드러진/부진한'   -> 값과 방향만 쓴다\n"
+                   + "!" * 62 + "\n")
+    (pkg / "README.txt").write_text(readme, encoding="utf-8")
     (pkg / "tags.txt").write_text(", ".join(default_tags(session)), encoding="utf-8")
 
     for p in chart_paths:
