@@ -107,12 +107,12 @@ AV 자체 감성 점수는 산출 방식이 비공개라 보조 지표로만 저
 | 도메인 + SSL | 완료. canonical·sitemap.xml·rss 실측 정상 |
 | `.env` — FRED, Alpha Vantage, SEC_USER_AGENT, OPENAI_API_KEY | 설정됨 |
 | `.env` — GA4 Data API, AdSense OAuth | 미설정 (CSV 폴백으로 동작) |
-| git 저장소 | init + 커밋 4개. **GitHub 원격은 아직 없음** |
-| `config.yaml` 의 `repo_url` | `USER/` placeholder — 레포 만든 뒤 교체 |
+| git 저장소 | init + push 완료. https://github.com/choijihee0619/us-market-daily (public) |
+| `config.yaml` 의 `repo_url` | 교체 완료 |
 | 과거 데이터 적재 | 완료. 가격 525종목 18만행(2025-03~2026-07) + 매크로·팩터·뉴스 |
 | 첫 실제 실행 | 완료 (세션 2026-07-29). 5블록 + 3채널 산출물 생성 |
 | **GA4 태그** | **설치 완료.** 데스크톱·모바일 둘 다 `check_site.py`로 확인, FAIL 0 |
-| 서치콘솔 | 도메인 속성 등록·사이트맵 제출 — 진행 상태 확인 필요 |
+| 서치콘솔 | 도메인 속성 등록 + `sitemap.xml`·`rss` 제출 완료 |
 | 측정 점검 도구 | 완료 (`scripts/check_site.py`, `docs/SETUP_ANALYTICS.md`) |
 | 뉴스 태깅 진단 | 완료 (`scripts/diagnose_news.py`). 7장 4·5번 결론 참조 |
 | 발행한 글 | 0편 |
@@ -209,11 +209,22 @@ docs/SETUP_ANALYTICS.md   GA4·서치콘솔·사이트맵 설치 절차 (7·8번
 
 ### 즉시
 
-1. ~~`git init` → 첫 커밋~~ **완료.** 남은 것: **GitHub 레포 생성 → push →
-   `config.yaml`의 `repo_url` 교체 → Actions secrets 등록.**
-   레포를 만들면 워크플로 cron이 살아난다(화~토 21:20/22:20 UTC). `FRED_API_KEY`,
-   `ALPHAVANTAGE_API_KEY`, `SEC_USER_AGENT`를 secrets에 넣지 않으면 스케줄 실행이
-   반쪽으로 돈다. 매 포스팅 하단에 코드 링크가 들어가는 설계이므로 public이 맞다.
+1. ~~git init → 커밋 → GitHub 레포 → repo_url 교체~~ **완료 (public).**
+   **남은 것 하나: Actions secrets 등록.** 워크플로 cron이 이미 active다
+   (화~토 21:20/22:20 UTC = 금~일 06:20/07:20 KST). secrets가 없으면 스케줄 실행이
+   FRED·AV 없이 돌아 빈약한 기록을 아카이브에 커밋한다. 첫 스케줄 실행 전에 넣을 것.
+   키를 코드로 넣지 말 것 -- secrets는 레포 내용물이 아니고 포크에도 따라가지 않는다.
+
+   ```bash
+   gh secret set FRED_API_KEY        --body "$(grep '^FRED_API_KEY='        .env | cut -d= -f2-)"
+   gh secret set ALPHAVANTAGE_API_KEY --body "$(grep '^ALPHAVANTAGE_API_KEY=' .env | cut -d= -f2-)"
+   gh secret set SEC_USER_AGENT      --body "$(grep '^SEC_USER_AGENT='      .env | cut -d= -f2-)"
+   gh secret list
+   ```
+
+   데이터 커밋은 유지한다(재현성 + 생존편향 스냅샷). parquet 전량 재작성 때문에
+   git 이력이 하루 ~4.9MB씩 늘어 1년 ~1.24GB로 추정된다. **2027-01경 용량 재검토**:
+   그때 Git LFS 또는 릴리즈 첨부로 전환할지 결정한다.
 2. ~~`--backfill 500`~~ **완료.** 가격 525종목 179,991행. yfinance 실패 종목 없었다.
 3. ~~첫 실제 실행~~ **완료.** 4장 '첫 실제 실행에서 드러난 것' 참조.
 4. ~~AV `relevance_min` 0.25 실측 조정~~ **완료 (2026-07-30). 결론: 유지.**
