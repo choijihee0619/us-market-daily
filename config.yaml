@@ -1,0 +1,170 @@
+# us-market-daily 설정
+# 분석 대상(dependent)과 신호 입력(independent)을 엄격히 분리한다.
+
+universe:
+  # 분석 유니버스: 잔차/CAR를 계산하는 대상
+  index_proxy: SPY
+  benchmarks: [SPY, QQQ, IWM, DIA]
+  # 11 GICS 섹터 SPDR
+  sectors:
+    XLK: 정보기술
+    XLF: 금융
+    XLV: 헬스케어
+    XLY: 경기소비재
+    XLP: 필수소비재
+    XLE: 에너지
+    XLI: 산업재
+    XLB: 소재
+    XLU: 유틸리티
+    XLRE: 부동산
+    XLC: 커뮤니케이션
+  # 스타일 팩터 ETF 프록시 (Ken French 일간 팩터가 지연 업데이트되므로 당일용 근사)
+  style_proxies:
+    MTUM: 모멘텀
+    VLUE: 밸류
+    QUAL: 퀄리티
+    USMV: 저변동성
+    IWM: 소형주
+  # 개별종목 유니버스. 파일이 없으면 constituents.py가 생성
+  constituents_file: data/universe_sp500.csv
+  max_names: 500
+
+signals:
+  # 신호 입력: 종속변수로 쓰지 않는다
+  fred_series:
+    DGS2:            미국채 2년
+    DGS10:           미국채 10년
+    T10Y2Y:          10Y-2Y 스프레드
+    T10YIE:          10년 기대인플레(BEI)
+    DTWEXBGS:        달러지수(광의)
+    VIXCLS:          VIX
+    BAMLH0A0HYM2:    하이일드 OAS
+    DFF:             연방기금금리(실효)
+  yahoo_signals:
+    "^VIX":  VIX
+    "^TNX":  10년물 수익률
+    "DX-Y.NYB": 달러인덱스
+    "BTC-USD": 비트코인
+    "CL=F":  WTI
+    "GC=F":  금
+
+news:
+  # rss만 쓰면 종목 태깅이 부정확하다. alphavantage는 ticker_sentiment에
+  # relevance_score가 들어 있어 태깅 문제를 근본적으로 해결한다.
+  # 무료 25req/day 제약이 있으므로 토픽 배치로 3~5회만 호출한다.
+  providers: [alphavantage, rss]    # 순서대로 시도, 중복 URL은 앞쪽 우선
+
+  alphavantage:
+    enabled: true
+    max_calls_per_day: 4       # 무료 티어 25/day 중 여유 있게
+    relevance_min: 0.25        # ticker_sentiment 하한. 실측 후 조정할 것
+    limit: 1000
+    topic_batches:
+      - economy_monetary,economy_macro
+      - earnings
+      - technology,blockchain
+      - mergers_and_acquisitions,economy_fiscal
+
+  # 무료 RSS 소스. 헤드라인+요약+링크까지만 저장 (전문 저장은 저작권 이슈)
+  rss_feeds:
+    - name: Yahoo Finance
+      url: https://finance.yahoo.com/news/rssindex
+    - name: CNBC Markets
+      url: https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss25&id=20910258
+    - name: CNBC Economy
+      url: https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss25&id=20910258
+    - name: MarketWatch Top
+      url: https://feeds.content.dowjones.io/public/rss/mw_topstories
+    - name: Federal Reserve Press
+      url: https://www.federalreserve.gov/feeds/press_all.xml
+    - name: BLS News
+      url: https://www.bls.gov/feed/bls_latest.rss
+  edgar:
+    enabled: true
+    forms: [8-K, 10-Q, 10-K]
+    # SEC는 User-Agent에 연락처를 요구한다 (미기재 시 403)
+    user_agent: "us-market-daily heeppiness@pukyong.ac.kr"
+  max_items_per_day: 400
+
+model:
+  # 위험모형: 잔차 e_it 를 만드는 데 쓰임. 예측모형이 아님.
+  risk_model: ff5_umd        # capm | ff3 | ff5 | ff5_umd
+  beta_window: 250           # 롤링 추정 구간(거래일)
+  beta_min_obs: 120
+  beta_shrinkage: vasicek    # none | blume | vasicek
+  outlier_sigma: 2.0         # 이례치 판정 임계
+  winsorize: 0.01            # 횡단면 상하위 1% 윈저화
+
+sentiment:
+  # 1단계 baseline: 사전 기반. LLM은 보조.
+  method: lm_dictionary      # lm_dictionary | finbert | llm | ensemble
+  novelty_window: 5          # 최근 N일 헤드라인과의 최대 유사도로 novelty 산출
+  novelty_threshold: 0.85    # 이 이상이면 재탕 기사로 간주해 가중 축소
+
+llm:
+  provider: rule             # rule | anthropic | openai
+  # 분류/요약은 저가 모델, 최종 원고만 상위 모델
+  classify_model: claude-haiku-4-5-20251001
+  write_model: claude-sonnet-5
+  max_articles_to_classify: 120
+  topics:
+    - 통화정책
+    - 인플레이션
+    - 고용
+    - 실적
+    - 가이던스
+    - M&A
+    - 규제정책
+    - 지정학
+    - 공급망
+    - AI/데이터센터투자
+    - 에너지
+    - 소비
+
+report:
+  timezone_publish: Asia/Seoul
+  publish_time: "07:00"
+  language: ko
+  charts:
+    style: research           # 고정 스타일시트
+    dpi: 144
+    width_px: 1200
+  # 세 채널 동시 출력. 역할이 다르므로 하나만 고르는 문제가 아니다.
+  #   github  : 완전 자동. 코드·데이터·아카이브. 수익원이 아니라 크리덴셜 자산.
+  #   tistory : 본진. 애드센스. Open API가 2024-02 종료되어 붙여넣기만 가능.
+  #   naver   : 유입 채널. 요약본만. 글쓰기 API는 2020-05-06 종료.
+  channels: [github, tistory, naver]
+
+  # 티스토리 자체 도메인. 처음부터 연결할 것 -- 플랫폼 리스크에 대한 유일한 보험이다.
+  # canonical은 수익이 나는 쪽(티스토리)을 가리킨다.
+  site_url: "https://dailyresidualnote.com"
+
+  # 티스토리 '포스트 주소' 설정과 일치시킬 것.
+  #   numeric : /123  (티스토리 기본). URL이 발행 시점에 결정되므로 canonical을
+  #             미리 못 만든다. 발행 후 scripts/link_post.py 로 기록하면 소급 반영된다.
+  #   date    : /2026-07-28  (문자 주소로 바꾸고 날짜를 슬러그로 쓰는 경우)
+  post_url_mode: numeric
+  post_path: "/{date}"          # post_url_mode가 date일 때만 사용
+
+  repo_url: "https://github.com/USER/us-market-daily"   # TODO: 깃허브 레포 만들고 교체
+
+# 사이트에 심는 공개 태그 값. 페이지 소스에 그대로 노출되므로 비밀이 아니고,
+# .env가 아니라 여기에 둔다. scripts/check_site.py 가 실제 배포된 HTML과 대조한다.
+site:
+  # GA4 '측정 ID' (G-XXXXXXXXXX). 티스토리 스킨 </head> 앞에 들어가는 값이다.
+  # .env 의 GA4_PROPERTY_ID(숫자 9자리)와 다른 값이다 -- 그쪽은 Data API 조회용이다.
+  ga4_measurement_id: "G-BMLPRR22L0"
+
+  # 서치콘솔·서치어드바이저 소유확인 메타태그의 content 값.
+  # DNS TXT(도메인 속성)로 확인했다면 비워 둔다. 값을 넣으면 check_site.py가 검사한다.
+  google_site_verification: ""
+  naver_site_verification: ""
+
+  # 티스토리 기본 주소. 리다이렉트가 없어 계속 살아 있다.
+  # canonical 무시 사례를 관찰하려면 서치콘솔에 별도 속성으로 등록해 둔다.
+  legacy_host: "heeppiness.tistory.com"
+
+disclaimer: >-
+  본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다.
+  특정 종목의 매수·매도를 권유하지 않으며, 필자는 언급된 종목을 보유하고 있을 수 있습니다.
+  모든 수치는 발행 시점 기준이며 사후 수정될 수 있습니다.

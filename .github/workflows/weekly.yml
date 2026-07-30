@@ -1,0 +1,123 @@
+name: weekly-review
+
+# 주간 회고는 금요일 미국장 마감 이후에 돈다.
+# 22:40 UTC 토요일 = 07:40 KST 토요일. 금요일 세션 채점까지 끝난 뒤다.
+# 일간 워크플로가 먼저 돌아 scorecard.json이 갱신되어 있어야 하므로
+# 일간(21:20/22:20 UTC)보다 늦게 잡는다.
+#
+# 애널리틱스는 같은 잡에서 이어 돌린다. 발행물이 아니라 운영 문서라
+# 아티팩트로만 받는다.
+
+on:
+  schedule:
+    - cron: "40 23 * * 6"   # 토 23:40 UTC = 일 08:40 KST
+  workflow_dispatch:
+    inputs:
+      week:
+        description: "해당 주의 아무 날짜 (YYYY-MM-DD, 비우면 직전 주)"
+        required: false
+      next_hypothesis:
+        description: "다음 주 가설 문장 (비우면 기본값)"
+        required: false
+
+concurrency:
+  group: weekly-review
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: 한글 폰트 설치
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-nanum fonts-noto-cjk
+          fc-cache -fv > /dev/null
+          rm -rf ~/.cache/matplotlib
+
+      - name: 의존성 설치
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 채점 기록 확인
+        id: gate
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, pathlib
+          p = pathlib.Path("data/scorecard.json")
+          n = len(json.loads(p.read_text())) if p.exists() else 0
+          print(f"n={n}")
+          print(f"ready={'true' if n >= 5 else 'false'}")
+          PY
+
+      - name: 주간 회고 생성
+        if: steps.gate.outputs.ready == 'true'
+        run: |
+          ARGS=""
+          [ -n "${{ github.event.inputs.week }}" ] && ARGS="$ARGS --week ${{ github.event.inputs.week }}"
+          [ -n "${{ github.event.inputs.next_hypothesis }}" ] && ARGS="$ARGS --next '${{ github.event.inputs.next_hypothesis }}'"
+          eval python scripts/run_weekly.py $ARGS
+
+      - name: 성과 리포트 (운영용)
+        if: steps.gate.outputs.ready == 'true'
+        continue-on-error: true     # 애널리틱스 미구성이어도 주간 회고는 살린다
+        env:
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          ADSENSE_ACCOUNT: ${{ secrets.ADSENSE_ACCOUNT }}
+          GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+          GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+          GOOGLE_OAUTH_REFRESH_TOKEN: ${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
+        run: |
+          if [ -n "${{ secrets.GA4_SERVICE_ACCOUNT_JSON }}" ]; then
+            echo '${{ secrets.GA4_SERVICE_ACCOUNT_JSON }}' > /tmp/ga4.json
+            export GOOGLE_APPLICATION_CREDENTIALS=/tmp/ga4.json
+          fi
+          pip install google-analytics-data google-api-python-client google-auth || true
+          python scripts/run_analytics.py --days 30 || echo "애널리틱스 미구성 - 건너뜀"
+
+      - name: 산출물 업로드
+        if: steps.gate.outputs.ready == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-${{ github.run_number }}
+          path: |
+            out/*_weekly/
+            out/_analytics/
+          retention-days: 60
+
+      - name: 커밋
+        if: steps.gate.outputs.ready == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add posts/ assets/ || true
+          if git diff --staged --quiet; then
+            echo "변경 없음"
+          else
+            git commit -m "weekly: 주간 회고"
+            git pull --rebase --autostash origin ${{ github.ref_name }} || true
+            git push
+          fi
+
+      - name: 요약
+        if: steps.gate.outputs.ready == 'true'
+        run: |
+          echo "### 주간 회고 생성 완료" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "누적 채점 ${{ steps.gate.outputs.n }}거래일" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "아티팩트에서 tistory/naver 패키지를 받아 붙여넣을 것." >> $GITHUB_STEP_SUMMARY

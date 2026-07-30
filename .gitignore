@@ -1,0 +1,13 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+out/*/
+!out/.gitkeep
+*.log
+
+# 데이터는 커밋한다 (재현성 + 공개 데이터셋 컨셉)
+# 단 용량이 커지면 아래 주석 해제하고 Git LFS 또는 릴리즈 첨부로 전환
+# data/*.parquet

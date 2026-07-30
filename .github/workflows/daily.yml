@@ -1,0 +1,115 @@
+name: daily-report
+
+# 시간 설계
+# GitHub Actions cron은 UTC만 받는다. 미국 서머타임 때문에 마감(16:00 ET)의 UTC 시각이
+# 여름 20:00 / 겨울 21:00 로 1시간 움직인다. 그래서 cron은 여유 있게 두 번 잡고,
+# 실제 판정은 calendar_utils.last_completed_session()이 한다.
+#   21:20 UTC = 06:20 KST(여름) / 06:20 KST(겨울, 전일)
+#   22:20 UTC = 07:20 KST -- 겨울 백업
+# 목표는 07:00 KST 발행이므로 산출물이 그 전에 준비되면 된다.
+#
+# 주의: GitHub Actions의 스케줄 cron은 러너 혼잡 시 수 분~수십 분 지연될 수 있다.
+# 07:00 정각 발행이 중요하면 네이버 예약 발행 기능을 함께 쓸 것.
+
+on:
+  schedule:
+    - cron: "20 21 * * 2-6"   # 화~토 UTC = 미국 월~금 마감 이후
+    - cron: "20 22 * * 2-6"   # 겨울시간 백업
+  workflow_dispatch:
+    inputs:
+      session:
+        description: "대상 거래일 (YYYY-MM-DD, 비우면 자동)"
+        required: false
+
+concurrency:
+  group: daily-report
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: 한글 폰트 설치
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-nanum fonts-noto-cjk
+          fc-cache -fv > /dev/null
+          rm -rf ~/.cache/matplotlib
+
+      - name: 의존성 설치
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 마감 완료 여부 확인
+        id: gate
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import sys; sys.path.insert(0, ".")
+          from src.calendar_utils import last_completed_session
+          s = last_completed_session()
+          print(f"session={s.date() if s is not None else ''}")
+          print(f"ready={'true' if s is not None else 'false'}")
+          PY
+
+      - name: 파이프라인 실행
+        if: steps.gate.outputs.ready == 'true'
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.session }}" ]; then
+            ARGS="--session ${{ github.event.inputs.session }}"
+          fi
+          python scripts/run_daily.py $ARGS
+
+      - name: 산출물 업로드
+        if: steps.gate.outputs.ready == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: post-${{ steps.gate.outputs.session }}
+          path: out/${{ steps.gate.outputs.session }}
+          retention-days: 30
+
+      - name: 데이터·포스팅 커밋
+        if: steps.gate.outputs.ready == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ posts/ assets/
+          if git diff --staged --quiet; then
+            echo "변경 없음"
+          else
+            git commit -m "daily: ${{ steps.gate.outputs.session }}"
+            git pull --rebase --autostash origin ${{ github.ref_name }} || true
+            git push
+          fi
+
+      # 티스토리·네이버는 붙여넣기 산출물이므로 아티팩트로만 받는다.
+      # 티스토리 Open API는 2024년 2월 종료, 네이버 글쓰기 API는 2020년 5월 종료.
+      - name: 붙여넣기 패키지 요약
+        if: steps.gate.outputs.ready == 'true'
+        run: |
+          echo "### ${{ steps.gate.outputs.session }} 발행 대기" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "1. 아티팩트 \`post-${{ steps.gate.outputs.session }}\` 다운로드" >> $GITHUB_STEP_SUMMARY
+          echo "2. \`tistory/\` -> 티스토리 HTML 모드 붙여넣기, 07:00 예약" >> $GITHUB_STEP_SUMMARY
+          echo "3. \`naver/\` -> 네이버 요약본 붙여넣기, 07:10 예약" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          cat out/${{ steps.gate.outputs.session }}/tistory/title.txt >> $GITHUB_STEP_SUMMARY || true
