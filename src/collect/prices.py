@@ -70,11 +70,22 @@ def sp500_constituents() -> pd.DataFrame:
     1단계 일간 리포트(기술통계·귀인)에는 문제 없지만, 백테스트로 넘어갈 때는
     시점별 구성종목 스냅샷을 매일 저장해 둔 것을 써야 한다.
     """
+    # pd.read_html(url)에 URL을 직접 주면 내부적으로 urllib을 쓴다. macOS의
+    # python.org framework 빌드는 시스템 인증서 저장소를 참조하지 않아
+    # CERTIFICATE_VERIFY_FAILED로 조용히 실패한다(2026-07-30 실측). requests는
+    # certifi 번들을 쓰므로 문제가 없고, 이 프로젝트의 다른 수집기도 전부 requests다.
+    # 그래서 내려받기와 파싱을 분리한다.
+    import io
+
+    import requests
+
     try:
-        tables = pd.read_html(
+        r = requests.get(
             "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies",
-            storage_options={"User-Agent": "Mozilla/5.0"},
+            headers={"User-Agent": "Mozilla/5.0"}, timeout=30,
         )
+        r.raise_for_status()
+        tables = pd.read_html(io.StringIO(r.text))
     except Exception as e:  # pragma: no cover
         log.warning("구성종목 수집 실패: %s", e)
         return pd.DataFrame()

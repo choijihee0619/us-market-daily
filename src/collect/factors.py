@@ -41,6 +41,12 @@ def _read_french_zip(url: str) -> pd.DataFrame:
         parts = [p.strip() for p in ln.split(",")]
         if not parts or not parts[0][:8].isdigit() or len(parts[0]) != 8:
             break
+        # 파일마다 줄 끝 쉼표 유무가 다르다. 모멘텀 일간 파일은 모든 데이터 줄이
+        # 쉼표로 끝나서('19261103,0.35,') 필드가 하나 더 잡히고, 그대로 두면
+        # 컬럼명 할당에서 Length mismatch로 죽는다(2026-07-30 실측).
+        # 빈 꼬리 필드만 떼면 두 파일을 같은 코드로 읽을 수 있다.
+        while parts and parts[-1] == "":
+            parts.pop()
         rows.append(parts)
     df = pd.DataFrame(rows)
     df[0] = pd.to_datetime(df[0], format="%Y%m%d")

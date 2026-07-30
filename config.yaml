@@ -146,7 +146,7 @@ report:
   post_url_mode: numeric
   post_path: "/{date}"          # post_url_mode가 date일 때만 사용
 
-  repo_url: "https://github.com/USER/us-market-daily"   # TODO: 깃허브 레포 만들고 교체
+  repo_url: "https://github.com/choijihee0619/us-market-daily.git"   # TODO: 깃허브 레포 만들고 교체
 
 # 사이트에 심는 공개 태그 값. 페이지 소스에 그대로 노출되므로 비밀이 아니고,
 # .env가 아니라 여기에 둔다. scripts/check_site.py 가 실제 배포된 HTML과 대조한다.

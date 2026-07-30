@@ -54,7 +54,8 @@ PY
 
 echo
 echo "==> 6. 오프라인 테스트"
-for t in test_pipeline test_publish test_weekly_analytics test_url_registry test_site_audit; do
+for t in test_pipeline test_publish test_weekly_analytics test_url_registry test_site_audit \
+         test_collect_parsing; do
   if python "tests/$t.py" > "/tmp/$t.log" 2>&1; then
     echo "  $t  통과"
   else
