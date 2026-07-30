@@ -43,7 +43,10 @@ python scripts/run_weekly.py --next "다음 주 가설 문장"
 # 5) 성과 리포트 (운영용, 발행하지 않음)
 python scripts/run_analytics.py --days 30
 
-# 6) 측정 설치 점검 (GA4 태그·canonical·sitemap). 절차: docs/SETUP_ANALYTICS.md
+# 6) 방법론 공지글 패키지 (최초 1회, 내용 수정 시 재실행)
+python scripts/make_notice.py
+
+# 7) 측정 설치 점검 (GA4 태그·canonical·sitemap). 절차: docs/SETUP_ANALYTICS.md
 python scripts/check_site.py
 python scripts/check_site.py --snippet        # 스킨에 붙일 코드 출력
 ```
@@ -57,6 +60,8 @@ python scripts/check_site.py --snippet        # 스킨에 붙일 코드 출력
 | `run_weekly.py` | 주 1회 | **가설 검증 회고** | O |
 | `run_analytics.py` | 주 1회 | 블로그 성과 분석 | X (운영 문서) |
 | `check_site.py` | 스킨 수정 후 | 측정 태그·canonical·sitemap 점검 | X (운영 확인) |
+| `make_notice.py` | 최초 1회 | 방법론 공지글 (고정 메뉴용) | O (1회) |
+| `diagnose_news.py` | 필요 시 | 뉴스 태깅 진단 | X (운영 확인) |
 
 주간 회고가 수익 측면에서 더 중요하다. 일간 글은 하루 지나면 죽지만
 "뉴스 감성이 익일 수익률을 설명하는가" 같은 글은 계속 검색된다. 애드센스 수익은

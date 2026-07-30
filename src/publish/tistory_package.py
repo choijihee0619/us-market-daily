@@ -189,6 +189,111 @@ def to_html(markdown_text: str, ctx: dict, repo_url: str | None = None) -> str:
     return "\n".join(H)
 
 
+H3 = "font-size:17px;font-weight:700;margin:30px 0 10px;color:#24292f;"
+CALLOUT = ("background:#f6f8fa;border-left:4px solid #24292f;padding:14px 18px;"
+           "margin:18px 0;border-radius:0 5px 5px 0;")
+
+
+def to_static_html(markdown_text: str, toc_title: str = "목차") -> str:
+    """방법론·필자소개 같은 **고정 페이지**용 변환기.
+
+    일간 리포트용 to_html과 분리한 이유: 저쪽은 5블록 구조를 전제로 목차 앵커가
+    고정되어 있고 세 줄 요약 박스가 붙는다. 고정 페이지는 구조가 매번 다르므로
+    `##` 제목을 훑어 목차를 자동 생성한다.
+
+    첫 `# ` 제목은 티스토리 제목란으로 가므로 본문에서 뺀다.
+    """
+    lines = markdown_text.split("\n")
+
+    # 목차 자동 생성 (## 만 대상. ###은 너무 잘게 쪼개진다)
+    heads = [ln[3:].strip() for ln in lines if ln.startswith("## ")]
+
+    H: list[str] = [f'<div style="{BODY}">']
+    if len(heads) > 2:
+        H.append(f'<div style="border:1px solid #e4e6ea;border-radius:6px;'
+                 f'padding:14px 20px;margin:0 0 30px;">')
+        H.append(f'<div style="font-weight:700;font-size:14px;color:#57606a;'
+                 f'margin-bottom:8px;">{toc_title}</div>')
+        for i, h in enumerate(heads, 1):
+            H.append(f'<div style="margin:5px 0;font-size:14px;">'
+                     f'<a href="#s{i}" style="color:#0969da;text-decoration:none;">'
+                     f'{_inline(h)}</a></div>')
+        H.append("</div>")
+
+    in_table = False
+    h_idx = 0
+    skip_title = True
+
+    def close_table():
+        nonlocal in_table
+        if in_table:
+            H.append("</tbody></table>")
+            in_table = False
+
+    for raw in lines:
+        line = raw.rstrip()
+        if not line:
+            close_table()
+            continue
+
+        if line.startswith("# "):
+            if skip_title:
+                skip_title = False
+            continue
+
+        if line.strip() == "---":
+            close_table()
+            H.append('<hr style="border:none;border-top:1px solid #e4e6ea;margin:34px 0;">')
+            continue
+
+        if line.startswith("## "):
+            close_table()
+            h_idx += 1
+            H.append(f'<h2 id="s{h_idx}" style="{H2}">{_inline(line[3:].strip())}</h2>')
+            continue
+
+        if line.startswith("### "):
+            close_table()
+            H.append(f'<h3 style="{H3}">{_inline(line[4:].strip())}</h3>')
+            continue
+
+        if line.startswith(">"):
+            close_table()
+            H.append(f'<div style="{CALLOUT}">{_inline(line.lstrip("> "))}</div>')
+            continue
+
+        if line.startswith("|"):
+            cells = [c.strip() for c in line.strip("|").split("|")]
+            if all(set(c) <= set("-: ") for c in cells):
+                continue
+            if not in_table:
+                H.append(f'<table style="{TABLE}"><tbody>')
+                in_table = True
+                tag, style = "th", TH
+            else:
+                tag, style = "td", TD
+            H.append("<tr>" + "".join(
+                f'<{tag} style="{style}">{_inline(c)}</{tag}>' for c in cells) + "</tr>")
+            continue
+
+        if line.startswith(("- ", "* ")):
+            close_table()
+            H.append(f'<p style="margin:7px 0 7px 14px;">· {_inline(line[2:])}</p>')
+            continue
+
+        if re.match(r"^\d+\. ", line):
+            close_table()
+            H.append(f'<p style="margin:7px 0 7px 14px;">{_inline(line)}</p>')
+            continue
+
+        close_table()
+        H.append(f'<p style="margin:14px 0;">{_inline(line)}</p>')
+
+    close_table()
+    H.append("</div>")
+    return "\n".join(H)
+
+
 def write_package(session, title: str, markdown: str, ctx: dict,
                   chart_paths: list[Path], out_root: Path,
                   repo_url: str | None = None) -> Path:

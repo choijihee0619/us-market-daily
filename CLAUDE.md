@@ -165,6 +165,7 @@ scripts/
   run_analytics.py  주 1회. 성과 분석 (운영용, 발행 안 함)
   check_site.py     스킨 수정 후. 배포된 HTML로 측정 설치 검증
   diagnose_news.py  뉴스 태깅 진단 (relevance 임계값·미설명 원인 분해)
+  make_notice.py    방법론 공지글 패키지 (원본: docs/METHODOLOGY.md)
 
 src/
   calendar_utils.py  거래일·DST·뉴스창. look-ahead 차단의 핵심
@@ -178,6 +179,8 @@ src/
 
 docs/MODELS.md            사용 모형 전체 목록 (7개 층위, 1단계/2단계 구분)
 docs/SETUP_ANALYTICS.md   GA4·서치콘솔·사이트맵 설치 절차 (7·8번 항목 실행 문서)
+docs/METHODOLOGY.md       독자용 방법론 안내 (공지글 원본). 여기가 단일 출처다 --
+                          티스토리에 붙여넣은 HTML을 직접 고치지 말 것
 ```
 
 ### 리포트 5블록

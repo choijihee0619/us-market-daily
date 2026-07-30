@@ -171,6 +171,11 @@ report:
   # 커밋 링크가 `...us-market-daily.git/commit/abc` 로 깨진다.
   repo_url: "https://github.com/choijihee0619/us-market-daily"
 
+  # 방법론 공지글 URL. scripts/make_notice.py 로 만든 글을 발행한 뒤 여기에 적으면
+  # 매일 글 용어 표 아래에 링크가 붙는다. 비어 있으면 링크를 넣지 않는다.
+  # 원본은 docs/METHODOLOGY.md 이고 수정하면 스크립트를 다시 돌려 기존 글을 고친다.
+  methodology_url: ""
+
 # 사이트에 심는 공개 태그 값. 페이지 소스에 그대로 노출되므로 비밀이 아니고,
 # .env가 아니라 여기에 둔다. scripts/check_site.py 가 실제 배포된 HTML과 대조한다.
 site:

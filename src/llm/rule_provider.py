@@ -102,7 +102,8 @@ class RuleProvider(LLMProvider):
             # 그날 가장 크게 움직인 팩터가 무엇을 뜻하는지 한 줄로 풀어준다.
             # mkt_rf 같은 원시 키를 그대로 내보내면 독자가 읽을 수 없다.
             k0, v0 = ordered[0]
-            if k0 in FACTOR_MEANING:
+            # 모멘텀은 builder가 부호까지 읽어주는 설명을 따로 붙인다. 중복 방지.
+            if k0 in FACTOR_MEANING and k0 != "umd":
                 parts.append(f"{FACTOR_KO.get(k0, k0)} 팩터가 가장 크게 움직였다 — "
                              f"{FACTOR_MEANING[k0]}")
 

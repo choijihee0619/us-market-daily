@@ -142,6 +142,27 @@ def build_markdown(ctx: dict, narrative: str, chart_files: list[str], cfg) -> st
     A(narrative.strip())
     A("")
 
+    # 모멘텀은 매일 등장하고 가장 오해하기 쉬운 팩터다. 부호에 따라 뜻이 정반대이므로
+    # 그날 부호를 읽어주는 설명을 자동으로 붙인다. 서술(LLM/룰)에 맡기면 표현이
+    # 흔들리고, 정의를 매번 다시 만들어 쓰면 틀릴 여지가 있다.
+    umd = (ctx.get("factors") or {}).get("umd")
+    if umd is not None:
+        v = umd * 100
+        if v < -0.15:
+            read = ("**음(−)이다. 최근 잘 오르던 종목이 그날 오히려 더 많이 빠졌다는 "
+                    "뜻이다(되돌림). 최근 상승세가 강한 종목을 들고 있었다면 개별 "
+                    "뉴스가 없어도 손실이 났을 날이다.**")
+        elif v > 0.15:
+            read = ("**양(+)이다. 오르던 종목이 그날도 더 올랐다는 뜻이다(추세 지속). "
+                    "최근 상승 종목에 몰려 있던 자금에 유리했던 날이다.**")
+        else:
+            read = "0에 가깝다. 최근 상승·하락 종목 사이에 뚜렷한 방향 차이가 없었다."
+        A(f"_**모멘텀(UMD) {v:+.2f}%** — 최근 약 1년간 많이 오른 종목을 사고 많이 내린 "
+          f"종목을 파는 가상 포트폴리오의 그날 수익률이다. {read} "
+          f"이 팩터를 모형에 넣지 않으면 이 움직임이 잔차에 남아 뉴스 효과로 "
+          f"오인된다._")
+        A("")
+
     tr = ctx.get("topic_regression", {})
     if tr.get("coef"):
         A("아래는 **팩터로 설명되지 않고 남은 부분(잔차)** 을 뉴스 토픽 노출로 회귀한 "
@@ -295,6 +316,11 @@ def build_markdown(ctx: dict, narrative: str, chart_files: list[str], cfg) -> st
       "아니라 알려진 위험 노출을 걷어내는 귀인 모형**이다. 걷어낸 뒤 남은 잔차가 이 "
       "기록의 분석 대상이다._")
     A("")
+    mu = str(cfg.get_path("report.methodology_url", "") or "").strip()
+    if mu:
+        A(f"용어·모형·한계를 처음부터 정리한 안내 글이 있다 → "
+          f"[이 블로그를 읽는 방법]({mu})")
+        A("")
 
     # --- 푸터 ---
     A(SECTION)
