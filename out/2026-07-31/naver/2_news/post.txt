@@ -8,29 +8,30 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 1715건을 주제별로 나눴습니다.
+이날 수집한 기사 1775건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 1389건 (전체의 81%)
+■ 실적  기사 1442건 (전체의 81%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
-   · Huntington plan directs $40B to home and consumer lending, $22B to small b  [HBAN]
-   · Morgan Stanley's Woodring on Apple: Investors 'barking up the wrong tree'   [AAPL, AMZN, MS]
+   · FTI Consulting News Bytes – 31 July 2026  [ADBE, FCN, META]
+   · Why Microsoft’s stock soared to a historic gain after earnings  [MSFT]
 
-■ M&A  기사 104건 (전체의 6%)
+■ M&A  기사 109건 (전체의 6%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
+   · GLPI CEO terms gambling “bulletproof”  [CZR, GLPI, MGM]
    · EA CEO earned $38.6M the same year he cut the devs behind America's best-s  [EA, MSFT]
-   · BP Set to Quit UK North Sea Oil in Pivotal Moment for PM Burnham  [BP, COP, CVX]
 
-■ 통화정책  기사 15건 (전체의 1%)
+■ 통화정책  기사 18건 (전체의 1%)
    → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
    · Update: US Equity Indexes Surge as Microsoft Triggers Rebound in Chipmaker  [MSFT, NVDA]
    · Why Woodward (WWD) Shares Are Plunging Today  [ENPH, GLW, UAL]
 
-■ 규제정책  기사 5건 (전체의 0%)
+■ 규제정책  기사 6건 (전체의 0%)
    → 관세·소송·제재는 산업 전체에 동시에 걸린다
    · Uber class action claims company misclassifies drivers as independent cont  [UBER]
+   · Navigating ICTS Compliance Under Heightened Scrutiny  [FCN, FTNT, GOOGL]
 
-■ AI/데이터센터투자  기사 4건 (전체의 0%)
+■ AI/데이터센터투자  기사 5건 (전체의 0%)
    → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
    · Can credit cards survive AI shopping? Why Mastercard’s CEO says they’ll ‘p  [MA]
 
@@ -43,7 +44,7 @@
 
 ■ Amazon (AMZN) · 경기소비재
    +15.32%  (시장 요인 제거 후 +13.39%)
-   Did Apple just signal a bottom in momentum-driven memory chip stocks?  [Yahoo Finance]
+   Morgan Stanley's Woodring on Apple: Investors 'barking up the wrong tr  [CNBC]
 
 ■ Weyerhaeuser (WY) · 부동산
    +6.51%  (시장 요인 제거 후 +7.76%)
@@ -59,7 +60,7 @@
 
 ■ Monolithic Power Systems (MPWR) · 정보기술
    +8.35%  (시장 요인 제거 후 +8.61%)
-   BHC Stock Soars As Earnings Beat Fuels Fresh Uptrend  [StocksToTrade]
+   FRMI Stock Slides As $375M Convertible Note Deal Rattles Traders  [StocksToTrade]
 
 ■ Alphabet Inc. (Class C) (GOOG) · 커뮤니케이션
    +6.88%  (시장 요인 제거 후 +4.93%)
@@ -87,7 +88,7 @@
 4. 오늘의 정리
 ────────────────────────
 
-오늘 미국 시장에서는 주로 기업 실적에 관한 뉴스가 집중되었습니다. 이는 주요 기업들이 분기 실적을 발표하며 주식 시장 전반에 영향을 미친 날이었음을 의미합니다. 특히 Amazon과 Apple, Morgan Stanley와 같은 주요 기업들이 두드러진 움직임을 보였으며, 이는 각종 실적 발표와 관련한 뉴스가 투자자들에게 주목받았음을 보여줍니다. Tyson Foods는 보도를 찾지 못했지만, 이는 자료 수집 범위 밖일 가능성이 높습니다.
+오늘 미국 증시는 실적 발표에 대한 관심이 집중되어 있었습니다. 이는 기업의 수익성과 앞으로의 전망에 대한 투자자들의 기대가 반영되기 때문입니다. Microsoft 등의 기업이 실적 발표 이후 주가에 변동을 보였으며, 시장 전반에 걸쳐 지수에 영향을 미쳤습니다. 반면, Tyson Foods와 같은 일부 기업은 보도 범위에 포함되지 않거나, 수집 범위 밖인 경우가 있으니 독자 여러분의 이해를 바랍니다.
 
 ────────────────────────
 
