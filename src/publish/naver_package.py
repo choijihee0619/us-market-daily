@@ -29,24 +29,31 @@ import pandas as pd
 from ..storage import as_list
 from .common import default_tags, slug
 
-INSTRUCTIONS = """네이버 블로그 게시 절차 (약 2분)
+INSTRUCTIONS = """네이버 블로그 게시 절차 — 글 2개 (합계 약 4분)
 
+이 폴더에는 성격이 다른 글 두 개가 있다. 검색 의도가 달라 나눠 둔 것이다.
+
+  1_summary/  "미국증시 마감" 쿼리 대응. 스캔용 숫자
+  2_news/     "무슨 일이 있었나" 대응. 읽는 글
+
+각 폴더에서:
 1. title.txt 제목을 붙여넣는다.
 2. post.txt 내용을 붙여넣는다. 평문이라 그대로 들어간다.
 3. 이미지 1~2장 첨부 (선택). 파일은 assets/{날짜}/ 에 있다.
-   (패키지 안에 따로 복사하지 않는다 -- assets/ 와 중복이라 저장소만 커진다.)
-4. tags.txt 태그 입력 -> 공개 -> 예약 07:10.
-   (티스토리 07:00보다 10분 뒤에 올려 원문이 먼저 색인되게 한다.)
+4. tags.txt 태그 입력 -> 공개 -> 예약.
 
-이 글의 컨셉
-- 티스토리 글의 요약본이 아니다. **뉴스 중심 리포트**다.
-  티스토리는 팩터·잔차가 주인공이고, 여기는 뉴스가 주인공이다.
-- 그래서 문장이 겹치지 않는다. 중복 콘텐츠 위험이 낮다.
+**발행 시각을 벌릴 것**
+  티스토리   07:00
+  1_summary  07:10   (원문이 먼저 색인되도록 10분 뒤)
+  2_news     12:00 이후 또는 저녁
+
+같은 날 두 글을 연달아 올리면 유사문서로 묶이거나 스팸으로 보일 수 있다.
+반나절 벌리면 노출 시간대도 두 번 가져간다.
 
 주의
-- 전문을 복사해 오지 말 것. 수익이 나는 쪽(티스토리) 순위를 잡아먹는다.
-- 외부 링크는 1개만 유지한다.
-- 마지막 '오늘의 정리' 한 줄은 직접 고쳐 쓰는 것을 권한다. 매일 같은 골격이
+- 티스토리 전문을 복사해 오지 말 것. 원문 순위를 잡아먹는다.
+- 외부 링크는 글당 1개만 유지한다.
+- 2_news 의 '오늘의 정리'는 직접 고쳐 쓰는 것을 권한다. 매일 같은 골격이
   반복되면 유사문서로 잡힐 수 있다.
 """
 
@@ -102,6 +109,110 @@ def _news_digest(news_win: pd.DataFrame, topics: list[str], limit: int = 3,
         })
     rows.sort(key=lambda r: -r["n"])
     return rows
+
+
+def build_summary(ctx: dict, canonical_url: str | None = None) -> str:
+    """글 A — 마감 숫자 요약 (평문).
+
+    뉴스 리포트와 목적이 다르다. 이쪽은 **검색 대응**이다. 네이버 유입은
+    "미국증시 마감", "뉴욕증시 마감" 같은 쿼리로 들어오고, 그런 독자는 스캔할 숫자를
+    원한다. 뉴스 리포트는 앞부분이 서술이라 그 의도에 안 맞는다.
+
+    티스토리 1번 블록과 같은 데이터지만 저쪽은 HTML 표이고 여기는 평문 목록이라
+    문장이 겹치지 않는다. 숫자 나열은 어느 매체나 비슷하게 쓰므로 유사문서 판정에서
+    문제되는 부분이 아니다.
+    """
+    session = pd.Timestamp(ctx["session"])
+    L: list[str] = []
+    A = L.append
+
+    A(f"{session:%Y년 %m월 %d일}(현지시간) 미국 증시 마감 기록입니다.")
+    A("전망이나 매매 권유가 아니라 그날의 숫자를 그대로 남깁니다.")
+    A("")
+
+    bm = ctx.get("benchmarks", {})
+    if bm:
+        A("[ 주요 지수 ]")
+        for t, label in [("SPY", "S&P 500"), ("QQQ", "나스닥 100"),
+                         ("IWM", "러셀 2000"), ("DIA", "다우 30")]:
+            if t in bm:
+                A(f"{label}   {bm[t]*100:+.2f}%")
+        A("")
+
+    sect = ctx.get("sectors", [])
+    if sect:
+        up = [s for s in sect if s["ret"] > 0]
+        A("[ 섹터 ]")
+        A(f"11개 중 {len(up)}개 상승")
+        for s in sect[:3]:
+            A(f"  {s['name']}   {s['ret']*100:+.2f}%")
+        if len(sect) > 3:
+            A("  ...")
+            A(f"  {sect[-1]['name']}   {sect[-1]['ret']*100:+.2f}%")
+        A("")
+
+    mac = ctx.get("macro", {})
+    if mac:
+        A("[ 금리·변동성 ]")
+        LBL = {"DGS2": "미국채 2년", "DGS10": "미국채 10년",
+               "VIXCLS": "VIX", "BAMLH0A0HYM2": "하이일드 스프레드"}
+        stale_any = False
+        for k, label in LBL.items():
+            m = mac.get(k)
+            if not m:
+                continue
+            chg = ("—" if m.get("change") is None else
+                   (f"{m['change']:+.0f}bp" if m["unit"] == "bp" else f"{m['change']:+.2f}"))
+            mark = ""
+            if m.get("stale") and m.get("asof") is not None:
+                mark = f"  * {pd.Timestamp(m['asof']):%m-%d} 기준"
+                stale_any = True
+            A(f"{label}   {m['level']:.2f}   ({chg}){mark}")
+        if stale_any:
+            # 공개 지연을 숨기면 없는 사실을 그날 수치처럼 싣게 된다.
+            A("")
+            A("* 표시는 해당 거래일 값이 아직 공개되지 않아 직전 공개일 기준입니다.")
+        A("")
+
+    cs = ctx.get("cross_section", {})
+    if cs.get("n"):
+        n_out = cs.get("n_up_outlier", 0) + cs.get("n_down_outlier", 0)
+        A("[ 시장 요인으로 설명되지 않은 움직임 ]")
+        A(f"분석 대상 {cs['n']}개 중 {n_out}개 종목이 ±2σ를 벗어났습니다.")
+        A("지수·업종 같은 공통 요인을 걷어낸 뒤에도 남은 변동입니다.")
+        A("")
+        for r in cs.get("top", [])[:3]:
+            A(f"  ▲ {r.get('name', r['ticker'])}({r['ticker']})  {r['ret']*100:+.2f}%")
+        for r in cs.get("bottom", [])[:3]:
+            A(f"  ▼ {r.get('name', r['ticker'])}({r['ticker']})  {r['ret']*100:+.2f}%")
+        A("")
+
+    sc = ctx.get("scorecard", {})
+    if sc.get("available"):
+        A("[ 전날 신호 채점 ]")
+        A("전날 뉴스 감성 상위 20% 종목과 하위 20% 종목의")
+        A("당일 실현 초과수익 차이입니다.")
+        A("")
+        A(f"스프레드  {sc['spread_bp']:+.1f}bp  "
+          f"({'방향 일치' if sc['hit'] else '방향 불일치'})")
+        cum = ctx.get("scorecard_cum", {})
+        if cum.get("n_days", 0) >= 5:
+            A(f"누적 {cum['n_days']}거래일 방향 적중률  {cum['hit_rate']*100:.0f}%")
+        A("")
+        A("맞은 날과 틀린 날을 모두 그대로 남깁니다.")
+        A("")
+
+    A("─" * 22)
+    A("")
+    A("종목별 잔차 계산 방식, 뉴스 주제 회귀, 사용한 모형과 코드는")
+    A("전체 리포트에 있습니다.")
+    if canonical_url:
+        A("")
+        A(f"전체 리포트 → {canonical_url}")
+    A("")
+    A("본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다.")
+    A("특정 종목의 매수·매도를 권유하지 않습니다.")
+    return "\n".join(L)
 
 
 def build_report(ctx: dict, title: str, canonical_url: str | None = None,
@@ -196,15 +307,6 @@ def build_report(ctx: dict, title: str, canonical_url: str | None = None,
                 A(line.strip())
         A("")
 
-    bm = ctx.get("benchmarks", {})
-    if bm.get("SPY") is not None:
-        sect = ctx.get("sectors", [])
-        A(f"참고로 그날 S&P 500은 {bm['SPY']*100:+.2f}%였습니다.")
-        if sect:
-            A(f"섹터는 {sect[0]['name']} {sect[0]['ret']*100:+.2f}%가 가장 높았고 "
-              f"{sect[-1]['name']} {sect[-1]['ret']*100:+.2f}%가 가장 낮았습니다.")
-        A("")
-
     # ------------------------------------------------------------ 마무리
     A("─" * 24)
     A("")
@@ -226,16 +328,50 @@ def write_package(session, title: str, ctx: dict, chart_paths: list[Path],
                   topics: list[str] | None = None,
                   insight: str | None = None,
                   universe: set[str] | None = None) -> Path:
-    pkg = Path(out_root) / slug(session) / "naver"
-    pkg.mkdir(parents=True, exist_ok=True)
+    """네이버용 글 **두 개**를 만든다.
 
-    text = build_report(ctx, title, canonical_url, news_win, topics, insight, universe)
-    news_title = f"[{pd.Timestamp(session):%m/%d} 미국장] 뉴스로 보는 하루"
-    (pkg / "title.txt").write_text(news_title, encoding="utf-8")
-    (pkg / "post.txt").write_text(text, encoding="utf-8")
-    (pkg / "README.txt").write_text(INSTRUCTIONS, encoding="utf-8")
+    하나로 합치지 않는 이유: 검색 의도가 다르다.
+      1_summary — "미국증시 마감" 쿼리 대응. 스캔용 숫자
+      2_news    — "무슨 일이 있었나" 대응. 읽는 글
+    한 글에 둘을 다 넣으면 앞부분이 숫자면 뉴스 독자가 이탈하고, 앞부분이 서술이면
+    검색 스니펫에 숫자가 안 잡힌다.
 
-    tags = default_tags(session) + ["미국주식뉴스", "해외주식", "뉴스분석"]
-    (pkg / "tags.txt").write_text(", ".join(dict.fromkeys(tags)), encoding="utf-8")
+    같은 날 두 글을 연달아 올리면 유사문서로 묶일 수 있으므로 시간을 벌린다
+    (README 참조).
+    """
+    session_ts = pd.Timestamp(session)
+    base = Path(out_root) / slug(session) / "naver"
+    base.mkdir(parents=True, exist_ok=True)
+    (base / "README.txt").write_text(INSTRUCTIONS, encoding="utf-8")
 
-    return pkg
+    # ------------------------------------------------ 글 A: 숫자 요약
+    a = base / "1_summary"
+    a.mkdir(exist_ok=True)
+    bm = ctx.get("benchmarks", {})
+    sect = ctx.get("sectors", [])
+    bits = []
+    if bm.get("SPY") is not None:
+        bits.append(f"S&P500 {bm['SPY']*100:+.2f}%")
+    if sect:
+        bits.append(f"{sect[0]['name']} {sect[0]['ret']*100:+.2f}%")
+    a_title = f"[{session_ts:%m/%d} 미국증시 마감] " + ", ".join(bits[:2])
+    (a / "title.txt").write_text(a_title, encoding="utf-8")
+    (a / "post.txt").write_text(build_summary(ctx, canonical_url), encoding="utf-8")
+    (a / "tags.txt").write_text(
+        ", ".join(dict.fromkeys(default_tags(session) +
+                                ["미국증시마감", "뉴욕증시", "해외주식", "증시마감"])),
+        encoding="utf-8")
+
+    # ------------------------------------------------ 글 B: 뉴스 리포트
+    b = base / "2_news"
+    b.mkdir(exist_ok=True)
+    (b / "title.txt").write_text(
+        f"[{session_ts:%m/%d} 미국장] 뉴스로 보는 하루", encoding="utf-8")
+    (b / "post.txt").write_text(
+        build_report(ctx, title, canonical_url, news_win, topics, insight, universe),
+        encoding="utf-8")
+    (b / "tags.txt").write_text(
+        ", ".join(dict.fromkeys(default_tags(session) +
+                                ["미국주식뉴스", "해외주식", "뉴스분석"])),
+        encoding="utf-8")
+    return base

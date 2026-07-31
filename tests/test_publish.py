@@ -118,16 +118,36 @@ def main():
         "novelty": [0.9, 0.8, 0.7],
         "sentiment": [0.2, 0.0, 0.1],
     })
+    # out/_verify 는 재사용되므로 이전 실행 잔재를 먼저 지운다. 안 그러면
+    # 구조를 바꿨을 때 옛 파일이 남아 검사 결과가 흐려진다.
+    import shutil as _sh
+    _sh.rmtree(outdir / f"{pd.Timestamp(session):%Y-%m-%d}" / "naver", ignore_errors=True)
     np_ = NAVER.write_package(session, title, ctx, charts, outdir, canonical,
                               news_win=news_win, topics=["실적", "통화정책", "M&A"],
                               insight="오늘은 실적 기사가 가장 많았습니다.",
                               universe={"AAA", "BBB"})
-    txt = (np_ / "post.txt").read_text(encoding="utf-8")
-    assert txt.count("http") == 1, f"외부 링크가 1개가 아님: {txt.count('http')}"
-    assert canonical in txt
+    # 글 2개 구조: 1_summary(숫자) / 2_news(뉴스)
+    for sub in ("1_summary", "2_news"):
+        assert (np_ / sub / "post.txt").exists(), f"{sub} 누락"
+        assert (np_ / sub / "title.txt").exists()
+        assert (np_ / sub / "tags.txt").exists()
+    summary = (np_ / "1_summary" / "post.txt").read_text(encoding="utf-8")
+    txt = (np_ / "2_news" / "post.txt").read_text(encoding="utf-8")
+
+    for name, t in (("summary", summary), ("news", txt)):
+        assert t.count("http") == 1, f"{name} 외부 링크가 1개가 아님: {t.count('http')}"
+        assert canonical in t, f"{name} canonical 누락"
+
+    # 두 글의 역할이 갈려야 한다. 합치면 검색 의도 하나만 잡는다.
+    assert "[ 주요 지수 ]" in summary, "요약 글에 숫자 블록이 없음"
+    assert "[ 주요 지수 ]" not in txt, "뉴스 글에 숫자 블록이 중복됨"
     # 티스토리와 축이 달라야 한다: 뉴스가 앞, 계량 용어는 뒤로
     assert "뉴스로 보는 하루" in txt or "뉴스는 어디에" in txt, "뉴스 중심 구성이 아님"
-    assert "잔차" not in txt, "네이버 글에 계량 용어가 앞세워짐 (티스토리와 중복)"
+    # 계량 용어를 '앞세우지' 않는지 본다. 맨 끝에서 전체 리포트로 넘기며 언급하는
+    # 것은 정상이다(그게 클릭 이유가 된다). 도입부만 검사한다.
+    for name, t in (("summary", summary), ("news", txt)):
+        lead = "\n".join(t.split("\n")[:20])
+        assert "잔차" not in lead, f"{name} 도입부에 계량 용어가 앞세워짐"
     assert "오늘은 실적 기사가 가장 많았습니다" in txt, "인사이트 미반영"
     # 주제별 합계를 전체 건수로 표시하면 안 된다
     assert "여러 주제에 걸치는" in txt, "중복 계산 안내 누락"
@@ -135,15 +155,17 @@ def main():
     assert not any(l.lstrip().startswith("|") for l in txt.split("\n")), \
         "마크다운 표가 평문 요약본에 섞임"
     assert "##" not in txt and "**" not in txt, "마크다운 문법이 평문에 남음"
-    n_img = len(list((np_ / "images").glob("*.png")))
-    assert n_img <= 2, f"이미지 과다: {n_img}"
-    ntitle = (np_ / "title.txt").read_text(encoding="utf-8")
-    assert ntitle != title, "네이버 제목이 티스토리와 동일 -- 유사문서 위험"
-    print(f"  post.txt {len(txt)}자, 제목 분리 확인")
-    print(f"  외부 링크 1개, 이미지 {n_img}장")
+    # 이미지는 assets/ 를 쓰므로 패키지에 복사하지 않는다
+    assert not list(np_.rglob("*.png")), "패키지에 이미지가 복사됨 (assets/ 와 중복)"
+    t1 = (np_ / "1_summary" / "title.txt").read_text(encoding="utf-8")
+    t2 = (np_ / "2_news" / "title.txt").read_text(encoding="utf-8")
+    assert t1 != title and t2 != title, "네이버 제목이 티스토리와 동일 -- 유사문서 위험"
+    assert t1 != t2, "두 글의 제목이 같음"
+    print(f"  1_summary {len(summary)}자 / 2_news {len(txt)}자")
+    print(f"  제목 분리: {t1[:34]} | {t2[:30]}")
 
     print("\n[4] 채널 간 정합성")
-    assert canonical in text and canonical in txt, "canonical 불일치"
+    assert canonical in text and canonical in txt and canonical in summary, "canonical 불일치"
     assert "example.com" not in html
     print("  canonical 일치, 예시 도메인 잔존 없음")
 
