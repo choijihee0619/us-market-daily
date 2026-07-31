@@ -4,8 +4,14 @@ __pycache__/
 .venv/
 venv/
 .DS_Store
-out/*/
-!out/.gitkeep
+# 붙여넣기 패키지는 커밋한다. git pull 한 번으로 발행 준비가 끝나야 한다
+# (Actions 아티팩트는 30일 뒤 만료되고 매일 run id를 찾아야 한다).
+# 단 패키지 안의 이미지는 assets/ 와 완전히 겹치므로 제외한다 -- 하루 660KB 대
+# 60KB 차이다. 티스토리는 raw URL로 인라인해서 파일이 아예 필요 없고,
+# 네이버는 assets/{date}/ 에서 첨부하면 된다.
+out/_*/
+out/*/*/images/
+out/*/images/
 *.log
 
 # 데이터는 커밋한다 (재현성 + 공개 데이터셋 컨셉)

@@ -233,17 +233,20 @@ posts/2026-07-29.md          GitHub 아카이브 (front matter + canonical_url)
 assets/2026-07-29/*.png
 data/scorecard.json          누적 성적표
 
-out/2026-07-29/
+out/2026-07-29/             붙여넣기 패키지. 텍스트만 커밋된다(하루 ~60KB)
 ├── tistory/
 │   ├── title.txt
 │   ├── post.html            HTML 모드 붙여넣기용. 차트가 raw URL로 인라인됨
 │   ├── tags.txt
-│   ├── README.txt           게시 절차 + 금지 표현 검출 결과
-│   └── images/
+│   └── README.txt           게시 절차 + 금지 표현 검출 결과
 └── naver/
     ├── title.txt            제목도 분리 (유사문서 방지)
     ├── post.txt             평문 뉴스 리포트
     └── ...
+
+이미지는 패키지에 복사하지 않는다. 티스토리는 raw URL로 인라인되어 파일이 필요
+없고, 네이버는 assets/{날짜}/ 에서 첨부하면 된다. 중복 저장하면 하루 660KB씩
+저장소가 커진다.
 ```
 
 ### 왜 붙여넣기인가
@@ -257,7 +260,7 @@ out/2026-07-29/
 
 ### 매일 루틴 (3분)
 
-1. Actions 아티팩트 다운로드 (또는 `git pull` 후 `out/`)
+1. `git pull` — `out/{날짜}/` 에 붙여넣기 패키지가 들어 있다
 2. `tistory/post.html` → HTML 모드 붙여넣기 → **2번 블록 한두 문장 손보기** → 발행
 3. 글 번호 기록 — `python scripts/link_post.py https://dailyresidualnote.com/123`
 4. `naver/post.txt` → 붙여넣기 → 10분 뒤 예약 (원문이 먼저 색인되도록)

@@ -97,7 +97,9 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/ posts/ assets/
+          # out/ 도 커밋한다. 붙여넣기 패키지를 git pull 로 받게 하기 위함이다.
+          # 이미지는 .gitignore가 걸러 텍스트만 올라간다(하루 ~60KB).
+          git add data/ posts/ assets/ out/
           if git diff --staged --quiet; then
             echo "변경 없음"
           else

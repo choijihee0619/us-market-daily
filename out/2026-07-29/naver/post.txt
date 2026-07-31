@@ -1,0 +1,104 @@
+[2026년 07월 29일 미국장] 뉴스로 보는 하루
+
+미국 시장에서 그날 실제로 보도된 뉴스를 모아 정리한 기록입니다.
+전망이나 매매 권유가 아니라, 무슨 일이 있었고 어떤 종목이 반응했는지를
+숫자와 함께 남깁니다.
+
+────────────────────────
+1. 오늘 뉴스는 어디에 몰렸나
+────────────────────────
+
+이날 수집한 기사 804건을 주제별로 나눴습니다.
+(한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
+
+■ 실적  기사 697건 (전체의 87%)
+   → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
+   · PayPal Earnings Top Estimates. CEO Lores Does Not Rule Out Stripe Deal  [PYPL]
+   · Exclusive | How P&G Is Trying to Sell Tide and Bounty to Inflation-Squeeze  [PG]
+
+■ 통화정책  기사 270건 (전체의 34%)
+   → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
+   · Crypto Credit Remains Resilient Despite Macro-Driven Market Volatility  [BLK, COIN, GLXY]
+   · QUICK SPARK: Google, Amazon, Nvidia Among 2026's Top 10 Most-Shorted Stock  [AMZN]
+
+■ AI/데이터센터투자  기사 83건 (전체의 10%)
+   → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
+   · QUICK SPARK: Google, Amazon, Nvidia Among 2026's Top 10 Most-Shorted Stock  [AMZN]
+   · Caterpillar Trades at 3x Its Historical Multiple — Michael Burry Is Bettin  [CAT]
+
+■ M&A  기사 72건 (전체의 9%)
+   → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
+   · PayPal Earnings Top Estimates. CEO Lores Does Not Rule Out Stripe Deal  [PYPL]
+   · Deal sealed between Virgin Atlantic and Joby for electric air taxi service  [DAL, JOBY]
+
+■ 인플레이션  기사 61건 (전체의 8%)
+   → 물가 지표는 연준 정책 기대를 통해 금리와 주식 양쪽에 반영된다
+   · Why Wall Street Is Split on Phillips 66 (PSX) Even as Its Numbers Improve  [MPC, PSX, VLO]
+   · How Equifax Is Using AI and Mortgage Demand to Drive Its Next Growth  [EFX]
+
+────────────────────────
+2. 뉴스가 있었던 종목
+────────────────────────
+
+그날 유난히 크게 움직인 종목 중 관련 보도가 확인된 경우입니다.
+괄호 안 숫자는 시장 전체 움직임을 걷어낸 뒤 남은 변동폭입니다.
+
+■ Garmin (GRMN) · 경기소비재
+   +16.23%  (시장 요인 제거 후 +17.11%)
+   Garmin Ltd. stock outperforms competitors on strong trading day  [MarketWatch]
+
+■ GE HealthCare (GEHC) · 헬스케어
+   +12.15%  (시장 요인 제거 후 +12.19%)
+   Stocks making the biggest moves premarket: Biogen, Vertiv, GE HealthCa  [CNBC]
+
+■ Cognizant (CTSH) · 정보기술
+   +11.25%  (시장 요인 제거 후 +11.16%)
+   Cognizant Earnings: Financial Services and North America Drive Resilie  [Morningstar]
+
+■ Expand Energy (EXE) · 에너지
+   +4.45%  (시장 요인 제거 후 +4.96%)
+   Bank of Nova Scotia Sells 23,300 Shares of Expand Energy Corporation $  [MarketBeat]
+
+■ Roper Technologies (ROP) · 정보기술
+   +4.39%  (시장 요인 제거 후 +4.13%)
+   Roper Technologies (NASDAQ:ROP) Price Target Raised to $415.00 at JPMo  [MarketBeat]
+
+■ Lennox International (LII) · 산업재
+   -20.97%  (시장 요인 제거 후 -19.82%)
+   Lennox International Falls Short of Q2 2026 Profit Forecast at $7.72 E  [AlphaStreet]
+
+■ Bunge Global (BG) · 필수소비재
+   -8.17%  (시장 요인 제거 후 -8.44%)
+   Bunge Global SA (BG) Q2 2026 Earnings Call Highlights: Strong EPS Grow  [Yahoo Finance]
+
+■ Fortive (FTV) · 산업재
+   -7.10%  (시장 요인 제거 후 -5.90%)
+   Fortive Q2 2026 slides: strong growth meets margin pressure  [Investing.com]
+
+────────────────────────
+3. 뉴스를 찾지 못한 움직임
+────────────────────────
+
+크게 움직였는데 수집 범위 안에서 관련 보도를 찾지 못한 종목입니다.
+뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
+이 구분을 흐리지 않으려고 따로 적습니다.
+
+  BXP, Inc.(BXP) +4.3%, Intuit(INTU) +6.4%, Adobe Inc.(ADBE) +5.7%, Amphenol(APH) +4.5%, Fidelity National Information Services(FIS) +4.2%, Masco(MAS) -11.1%
+
+────────────────────────
+4. 오늘의 정리
+────────────────────────
+
+오늘 미국 증시는 주로 '실적' 관련 뉴스에 집중되었습니다. PayPal과 Procter & Gamble 등이 주목받았으며, 이는 시장 전반에 영향을 끼친 주요 주제였습니다. 또한, 통화정책과 AI/데이터센터 투자 관련 뉴스도 다수 보도되었으나 방송되지 않았던 Intuit과 Adobe 같은 종목도 크게 움직였습니다. 이러한 종목들에 관련된 뉴스가 없다는 뜻이 아니라 수집 범위 밖에 있었음을 유의하시기 바랍니다.
+
+참고로 그날 S&P 500은 -1.54%였습니다.
+섹터는 에너지 +1.88%가 가장 높았고 산업재 -3.19%가 가장 낮았습니다.
+
+────────────────────────
+
+이 글은 뉴스 중심으로 정리한 것입니다.
+종목별 초과수익 계산 방식, 뉴스 주제 회귀 분석, 전날 신호 채점 결과는
+전체 리포트에 있습니다.
+
+본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다.
+특정 종목의 매수·매도를 권유하지 않습니다.

@@ -1,0 +1,104 @@
+[2026년 07월 30일 미국장] 뉴스로 보는 하루
+
+미국 시장에서 그날 실제로 보도된 뉴스를 모아 정리한 기록입니다.
+전망이나 매매 권유가 아니라, 무슨 일이 있었고 어떤 종목이 반응했는지를
+숫자와 함께 남깁니다.
+
+────────────────────────
+1. 오늘 뉴스는 어디에 몰렸나
+────────────────────────
+
+이날 수집한 기사 2308건을 주제별로 나눴습니다.
+(한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
+
+■ 실적  기사 2034건 (전체의 88%)
+   → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
+   · Legacy brands are evolving from products into platforms  [GIS, HSY, K]
+   · Qualcomm’s stock falls as memory woes weigh on earnings  [QCOM]
+
+■ M&A  기사 101건 (전체의 4%)
+   → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
+   · A healthcare restructuring  [BSX]
+   · Arthur J. Gallagher announces passing of lead independent director David J  [AJG]
+
+■ 통화정책  기사 35건 (전체의 2%)
+   → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
+   · In 12 Words, JPMorgan CEO Jamie Dimon Just Issued a Stark Warning to Inves  [AAPL, AMZN, JPM]
+   · Stock Market Live July 30, 2026: S&P 500 (SPY) Pivoting from Fed-Induced D  [AMD, BAC, MSFT]
+
+■ 에너지  기사 10건 (전체의 0%)
+   → 유가는 에너지 섹터 이익과 동시에 물가 기대에도 반영된다
+   · Indonesia Energy (NYSE American: INDO) begins K-29 drilling and plans WK-5  [INDO]
+   · Middle East War Lifts Power Prices, Sounding Alarm on KEPCO's Finances  [KEP]
+
+■ AI/데이터센터투자  기사 6건 (전체의 0%)
+   → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
+   · Empery Digital trims BTC holdings, invests $65M in Midwest AI data center  [COIN, VLCN]
+   · Hyperscale Data Sells Bitcoin Treasury Assets To Fund Its Michigan AI Camp  [AULT, NVDA]
+
+────────────────────────
+2. 뉴스가 있었던 종목
+────────────────────────
+
+그날 유난히 크게 움직인 종목 중 관련 보도가 확인된 경우입니다.
+괄호 안 숫자는 시장 전체 움직임을 걷어낸 뒤 남은 변동폭입니다.
+
+■ Microsoft (MSFT) · 정보기술
+   +15.51%  (시장 요인 제거 후 +15.35%)
+   ANALYSIS: How AI has rewired Taiwan’s stock market  [Taipei Times]
+
+■ Emcor (EME) · 산업재
+   +19.32%  (시장 요인 제거 후 +14.48%)
+   EMCOR Group (EME) Q2 2026 Earnings  [7 Wall St.]
+
+■ Quanta Services (PWR) · 산업재
+   +17.26%  (시장 요인 제거 후 +13.48%)
+   Sterling Before Q2 Earnings: Should You Buy, Sell or Hold the Stock?  [The Globe and Mail]
+
+■ Huntington Ingalls Industries (HII) · 산업재
+   +14.09%  (시장 요인 제거 후 +14.41%)
+   NNS, General Dynamics subsidiary awarded $76.6B in Navy contracts  [Virginia Business]
+
+■ Chipotle Mexican Grill (CMG) · 경기소비재
+   +12.50%  (시장 요인 제거 후 +13.10%)
+   New drinks, burritos and perks help Chipotle and Starbucks beat cautio  [Los Angeles Times]
+
+■ Willis Towers Watson (WTW) · 금융
+   +6.37%  (시장 요인 제거 후 +8.89%)
+   WTW Q2 Earnings Beat Estimates on Revenue Growth and Margin Gains  [Yahoo Finance]
+
+■ Avery Dennison (AVY) · 소재
+   +4.59%  (시장 요인 제거 후 +5.71%)
+   PCA reports sales growth but slimmer profits  [Recycling Today]
+
+■ Baxter International (BAX) · 헬스케어
+   +7.99%  (시장 요인 제거 후 +9.36%)
+   Baxter Turnaround Efforts Continue Under New Management Team  [Morningstar]
+
+────────────────────────
+3. 뉴스를 찾지 못한 움직임
+────────────────────────
+
+크게 움직였는데 수집 범위 안에서 관련 보도를 찾지 못한 종목입니다.
+뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
+이 구분을 흐리지 않으려고 따로 적습니다.
+
+  XLC(XLC) -2.7%
+
+────────────────────────
+4. 오늘의 정리
+────────────────────────
+
+오늘은 주로 '실적' 관련 뉴스가 미국 시장을 지배했습니다. 이는 기업들의 분기 성과가 투자자들의 관심사를 반영하며 시장 전반에 영향을 미치기 때문입니다. 특히 Qualcomm(QCOM)의 주가는 메모리 문제로 인한 실적 부진 소식에 하락한 반면, Chipotle(CMG)와 Microsoft(MSFT) 같은 기업들은 실적 호조로 긍정적인 반응을 보였습니다. 반면 XLC의 경우, 눈에 띄는 움직임에도 관련된 보도를 찾을 수 없었습니다. 이는 뉴스가 없었다는 뜻이 아니라, 제 수집 범위 밖에 있는 것으로 보입니다.
+
+참고로 그날 S&P 500은 +1.68%였습니다.
+섹터는 정보기술 +5.50%가 가장 높았고 커뮤니케이션 -2.68%가 가장 낮았습니다.
+
+────────────────────────
+
+이 글은 뉴스 중심으로 정리한 것입니다.
+종목별 초과수익 계산 방식, 뉴스 주제 회귀 분석, 전날 신호 채점 결과는
+전체 리포트에 있습니다.
+
+본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다.
+특정 종목의 매수·매도를 권유하지 않습니다.

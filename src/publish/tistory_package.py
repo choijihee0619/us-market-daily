@@ -377,8 +377,11 @@ def write_package(session, title: str, markdown: str, ctx: dict,
     (pkg / "README.txt").write_text(readme, encoding="utf-8")
     (pkg / "tags.txt").write_text(", ".join(default_tags(session)), encoding="utf-8")
 
-    for p in chart_paths:
-        p = Path(p)
-        if p.exists():
-            shutil.copy(p, pkg / "images" / p.name)
+    # 인라인 모드에서는 이미지 파일이 쓰이지 않는다(raw URL로 들어간다).
+    # 복사하면 assets/ 와 중복될 뿐이라 건너뛴다.
+    if not image_base:
+        for p in chart_paths:
+            p = Path(p)
+            if p.exists():
+                shutil.copy(p, pkg / "images" / p.name)
     return pkg

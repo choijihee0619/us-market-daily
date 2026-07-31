@@ -22,7 +22,6 @@
 """
 from __future__ import annotations
 
-import shutil
 from pathlib import Path
 
 import pandas as pd
@@ -34,7 +33,8 @@ INSTRUCTIONS = """네이버 블로그 게시 절차 (약 2분)
 
 1. title.txt 제목을 붙여넣는다.
 2. post.txt 내용을 붙여넣는다. 평문이라 그대로 들어간다.
-3. images/ 에서 1~2장 첨부 (선택).
+3. 이미지 1~2장 첨부 (선택). 파일은 assets/{날짜}/ 에 있다.
+   (패키지 안에 따로 복사하지 않는다 -- assets/ 와 중복이라 저장소만 커진다.)
 4. tags.txt 태그 입력 -> 공개 -> 예약 07:10.
    (티스토리 07:00보다 10분 뒤에 올려 원문이 먼저 색인되게 한다.)
 
@@ -227,7 +227,7 @@ def write_package(session, title: str, ctx: dict, chart_paths: list[Path],
                   insight: str | None = None,
                   universe: set[str] | None = None) -> Path:
     pkg = Path(out_root) / slug(session) / "naver"
-    (pkg / "images").mkdir(parents=True, exist_ok=True)
+    pkg.mkdir(parents=True, exist_ok=True)
 
     text = build_report(ctx, title, canonical_url, news_win, topics, insight, universe)
     news_title = f"[{pd.Timestamp(session):%m/%d} 미국장] 뉴스로 보는 하루"
@@ -238,7 +238,4 @@ def write_package(session, title: str, ctx: dict, chart_paths: list[Path],
     tags = default_tags(session) + ["미국주식뉴스", "해외주식", "뉴스분석"]
     (pkg / "tags.txt").write_text(", ".join(dict.fromkeys(tags)), encoding="utf-8")
 
-    for p in [Path(x) for x in chart_paths][:2]:
-        if p.exists():
-            shutil.copy(p, pkg / "images" / p.name)
     return pkg
