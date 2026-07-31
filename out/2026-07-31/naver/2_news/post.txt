@@ -1,0 +1,99 @@
+[2026년 07월 31일 미국장] 뉴스로 보는 하루
+
+미국 시장에서 그날 실제로 보도된 뉴스를 모아 정리한 기록입니다.
+전망이나 매매 권유가 아니라, 무슨 일이 있었고 어떤 종목이 반응했는지를
+숫자와 함께 남깁니다.
+
+────────────────────────
+1. 오늘 뉴스는 어디에 몰렸나
+────────────────────────
+
+이날 수집한 기사 1715건을 주제별로 나눴습니다.
+(한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
+
+■ 실적  기사 1389건 (전체의 81%)
+   → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
+   · Huntington plan directs $40B to home and consumer lending, $22B to small b  [HBAN]
+   · Morgan Stanley's Woodring on Apple: Investors 'barking up the wrong tree'   [AAPL, AMZN, MS]
+
+■ M&A  기사 104건 (전체의 6%)
+   → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
+   · EA CEO earned $38.6M the same year he cut the devs behind America's best-s  [EA, MSFT]
+   · BP Set to Quit UK North Sea Oil in Pivotal Moment for PM Burnham  [BP, COP, CVX]
+
+■ 통화정책  기사 15건 (전체의 1%)
+   → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
+   · Update: US Equity Indexes Surge as Microsoft Triggers Rebound in Chipmaker  [MSFT, NVDA]
+   · Why Woodward (WWD) Shares Are Plunging Today  [ENPH, GLW, UAL]
+
+■ 규제정책  기사 5건 (전체의 0%)
+   → 관세·소송·제재는 산업 전체에 동시에 걸린다
+   · Uber class action claims company misclassifies drivers as independent cont  [UBER]
+
+■ AI/데이터센터투자  기사 4건 (전체의 0%)
+   → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
+   · Can credit cards survive AI shopping? Why Mastercard’s CEO says they’ll ‘p  [MA]
+
+────────────────────────
+2. 뉴스가 있었던 종목
+────────────────────────
+
+그날 유난히 크게 움직인 종목 중 관련 보도가 확인된 경우입니다.
+괄호 안 숫자는 시장 전체 움직임을 걷어낸 뒤 남은 변동폭입니다.
+
+■ Amazon (AMZN) · 경기소비재
+   +15.32%  (시장 요인 제거 후 +13.39%)
+   Did Apple just signal a bottom in momentum-driven memory chip stocks?  [Yahoo Finance]
+
+■ Weyerhaeuser (WY) · 부동산
+   +6.51%  (시장 요인 제거 후 +7.76%)
+   Weyerhaeuser (WY) Beat Expectations, Is The Stock Still Below Fair Val  [Simply Wall St]
+
+■ Dexcom (DXCM) · 헬스케어
+   +11.95%  (시장 요인 제거 후 +12.04%)
+   DexCom stock reaches 52-week high at $82.85  [Investing.com]
+
+■ Eaton Corporation (ETN) · 산업재
+   +7.32%  (시장 요인 제거 후 +7.75%)
+   Eaton's Heritage as a Premier Electrical Equipment Supplier Give It a   [Morningstar]
+
+■ Monolithic Power Systems (MPWR) · 정보기술
+   +8.35%  (시장 요인 제거 후 +8.61%)
+   BHC Stock Soars As Earnings Beat Fuels Fresh Uptrend  [StocksToTrade]
+
+■ Alphabet Inc. (Class C) (GOOG) · 커뮤니케이션
+   +6.88%  (시장 요인 제거 후 +4.93%)
+   Home Depot Bets Its Pro Growth on One Unified Customer Experience  [CMSWire]
+
+■ Alphabet Inc. (Class A) (GOOGL) · 커뮤니케이션
+   +6.73%  (시장 요인 제거 후 +4.72%)
+   Home Depot Bets Its Pro Growth on One Unified Customer Experience  [CMSWire]
+
+■ Trane Technologies (TT) · 산업재
+   +3.33%  (시장 요인 제거 후 +3.99%)
+   Carrier Growth Outlook Builds on HVAC Orders and Data Center Demand  [Yahoo! Finance Canada]
+
+────────────────────────
+3. 뉴스를 찾지 못한 움직임
+────────────────────────
+
+크게 움직였는데 수집 범위 안에서 관련 보도를 찾지 못한 종목입니다.
+뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
+이 구분을 흐리지 않으려고 따로 적습니다.
+
+  XLY(XLY) +3.3%, Tyson Foods(TSN) -4.4%
+
+────────────────────────
+4. 오늘의 정리
+────────────────────────
+
+오늘 미국 시장에서는 주로 기업 실적에 관한 뉴스가 집중되었습니다. 이는 주요 기업들이 분기 실적을 발표하며 주식 시장 전반에 영향을 미친 날이었음을 의미합니다. 특히 Amazon과 Apple, Morgan Stanley와 같은 주요 기업들이 두드러진 움직임을 보였으며, 이는 각종 실적 발표와 관련한 뉴스가 투자자들에게 주목받았음을 보여줍니다. Tyson Foods는 보도를 찾지 못했지만, 이는 자료 수집 범위 밖일 가능성이 높습니다.
+
+────────────────────────
+
+이 글은 뉴스 중심으로 정리한 것입니다.
+종목별 초과수익 계산 방식, 뉴스 주제 회귀 분석, 전날 신호 채점 결과는
+전체 리포트에 있습니다.
+
+본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다.
+특정 종목의 매수·매도를 권유하지 않습니다.
