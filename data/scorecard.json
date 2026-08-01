@@ -10,11 +10,11 @@
  },
  {
   "date": "2026-07-31",
-  "spread_bp": 30.18,
-  "top_bp": 5.24,
-  "bottom_bp": -24.94,
+  "spread_bp": 30.01,
+  "top_bp": 6.37,
+  "bottom_bp": -23.64,
   "hit": true,
   "n": 412,
-  "rev": "c6ad37a"
+  "rev": "14fbef9"
  }
 ]

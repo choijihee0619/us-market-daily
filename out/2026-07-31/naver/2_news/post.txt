@@ -8,32 +8,32 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 1775건을 주제별로 나눴습니다.
+이날 수집한 기사 1856건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 1442건 (전체의 81%)
+■ 실적  기사 1524건 (전체의 82%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
-   · FTI Consulting News Bytes – 31 July 2026  [ADBE, FCN, META]
-   · Why Microsoft’s stock soared to a historic gain after earnings  [MSFT]
+   · Did Apple just signal a bottom in momentum-driven memory chip stocks?  [AAPL, AMZN, MSFT]
+   · Blackstone Mortgage REIT Shares Dive Most Since Early Pandemic  [BX]
 
-■ M&A  기사 109건 (전체의 6%)
+■ M&A  기사 115건 (전체의 6%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
-   · GLPI CEO terms gambling “bulletproof”  [CZR, GLPI, MGM]
    · EA CEO earned $38.6M the same year he cut the devs behind America's best-s  [EA, MSFT]
+   · GLPI CEO terms gambling “bulletproof”  [CZR, GLPI, MGM]
 
-■ 통화정책  기사 18건 (전체의 1%)
+■ 통화정책  기사 22건 (전체의 1%)
    → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
    · Update: US Equity Indexes Surge as Microsoft Triggers Rebound in Chipmaker  [MSFT, NVDA]
-   · Why Woodward (WWD) Shares Are Plunging Today  [ENPH, GLW, UAL]
+   · CNH Archives  [CAT, CNH, DE]
 
-■ 규제정책  기사 6건 (전체의 0%)
+■ 에너지  기사 12건 (전체의 1%)
+   → 유가는 에너지 섹터 이익과 동시에 물가 기대에도 반영된다
+   · Cool Wins: PG&E Offers Customers Simple Steps for Summer Energy Savings  [PCG, PCG-P-A]
+   · 10-Q - ENTERGY ARKANSAS, LLC (0000007323) (Filer)  [ETR]
+
+■ 규제정책  기사 8건 (전체의 0%)
    → 관세·소송·제재는 산업 전체에 동시에 걸린다
-   · Uber class action claims company misclassifies drivers as independent cont  [UBER]
    · Navigating ICTS Compliance Under Heightened Scrutiny  [FCN, FTNT, GOOGL]
-
-■ AI/데이터센터투자  기사 5건 (전체의 0%)
-   → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
-   · Can credit cards survive AI shopping? Why Mastercard’s CEO says they’ll ‘p  [MA]
 
 ────────────────────────
 2. 뉴스가 있었던 종목
@@ -88,7 +88,7 @@
 4. 오늘의 정리
 ────────────────────────
 
-오늘 미국 증시는 실적 발표에 대한 관심이 집중되어 있었습니다. 이는 기업의 수익성과 앞으로의 전망에 대한 투자자들의 기대가 반영되기 때문입니다. Microsoft 등의 기업이 실적 발표 이후 주가에 변동을 보였으며, 시장 전반에 걸쳐 지수에 영향을 미쳤습니다. 반면, Tyson Foods와 같은 일부 기업은 보도 범위에 포함되지 않거나, 수집 범위 밖인 경우가 있으니 독자 여러분의 이해를 바랍니다.
+오늘의 뉴스를 보면 주로 '실적' 관련 보도에 몰렸음을 알 수 있습니다. 이는 시장 전체에 영향을 미치기 쉬운 주제로, Apple과 Microsoft 같은 대형 기업이 관련되어 있었기 때문입니다. 반면, Tyson Foods와 같은 일부 종목은 관련 보도를 찾지 못했는데, 이는 뉴스가 없었다기보다는 수집 범위 밖에 있었기 때문입니다. 다양한 주제의 보도가 나왔지만 특히 실적에 대한 관심이 컸던 하루였습니다.
 
 ────────────────────────
 
