@@ -8,15 +8,15 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 1856건을 주제별로 나눴습니다.
+이날 수집한 기사 1859건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 1524건 (전체의 82%)
+■ 실적  기사 1522건 (전체의 82%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
-   · Did Apple just signal a bottom in momentum-driven memory chip stocks?  [AAPL, AMZN, MSFT]
-   · Blackstone Mortgage REIT Shares Dive Most Since Early Pandemic  [BX]
+   · Huntington plan directs $40B to home and consumer lending, $22B to small b  [HBAN]
+   · Hanmi's $55M Notes Pay 6.50% Fixed Interest for Five Years  [AAPL, HAFC, SYK]
 
-■ M&A  기사 115건 (전체의 6%)
+■ M&A  기사 117건 (전체의 6%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
    · EA CEO earned $38.6M the same year he cut the devs behind America's best-s  [EA, MSFT]
    · GLPI CEO terms gambling “bulletproof”  [CZR, GLPI, MGM]
@@ -26,14 +26,15 @@
    · Update: US Equity Indexes Surge as Microsoft Triggers Rebound in Chipmaker  [MSFT, NVDA]
    · CNH Archives  [CAT, CNH, DE]
 
-■ 에너지  기사 12건 (전체의 1%)
+■ 규제정책  기사 9건 (전체의 0%)
+   → 관세·소송·제재는 산업 전체에 동시에 걸린다
+   · AIxCrypto Holdings' Shocking Year-Long Related-Party Deal Raises Red Flags  [AIXC, NVDA]
+   · Uber class action claims company misclassifies drivers as independent cont  [UBER]
+
+■ 에너지  기사 9건 (전체의 0%)
    → 유가는 에너지 섹터 이익과 동시에 물가 기대에도 반영된다
    · Cool Wins: PG&E Offers Customers Simple Steps for Summer Energy Savings  [PCG, PCG-P-A]
-   · 10-Q - ENTERGY ARKANSAS, LLC (0000007323) (Filer)  [ETR]
-
-■ 규제정책  기사 8건 (전체의 0%)
-   → 관세·소송·제재는 산업 전체에 동시에 걸린다
-   · Navigating ICTS Compliance Under Heightened Scrutiny  [FCN, FTNT, GOOGL]
+   · 10-Q - SOUTHERN CALIFORNIA EDISON Co (0000092103) (Filer)  [SO]
 
 ────────────────────────
 2. 뉴스가 있었던 종목
@@ -88,7 +89,7 @@
 4. 오늘의 정리
 ────────────────────────
 
-오늘의 뉴스를 보면 주로 '실적' 관련 보도에 몰렸음을 알 수 있습니다. 이는 시장 전체에 영향을 미치기 쉬운 주제로, Apple과 Microsoft 같은 대형 기업이 관련되어 있었기 때문입니다. 반면, Tyson Foods와 같은 일부 종목은 관련 보도를 찾지 못했는데, 이는 뉴스가 없었다기보다는 수집 범위 밖에 있었기 때문입니다. 다양한 주제의 보도가 나왔지만 특히 실적에 대한 관심이 컸던 하루였습니다.
+오늘의 뉴스는 전체적으로 '실적'에 집중되었습니다. 이는 기업들이 분기별 실적보고서를 발표하며 주가에 영향을 미쳤기 때문입니다. 개별 종목에 대한 반응으로는 애플(AAPL)이 공급망 문제로 언급된 반면 와이자(WY)와 덱스컴(DXCM) 등이 기대 이상의 실적을 발표하여 주가가 상승했습니다. 특히, 확인되지 않은 보도가 있는타이슨 푸즈(TSN)의 경우, 수집 범위 밖의 뉴스가 가능성이 있음을 염두에 두셔야 합니다.
 
 ────────────────────────
 
