@@ -357,6 +357,7 @@ src/
 docs/
 ├── METHODOLOGY.md        독자용 방법론 안내 (공지글 원본, 단일 출처)
 ├── MODELS.md             사용 모형 전체 목록
+├── POST_BACKLOG.md       개념·방법론 글 백로그 (72편) + 참고문헌 41편
 └── SETUP_ANALYTICS.md    GA4·서치콘솔·사이트맵 설치 절차
 ```
 
