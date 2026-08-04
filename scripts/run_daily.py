@@ -344,6 +344,28 @@ def main() -> int:
         start, end = news_window(session)
         news_win = N.filter_window(news, start, end) if not news.empty else pd.DataFrame()
 
+    # **데이터 가용성 게이트.** 달력상 마감했다고 가격이 확정된 건 아니다.
+    # 2026-08-04 실측: 08-03(월) 마감 11시간 뒤인데도 yfinance가 Open/High/Low/Volume만
+    # 주고 Close를 NaN으로 돌려줬다. 그대로 진행하면 제목이 "2026-08-03 | " 인 빈
+    # 리포트가 만들어져 아카이브에 커밋된다. 채점 기록에 껍데기가 섞이면 안 된다.
+    # LLM 호출 앞에 두어 낭비도 막는다.
+    _px = storage.read("prices")
+    if not _px.empty:
+        _day = _px[pd.to_datetime(_px["date"]).dt.normalize() == session]
+        _bench = str(cfg.get_path("universe.index_proxy", "SPY"))
+        _ok = (not _day.empty) and (_day["ticker"] == _bench).any() \
+            and pd.notna(_day.loc[_day["ticker"] == _bench, "ret"]).any()
+    else:
+        _day, _ok = pd.DataFrame(), False
+    if not _ok:
+        log.error(
+            "%s 세션의 가격 데이터가 확정되지 않았다 (해당일 %d행, 기준지수 확보 실패).\n"
+            "  거래소 마감과 데이터 제공사의 종가 확정 사이에는 시차가 있다.\n"
+            "  빈 리포트를 만들지 않고 종료한다. 잠시 뒤 다시 실행할 것:\n"
+            "    python scripts/run_daily.py --session %s",
+            session.date(), len(_day), session.date())
+        return 2
+
     # --dry-run에서도 회사명·섹터가 필요하다. 파일이 있으면 읽고, 없으면 None으로 둔다.
     universe_df = resolve_universe(cfg)
     ctx = build_context(cfg, session, news_win, universe_df)

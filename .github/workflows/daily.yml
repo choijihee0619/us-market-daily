@@ -2,19 +2,27 @@ name: daily-report
 
 # 시간 설계
 # GitHub Actions cron은 UTC만 받는다. 미국 서머타임 때문에 마감(16:00 ET)의 UTC 시각이
-# 여름 20:00 / 겨울 21:00 로 1시간 움직인다. 그래서 cron은 여유 있게 두 번 잡고,
-# 실제 판정은 calendar_utils.last_completed_session()이 한다.
-#   21:20 UTC = 06:20 KST(여름) / 06:20 KST(겨울, 전일)
-#   22:20 UTC = 07:20 KST -- 겨울 백업
-# 목표는 07:00 KST 발행이므로 산출물이 그 전에 준비되면 된다.
+# 여름 20:00 / 겨울 21:00 로 1시간 움직인다. calendar_utils는 마감 후 45분(SETTLE_LAG_MIN)이
+# 지나야 그 거래일을 '완료'로 판정하므로 게이트가 열리는 시각은 여름 20:45 / 겨울 21:45 UTC다.
 #
-# 주의: GitHub Actions의 스케줄 cron은 러너 혼잡 시 수 분~수십 분 지연될 수 있다.
-# 07:00 정각 발행이 중요하면 네이버 예약 발행 기능을 함께 쓸 것.
+# **요일은 반드시 1-5(월~금 UTC)여야 한다.**
+# 2-6(화~토)으로 두면 월요일 세션이 매주 통째로 사라진다. 월요일에 실행이 없고,
+# 화요일 21:20 UTC 시점에는 이미 화요일장이 마감돼 last_completed_session()이
+# 화요일을 돌려주기 때문이다. 2026-08-03(월) 세션이 실제로 이렇게 누락됐다.
+#
+# 두 번 잡는 이유는 서머타임과 러너 지연 양쪽이다.
+#   20:50 UTC  여름 1차 (게이트 20:45 직후). 겨울에는 마감 전이라 직전 세션이 잡혀 no-op
+#   22:20 UTC  겨울 1차 / 여름 백업
+# 실측 지연이 +53~68분이라(2026-07-30~08-01) 1차가 실제로는 21:40~22:00 UTC,
+# 즉 06:40~07:00 KST에 끝난다. 07:00 KST 발행을 노린다면 이 지연을 감안할 것.
+#
+# 같은 세션에 두 번 돌아도 storage.upsert가 멱등이고 커밋 단계가 변경 없으면
+# 건너뛰므로 중복 커밋은 생기지 않는다.
 
 on:
   schedule:
-    - cron: "20 21 * * 2-6"   # 화~토 UTC = 미국 월~금 마감 이후
-    - cron: "20 22 * * 2-6"   # 겨울시간 백업
+    - cron: "50 20 * * 1-5"   # 월~금 UTC. 여름 1차
+    - cron: "20 22 * * 1-5"   # 월~금 UTC. 겨울 1차 / 여름 백업
   workflow_dispatch:
     inputs:
       session:
@@ -66,6 +74,7 @@ jobs:
           PY
 
       - name: 파이프라인 실행
+        id: run
         if: steps.gate.outputs.ready == 'true'
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
@@ -82,10 +91,24 @@ jobs:
           if [ -n "${{ github.event.inputs.session }}" ]; then
             ARGS="--session ${{ github.event.inputs.session }}"
           fi
+          set +e
           python scripts/run_daily.py $ARGS
+          code=$?
+          set -e
+          # 종료코드 2 = 가격 데이터 미확정. 거래소 마감과 데이터 제공사의 종가
+          # 확정 사이에 시차가 있어 1차 실행이 이르면 정상적으로 발생한다.
+          # 이걸 실패로 처리하면 여름철마다 빨간 X가 떠서 진짜 고장을 구분할 수
+          # 없게 된다. 2차 cron이 받아가므로 여기서는 건너뛴다.
+          if [ $code -eq 2 ]; then
+            echo "skipped=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::가격 데이터 미확정 -- 다음 스케줄에서 재시도한다"
+            exit 0
+          fi
+          echo "skipped=false" >> "$GITHUB_OUTPUT"
+          exit $code
 
       - name: 산출물 업로드
-        if: steps.gate.outputs.ready == 'true'
+        if: steps.gate.outputs.ready == 'true' && steps.run.outputs.skipped == 'false'
         uses: actions/upload-artifact@v4
         with:
           name: post-${{ steps.gate.outputs.session }}
@@ -93,7 +116,7 @@ jobs:
           retention-days: 30
 
       - name: 데이터·포스팅 커밋
-        if: steps.gate.outputs.ready == 'true'
+        if: steps.gate.outputs.ready == 'true' && steps.run.outputs.skipped == 'false'
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -111,7 +134,7 @@ jobs:
       # 티스토리·네이버는 붙여넣기 산출물이므로 아티팩트로만 받는다.
       # 티스토리 Open API는 2024년 2월 종료, 네이버 글쓰기 API는 2020년 5월 종료.
       - name: 붙여넣기 패키지 요약
-        if: steps.gate.outputs.ready == 'true'
+        if: steps.gate.outputs.ready == 'true' && steps.run.outputs.skipped == 'false'
         run: |
           echo "### ${{ steps.gate.outputs.session }} 발행 대기" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
