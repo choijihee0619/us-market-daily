@@ -1,0 +1,101 @@
+[2026년 08월 04일 미국장] 뉴스로 보는 하루
+
+미국 시장에서 그날 실제로 보도된 뉴스를 모아 정리한 기록입니다.
+전망이나 매매 권유가 아니라, 무슨 일이 있었고 어떤 종목이 반응했는지를
+숫자와 함께 남깁니다.
+
+────────────────────────
+1. 오늘 뉴스는 어디에 몰렸나
+────────────────────────
+
+이날 수집한 기사 1660건을 주제별로 나눴습니다.
+(한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
+
+■ 실적  기사 1397건 (전체의 84%)
+   → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
+   · Intuitive Machines selected by L3Harris to supply 18 spacecraft for missil  [LHX]
+   · PR News | Chevron’s Sinclair Jumps to Northrop Grumman - Tue., Aug. 4, 202  [CVX, LMT, NOC]
+
+■ M&A  기사 91건 (전체의 5%)
+   → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
+   · PR News | Chevron’s Sinclair Jumps to Northrop Grumman - Tue., Aug. 4, 202  [CVX, LMT, NOC]
+   · An AstraZeneca, Bristol Myers Squibb merger could create a cancer-drug gia  [BMY]
+
+■ 통화정책  기사 16건 (전체의 1%)
+   → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
+   · Citi Says Japan Has Yen Defense Tools Beyond Treasury Sales  [C]
+   · Why May Correlations Turn Positive?  [BCPL, BK, SPGI]
+
+■ 에너지  기사 3건 (전체의 0%)
+   → 유가는 에너지 섹터 이익과 동시에 물가 기대에도 반영된다
+   · Capital Clean Energy Carriers receives LNG carrier Alcaios I, starts 18-mo  [CCEC]
+   · Golar LNG raises $600 million loan with FLNG business expansion in mind  [GLNG]
+
+■ AI/데이터센터투자  기사 2건 (전체의 0%)
+   → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
+   · Palantir’s stock climbs after earnings, as AI drives turbocharged growth
+   · Hyperscale Data Holds About 959 Bitcoin Worth $60.8M | GPUS Stock News  [AULT]
+
+────────────────────────
+2. 뉴스가 있었던 종목
+────────────────────────
+
+그날 유난히 크게 움직인 종목 중 관련 보도가 확인된 경우입니다.
+괄호 안 숫자는 시장 전체 움직임을 걷어낸 뒤 남은 변동폭입니다.
+
+■ Palantir Technologies (PLTR) · 정보기술
+   +29.45%  (시장 요인 제거 후 +29.86%)
+   One Southwest roundtrip lets a companion fly free, fees extra  [Stock Titan]
+
+■ Gartner (IT) · 정보기술
+   +22.61%  (시장 요인 제거 후 +24.97%)
+   Caterpillar, Wayfair, Zebra Technologies, Gartner And Other Big Stocks  [Benzinga]
+
+■ Broadridge Financial Solutions (BR) · 산업재
+   +7.04%  (시장 요인 제거 후 +8.28%)
+   Broadridge Financial Solutions Q4 2026 Earnings Call Transcript  [MarketBeat]
+
+■ Leidos (LDOS) · 산업재
+   +10.01%  (시장 요인 제거 후 +10.21%)
+   Is Leidos Holdings (LDOS) Cheap Following Its Earnings Beat And Higher  [Yahoo Finance]
+
+■ Clorox (CLX) · 필수소비재
+   +6.52%  (시장 요인 제거 후 +6.19%)
+   Chair and CEO Linda Rendle on Q4 and FY26 performance and outlook  [The Clorox Company]
+
+■ Kimberly-Clark (KMB) · 필수소비재
+   +3.73%  (시장 요인 제거 후 +3.74%)
+   Kimberly-Clark cuts annual forecasts as China quality claims hurt diap  [Reuters]
+
+■ Aptiv (APTV) · 경기소비재
+   -16.62%  (시장 요인 제거 후 -19.53%)
+   [APTV Q2 2026 Earnings Call] Aptiv Cuts Full-Year Outlook by $300M as   [BigGo Finance]
+
+■ NRG Energy (NRG) · 유틸리티
+   -15.48%  (시장 요인 제거 후 -19.13%)
+   NRG Energy slumps to 52-week low after Q2 miss as interest costs climb  [Seeking Alpha]
+
+────────────────────────
+3. 뉴스를 찾지 못한 움직임
+────────────────────────
+
+크게 움직였는데 수집 범위 안에서 관련 보도를 찾지 못한 종목입니다.
+뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
+이 구분을 흐리지 않으려고 따로 적습니다.
+
+  ^VIX(^VIX) +4.0%, Workday, Inc.(WDAY) +3.8%, XLK(XLK) +5.0%, USMV(USMV) +1.5%, Monolithic Power Systems(MPWR) -0.7%
+
+────────────────────────
+4. 오늘의 정리
+────────────────────────
+
+오늘의 미국 증시 뉴스는 '실적' 발표에 가장 집중되었습니다. 여러 기업이 실적 발표와 연관된 소식을 전하며 주식시장 전반에 영향을 미쳤습니다. 특히 정보기술 섹터에서 긍정적 반응이 두드러졌습니다. 그 외에도 M&A, 통화정책, 에너지 관련 이슈들이 보였으나 상대적으로 적었습니다. 일부 종목에서 관련 보도를 찾지 못한 것은 "뉴스가 없었다는 뜻이 아니라 수집 범위 밖"임을 명확히 합니다.
+
+────────────────────────
+
+이 글은 뉴스 중심으로 정리한 것입니다.
+종목별 초과수익 계산 방식, 뉴스 주제 회귀 분석, 전날 신호 채점 결과는
+전체 리포트에 있습니다.
+
+본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다.
+특정 종목의 매수·매도를 권유하지 않습니다.
