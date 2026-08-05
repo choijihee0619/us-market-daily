@@ -1,0 +1,101 @@
+[2026년 08월 05일 미국장] 뉴스로 보는 하루
+
+미국 시장에서 그날 실제로 보도된 뉴스를 모아 정리한 기록입니다.
+전망이나 매매 권유가 아니라, 무슨 일이 있었고 어떤 종목이 반응했는지를
+숫자와 함께 남깁니다.
+
+────────────────────────
+1. 오늘 뉴스는 어디에 몰렸나
+────────────────────────
+
+이날 수집한 기사 1422건을 주제별로 나눴습니다.
+(한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
+
+■ 실적  기사 1143건 (전체의 80%)
+   → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
+   · Analyst Report: AbbVie Inc  [ABBV]
+   · John Deere, UAW ‘Half a Billion Dollars’ Apart in Contract Extension Clash  [DE]
+
+■ M&A  기사 72건 (전체의 5%)
+   → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
+   · Rumoured GPC–O’Reilly deal refuted, but still revealed much  [GPC, ORLY]
+   · Walt Disney Company & TikTok Ink Global Short-Form Content-Sharing Deal  [DIS]
+
+■ 통화정책  기사 13건 (전체의 1%)
+   → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
+   · Are REITs Still a Buy After Their 2026 Runup?  [EQIX, MORN, PLD]
+   · Realty Income (O) Stock Looks Expensive On Earnings But Strong On Returns  [O]
+
+■ AI/데이터센터투자  기사 7건 (전체의 0%)
+   → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
+   · James Altucher Prefers AI's Picks And Shovels; Calls Quantum Computing Sci  [MSFT, TAOX]
+   · All Nippon Airways Builds Cloud Network Hub with Equinix  [EQIX]
+
+■ 규제정책  기사 4건 (전체의 0%)
+   → 관세·소송·제재는 산업 전체에 동시에 걸린다
+   · Worker alleges lack of fossil fuel-free 401(k) option violated his religio  [TMO]
+   · Equipment from Southern California Edison identified as source of 2025 Eat  [EIX]
+
+────────────────────────
+2. 뉴스가 있었던 종목
+────────────────────────
+
+그날 유난히 크게 움직인 종목 중 관련 보도가 확인된 경우입니다.
+괄호 안 숫자는 시장 전체 움직임을 걷어낸 뒤 남은 변동폭입니다.
+
+■ Assurant (AIZ) · 금융
+   +7.20%  (시장 요인 제거 후 +7.24%)
+   Transcript : Assurant, Inc., Q2 2026 Earnings Call, Aug 05, 2026  [www.marketscreener.com]
+
+■ Charles River Laboratories (CRL) · 헬스케어
+   +11.36%  (시장 요인 제거 후 +11.45%)
+   IQVIA (IQV) Teams Up With Medera To Push Cardiac Gene Therapy Forward  [Simply Wall Street]
+
+■ International Flavors & Fragrances (IFF) · 소재
+   +8.88%  (시장 요인 제거 후 +8.68%)
+   International Flavors & Fragrances (IFF) Jumps 8.4% to $87.67  [AlphaStreet]
+
+■ Marriott International (MAR) · 경기소비재
+   +4.67%  (시장 요인 제거 후 +4.76%)
+   Marriott's Brand Advantage Intact Amid Healthy Travel Demand  [Morningstar]
+
+■ Booking Holdings (BKNG) · 경기소비재
+   +6.56%  (시장 요인 제거 후 +5.99%)
+   Quarterly report: Disney says theme park attendance is up  [Orlando Sentinel]
+
+■ Walt Disney Company (The) (DIS) · 커뮤니케이션
+   +3.65%  (시장 요인 제거 후 +3.62%)
+   Disney Q3 FY26 Earnings: Commentary from CEO Josh D’Amaro  [The Walt Disney Company]
+
+■ Amgen (AMGN) · 헬스케어
+   +4.57%  (시장 요인 제거 후 +4.24%)
+   Highlights from Amgen's 2026 Second Quarter Earnings Report  [Amgen]
+
+■ Nvidia (NVDA) · 정보기술
+   +3.43%  (시장 요인 제거 후 +3.81%)
+   AI data centers and EVs are among the uses for 2200V GaN technology  [Stock Titan]
+
+────────────────────────
+3. 뉴스를 찾지 못한 움직임
+────────────────────────
+
+크게 움직였는데 수집 범위 안에서 관련 보도를 찾지 못한 종목입니다.
+뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
+이 구분을 흐리지 않으려고 따로 적습니다.
+
+  Hilton Worldwide(HLT) +4.0%, GC=F(GC=F) +5.2%, American Tower(AMT) -4.1%
+
+────────────────────────
+4. 오늘의 정리
+────────────────────────
+
+오늘 미국 시장에서는 실적 관련 뉴스가 가장 많이 보도되었습니다. 이는 대형 기업들의 실적 발표가 주식 시장 전반에 미치는 영향이 크기 때문에 주목을 받았습니다. 그 외에도 M&A와 관련된 소식이 DIS와 같은 개별 기업에 영향을 미쳤습니다. 보도를 찾지 못한 HLT, GC=F, AMT 등의 종목은 자료 수집 범위를 벗어난 상황이므로, 보도가 없었다고 단정할 수 없습니다.
+
+────────────────────────
+
+이 글은 뉴스 중심으로 정리한 것입니다.
+종목별 초과수익 계산 방식, 뉴스 주제 회귀 분석, 전날 신호 채점 결과는
+전체 리포트에 있습니다.
+
+본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다.
+특정 종목의 매수·매도를 권유하지 않습니다.
