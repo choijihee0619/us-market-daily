@@ -8,15 +8,15 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 1413건을 주제별로 나눴습니다.
+이날 수집한 기사 1448건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 1112건 (전체의 79%)
+■ 실적  기사 1145건 (전체의 79%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
-   · O’Reilly Automotive, suppliers sharing tariff refund benefits  [AMZN, F, MKC]
-   · American Tower bullish on US spectrum deployment opportunities  [AMT, CCI]
+   · FirstEnergy Foundation Supports New Jersey Disaster Preparedness & Recover  [AWK, FE]
+   · Protest underway in downtown San Diego amid soaring Sempra profits and cos  [SRE]
 
-■ M&A  기사 92건 (전체의 7%)
+■ M&A  기사 91건 (전체의 6%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
    · Devon CEO on divestiture plan: ‘There is no shortage of incoming phone cal  [CTRA, DVN]
    · Allegiant Air will install first-class seats  [ALGT, EXPE]
@@ -24,12 +24,12 @@
 ■ 통화정책  기사 20건 (전체의 1%)
    → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
    · FTSE 100 closes down despite strong results from WPP and Diageo  [ADM, APO, WPP]
-   · Nasdaq Futures Slip as Western Digital and Sandisk Sink on Disappointing G  [AMD, PODD, WDC]
+   · Bank of America Sees Yen Jumping 6% by End of 2026  [BAC]
 
-■ 에너지  기사 12건 (전체의 1%)
+■ 에너지  기사 16건 (전체의 1%)
    → 유가는 에너지 섹터 이익과 동시에 물가 기대에도 반영된다
    · ICF wins $35 million Entergy Louisiana energy contract By Investing.com  [ETR, ICFI]
-   · 10-Q - ATMOS ENERGY CORP (0000731802) (Filer)  [ATO]
+   · 10-Q - Phillips 66 (0001534701) (Filer)  [PSX]
 
 ■ AI/데이터센터투자  기사 8건 (전체의 1%)
    → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
@@ -89,7 +89,7 @@
 4. 오늘의 정리
 ────────────────────────
 
-오늘 미국 시장 뉴스에서는 주로 '실적' 관련 소식이 집중되었습니다. 이는 개별 기업들이 시장에 미치는 영향력에 대한 정보를 제공하며, 투자자들의 관심을 끌기 때문입니다. 포커스가 맞춰진 종목 중에서는 Parker Hannifin, Motorola Solutions, Fox Corporation 등이 실적 발표에 맞춰 주가가 반응했습니다. Leidos, Allstate, Federal Realty Investment Trust의 경우에는 관련 보도가 수집되지 않았으나, 이는 뉴스가 없었다는 뜻이 아니라 수집 범위 밖에 있었기 때문입니다.
+이번 거래일에는 '실적'과 관련된 뉴스가 주로 보도되었습니다. 이는 기업 성과가 시장 전반에 미치는 영향이 크기 때문으로 보입니다. 'M&A'와 '통화정책' 관련 소식도 있었지만, 보도된 수는 상대적으로 적었습니다. 다음 종목들인 Leidos, Allstate, Federal Realty Investment Trust는 두드러진 주가 변동이 있었으나 뉴스 수집 범위 내에서는 관련 뉴스를 찾지 못했습니다.
 
 ────────────────────────
 
