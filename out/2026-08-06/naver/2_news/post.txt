@@ -8,15 +8,15 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 1370건을 주제별로 나눴습니다.
+이날 수집한 기사 1413건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 1071건 (전체의 78%)
+■ 실적  기사 1112건 (전체의 79%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
-   · The ‘Pain Trade’ Has Officially Arrived for Software Stocks  [DDOG, HUBS]
-   · Steve Wozniak and Karen Allen Planned for 2027 Cruise Talks  [NCLH]
+   · O’Reilly Automotive, suppliers sharing tariff refund benefits  [AMZN, F, MKC]
+   · American Tower bullish on US spectrum deployment opportunities  [AMT, CCI]
 
-■ M&A  기사 86건 (전체의 6%)
+■ M&A  기사 92건 (전체의 7%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
    · Devon CEO on divestiture plan: ‘There is no shortage of incoming phone cal  [CTRA, DVN]
    · Allegiant Air will install first-class seats  [ALGT, EXPE]
@@ -89,7 +89,7 @@
 4. 오늘의 정리
 ────────────────────────
 
-오늘은 실적 발표에 관한 뉴스가 주를 이루며, 이는 여러 산업에 걸친 개별 기업 재료로 나타났습니다. DDOG과 HUBS, 그리고 NCLH 같은 종목들이 주요 뉴스의 중심에 있었으며, 이는 해당 기업들의 실적 발표와 관련이 깊습니다. 한편, PH, MSI, FOX와 같은 종목들은 이날 높은 수익률을 기록했으나, LDOS와 ALL 같은 종목들은 보도가 확인되지 않았습니다. 이는 해당 뉴스가 없었다는 뜻이 아니라, 수집 범위 밖에 있었음을 의미합니다.
+오늘 미국 시장 뉴스에서는 주로 '실적' 관련 소식이 집중되었습니다. 이는 개별 기업들이 시장에 미치는 영향력에 대한 정보를 제공하며, 투자자들의 관심을 끌기 때문입니다. 포커스가 맞춰진 종목 중에서는 Parker Hannifin, Motorola Solutions, Fox Corporation 등이 실적 발표에 맞춰 주가가 반응했습니다. Leidos, Allstate, Federal Realty Investment Trust의 경우에는 관련 보도가 수집되지 않았으나, 이는 뉴스가 없었다는 뜻이 아니라 수집 범위 밖에 있었기 때문입니다.
 
 ────────────────────────
 
