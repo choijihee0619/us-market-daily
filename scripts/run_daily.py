@@ -436,9 +436,13 @@ def main() -> int:
         digest = NAVER._news_digest(news_win, topics, limit=2, universe=uni_set)
         news_map = ctx.get("outlier_news", {})
         allout = ctx["cross_section"].get("top", []) + ctx["cross_section"].get("bottom", [])
+        # URL은 LLM 프롬프트에서 뺀다. 인사이트(4번 '오늘의 정리')는 서술문이라
+        # 링크가 들어갈 자리가 없고, 넣으면 모델이 본문에 URL을 흘리거나 없는
+        # 주소를 만들어낼 여지가 생긴다. 링크는 build_report가 데이터에서 직접 찍는다.
+        digest_for_llm = [{k: v for k, v in d.items() if k != "urls"} for d in digest]
         insight_ctx = {
             "session": str(session.date()),
-            "topic_digest": digest,
+            "topic_digest": digest_for_llm,
             "matched": [{"ticker": r["ticker"], "name": r.get("name"),
                          "sector": r.get("sector"), "ret": r["ret"],
                          "headline": news_map.get(r["ticker"])}
@@ -451,7 +455,9 @@ def main() -> int:
         insight = provider.write_news_insight(insight_ctx)
         p = NAVER.write_package(session, title, ctx, charts, OUT_DIR, canonical,
                                 news_win=news_win, topics=topics, insight=insight,
-                                universe=uni_set)
+                                universe=uni_set,
+                                article_links=bool(cfg.get_path(
+                                    "report.naver_article_links", True)))
         made.append(f"naver    {p}")
 
     print()

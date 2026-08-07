@@ -17,8 +17,26 @@
 형식은 평문(txt)을 유지한다. 네이버 스마트에디터는 붙여넣은 HTML을 상당 부분
 정규화해서 표·스타일이 깨진다. 평문이 가장 안정적이다.
 
-외부 링크는 1개로 유지한다. 네이버가 외부 링크 많은 글의 노출을 낮추는 경향이
-있다고 알려져 있다.  [검증 필요 -- 공식 문서화된 규칙이 아니라 경험칙이다]
+외부 링크 정책 (2026-08-07 변경)
+-------------------------------
+이전에는 외부 링크를 글당 1개(티스토리 원문)로 제한했다. 근거는 "네이버가 외부
+링크 많은 글의 노출을 낮춘다"는 경험칙이었고, 그 근거 자체가
+`[검증 필요 -- 공식 문서화된 규칙이 아니라 경험칙이다]`로 표시돼 있었다.
+
+지금은 **2_news 에 인용한 기사의 원문 링크를 함께 싣는다.** 바꾼 이유는
+검증 가능성이다. 이 글은 "그날 이런 보도가 있었고 그 종목이 이만큼 움직였다"를
+주장하는데, 원문을 확인할 경로가 없으면 독자가 그 주장을 검증할 수 없다.
+출처 표기는 애드센스가 요구하는 원본성·E-E-A-T 심사에서도 유리한 쪽이다.
+
+**감수하는 위험을 명시해둔다.** 링크 수가 1개에서 최대 19개로 늘어난다
+(토픽 5×2 + 이례치 8 + 티스토리 1). 위 경험칙이 사실이라면 네이버 노출이
+깎이고, 네이버는 이 프로젝트의 유입 채널이다. 그래서 되돌릴 수 있게 만들었다 --
+`config.yaml` 의 `report.naver_article_links: false` 한 줄이면 이전 동작으로
+돌아간다. 노출 변화는 `scripts/run_analytics.py` 로 관측할 일이고, 지금은
+경험칙과 검증가능성 중 후자를 택한 상태다.  [검증 필요 -- 노출 영향 미측정]
+
+1_summary 는 그대로 티스토리 링크 1개만 유지한다. 그쪽은 검색 스니펫용
+숫자 목록이라 인용할 기사가 없다.
 """
 from __future__ import annotations
 
@@ -52,7 +70,10 @@ INSTRUCTIONS = """네이버 블로그 게시 절차 — 글 2개 (합계 약 4�
 
 주의
 - 티스토리 전문을 복사해 오지 말 것. 원문 순위를 잡아먹는다.
-- 외부 링크는 글당 1개만 유지한다.
+- 1_summary 는 외부 링크 1개(티스토리)만 유지한다.
+- 2_news 에는 인용 기사 원문 링크가 들어 있다. 지우지 말 것 -- 그 글의 주장
+  ("이런 보도가 있었고 그 종목이 이만큼 움직였다")을 독자가 검증할 유일한 경로다.
+  네이버 스마트에디터는 붙여넣은 맨 URL을 자동으로 링크로 만든다.
 - 2_news 의 '오늘의 정리'는 직접 고쳐 쓰는 것을 권한다. 매일 같은 골격이
   반복되면 유사문서로 잡힐 수 있다.
 """
@@ -106,6 +127,10 @@ def _news_digest(news_win: pd.DataFrame, topics: list[str], limit: int = 3,
             "headlines": [str(h) for h in pick["headline"].head(limit)],
             "tickers": [", ".join(as_list(v)[:3]) for v in pick["tickers"].head(limit)]
                        if "tickers" in pick.columns else [],
+            # 헤드라인과 같은 순서·같은 길이로 맞춘다. 인덱스로 짝지으므로
+            # 결측 URL도 빈 문자열로 자리를 채워야 어긋나지 않는다.
+            "urls": [str(u or "") for u in pick["url"].head(limit)]
+                    if "url" in pick.columns else [],
         })
     rows.sort(key=lambda r: -r["n"])
     return rows
@@ -219,7 +244,8 @@ def build_report(ctx: dict, title: str, canonical_url: str | None = None,
                  news_win: pd.DataFrame | None = None,
                  topics: list[str] | None = None,
                  insight: str | None = None,
-                 universe: set[str] | None = None) -> str:
+                 universe: set[str] | None = None,
+                 article_links: bool = True) -> str:
     session = pd.Timestamp(ctx["session"])
     L: list[str] = []
     A = L.append
@@ -251,15 +277,20 @@ def build_report(ctx: dict, title: str, canonical_url: str | None = None,
             if note:
                 A(f"   → {note}")
             tks = d.get("tickers") or []
+            urls = d.get("urls") or []
             for i, h in enumerate(d["headlines"]):
                 tk = tks[i] if i < len(tks) and tks[i] else ""
                 A(f"   · {h[:74]}" + (f"  [{tk}]" if tk else ""))
+                u = urls[i] if i < len(urls) else ""
+                if article_links and u:
+                    A(f"     {u}")
             A("")
 
     # ------------------------------------- 2. 뉴스가 있었던 종목의 움직임
     cs = ctx.get("cross_section", {})
     news_map = ctx.get("outlier_news", {})
     src_map = ctx.get("outlier_news_source", {})
+    url_map = ctx.get("outlier_news_url", {})
     matched = [r for r in (cs.get("top", []) + cs.get("bottom", []))
                if r["ticker"] in news_map]
     if matched:
@@ -269,6 +300,12 @@ def build_report(ctx: dict, title: str, canonical_url: str | None = None,
         A("")
         A("그날 유난히 크게 움직인 종목 중 관련 보도가 확인된 경우입니다.")
         A("괄호 안 숫자는 시장 전체 움직임을 걷어낸 뒤 남은 변동폭입니다.")
+        if article_links:
+            # 이 블록은 "수치와 보도가 같은 날 있었다"만 주장한다. 링크를 붙이는
+            # 목적은 그 주장을 독자가 확인할 수 있게 하는 것이고, 인과 주장으로
+            # 읽히지 않도록 여기서 한 번 못박는다(3장 '인과 주장 금지').
+            A("링크는 그 종목이 그날 보도된 기사 원문입니다.")
+            A("기사가 주가 움직임의 원인이라는 뜻은 아닙니다.")
         A("")
         for r in matched[:8]:
             name = r.get("name", r["ticker"])
@@ -278,6 +315,9 @@ def build_report(ctx: dict, title: str, canonical_url: str | None = None,
             A(f"■ {name} ({r['ticker']}) · {sec}")
             A(f"   {r['ret']*100:+.2f}%  (시장 요인 제거 후 {r['residual']*100:+.2f}%)")
             A(f"   {head}" + (f"  [{src}]" if src else ""))
+            u = url_map.get(r["ticker"], "")
+            if article_links and u:
+                A(f"   {u}")
             A("")
 
     # ------------------------------------------- 3. 뉴스가 없던 큰 움직임
@@ -327,7 +367,8 @@ def write_package(session, title: str, ctx: dict, chart_paths: list[Path],
                   news_win: pd.DataFrame | None = None,
                   topics: list[str] | None = None,
                   insight: str | None = None,
-                  universe: set[str] | None = None) -> Path:
+                  universe: set[str] | None = None,
+                  article_links: bool = True) -> Path:
     """네이버용 글 **두 개**를 만든다.
 
     하나로 합치지 않는 이유: 검색 의도가 다르다.
@@ -368,7 +409,8 @@ def write_package(session, title: str, ctx: dict, chart_paths: list[Path],
     (b / "title.txt").write_text(
         f"[{session_ts:%m/%d} 미국장] 뉴스로 보는 하루", encoding="utf-8")
     (b / "post.txt").write_text(
-        build_report(ctx, title, canonical_url, news_win, topics, insight, universe),
+        build_report(ctx, title, canonical_url, news_win, topics, insight, universe,
+                     article_links=article_links),
         encoding="utf-8")
     (b / "tags.txt").write_text(
         ", ".join(dict.fromkeys(default_tags(session) +

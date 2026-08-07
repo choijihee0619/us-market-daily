@@ -91,7 +91,11 @@ AV 자체 감성 점수는 산출 방식이 비공개라 보조 지표로만 저
   정책이 요구하는 human oversight의 증거다.**
 - **티스토리 스킨에 JS 리다이렉트 삽입.** 이용약관 위반, 계정 정지 사유.
 - **네이버에 전문 복사.** 중복 콘텐츠로 티스토리(수익원) 순위를 잡아먹는다.
-  요약 + 외부 링크 1개만.
+  네이버는 서술 축이 다른 별도 글이어야 한다(`naver_package` 주석 참조).
+  **외부 링크 규칙은 2026-08-07에 바뀌었다.** 이전 "글당 1개"는 1_summary에만
+  적용되고, 2_news에는 인용 기사 원문 링크를 싣는다 — 그 글의 주장을 독자가
+  검증할 경로이고 E-E-A-T에도 유리하다. `report.naver_article_links: false`
+  한 줄로 되돌아간다. 노출 영향은 `[검증 필요 — 미측정]`.
 - **본문에 수동 애드센스 코드 추가.** 자동광고로 충분하고, 과다 삽입은 정책 위반 소지.
 - **개별 종목 매수·매도 시사.** 유료화 시 유사투자자문업 신고 대상이 될 수 있다.
   팩터·매크로 귀인 수준에 머문다.
@@ -103,7 +107,7 @@ AV 자체 감성 점수는 산출 방식이 비공개라 보조 지표로만 저
 
 | 항목 | 상태 |
 |---|---|
-| 파이프라인 | 완료. 오프라인 테스트 **7종** 통과 |
+| 파이프라인 | 완료. 오프라인 테스트 **8종** 통과 |
 | 도메인 + SSL | 완료. canonical·sitemap.xml·rss 실측 정상 |
 | `.env` — FRED, Alpha Vantage, SEC_USER_AGENT, OPENAI_API_KEY | 설정됨 |
 | `.env` — GA4 Data API, AdSense OAuth | 미설정 (CSV 폴백으로 동작) |
@@ -182,11 +186,13 @@ scripts/
   run_weekly.py     주 1회. 가설 검증 회고
   run_analytics.py  주 1회. 성과 분석 (운영용, 발행 안 함)
   check_site.py     스킨 수정 후. 배포된 HTML로 측정 설치 검증
+  check_freshness.py 매일 루틴 0단계. 기록이 마지막 거래일보다 뒤처졌는지 (7장 16번)
   diagnose_news.py  뉴스 태깅 진단 (relevance 임계값·미설명 원인 분해)
   make_notice.py    방법론 공지글 패키지 (원본: docs/METHODOLOGY.md)
 
 src/
   calendar_utils.py  거래일·DST·뉴스창. look-ahead 차단의 핵심
+  freshness.py       세션 누락 판정. 순수 함수(gap_report)로 분리해 합성 검증
   storage.py         append-only parquet upsert
   collect/           prices, macro, factors, news, news_alphavantage, analytics
   process/           residual, sentiment, attribution, weekly_stats
@@ -330,6 +336,12 @@ docs/SESSION_GAPS.md      세션 누락 감지·복구 설계 (7장 16번). 구�
     구현 순서는 문서 5절. **계층 2(소급 실행 스탬프)가 계층 1(갭 자동 메움)보다
     먼저다** — 표시 없는 자동 메움은 실시간 out-of-sample 기록을 되돌릴 수 없게
     오염시킨다. 08-06 복구에서 소급 AV가 1,253건, 07-30 실시간이 1,058건이었다.
+
+    진행: **계층 4 완료** (`scripts/check_freshness.py` + `src/freshness.py`,
+    `tests/test_freshness.py` 9종). 남은 것은 계층 2 → 1 → 3.
+    현재 이 스크립트가 잡아내는 실재 갭은 **2026-08-03 한 건**이다.
+    복구하려면 `python scripts/run_daily.py --session 2026-08-03` 이지만
+    4세션 지난 건이라 계층 2가 들어간 뒤에 판단한다(문서 4절).
 
 ---
 

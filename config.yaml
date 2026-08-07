@@ -185,6 +185,13 @@ report:
   # 커밋 링크가 `...us-market-daily.git/commit/abc` 로 깨진다.
   repo_url: "https://github.com/choijihee0619/us-market-daily"
 
+  # 네이버 2_news 에 인용 기사 원문 링크를 넣는다. 목적은 검증가능성이다 --
+  # "이런 보도가 있었고 그 종목이 이만큼 움직였다"는 주장을 독자가 확인할 경로다.
+  # false로 두면 링크가 티스토리 1개로 줄어 이전 동작이 된다. 되돌리는 이유가
+  # 생길 수 있어 남겨둔 스위치다: "네이버가 외부 링크 많은 글의 노출을 낮춘다"는
+  # 경험칙이 있고 아직 미검증이다. 노출 변화는 run_analytics.py 로 관측할 것.
+  naver_article_links: true
+
   # 방법론 공지글 URL. scripts/make_notice.py 로 만든 글을 발행한 뒤 여기에 적으면
   # 매일 글 용어 표 아래에 링크가 붙는다. 비어 있으면 링크를 넣지 않는다.
   # 원본은 docs/METHODOLOGY.md 이고 수정하면 스크립트를 다시 돌려 기존 글을 고친다.

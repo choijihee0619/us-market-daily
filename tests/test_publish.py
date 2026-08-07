@@ -54,6 +54,14 @@ def make_ctx():
         "upcoming": [{"time": "08:30", "name": "6월 PCE 물가", "consensus": "+0.2% m/m"}],
         "sources": ["Yahoo Finance", "FRED", "Ken French Data Library"],
     }
+    # 이례치 뉴스 매칭을 심는다. 비워두면 네이버 2번 블록('뉴스가 있었던 종목')이
+    # 아예 렌더링되지 않아 기사 링크 검사가 통과하는 척만 한다.
+    cs = ctx["cross_section"]
+    for r in (cs.get("top", [])[:2] + cs.get("bottom", [])[:1]):
+        t = r["ticker"]
+        ctx["outlier_news"][t] = f"{t} posts surprise quarterly result"
+        ctx.setdefault("outlier_news_url", {})[t] = f"https://news.example.org/{t.lower()}-q2"
+        ctx.setdefault("outlier_news_source", {})[t] = "Example Wire"
     return cfg, ctx, resid
 
 
@@ -117,6 +125,9 @@ def main():
         "tickers": [["AAA"], [], ["BBB"]],
         "novelty": [0.9, 0.8, 0.7],
         "sentiment": [0.2, 0.0, 0.1],
+        "url": ["https://news.example.org/acme-earnings",
+                "https://news.example.org/fed-holds",
+                "https://news.example.org/beta-merger"],
     })
     # out/_verify 는 재사용되므로 이전 실행 잔재를 먼저 지운다. 안 그러면
     # 구조를 바꿨을 때 옛 파일이 남아 검사 결과가 흐려진다.
@@ -134,9 +145,33 @@ def main():
     summary = (np_ / "1_summary" / "post.txt").read_text(encoding="utf-8")
     txt = (np_ / "2_news" / "post.txt").read_text(encoding="utf-8")
 
+    # 링크 정책은 두 글이 다르다 (naver_package 모듈 주석 '외부 링크 정책' 참조).
+    #   1_summary : 티스토리 1개만. 검색 스니펫용 숫자 목록이라 인용할 기사가 없다.
+    #   2_news    : 인용 기사 원문 링크를 함께 싣는다. 그 글의 주장을 독자가
+    #               검증할 유일한 경로다.
+    assert summary.count("http") == 1, \
+        f"1_summary 외부 링크가 1개가 아님: {summary.count('http')}"
     for name, t in (("summary", summary), ("news", txt)):
-        assert t.count("http") == 1, f"{name} 외부 링크가 1개가 아님: {t.count('http')}"
         assert canonical in t, f"{name} canonical 누락"
+
+    # 1번 블록(토픽별 대표 기사) 링크
+    assert "https://news.example.org/acme-earnings" in txt, "토픽 대표 기사 링크 누락"
+    # 2번 블록(이례치 종목) 링크. ctx의 outlier_news_url에서 와야 한다.
+    assert any(u in txt for u in ctx.get("outlier_news_url", {}).values()), \
+        "이례치 종목 기사 링크 누락"
+    assert txt.count("http") > 1, "2_news 에 기사 링크가 전혀 없다"
+    # 상관을 인과로 읽히지 않게 못박는 문장이 있어야 한다 (3장 '인과 주장 금지').
+    assert "원인이라는 뜻은 아닙니다" in txt, "링크 오해 방지 문구 누락"
+
+    # 스위치가 실제로 되돌리는지. 경험칙(네이버가 외부 링크 많은 글을 낮춘다)이
+    # 사실로 확인되면 config 한 줄로 돌아가야 하므로, 그 경로를 검사한다.
+    txt_off = NAVER.build_report(
+        ctx, title, canonical, news_win, ["실적", "통화정책", "M&A"],
+        "오늘은 실적 기사가 가장 많았습니다.", {"AAA", "BBB"}, article_links=False)
+    assert txt_off.count("http") == 1, \
+        f"article_links=False 인데 링크가 남음: {txt_off.count('http')}"
+    assert "원인이라는 뜻은 아닙니다" not in txt_off, \
+        "링크가 없는데 링크 안내 문구가 남음"
 
     # 두 글의 역할이 갈려야 한다. 합치면 검색 의도 하나만 잡는다.
     assert "[ 주요 지수 ]" in summary, "요약 글에 숫자 블록이 없음"
