@@ -8,39 +8,88 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 1517건을 주제별로 나눴습니다.
+이날 수집한 기사 1682건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 1224건 (전체의 81%)
+■ 실적  기사 1390건 (전체의 83%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
-   · Johnson & Johnson vs AbbVie: Safe Dividend vs Higher Yield  [ABBV, JNJ, SBUX]
-   · Camden's Water UP! Offers Paid Training and OSHA 30 Certification  [AWK]
+   · KLA, Snowflake, Airbnb And A Health Care Stock On CNBC’s ‘Final Trades’  [ABNB, GILD, KLAC]
+   · OMCL Falls 20.1% in a Month as Booking and Margin Risks Build  [BDX, MCK, OMCL]
 
-■ M&A  기사 84건 (전체의 6%)
+■ M&A  기사 89건 (전체의 5%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
    · Private Equity’s Exit Backlog: Acknowledged but Stuck  [APO, BLK, BX]
-   · Johnson & Johnson vs AbbVie: Safe Dividend vs Higher Yield  [ABBV, JNJ, SBUX]
+   · Blackstone strikes $1.8 billion deal for Air Canada division  [BX]
 
 ■ 통화정책  기사 21건 (전체의 1%)
    → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
    · Private Equity’s Exit Backlog: Acknowledged but Stuck  [APO, BLK, BX]
    · Asking the Right Questions - Raymond James - Commentaries  [RJF]
 
-■ 규제정책  기사 5건 (전체의 0%)
+■ 규제정책  기사 6건 (전체의 0%)
    → 관세·소송·제재는 산업 전체에 동시에 걸린다
-   · City of Jonesboro Denies Variance Request for Tractor Supply Relocation  [TSCO]
+   · Edison Judge Balks at Holding Utility Liable for LA Wildfire  [AIG, ALL, CB]
    · SCE wins tentative ruling in Eaton wildfire liability case, Bloomberg News  [EIX]
 
-■ AI/데이터센터투자  기사 5건 (전체의 0%)
+■ AI/데이터센터투자  기사 6건 (전체의 0%)
    → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
    · Oracle’s stock has taken a hit as AI spending concerns resurface  [ORCL]
    · Lumentum sees sales more than double as AI demand swells  [LITE]
 
 ────────────────────────
+2. 뉴스가 있었던 종목
+────────────────────────
+
+그날 유난히 크게 움직인 종목 중 관련 보도가 확인된 경우입니다.
+괄호 안 숫자는 시장 전체 움직임을 걷어낸 뒤 남은 변동폭입니다.
+
+■ Supermicro (SMCI) · 정보기술
+   +19.02%  (시장 요인 제거 후 +17.60%)
+   SK Hynix and SanDisk Climb 8%, Western Digital Gains 4% as Memory Shor  [7 Wall St.]
+
+■ Yum! Brands (YUM) · 경기소비재
+   +3.86%  (시장 요인 제거 후 +3.81%)
+   Lamb Weston at Bank of America smid cap virtual conference: margin res  [Investing.com]
+
+■ Darden Restaurants (DRI) · 경기소비재
+   +4.01%  (시장 요인 제거 후 +4.06%)
+   Darden Restaurants stock hits 52-week high at 221.0 USD By Investing.c  [Investing.com Canada]
+
+■ Alliant Energy (LNT) · 유틸리티
+   +2.42%  (시장 요인 제거 후 +2.29%)
+   Assenagon Asset Management S.A. Has $7.12 Million Stock Holdings in Al  [MarketBeat]
+
+■ WEC Energy Group (WEC) · 유틸리티
+   +2.28%  (시장 요인 제거 후 +2.15%)
+   Did Strong Q2 Results and Reaffirmed 2026 Guidance Just Shift WEC Ener  [Simply Wall Street]
+
+■ Oracle Corporation (ORCL) · 정보기술
+   +5.36%  (시장 요인 제거 후 +6.19%)
+   Oracle’s stock has taken a hit as AI spending concerns resurface  [MarketWatch Top]
+
+■ Tractor Supply (TSCO) · 경기소비재
+   +3.23%  (시장 요인 제거 후 +3.92%)
+   City of Jonesboro Denies Variance Request for Tractor Supply Relocatio  [Jonesboro Right Now]
+
+■ Cencora (COR) · 헬스케어
+   -5.90%  (시장 요인 제거 후 -5.63%)
+   Cencora dips on loss of some Walgreens business (COR:NYSE)  [Seeking Alpha]
+
+────────────────────────
+3. 뉴스를 찾지 못한 움직임
+────────────────────────
+
+크게 움직였는데 수집 범위 안에서 관련 보도를 찾지 못한 종목입니다.
+뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
+이 구분을 흐리지 않으려고 따로 적습니다.
+
+  Ciena(CIEN) +11.5%, Veeva Systems(VEEV) +2.1%, Global Payments(GPN) +3.1%, CRH plc(CRH) -3.3%, D. R. Horton(DHI) -3.3%, XLB(XLB) -1.2%
+
+────────────────────────
 4. 오늘의 정리
 ────────────────────────
 
-오늘 미국 시장에서는 '실적' 관련 뉴스가 가장 많은 주목을 받았습니다. 이는 여러 기업들의 재무 성과 발표가 달러와 시장의 투자 심리에 광범위한 영향을 미쳤기 때문입니다. 'M&A'와 '통화정책'에 대한 기사도 주목을 받았지만 비교적 적었습니다. 보도를 찾지 못한 종목은 수집 범위 밖에 있는 것이며, 정보기술 섹터가 상대적으로 높은 수익률을 기록했습니다.
+오늘 미국 주식시장에서는 기업 실적 관련 소식이 가장 큰 주목을 받았습니다. 이는 시장 전반에 영향을 미칠 수 있는 요소로, 투자자들이 기업의 경영 성과를 바탕으로 주가의 방향성을 판단하는 데 중요한 역할을 합니다. Oracle은 AI 투자 우려로 주가에 타격을 입었지만 데이터 센터 관련 수요가 상승세를 보였습니다. Supermicro, Yum! Brands와 같은 일부 기업은 크게 움직였지만 이에 대한 뉴스는 수집 범위 밖이었습니다.
 
 ────────────────────────
 
