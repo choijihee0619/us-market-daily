@@ -8,33 +8,33 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 1551건을 주제별로 나눴습니다.
+이날 수집한 기사 1622건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 1250건 (전체의 81%)
+■ 실적  기사 1312건 (전체의 81%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
+   · Nvidia, Intel, Google: Wall Street is partying like it’s 1999  [INTC, NVDA]
    · Customers choose Saia for top honors in two freight categories  [FDX, SAIA]
-   · Popular cruise line quietly adds new routes from Galveston  [CCL, NCLH, RCL]
 
-■ M&A  기사 86건 (전체의 6%)
+■ M&A  기사 92건 (전체의 6%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
-   · Dominion Energy (D) touts $1.78B in bill credits and job protections in Ne  [D, NEE]
-   · MGM's $546M Northfield Sale Boosts Buyback and Liquidity Flexibility  [CZR, MGM, WYNN]
+   · Hershey’s push for premiumisation picks up pace  [HSY, KO, MDLZ]
+   · Does MYR Group’s Acquisition Push, Funded by MYRG’s Balance Sheet, Deepen   [MYRG, PWR]
 
 ■ 통화정책  기사 13건 (전체의 1%)
    → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
    · A Fantastic Fundamental Foundation for This REIT ETF  [PLD, PSA, REIT]
    · America builds what it needs: Citigroup CEO Jane Fraser  [C]
 
-■ 에너지  기사 10건 (전체의 1%)
+■ 에너지  기사 11건 (전체의 1%)
    → 유가는 에너지 섹터 이익과 동시에 물가 기대에도 반영된다
    · Recurrent Energy Brings 150 MW Solar Park Online for Microsoft in Australi  [CSIQ, MSFT]
    · BP P.L.C. Awards Multi-Million-Dollar Contract to Emerson Electric Co. for  [EMR]
 
-■ 소비  기사 5건 (전체의 0%)
-   → 미국 GDP의 3분의 2가 소비다
-   · Higher fuel costs could mean higher electric bills for NENC Dominion Energ  [D]
-   · Rich Americans are propping up the travel economy as airfares soar 25% hig  [COST]
+■ AI/데이터센터투자  기사 4건 (전체의 0%)
+   → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
+   · Cisco sees record results from an AI ‘supercycle,’ but its stock pulls bac  [CSCO]
+   · The Beat: Target names AI chief, Niron gets White House backing, Envoy cha  [BSX, LOW, TGT]
 
 ────────────────────────
 2. 뉴스가 있었던 종목
@@ -60,7 +60,7 @@
    Expedia Stock Is Up 60% This Year. The B2B Business Deserves the Credi  [TIKR.com]
 
 ■ Paychex (PAYX) · 산업재
-   +4.18%  (시장 요인 제거 후 +3.81%)
+   +4.18%  (시장 요인 제거 후 +3.78%)
    Paychex stock holds steady as investors weigh dividend yield and analy  [AD HOC NEWS]
 
 ■ Global Payments (GPN) · 금융
@@ -89,7 +89,7 @@
 4. 오늘의 정리
 ────────────────────────
 
-오늘은 '실적' 관련 뉴스가 증시 전반에 가장 큰 영향을 미쳤습니다. 이는 여러 기업들의 실적 발표와 관련된 보도가 많았기 때문입니다. 개별 뉴스가 확인되지 않은 GoDaddy(GDDY)와 Fox Corporation(FOX)은 움직임이 있었지만, 이는 수집 범위 밖의 뉴스일 수 있습니다. 전반적으로 주요 지수들은 긍정적인 흐름을 보였습니다.
+오늘 미국 증시 뉴스는 주로 기업 실적 발표에 집중되었습니다. 대형 기술 기업들과 화물운송 기업들이 실적과 관련된 소식을 전하면서 시장 전반에 큰 영향을 미쳤습니다. 실적 외에도 인수합병 관련 소식이 관심을 끌었으나 이는 개별 기업 중심의 재료로 나타났습니다. 또 GoDaddy과 같은 종목은 보도를 찾지 못했지만, 이는 단순히 수집 범위 밖에 있었기 때문입니다.
 
 ────────────────────────
 

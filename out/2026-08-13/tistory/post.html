@@ -41,23 +41,23 @@
 <p style="margin:24px 0;text-align:center;"><img src="https://raw.githubusercontent.com/choijihee0619/us-market-daily/main/assets/2026-08-13/02_factors.png" alt="" style="max-width:100%;height:auto;border-radius:4px;"></p>
 <h2 id="m2" style="font-size:21px;font-weight:700;margin:44px 0 14px;padding-bottom:9px;border-bottom:2px solid #24292f;">2. 무엇이 설명했나</h2>
 <p style="margin:14px 0;"><span style="color:#888;font-size:13px;">개별 종목의 등락은 대부분 '그 종목 고유의 사건'이 아니라 시장 전체·규모·가치·모멘텀 같은 <b>공통 요인(팩터)</b> 에 대한 노출로 설명된다. 이 블록은 그 공통 요인이 그날 얼마나 움직였는지를 먼저 본다.</span></p>
-<p style="margin:14px 0;">시장에서 각 팩터의 움직임을 살펴보면, 시장 전체의 초과수익을 나타내는 시장(MKT) 팩터는 약 0.7%로 양호한 편이었다. 이것은 그날의 수익이 전반적으로 시장의 방향 하나로 설명됐다는 뜻이다. 모멘텀은 -0.28%로, 최근 오르던 종목들이 하락하는 경향이 있었다. 규모 팩터는 -0.43%로 음(-)의 값을 보여 대형주가 소형주보다 더 수익이 높았다.</p>
-<p style="margin:14px 0;">섹터별로 보면 커뮤니케이션 섹터가 2.07%의 높은 상승률을 기록해 두드러졌고, 정보기술 역시 긍정적인 흐름을 보이며 1.01% 상승했다. 반면, 소재 섹터는 -0.51%로 하락했다. 개별 종목 중에서는 정보기술 섹터의 Workday, Inc.가 잔차 16.8%p로 가장 높은 양의 잔차를 기록했다. 이는 팩터 노출로 설명된 움직임을 넘어선 수익이었다. 반면, 정보기술 섹터의 Cisco는 잔차 -9.88%p로 하위에 위치했다.</p>
-<p style="margin:14px 0;">토픽 회귀에서는 AI/데이터센터투자 관련 계수가 -310.38로 큰 음수였으며, R²는 6.8%로 in-sample 결과로 유의성 검정을 하지 않았음을 감안해야 한다. 이 수치는 AI/데이터센터투자 관련 뉴스가 잔차의 큰 변동 요인이 될 가능성이 있음을 시사하지만, 데이터 커버리지의 한계도 있을 수 있다.</p>
+<p style="margin:14px 0;">시장에서 가장 두드러진 움직임은 가치(HML) 팩터와 모멘텀 팩터였다. 가치 팩터가 소폭 상승세를 보이며 저평가 주식이 성장주보다 다소 나은 성과를 보였다. 반면, 모멘텀 팩터는 살짝 하락해 최근 12개월 동안 많이 오른 주식이 약간의 되돌림을 겪은 셈이다. 전반적인 시장 초과수익은 소폭 상승해 주식시장이 안정적인 흐름을 유지했다.</p>
+<p style="margin:14px 0;">섹터별로는 커뮤니케이션(XLC)과 부동산(XLRE) 섹터가 가장 크게 상승했다. 특히 커뮤니케이션 섹터는 2% 이상 상승해 이 날 가장 강력한 성과를 보였다. 반면, 소재(XLB)와 산업재(XLI) 섹터는 각각 소폭 하락했다. 종목별로는 워크데이(Workday, 정보기술)와 코스타 그룹(CoStar Group, 부동산)이 각각 17.8%와 8.4% 상승하며 높은 잔차 수익을 기록했다. 이는 개별 기업의 이슈가 팩터 노출로 설명된 부분 이상으로 주목받았음을 시사한다.</p>
+<p style="margin:14px 0;">토픽 회귀 분석에서 in-sample R²는 7.2%로, 설명력이 제한적이며 유의성 검정을 하지 않은 상태임을 감안해야 한다. AI/데이터센터투자와 공급망 이슈가 가장 높은 계수를 보이며 이 날의 일부 시장 움직임에 영향을 미쳤다. 다만, 주어진 데이터 외에도 잔여 변동성이 상당하여 시장의 복잡성을 쉽게 해명하기는 어려웠을 것이다.</p>
 <p style="margin:14px 0;"><span style="color:#888;font-size:13px;"><b>모멘텀(UMD) -0.28%</b> — 최근 약 1년간 많이 오른 종목을 사고 많이 내린 종목을 파는 가상 포트폴리오의 그날 수익률이다. <b>음(−)이다. 최근 잘 오르던 종목이 그날 오히려 더 많이 빠졌다는 뜻이다(되돌림). 최근 상승세가 강한 종목을 들고 있었다면 개별 뉴스가 없어도 손실이 났을 날이다.</b> 이 팩터를 모형에 넣지 않으면 이 움직임이 잔차에 남아 뉴스 효과로 오인된다.</span></p>
 <p style="margin:14px 0;">아래는 <b>팩터로 설명되지 않고 남은 부분(잔차)</b> 을 뉴스 토픽 노출로 회귀한 결과다. 계수가 +면 그날 그 토픽에 노출된 종목들의 잔차가 평균적으로 높았다는 뜻이고, 인과관계가 아니라 같은 날 함께 나타난 연관이다.</p>
 <table style="border-collapse:collapse;width:100%;font-size:15px;margin:16px 0;"><tbody>
 <tr><th style="border:1px solid #d8dade;padding:9px 12px;background:#f6f7f9;font-weight:600;text-align:left;">토픽</th><th style="border:1px solid #d8dade;padding:9px 12px;background:#f6f7f9;font-weight:600;text-align:left;">계수 (bp)</th></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">AI/데이터센터투자</td><td style="border:1px solid #d8dade;padding:9px 12px;">-310.4</td></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">M&A</td><td style="border:1px solid #d8dade;padding:9px 12px;">+65.3</td></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">실적</td><td style="border:1px solid #d8dade;padding:9px 12px;">-55.5</td></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">소비</td><td style="border:1px solid #d8dade;padding:9px 12px;">+42.1</td></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">규제정책</td><td style="border:1px solid #d8dade;padding:9px 12px;">+22.7</td></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">통화정책</td><td style="border:1px solid #d8dade;padding:9px 12px;">+22.7</td></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">에너지</td><td style="border:1px solid #d8dade;padding:9px 12px;">+13.7</td></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">공급망</td><td style="border:1px solid #d8dade;padding:9px 12px;">+6.9</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">AI/데이터센터투자</td><td style="border:1px solid #d8dade;padding:9px 12px;">-300.3</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">공급망</td><td style="border:1px solid #d8dade;padding:9px 12px;">+177.8</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">M&A</td><td style="border:1px solid #d8dade;padding:9px 12px;">+63.4</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">실적</td><td style="border:1px solid #d8dade;padding:9px 12px;">-54.6</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">에너지</td><td style="border:1px solid #d8dade;padding:9px 12px;">-42.3</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">소비</td><td style="border:1px solid #d8dade;padding:9px 12px;">+37.7</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">통화정책</td><td style="border:1px solid #d8dade;padding:9px 12px;">+23.7</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">규제정책</td><td style="border:1px solid #d8dade;padding:9px 12px;">+23.2</td></tr>
 </tbody></table>
-<p style="margin:14px 0;">n=368, R²=6.8%. R²는 잔차 횡단면 분산 중 토픽이 설명한 비중이다 — 나머지 93%는 이 토픽 집합으로 설명되지 않았다. 표준오차는 보고하지 않는다. 잔차가 추정된 베타에서 나온 generated regressand라 2단계 추정오차가 반영되지 않았기 때문이다. 계수는 방향성 참고용이다.</p>
+<p style="margin:14px 0;">n=368, R²=7.2%. R²는 잔차 횡단면 분산 중 토픽이 설명한 비중이다 — 나머지 93%는 이 토픽 집합으로 설명되지 않았다. 표준오차는 보고하지 않는다. 잔차가 추정된 베타에서 나온 generated regressand라 2단계 추정오차가 반영되지 않았기 때문이다. 계수는 방향성 참고용이다.</p>
 <p style="margin:24px 0;text-align:center;"><img src="https://raw.githubusercontent.com/choijihee0619/us-market-daily/main/assets/2026-08-13/03_macro.png" alt="" style="max-width:100%;height:auto;border-radius:4px;"></p>
 <h2 id="m3" style="font-size:21px;font-weight:700;margin:44px 0 14px;padding-bottom:9px;border-bottom:2px solid #24292f;">3. 설명되지 않은 움직임</h2>
 <p style="margin:14px 0;"><span style="color:#888;font-size:13px;"><b>잔차(residual)</b> 는 '그 종목이 팩터 노출만으로 움직였다면 이랬을 텐데, 실제로는 이만큼 달랐다'의 차이다. 예를 들어 시장이 -1.5% 빠진 날 어떤 종목이 -1.5% 하락했다면 시장을 따라간 것이라 잔차는 0에 가깝다. 반대로 시장이 빠진 날 +16% 오르면 팩터로 설명되지 않는 큰 양(+)의 잔차가 남는다. 그 남은 부분이 그 종목 고유의 사건 — 실적 발표, 가이던스 수정, M&A 같은 — 을 담고 있을 가능성이 높다. 이 블로그가 뉴스와 맞춰보는 대상이 바로 이 잔차다.</span></p>
@@ -81,8 +81,8 @@
 <h2 id="m4" style="font-size:21px;font-weight:700;margin:44px 0 14px;padding-bottom:9px;border-bottom:2px solid #24292f;">4. 어제 신호 채점</h2>
 <p style="margin:14px 0;"><span style="color:#888;font-size:13px;">이 블로그의 존재 이유다. 전날 뉴스 감성으로 종목을 5분위로 나눠 놓고, 그 다음 거래일에 실제로 상위 분위가 하위 분위보다 높은 잔차를 냈는지 채점한다. <b>맞은 날과 틀린 날을 모두 그대로 남긴다.</b> 사후에 성공 사례만 고르면 out-of-sample 기록이 아니게 되기 때문이다.</span></p>
 <p style="margin:14px 0;">직전 거래일 뉴스 감성(novelty 가중) 5분위 포트폴리오의 당일 실현 잔차:</p>
-<p style="margin:6px 0 6px 14px;">· 최상위 분위 (n=71): -40.2bp</p>
-<p style="margin:6px 0 6px 14px;">· 최하위 분위 (n=72): +49.6bp</p>
+<p style="margin:6px 0 6px 14px;">· 최상위 분위 (n=71): -40.0bp</p>
+<p style="margin:6px 0 6px 14px;">· 최하위 분위 (n=72): +49.7bp</p>
 <p style="margin:6px 0 6px 14px;">· 스프레드: <b>-89.7bp</b> (방향 불일치)</p>
 <p style="margin:14px 0;">누적 8거래일: 평균 스프레드 -12.2bp, 방향 적중률 38%, t=-0.55.</p>
 <p style="margin:14px 0;">동일가중이며 거래비용을 반영하지 않았다. 집행 가능한 전략 수익률이 아니라 신호의 방향성 기록이다.</p>
@@ -99,9 +99,9 @@
 <p style="margin:14px 0;"><span style="color:#888;font-size:13px;">일정은 FRED 릴리스 캘린더 기준이며 시각은 지표마다 다르다. 컨센서스(시장 예상치)는 무료 소스로 확보되지 않아 싣지 않는다.</span></p>
 <p style="margin:14px 0;"><span style="color:#888;font-size:13px;">본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다. 특정 종목의 매수·매도를 권유하지 않으며, 필자는 언급된 종목을 보유하고 있을 수 있습니다. 모든 수치는 발행 시점 기준이며 사후 수정될 수 있습니다.</span></p>
 <p style="margin:14px 0;">데이터 출처: Yahoo Finance · FRED (St. Louis Fed) · Kenneth R. French Data Library · SEC EDGAR</p>
-<p style="margin:14px 0;">생성 커밋: <code style="background:#f4f4f6;padding:1px 5px;border-radius:3px;font-size:13px;">469ae33</code></p>
+<p style="margin:14px 0;">생성 커밋: <code style="background:#f4f4f6;padding:1px 5px;border-radius:3px;font-size:13px;">0a841a3</code></p>
 <div style="margin-top:46px;padding-top:20px;border-top:1px solid #e4e6ea;font-size:13px;color:#6e7781;line-height:1.75;">
-<p style="margin:5px 0;">이 글을 생성한 코드와 원본 데이터: <a href="https://github.com/choijihee0619/us-market-daily/commit/469ae33" style="color:#0969da;">GitHub</a></p>
+<p style="margin:5px 0;">이 글을 생성한 코드와 원본 데이터: <a href="https://github.com/choijihee0619/us-market-daily/commit/0a841a3" style="color:#0969da;">GitHub</a></p>
 <p style="margin:5px 0;">본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다. 특정 종목의 매수·매도를 권유하지 않으며, 필자는 언급된 종목을 보유하고 있을 수 있습니다.</p>
 <p style="margin:5px 0;">대상 거래일 2026-08-13 (ET)</p>
 </div></div>
