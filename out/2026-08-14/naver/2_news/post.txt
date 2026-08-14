@@ -8,30 +8,30 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 1557건을 주제별로 나눴습니다.
+이날 수집한 기사 1686건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 1245건 (전체의 80%)
+■ 실적  기사 1373건 (전체의 81%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
-   · As Lululemon AI chief exits, analysts ‘increasingly concerned’ about turno  [LULU, NKE]
-   · BMS welcomes new multiple myeloma drug as generics batter current portfoli  [BMY]
+   · Metro East customers may see discolored water during annual flushing  [AWK]
+   · Jeff Auxier's Top Second Quarter 2026 Move: Trimming Corning Inc at a -0.3  [AMD, FDX, GLW]
 
-■ M&A  기사 99건 (전체의 6%)
+■ M&A  기사 109건 (전체의 6%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
    · Dominion Energy customers voice fears over proposed $67B NextEra takeover   [D]
    · Workday’s stock sees a record surge. Could a buyout spark a software reviv  [WDAY]
 
-■ 통화정책  기사 12건 (전체의 1%)
+■ 통화정책  기사 11건 (전체의 1%)
    → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
-   · Japan-U.S. Loan Backs Natural Gas Projects as AI Power Demand Grows  [C]
    · Morgan Stanley Turns More Bullish on IT Hardware as ‘Chipflation’ Drives F  [HPE, MS, NTAP]
+   · Lamb Weston flags price risks from heat-impacted potato crop  [KHC, LW]
 
-■ AI/데이터센터투자  기사 5건 (전체의 0%)
+■ AI/데이터센터투자  기사 6건 (전체의 0%)
    → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
    · Salesforce’s stock gets a boost as J.P. Morgan says AI fears are overblown  [CRM]
-   · Georgia Power adds time, not transparency, to OpenAI data center contract   [GPJA, SO]
+   · Japan-U.S. Loan Backs Natural Gas Projects as AI Power Demand Grows  [C]
 
-■ 고용  기사 3건 (전체의 0%)
+■ 고용  기사 2건 (전체의 0%)
    → 고용은 연준이 가장 무겁게 보는 지표다
    · Pilots File Lawsuit Alleging Delta Air Lines Denied Paid Leave Amid Milita  [DAL]
    · More Than 2,000 Workers Tackle Cincinnati Power Outages  [DUK]
@@ -44,15 +44,15 @@
 괄호 안 숫자는 시장 전체 움직임을 걷어낸 뒤 남은 변동폭입니다.
 
 ■ Copart (CPRT) · 산업재
-   +7.55%  (시장 요인 제거 후 +8.25%)
+   +7.55%  (시장 요인 제거 후 +8.22%)
    Copart options signal caution despite 7% rally  [Investing.com]
 
 ■ Fox Corporation (Class B) (FOX) · 커뮤니케이션
-   +5.70%  (시장 요인 제거 후 +5.98%)
+   +5.70%  (시장 요인 제거 후 +6.05%)
    FOX (NASDAQ:FOXA) Raised to "Overweight" at JPMorgan Chase & Co.  [MarketBeat]
 
 ■ Fox Corporation (Class A) (FOXA) · 커뮤니케이션
-   +5.49%  (시장 요인 제거 후 +5.71%)
+   +5.49%  (시장 요인 제거 후 +5.78%)
    Here Are Friday’s Top Wall Street Analyst Research Calls: Cinemark, Di  [Yahoo Finance]
 
 ■ Tyson Foods (TSN) · 필수소비재
@@ -60,19 +60,19 @@
    8-K - TYSON FOODS, INC. (0000100493) (Filer)  [SEC 8-K]
 
 ■ Halliburton (HAL) · 에너지
-   +4.81%  (시장 요인 제거 후 +4.91%)
+   +4.81%  (시장 요인 제거 후 +4.90%)
    SLB climbs as oil-services stocks rally and investors continue to dige  [Quiver Quantitative]
 
 ■ Walt Disney Company (The) (DIS) · 커뮤니케이션
-   +1.96%  (시장 요인 제거 후 +2.43%)
+   +1.96%  (시장 요인 제거 후 +2.47%)
    Power Rangers Reboot Falls at Disney+: Hasbro’s IP Deal Dooms Both Str  [Tech Times]
 
 ■ Advanced Micro Devices (AMD) · 정보기술
-   +6.50%  (시장 요인 제거 후 +4.84%)
+   +6.50%  (시장 요인 제거 후 +4.82%)
    Dell’s stock has beaten Micron and AMD this year — and now it’s adding  [MarketWatch Top]
 
 ■ NRG Energy (NRG) · 유틸리티
-   +5.42%  (시장 요인 제거 후 +4.70%)
+   +5.42%  (시장 요인 제거 후 +4.65%)
    “I Think You Have a Winner” Cramer Excited About Hess Midstream’s 7% D  [7 Wall St.]
 
 ────────────────────────
@@ -89,7 +89,7 @@
 4. 오늘의 정리
 ────────────────────────
 
-오늘 시장 뉴스는 주로 '실적'에 집중되었습니다. 이는 Lululemon(NYSE: LULU) 및 Bristol-Myers Squibb(NYSE: BMY) 등 여러 기업들이 새로운 제품 출시 및 경영진 변화와 관련된 내용을 발표하면서, 기업별로 다르게 반영되었습니다. 한편, M&A 소식도 다소 있었고 이는 Dominion Energy(NYSE: D) 및 Workday(NYSE: WDAY)와 같은 기업들이 주된 관심의 대상이었습니다. 이날 큰 움직임을 보인 Paychex(NASDAQ: PAYX) 및 F5, Inc.(NASDAQ: FFIV)와 같은 종목은 보도를 찾지 못했으나, 이는 뉴스가 없었다는 뜻이 아니라 수집 범위 밖이었다는 점을 유념하시기 바랍니다.
+오늘의 주요 뉴스는 "실적" 발표와 관련된 내용이었습니다. 이 주제는 시장 전반에 걸쳐 기업들의 실적 발표와 이에 따른 주가 변동을 반영합니다. AMD와 같은 기술주는 실적 관련 보도로 인해 주가 상승을 보인 반면, Paychex와 F5, Inc.와 같은 특정 종목은 관련 보도가 수집 범위에 없어 움직임의 이유가 명확하지 않았습니다. 시장 전반에서는 에너지와 유틸리티 섹터가 긍정적인 흐름을 나타냈습니다.
 
 ────────────────────────
 

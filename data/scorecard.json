@@ -73,11 +73,11 @@
  },
  {
   "date": "2026-08-14",
-  "spread_bp": 4.36,
-  "top_bp": 18.27,
-  "bottom_bp": 13.9,
+  "spread_bp": 4.94,
+  "top_bp": 18.72,
+  "bottom_bp": 13.78,
   "hit": true,
   "n": 369,
-  "rev": "2cd2204"
+  "rev": "68c155c"
  }
 ]
