@@ -8,28 +8,28 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 1204건을 주제별로 나눴습니다.
+이날 수집한 기사 1358건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 1090건 (전체의 91%)
+■ 실적  기사 1231건 (전체의 91%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
-   · Royal Caribbean Isn't Giving Up on Perfect Day Mexico Project  [RCL]
-   · Algoma Steel Group Suspends EAF Production Due to Unplanned LSP Outage  [ASTL, GEV]
+   · Crexendo plans AI-ready conversation data for a platform serving 8 million  [CRM, CXDO]
+   · 57% of enterprises take over 4.5 days to recover from cyberattacks—Commvau  [CVLT, MSFT]
 
-■ M&A  기사 53건 (전체의 4%)
+■ M&A  기사 60건 (전체의 4%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
    · Can New Mexico, not Blackstone, just buy PNM? It turns out, we can’t. Here  [BX]
    · Ecolab's CoolIT Deal Raises AI Upside but Also Debt and Cost Risks  [ECL]
 
-■ 통화정책  기사 21건 (전체의 2%)
+■ 통화정책  기사 26건 (전체의 2%)
    → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
-   · Why Is Southern Company (NYSE:SO) Drawing Attention as Rising Electricity   [SO]
    · Morgan Stanley targets EUR/AUD at 1.53, backs Aussie dollar carry trade  [MS]
+   · McDonald’s, Whirlpool CEOs flag the same concern on the economy  [BAC, KHC, MCD]
 
-■ 규제정책  기사 3건 (전체의 0%)
-   → 관세·소송·제재는 산업 전체에 동시에 걸린다
-   · America’s growing debt pile will be the big focus Wednesday as global bond
-   · The national debt is about to hit $40 trillion. Here’s how it can hurt Ame
+■ 인플레이션  기사 3건 (전체의 0%)
+   → 물가 지표는 연준 정책 기대를 통해 금리와 주식 양쪽에 반영된다
+   · Mortgage rates could move even higher — dealing a fresh blow to home buyer
+   · Silver prices today, Tuesday, August 18, 2026: Silver price holds as inves
 
 ■ AI/데이터센터투자  기사 3건 (전체의 0%)
    → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
@@ -48,15 +48,15 @@
    Targa Resources Announces Expanded Long-Term Midstream Agreements with  [Quiver Quantitative]
 
 ■ Edison International (EIX) · 유틸리티
-   +3.35%  (시장 요인 제거 후 +3.38%)
+   +3.35%  (시장 요인 제거 후 +3.37%)
    Southern California program erases up to $8,000 in utility debt after   [The Cool Down]
 
 ■ Monster Beverage (MNST) · 필수소비재
-   +4.09%  (시장 요인 제거 후 +3.89%)
+   +4.09%  (시장 요인 제거 후 +3.88%)
    Can Monster Energy's 22% Segment Growth Keep Driving MNST?  [TradingView]
 
 ■ Johnson & Johnson (JNJ) · 헬스케어
-   +3.33%  (시장 요인 제거 후 +2.58%)
+   +3.33%  (시장 요인 제거 후 +2.59%)
    Johnson & Johnson (JNJ) Wins FDA Clearance For AI Powered MONARCH QUES  [Yahoo Finance]
 
 ■ Ulta Beauty (ULTA) · 경기소비재
@@ -89,7 +89,7 @@
 4. 오늘의 정리
 ────────────────────────
 
-오늘의 주요 뉴스는 '실적'에 집중되어 있었습니다. 이는 시장 전반에 걸쳐 기업들의 성과가 주목받고, 투자자 관심이 증가했음을 나타냅니다. Royal Caribbean과 Algoma Steel Group과 같은 기업들이 이에 해당합니다. 보도가 확인되지 않은 Aon과 Carvana는 수집 범위 밖에 있었던 것으로 보입니다.
+오늘의 미국 증시 뉴스는 주로 기업 실적 발표에 집중되었습니다. 실적 발표는 기업의 주요 전략과 발전 방향을 드러내어 시장 전반에 큰 영향을 미칠 수 있기 때문에 주요 주목을 받았습니다. 그러나 Carvana(CVNA)와 Aon plc(AON)와 같은 종목들은 눈에 띄는 변동을 나타냈지만, 해당 뉴스 수집 범위 내에서는 관련 보도를 찾지 못했습니다. 이는 뉴스가 없었다기보다 수집된 데이터의 범위 밖에 있었다는 점을 말씀드립니다.
 
 ────────────────────────
 
