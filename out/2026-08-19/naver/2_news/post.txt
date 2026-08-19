@@ -1,0 +1,101 @@
+[2026년 08월 19일 미국장] 뉴스로 보는 하루
+
+미국 시장에서 그날 실제로 보도된 뉴스를 모아 정리한 기록입니다.
+전망이나 매매 권유가 아니라, 무슨 일이 있었고 어떤 종목이 반응했는지를
+숫자와 함께 남깁니다.
+
+────────────────────────
+1. 오늘 뉴스는 어디에 몰렸나
+────────────────────────
+
+이날 수집한 기사 1571건을 주제별로 나눴습니다.
+(한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
+
+■ 실적  기사 1323건 (전체의 84%)
+   → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
+   · Nike, Target, Amer Sports + More Companies Have Gotten Tariff Refunds — Wi  [AS, COST, NKE]
+   · Home Depot Unveiled Gen AI for Customers. It’s Already Working Overtime  [HD]
+
+■ M&A  기사 115건 (전체의 7%)
+   → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
+   · Copart Reportedly In Talks To Acquire CCC Intelligent Solutions  [CPRT]
+   · Johnson & Johnson Pays $785 Million for Sail Partnership and Buyout Option  [JNJ]
+
+■ 통화정책  기사 22건 (전체의 1%)
+   → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
+   · Wall St set for higher open after retail earnings; Moderna soars  [LOW, MRK, MRNA]
+   · C's July Card Delinquencies Tick Up: Will This Impact Asset Quality?  [BAC, C, JPM]
+
+■ AI/데이터센터투자  기사 4건 (전체의 0%)
+   → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
+   · Robinhood Ventures Puts $75M Into OpenAI Through Retail-Accessible Fund  [COIN, MSFT, RVI]
+   · Roundtable CEO James Heckman Rings Nasdaq Closing Bell, Unveiling World’s   [COIN, NDAQ, RTB]
+
+■ 에너지  기사 4건 (전체의 0%)
+   → 유가는 에너지 섹터 이익과 동시에 물가 기대에도 반영된다
+   · Wisconsin Electric (NYSE: WELPM) lines up long-term nuclear power in new d  [NEE, WEC]
+   · SLB wins offshore production restoration contract from BSP  [SLB]
+
+────────────────────────
+2. 뉴스가 있었던 종목
+────────────────────────
+
+그날 유난히 크게 움직인 종목 중 관련 보도가 확인된 경우입니다.
+괄호 안 숫자는 시장 전체 움직임을 걷어낸 뒤 남은 변동폭입니다.
+
+■ Merck & Co. (MRK) · 헬스케어
+   +12.60%  (시장 요인 제거 후 +11.38%)
+   Wall St set for higher open after retail earnings; Moderna soars  [Yahoo Finance]
+
+■ Estée Lauder Companies (The) (EL) · 필수소비재
+   +16.30%  (시장 요인 제거 후 +14.47%)
+   YJ Stock Pulls Back As Volatility Grips Yunji Inc.  [Timothy Sykes]
+
+■ Copart (CPRT) · 산업재
+   +7.43%  (시장 요인 제거 후 +5.74%)
+   Copart Reportedly In Talks To Acquire CCC Intelligent Solutions  [Auto Recycling World]
+
+■ Marvell Technology (MRVL) · 정보기술
+   +9.85%  (시장 요인 제거 후 +12.25%)
+   Marvell Technology Fell 8% Tuesday. Here’s Where the Stock Could Go in  [TIKR.com]
+
+■ Jack Henry & Associates (JKHY) · 금융
+   +6.49%  (시장 요인 제거 후 +4.46%)
+   Jack Henry: Fiscal Q4 Earnings Snapshot  [kens5.com]
+
+■ Aflac (AFL) · 금융
+   -4.29%  (시장 요인 제거 후 -4.95%)
+   Aflac stock eases as ex-dividend date and softer Q2 trends weigh  [Ad-hoc-news.de]
+
+■ Steel Dynamics (STLD) · 소재
+   -7.53%  (시장 요인 제거 후 -8.10%)
+   Steel Dynamics Grants $2 Million RSU Transition Awards to Two Executiv  [Kalkine Media]
+
+■ Fifth Third Bancorp (FITB) · 금융
+   -4.07%  (시장 요인 제거 후 -5.23%)
+   K2 Principal Fund L.P. Makes New Investment in Vistra Corp. $VST  [MarketBeat]
+
+────────────────────────
+3. 뉴스를 찾지 못한 움직임
+────────────────────────
+
+크게 움직였는데 수집 범위 안에서 관련 보도를 찾지 못한 종목입니다.
+뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
+이 구분을 흐리지 않으려고 따로 적습니다.
+
+  XLV(XLV) +3.5%, Alexandria Real Estate Equities(ARE) +10.3%, BTC-USD(BTC-USD) +7.1%, GC=F(GC=F) +4.9%, A. O. Smith(AOS) +4.8%, Regions Financial Corporation(RF) -3.5%
+
+────────────────────────
+4. 오늘의 정리
+────────────────────────
+
+오늘은 실적 발표와 관련된 뉴스가 주제를 차지했습니다. 이는 기업의 수익성과 연관이 깊어, 시장 전체에 영향을 미쳤습니다. 예를 들어, 나이키와 홈디포의 실적 관련 소식이 여러 매체에 보도되었고 관련 주식에도 영향을 미친 것으로 보입니다. 한편, Alexandria Real Estate Equities와 A. O. Smith 등의 종목에 대한 관련 보도를 찾지 못했지만 이는 수집 범위 밖의 가능성이 큽니다.
+
+────────────────────────
+
+이 글은 뉴스 중심으로 정리한 것입니다.
+종목별 초과수익 계산 방식, 뉴스 주제 회귀 분석, 전날 신호 채점 결과는
+전체 리포트에 있습니다.
+
+본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다.
+특정 종목의 매수·매도를 권유하지 않습니다.
