@@ -8,15 +8,15 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 1571건을 주제별로 나눴습니다.
+이날 수집한 기사 1666건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 1323건 (전체의 84%)
+■ 실적  기사 1416건 (전체의 85%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
    · Nike, Target, Amer Sports + More Companies Have Gotten Tariff Refunds — Wi  [AS, COST, NKE]
-   · Home Depot Unveiled Gen AI for Customers. It’s Already Working Overtime  [HD]
+   · Johnson & Johnson Pays $785 Million for Sail Partnership and Buyout Option  [JNJ]
 
-■ M&A  기사 115건 (전체의 7%)
+■ M&A  기사 120건 (전체의 7%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
    · Copart Reportedly In Talks To Acquire CCC Intelligent Solutions  [CPRT]
    · Johnson & Johnson Pays $785 Million for Sail Partnership and Buyout Option  [JNJ]
@@ -31,10 +31,10 @@
    · Robinhood Ventures Puts $75M Into OpenAI Through Retail-Accessible Fund  [COIN, MSFT, RVI]
    · Roundtable CEO James Heckman Rings Nasdaq Closing Bell, Unveiling World’s   [COIN, NDAQ, RTB]
 
-■ 에너지  기사 4건 (전체의 0%)
-   → 유가는 에너지 섹터 이익과 동시에 물가 기대에도 반영된다
-   · Wisconsin Electric (NYSE: WELPM) lines up long-term nuclear power in new d  [NEE, WEC]
-   · SLB wins offshore production restoration contract from BSP  [SLB]
+■ 고용  기사 2건 (전체의 0%)
+   → 고용은 연준이 가장 무겁게 보는 지표다
+   · Alaska Airlines Passengers Could Face Service Cuts As Flight Attendants Co  [ALK, BA]
+   · American Airlines Flight Attendants Are Already Complaining About Seatback  [AAL, DAL]
 
 ────────────────────────
 2. 뉴스가 있었던 종목
@@ -83,13 +83,13 @@
 뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
 이 구분을 흐리지 않으려고 따로 적습니다.
 
-  XLV(XLV) +3.5%, Alexandria Real Estate Equities(ARE) +10.3%, BTC-USD(BTC-USD) +7.1%, GC=F(GC=F) +4.9%, A. O. Smith(AOS) +4.8%, Regions Financial Corporation(RF) -3.5%
+  XLV(XLV) +3.5%, Alexandria Real Estate Equities(ARE) +10.3%, BTC-USD(BTC-USD) +7.1%, A. O. Smith(AOS) +4.8%, GC=F(GC=F) +4.8%, Regions Financial Corporation(RF) -3.5%
 
 ────────────────────────
 4. 오늘의 정리
 ────────────────────────
 
-오늘은 실적 발표와 관련된 뉴스가 주제를 차지했습니다. 이는 기업의 수익성과 연관이 깊어, 시장 전체에 영향을 미쳤습니다. 예를 들어, 나이키와 홈디포의 실적 관련 소식이 여러 매체에 보도되었고 관련 주식에도 영향을 미친 것으로 보입니다. 한편, Alexandria Real Estate Equities와 A. O. Smith 등의 종목에 대한 관련 보도를 찾지 못했지만 이는 수집 범위 밖의 가능성이 큽니다.
+오늘 미국 증시에서 주된 관심은 '실적' 발표에 쏠렸습니다. 이는 Nike와 Johnson & Johnson을 비롯한 여러 기업의 실적 관련 소식이 시장에 큰 영향을 미쳤기 때문입니다. 해당 기업들은 실적과 관련된 보도로 움직였으며, 특히 Johnson & Johnson은 인수 및 파트너십 관련 뉴스로도 주목받았습니다. 보도가 따로 확인되지 않은 종목들은 "뉴스가 없었다는 뜻이 아니라 수집 범위 밖"이라는 점을 기억해 주세요.
 
 ────────────────────────
 
