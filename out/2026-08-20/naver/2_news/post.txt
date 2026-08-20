@@ -8,33 +8,33 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 1535건을 주제별로 나눴습니다.
+이날 수집한 기사 1721건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 1245건 (전체의 81%)
+■ 실적  기사 1427건 (전체의 83%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
    · Moderna’s cancer-vaccine breakthrough drives broad biopharma stock rally  [MRNA]
-   · The chip-stock rally hits a speed bump — but these analysts see reason to   [ON]
+   · Target Corporation (TGT) vs. Walmart (WMT): A Closer Look at Two Dividend   [LLY, PM, TGT]
 
-■ M&A  기사 69건 (전체의 4%)
+■ M&A  기사 78건 (전체의 5%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
-   · Dominion Energy (NYSE: D) links $1.78B in bill relief to NextEra merger  [D]
    · DataMeds AI expands Datavault AI blockchain license to all healthcare apps  [JNJ, MEDS, PFE]
+   · Williams Sonoma, Teriyaki Madness among upcoming additions to Easton area  [WSM]
 
-■ 통화정책  기사 18건 (전체의 1%)
+■ 통화정책  기사 20건 (전체의 1%)
    → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
    · Anxious bond market sends troubling message to investors: There’s no easy   [FIX]
    · Consolidated Edison Stock And 2 Dividend Payers Facing Higher Rate Pressur  [ED]
 
-■ 에너지  기사 10건 (전체의 1%)
+■ 에너지  기사 11건 (전체의 1%)
    → 유가는 에너지 섹터 이익과 동시에 물가 기대에도 반영된다
    · Eaton Supports Emergency Readiness and Energy Resilience for 35 California  [ETN]
    · SLB Prepares to Restart 15 Oil Rigs in Venezuela  [BKR, COP, CVX]
 
-■ AI/데이터센터투자  기사 7건 (전체의 0%)
+■ AI/데이터센터투자  기사 10건 (전체의 1%)
    → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
-   · Neocloud stocks like CoreWeave are having a moment — and time’s running ou  [LOW]
    · ServiceNow’s stock leads a software rally. Here’s what’s energizing invest  [NOW]
+   · CoinShares Expands WGMI ETF as Bitcoin Miners Shift to AI  [AMAT, MSFT, NVDA]
 
 ────────────────────────
 2. 뉴스가 있었던 종목
@@ -49,7 +49,7 @@
 
 ■ Deere & Company (DE) · 산업재
    +6.94%  (시장 요인 제거 후 +7.17%)
-   Chevron vs. Exxon Mobil: The Better Energy Stock for the Next 5 Years  [7 Wall St.]
+   BTBT Jumps As Cloud Pivot, ETH-Funded Build Drive Q2 Beat  [StocksToTrade]
 
 ■ Yum! Brands (YUM) · 경기소비재
    +4.39%  (시장 요인 제거 후 +4.72%)
@@ -57,7 +57,7 @@
 
 ■ Coinbase (COIN) · 금융
    +7.58%  (시장 요인 제거 후 +10.63%)
-   CoreWeave Lands Multibillion-Dollar Hudson River Deal as Wall Street R  [Yahoo Finance]
+   Cybersecurity firm unveils crypto phishing campaign targeting 885,000   [TradingView]
 
 ■ Revvity (RVTY) · 헬스케어
    +3.92%  (시장 요인 제거 후 +5.72%)
@@ -89,7 +89,7 @@
 4. 오늘의 정리
 ────────────────────────
 
-오늘 미국 증시는 실적 발표가 중심 주제로 작용했습니다. 모더나의 암 백신 발전 소식이 바이오주 전반에 영향을 미쳤고, 반도체주는 긍정적인 관측에도 불구하고 상승세가 다소 주춤했습니다. 기업 인수·합병 뉴스도 여러 종목에 작용했으며, 통화정책과 관련된 보도가 시장 전반에 주는 압박도 감지되었습니다. 보도가 확인되지 않은 종목의 움직임은 수집 범위 밖의 뉴스일 가능성을 고려해야 합니다.
+오늘 미국 시장에서는 실적 발표가 주요 뉴스로 자리 잡았습니다. 특히 Moderna의 암 백신에 관한 긍정적인 보고가 바이오제약 주식의 전반적인 상승을 이끌었습니다. 이러한 실적 발표는 기업의 재무 상태와 미래 전망을 확인할 수 있는 재료로, 시장 전반에 영향을 미칠 수 있는 주요 요인으로 작용합니다. 한편, Qnity Electronics 같은 일부 종목은 뉴스가 발견되지 않았지만 큰 변화를 보였는데, 이는 수집 범위 밖의 보도가 있을 가능성을 시사합니다.
 
 ────────────────────────
 
