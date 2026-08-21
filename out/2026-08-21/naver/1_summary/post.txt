@@ -28,8 +28,8 @@ VIX   16.01   (+1.12)  * 08-20 기준
 지수·업종 같은 공통 요인을 걷어낸 뒤에도 남은 변동입니다.
 
   ▲ Robinhood Markets(HOOD)  +13.70%
+  ▲ BTC-USD(BTC-USD)  +7.49%
   ▲ Freeport-McMoRan(FCX)  +7.64%
-  ▲ HCA Healthcare(HCA)  +5.64%
   ▼ Sempra(SRE)  -5.14%
   ▼ CenterPoint Energy(CNP)  -3.56%
   ▼ Edison International(EIX)  -4.11%

@@ -8,15 +8,15 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 1467건을 주제별로 나눴습니다.
+이날 수집한 기사 1508건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 1239건 (전체의 84%)
+■ 실적  기사 1277건 (전체의 85%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
    · Truist's reputation score plunges 14 spots as customers cite fees, trust  [TFC]
-   · Becton Dickinson (BDX) Completes PREVENT Trial Enrollment For Hernia Preve  [BDX]
+   · 3 Insurance Stocks That Concern Us  [AIZ, EG]
 
-■ M&A  기사 60건 (전체의 4%)
+■ M&A  기사 59건 (전체의 4%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
    · AT&T stands to gain as Verizon loses a customer related battle  [VZ]
    · MSI Expands Drone Portfolio With D-Fend Deal: Will it Drive Growth?  [AXON, MSI, RTX]
@@ -30,10 +30,10 @@
    → 유가는 에너지 섹터 이익과 동시에 물가 기대에도 반영된다
    · 8-K - DEVON ENERGY CORP/DE (0001090012) (Filer)  [DVN]
 
-■ 규제정책  기사 3건 (전체의 0%)
-   → 관세·소송·제재는 산업 전체에 동시에 걸린다
-   · Uber Faces €825 Million Dutch Fine Over Driver Data Breach  [UBER]
-   · U.S. Transportation Department's Attempted Ban On Delta Air Lines' Mexico   [DAL]
+■ 인플레이션  기사 3건 (전체의 0%)
+   → 물가 지표는 연준 정책 기대를 통해 금리와 주식 양쪽에 반영된다
+   · Gold prices today, Friday, August 21, 2026: Gold remains strong amid U.S. 
+   · Silver prices today, Friday, August 21, 2026: Silver pushes higher on weak
 
 ────────────────────────
 2. 뉴스가 있었던 종목
@@ -82,13 +82,13 @@
 뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
 이 구분을 흐리지 않으려고 따로 적습니다.
 
-  Robinhood Markets(HOOD) +13.7%, BTC-USD(BTC-USD) +6.3%, Duke Energy(DUK) -2.3%, XLU(XLU) -2.3%
+  Robinhood Markets(HOOD) +13.7%, BTC-USD(BTC-USD) +7.5%, Duke Energy(DUK) -2.3%, XLU(XLU) -2.3%
 
 ────────────────────────
 4. 오늘의 정리
 ────────────────────────
 
-오늘의 미국 시장 뉴스는 주로 실적에 집중되었습니다. Truist와 Becton Dickinson (BDX) 같은 기업들의 실적 관련 뉴스를 통해 시장 전반에 영향을 미치며 다양한 반응이 나타났습니다. 개별 기업으로는 HCA Healthcare와 Tesla, Ross Stores 등이 관련 보도와 함께 긍정적인 수익률을 기록했습니다. Robinhood Markets와 같은 종목은 큰 움직임을 보였지만, 이는 저희 수집 범위를 벗어난 다른 뉴스 때문일 수 있습니다.
+오늘 미국 시장의 뉴스는 주로 기업 실적에 집중되었습니다. 이는 시장 전반에 걸친 관심사로, 여러 기업의 주가에 영향을 미칠 수 있는 요소입니다. 같은 날 M&A 및 통화정책과 관련된 뉴스도 있었지만, 규모는 상대적으로 작았습니다. 상당한 변동이 있었으나 Robinhood Markets와 같은 몇몇 종목의 경우, 관련 보도를 찾지 못한 것은 "뉴스가 없었다는 뜻이 아니라 수집 범위 밖"이라는 점을 유의해 주시기 바랍니다.
 
 ────────────────────────
 
