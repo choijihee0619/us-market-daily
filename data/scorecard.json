@@ -97,5 +97,14 @@
   "hit": false,
   "n": 395,
   "rev": "ede21e6"
+ },
+ {
+  "date": "2026-08-21",
+  "spread_bp": 19.38,
+  "top_bp": 29.32,
+  "bottom_bp": 9.94,
+  "hit": true,
+  "n": 386,
+  "rev": "491b8e4"
  }
 ]
