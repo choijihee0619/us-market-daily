@@ -1,0 +1,101 @@
+[2026년 08월 25일 미국장] 뉴스로 보는 하루
+
+미국 시장에서 그날 실제로 보도된 뉴스를 모아 정리한 기록입니다.
+전망이나 매매 권유가 아니라, 무슨 일이 있었고 어떤 종목이 반응했는지를
+숫자와 함께 남깁니다.
+
+────────────────────────
+1. 오늘 뉴스는 어디에 몰렸나
+────────────────────────
+
+이날 수집한 기사 1212건을 주제별로 나눴습니다.
+(한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
+
+■ 실적  기사 1102건 (전체의 91%)
+   → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
+   · Allegion Launches XE360 Series Wireless Locks with RealSync Technology  [ALLE]
+   · Bristol Myers ends blood cancer drug deal with cell therapy maker Cellares  [BMY]
+
+■ M&A  기사 64건 (전체의 5%)
+   → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
+   · Halliburton wins bp contract for Brazil deepwater field By Investing.com  [HAL]
+   · Cornish Lithium awards contract for Cross Lanes Geothermal Lithium Project  [HAL]
+
+■ 통화정책  기사 13건 (전체의 1%)
+   → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
+   · Citi Says Zimbabwe Is Breaking From Past as Economy Turns Around  [C]
+   · Home Depot still faces frozen housing market  [HD]
+
+■ AI/데이터센터투자  기사 10건 (전체의 1%)
+   → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
+   · 'This is what keeps me excited': Walmart is 3D printing its stores — and t  [WMT]
+   · The State of AI-Enabled Malware August 2026: From Brand Abuse to Agentic E  [PANW]
+
+■ 에너지  기사 5건 (전체의 0%)
+   → 유가는 에너지 섹터 이익과 동시에 물가 기대에도 반영된다
+   · The Hartford Partners With UC Berkeley’s Bakar Labs For Energy & Materials  [HIG]
+   · ExxonMobil and Area 4 partners award $1.1 billion in contracts for Mozambi  [XOM]
+
+────────────────────────
+2. 뉴스가 있었던 종목
+────────────────────────
+
+그날 유난히 크게 움직인 종목 중 관련 보도가 확인된 경우입니다.
+괄호 안 숫자는 시장 전체 움직임을 걷어낸 뒤 남은 변동폭입니다.
+
+■ Moderna (MRNA) · 헬스케어
+   +14.36%  (시장 요인 제거 후 +13.04%)
+   Merck (MRK) Surges on a Melanoma Win. Can Intismeran Extend Keytruda’s  [Yahoo Finance]
+
+■ CDW Corporation (CDW) · 정보기술
+   +7.23%  (시장 요인 제거 후 +7.31%)
+   CDW to Participate in the Citi 2026 Global TMT Conference  [Yahoo Finance]
+
+■ Cadence Design Systems (CDNS) · 정보기술
+   +5.06%  (시장 요인 제거 후 +4.54%)
+   Eli Lilly vs Novo Nordisk: One Winner in The Weight-Loss Drug Gold Rus  [7 Wall St.]
+
+■ Merck & Co. (MRK) · 헬스케어
+   +3.84%  (시장 요인 제거 후 +3.77%)
+   Merck (MRK) Surges on a Melanoma Win. Can Intismeran Extend Keytruda’s  [Yahoo Finance]
+
+■ McKesson Corporation (MCK) · 헬스케어
+   +3.58%  (시장 요인 제거 후 +4.00%)
+   McKesson to acquire Precision Medicine Group for $2.25 billion  [Quartz]
+
+■ BXP, Inc. (BXP) · 부동산
+   +3.06%  (시장 요인 제거 후 +2.99%)
+   Boston Properties stock steadies as UBS lifts target on Q2 2026 leasin  [Ad-hoc-news.de]
+
+■ Pfizer (PFE) · 헬스케어
+   +2.15%  (시장 요인 제거 후 +2.23%)
+   Q2 Rundown: Pfizer (NYSE:PFE) Vs Other Branded Pharmaceuticals Stocks  [Yahoo! Finance Canada]
+
+■ Supermicro (SMCI) · 정보기술
+   +9.35%  (시장 요인 제거 후 +7.65%)
+   Cisco Taps Supermicro for Rack-Scale AI Systems With Nvidia, Shares Cl  [BigGo Finance]
+
+────────────────────────
+3. 뉴스를 찾지 못한 움직임
+────────────────────────
+
+크게 움직였는데 수집 범위 안에서 관련 보도를 찾지 못한 종목입니다.
+뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
+이 구분을 흐리지 않으려고 따로 적습니다.
+
+  Interactive Brokers(IBKR) +5.5%, Robinhood Markets(HOOD) +8.2%, Cooper Companies (The)(COO) -3.6%, Emcor(EME) -3.3%, Prudential Financial(PRU) -2.1%, Comfort Systems USA(FIX) -3.0%
+
+────────────────────────
+4. 오늘의 정리
+────────────────────────
+
+오늘 미국 시장은 주로 기업 실적 발표에 집중되었습니다. 이는 광범위한 주제로, 개별 기업들의 주가 변동에 주요한 영향을 미칩니다. 예를 들어, Bristol Myers의 계약 종료 소식은 BMY 주식에 영향을 미쳤고, Merck의 긍정적인 혈액암 치료제 뉴스는 MRK 주식이 오르는 날에 함께 보도되었습니다. Interactive Brokers와 Robinhood Markets 같은 종목들은 크게 움직였음에도 불구하고, 관련 보도를 수집할 수 없었음을 알려드립니다. 이는 뉴스가 없었다는 뜻이 아니라, 우리의 수집 범위를 넘는 것이기 때문입니다.
+
+────────────────────────
+
+이 글은 뉴스 중심으로 정리한 것입니다.
+종목별 초과수익 계산 방식, 뉴스 주제 회귀 분석, 전날 신호 채점 결과는
+전체 리포트에 있습니다.
+
+본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다.
+특정 종목의 매수·매도를 권유하지 않습니다.
