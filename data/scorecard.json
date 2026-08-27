@@ -109,11 +109,11 @@
  },
  {
   "date": "2026-08-26",
-  "spread_bp": 25.24,
-  "top_bp": 39.15,
+  "spread_bp": 25.56,
+  "top_bp": 39.47,
   "bottom_bp": 13.92,
   "hit": true,
-  "n": 354,
-  "rev": "4ddb0e7"
+  "n": 355,
+  "rev": "8fefeb3"
  }
 ]
