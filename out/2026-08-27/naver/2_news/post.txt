@@ -8,22 +8,22 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 339건을 주제별로 나눴습니다.
+이날 수집한 기사 344건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 211건 (전체의 62%)
+■ 실적  기사 223건 (전체의 65%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
-   · Bank of America doubles down on Nvidia stock  [BAC, NVDA]
+   · CrowdStrike’s stock soars after AI fuels the cybersecurity company’s ‘best  [CRWD, INTC]
    · Salesforce’s stock gets an Anthropic boost — and more highlights from earn  [CRM]
 
-■ M&A  기사 20건 (전체의 6%)
+■ M&A  기사 21건 (전체의 6%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
    · Sempra Completes Ecogas Sale For Approximately $500 Million As $65 Billion  [SRE]
    · What Is Blackstone (BX) Eyeing In India’s Clean Energy Sale?  [BX]
 
 ■ AI/데이터센터투자  기사 4건 (전체의 1%)
    → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
-   · What to know about Hugging Face, the open-source AI startup reportedly cat  [NVDA]
+   · Salesforce’s stock gets an Anthropic boost — and more highlights from earn  [CRM]
    · CrowdStrike’s stock soars after AI fuels the cybersecurity company’s ‘best  [CRWD, INTC]
 
 ■ 에너지  기사 3건 (전체의 1%)
@@ -61,7 +61,7 @@
 
 ■ Nvidia (NVDA) · 정보기술
    +8.74%  (시장 요인 제거 후 +7.20%)
-   Bank of America doubles down on Nvidia stock  [Yahoo Finance]
+   What to know about Hugging Face, the open-source AI startup reportedly  [MarketWatch Top]
 
 ■ Palo Alto Networks (PANW) · 정보기술
    +12.83%  (시장 요인 제거 후 +11.32%)
@@ -89,7 +89,7 @@
 4. 오늘의 정리
 ────────────────────────
 
-오늘은 주로 실적 발표와 관련된 뉴스가 증시를 차지했습니다. 실적 발표는 기업의 수익성과 경영 상태를 보여주는 지표로, 전반적인 시장에 큰 영향을 미칩니다. Nvidia와 Salesforce와 같은 기업들이 긍정적인 실적 소식을 전하며 주가 상승을 기록했습니다. 그러나 Fortinet, ServiceNow와 같이 크게 움직인 종목 중에는 보도를 찾지 못한 것이 있어, 이는 뉴스가 없었다기보다는 수집 범위 내에 포함되지 않았다는 것을 의미합니다.
+그날의 미국 증시는 실적 발표에 대한 뉴스가 중심을 이뤘습니다. CrowdStrike와 Salesforce는 AI 기술의 영향으로 실적에서 강한 상승을 보였으며, 이는 정보기술 섹터 전반에 걸쳐 긍정적으로 작용했습니다. 개별 기업인 Veeva Systems와 Synopsys 등도 주가 상승을 기록했으나, 이들에 대한 보도는 수집되지 않았음을 확인했습니다. 오늘 뉴스는 특정 기업의 영향보다는 AI와 실적의 조합이 시장 전반에 미친 영향을 보여주었습니다.
 
 ────────────────────────
 
