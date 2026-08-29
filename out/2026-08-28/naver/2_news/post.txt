@@ -8,33 +8,32 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 310건을 주제별로 나눴습니다.
+이날 수집한 기사 340건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 150건 (전체의 48%)
+■ 실적  기사 166건 (전체의 49%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
-   · Target (TGT) Rallied in 2026. Can its Turnaround Start Producing Margin Gr  [TGT]
-   · Can Regeneron (REGN)’s Rare-Disease Win Move the Earnings Needle?  [REGN]
-
-■ M&A  기사 13건 (전체의 4%)
-   → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
-   · Autodesk's Near-Term Focus Is Its MaintainX Acquisition  [ADSK]
-   · Deutsche (DB) Completed a €1B Buyback and Started Another €500M Program. I  [TGT]
-
-■ 가이던스  기사 7건 (전체의 2%)
-   → 실적 자체보다 향후 전망 수정이 주가를 더 크게 움직이는 경우가 많다
-   · Salesforce’s stock rockets 20% and gives the software sector a major lift  [CRM]
    · Nvidia Stock Breaks Out On Bullish Quarterly Report, Outlook  [NVDA]
+   · Workday Stock Falls As Earnings Beat, Guidance Underwhelms  [WDAY]
 
-■ AI/데이터센터투자  기사 6건 (전체의 2%)
+■ M&A  기사 18건 (전체의 5%)
+   → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
+   · Tempus AI (TEM) Jumped on Moderna’s Melanoma Win. Did its $1.5B Personalis  [MRNA]
+   · Political pushback to the NextEra-Dominion deal has spread to New England  [D, NEE]
+
+■ AI/데이터센터투자  기사 10건 (전체의 3%)
    → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
-   · Why Nvidia loves backing and buying startups  [NVDA]
    · Marvell (MRVL) Is Betting on Microsoft, AWS and Google to Power Its Next G  [MRVL, MSFT]
+   · Michael Burry flags Nvidia's $500 billion AI financing deal as proof of 'b  [NVDA]
 
-■ 규제정책  기사 2건 (전체의 1%)
+■ 가이던스  기사 6건 (전체의 2%)
+   → 실적 자체보다 향후 전망 수정이 주가를 더 크게 움직이는 경우가 많다
+   · Nvidia Stock Breaks Out On Bullish Quarterly Report, Outlook  [NVDA]
+   · Workday Stock Falls As Earnings Beat, Guidance Underwhelms  [WDAY]
+
+■ 규제정책  기사 3건 (전체의 1%)
    → 관세·소송·제재는 산업 전체에 동시에 걸린다
-   · Canada Goose (GOOS) Faces an Additional 50% U.S. Tariff on Certain Canadia
-   · Judge says Trump administration’s blacklist of Anthropic was illegal
+   · Circle Internet (CRCL) Rallied After the White House Crypto Summit. Can Re  [FIX]
 
 ────────────────────────
 2. 뉴스가 있었던 종목
@@ -49,11 +48,11 @@
 
 ■ Amazon (AMZN) · 경기소비재
    +3.97%  (시장 요인 제거 후 +3.86%)
-   Ulta Beauty Beats Wall Street Expectations, Raises Full-year Forecasts  [WWD]
+   Gen Digital stock hits 52-week high at 30.62 USD  [Investing.com]
 
 ■ Nvidia (NVDA) · 정보기술
    -4.57%  (시장 요인 제거 후 -4.73%)
-   Is Nvidia heading for $1 trillion in annual revenue? One analyst now t  [MarketWatch Top]
+   Nvidia Stock Breaks Out On Bullish Quarterly Report, Outlook  [Yahoo Finance]
 
 ■ Autodesk (ADSK) · 정보기술
    -3.67%  (시장 요인 제거 후 -4.83%)
@@ -81,7 +80,7 @@
 4. 오늘의 정리
 ────────────────────────
 
-오늘 미국 시장에서는 주로 실적 발표와 관련된 뉴스가 많이 보도되었습니다. 이 같은 실적 주제는 여러 기업의 주가에 영향을 미치는 요인으로 작용하며, 시장 전반에 큰 영향을 미쳤습니다. 특히 Nvidia, Marvell, 그리고 Autodesk 등의 정보기술 종목들이 주목받으며 각각 부정적인 수익률을 기록했습니다. 한편, Domino's, McDonald's, Lululemon 등도 주가 변동이 있었으나, 관련 보도는 수집 범위를 벗어났음을 알려드립니다.
+이 날의 뉴스는 주로 '실적' 관련 소식에 집중되었습니다. 이는 Nvidia와 Workday와 같은 기업이 실적 발표 및 가이던스에 따라 큰 변화가 일어났고, 이는 기업 개별 재료로 작용했습니다. 또한 M&A 소식 및 AI/데이터센터 투자 관련 소식도 일부 주목받았습니다. 도미노 피자, 맥도날드 등 결과가 크게 변동된 종목들 중에서는 뉴스가 확인되지 않은 부분이 있었는데, 이는 수집 범위 밖의 영역에 있는 것으로 해석됩니다. 날이 총체적으로는 변동폭이 크지 않은 시장 분위기를 보였으나, 특정 종목에서는 두드러진 움직임이 나타났습니다.
 
 ────────────────────────
 
