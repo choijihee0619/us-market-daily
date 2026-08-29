@@ -1,0 +1,93 @@
+[2026년 08월 28일 미국장] 뉴스로 보는 하루
+
+미국 시장에서 그날 실제로 보도된 뉴스를 모아 정리한 기록입니다.
+전망이나 매매 권유가 아니라, 무슨 일이 있었고 어떤 종목이 반응했는지를
+숫자와 함께 남깁니다.
+
+────────────────────────
+1. 오늘 뉴스는 어디에 몰렸나
+────────────────────────
+
+이날 수집한 기사 310건을 주제별로 나눴습니다.
+(한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
+
+■ 실적  기사 150건 (전체의 48%)
+   → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
+   · Target (TGT) Rallied in 2026. Can its Turnaround Start Producing Margin Gr  [TGT]
+   · Can Regeneron (REGN)’s Rare-Disease Win Move the Earnings Needle?  [REGN]
+
+■ M&A  기사 13건 (전체의 4%)
+   → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
+   · Autodesk's Near-Term Focus Is Its MaintainX Acquisition  [ADSK]
+   · Deutsche (DB) Completed a €1B Buyback and Started Another €500M Program. I  [TGT]
+
+■ 가이던스  기사 7건 (전체의 2%)
+   → 실적 자체보다 향후 전망 수정이 주가를 더 크게 움직이는 경우가 많다
+   · Salesforce’s stock rockets 20% and gives the software sector a major lift  [CRM]
+   · Nvidia Stock Breaks Out On Bullish Quarterly Report, Outlook  [NVDA]
+
+■ AI/데이터센터투자  기사 6건 (전체의 2%)
+   → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
+   · Why Nvidia loves backing and buying startups  [NVDA]
+   · Marvell (MRVL) Is Betting on Microsoft, AWS and Google to Power Its Next G  [MRVL, MSFT]
+
+■ 규제정책  기사 2건 (전체의 1%)
+   → 관세·소송·제재는 산업 전체에 동시에 걸린다
+   · Canada Goose (GOOS) Faces an Additional 50% U.S. Tariff on Certain Canadia
+   · Judge says Trump administration’s blacklist of Anthropic was illegal
+
+────────────────────────
+2. 뉴스가 있었던 종목
+────────────────────────
+
+그날 유난히 크게 움직인 종목 중 관련 보도가 확인된 경우입니다.
+괄호 안 숫자는 시장 전체 움직임을 걷어낸 뒤 남은 변동폭입니다.
+
+■ Darden Restaurants (DRI) · 경기소비재
+   +2.13%  (시장 요인 제거 후 +3.28%)
+   Darden plans to discuss its next quarterly results on Sept. 24  [Stock Titan]
+
+■ Amazon (AMZN) · 경기소비재
+   +3.97%  (시장 요인 제거 후 +3.86%)
+   Ulta Beauty Beats Wall Street Expectations, Raises Full-year Forecasts  [WWD]
+
+■ Nvidia (NVDA) · 정보기술
+   -4.57%  (시장 요인 제거 후 -4.73%)
+   Is Nvidia heading for $1 trillion in annual revenue? One analyst now t  [MarketWatch Top]
+
+■ Autodesk (ADSK) · 정보기술
+   -3.67%  (시장 요인 제거 후 -4.83%)
+   Autodesk's Near-Term Focus Is Its MaintainX Acquisition  [Morningstar]
+
+■ Marvell Technology (MRVL) · 정보기술
+   -10.28%  (시장 요인 제거 후 -10.27%)
+   Marvell (MRVL) Is Betting on Microsoft, AWS and Google to Power Its Ne  [Yahoo Finance]
+
+■ CrowdStrike (CRWD) · 정보기술
+   -4.19%  (시장 요인 제거 후 -6.61%)
+   CrowdStrike’s stock jumps after record-breaking earnings. Wall Street   [MarketWatch Top]
+
+────────────────────────
+3. 뉴스를 찾지 못한 움직임
+────────────────────────
+
+크게 움직였는데 수집 범위 안에서 관련 보도를 찾지 못한 종목입니다.
+뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
+이 구분을 흐리지 않으려고 따로 적습니다.
+
+  Domino's(DPZ) +5.4%, McDonald's(MCD) +1.9%, Lululemon Athletica(LULU) +5.1%, XLY(XLY) +1.1%, XLC(XLC) +1.4%, Stryker Corporation(SYK) +2.7%
+
+────────────────────────
+4. 오늘의 정리
+────────────────────────
+
+오늘 미국 시장에서는 주로 실적 발표와 관련된 뉴스가 많이 보도되었습니다. 이 같은 실적 주제는 여러 기업의 주가에 영향을 미치는 요인으로 작용하며, 시장 전반에 큰 영향을 미쳤습니다. 특히 Nvidia, Marvell, 그리고 Autodesk 등의 정보기술 종목들이 주목받으며 각각 부정적인 수익률을 기록했습니다. 한편, Domino's, McDonald's, Lululemon 등도 주가 변동이 있었으나, 관련 보도는 수집 범위를 벗어났음을 알려드립니다.
+
+────────────────────────
+
+이 글은 뉴스 중심으로 정리한 것입니다.
+종목별 초과수익 계산 방식, 뉴스 주제 회귀 분석, 전날 신호 채점 결과는
+전체 리포트에 있습니다.
+
+본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다.
+특정 종목의 매수·매도를 권유하지 않습니다.
