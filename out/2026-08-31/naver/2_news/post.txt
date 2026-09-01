@@ -1,0 +1,99 @@
+[2026년 08월 31일 미국장] 뉴스로 보는 하루
+
+미국 시장에서 그날 실제로 보도된 뉴스를 모아 정리한 기록입니다.
+전망이나 매매 권유가 아니라, 무슨 일이 있었고 어떤 종목이 반응했는지를
+숫자와 함께 남깁니다.
+
+────────────────────────
+1. 오늘 뉴스는 어디에 몰렸나
+────────────────────────
+
+이날 수집한 기사 732건을 주제별로 나눴습니다.
+(한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
+
+■ 실적  기사 532건 (전체의 73%)
+   → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
+   · Marvell Wins Wall Street. Google Bets $12 Billion. Amazon Fears Fade.  [AMZN]
+   · Despite Impressive Results, Nvidia Stock May Be Stuck in a Range - What's   [NVDA]
+
+■ M&A  기사 25건 (전체의 3%)
+   → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
+   · Grainger acquiring AWM in $210 million deal  [GWW]
+   · AA targeted by Germany’s Allianz in £5bn takeover swoop  [TGT]
+
+■ AI/데이터센터투자  기사 6건 (전체의 1%)
+   → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
+   · Microsoft’s stock seals its longest winning streak of the year as AI softw  [MSFT]
+   · Broadcom or AMD? Here's Why the Market Is Pricing the Same AI Boom So Diff  [AMD, AVGO]
+
+■ 에너지  기사 3건 (전체의 0%)
+   → 유가는 에너지 섹터 이익과 동시에 물가 기대에도 반영된다
+   · Goldman Sachs sends blunt message on oil price, economy  [GS]
+
+■ 통화정책  기사 2건 (전체의 0%)
+   → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
+   · Think Six Months Ahead  [APO]
+
+────────────────────────
+2. 뉴스가 있었던 종목
+────────────────────────
+
+그날 유난히 크게 움직인 종목 중 관련 보도가 확인된 경우입니다.
+괄호 안 숫자는 시장 전체 움직임을 걷어낸 뒤 남은 변동폭입니다.
+
+■ Tesla, Inc. (TSLA) · 경기소비재
+   +5.51%  (시장 요인 제거 후 +6.17%)
+   Paragon Financial Partners Inc. Makes New Investment in Tesla, Inc. $T  [MarketBeat]
+
+■ Schlumberger (SLB) · 에너지
+   +4.83%  (시장 요인 제거 후 +4.76%)
+   SLB Shares Climb 4.2% After Venezuela Data Agreement, Analysts Remain   [TechStock²]
+
+■ Coinbase (COIN) · 금융
+   +5.31%  (시장 요인 제거 후 +6.86%)
+   Elon Musk Agrees With Coinbase CEO Brian Armstrong That Some Charities  [Yahoo Finance]
+
+■ Dollar General (DG) · 필수소비재
+   +3.14%  (시장 요인 제거 후 +3.96%)
+   Dollar General Corporation $DG Stock Holdings Lifted by Royal London A  [MarketBeat]
+
+■ Pfizer (PFE) · 헬스케어
+   +1.79%  (시장 요인 제거 후 +2.08%)
+   North Star Asset Management Inc. Acquires New Shares in Amgen Inc. $AM  [MarketBeat]
+
+■ PG&E Corporation (PCG) · 유틸리티
+   -20.06%  (시장 요인 제거 후 -19.95%)
+   Is PG&E Corp (PCG) a Bargain After 7.5% Drop? GF Value Says Unde  [GuruFocus]
+
+■ Aon plc (AON) · 금융
+   -9.53%  (시장 요인 제거 후 -9.17%)
+   Aon close to acquiring USI Insurance from KKR in $17 billion deal, WSJ  [Reuters]
+
+■ Take-Two Interactive (TTWO) · 커뮤니케이션
+   -6.67%  (시장 요인 제거 후 -5.97%)
+   90% of GTA VI Preorders Pick $100 Edition: What Does It Mean for TTWO?  [Benzinga]
+
+────────────────────────
+3. 뉴스를 찾지 못한 움직임
+────────────────────────
+
+크게 움직였는데 수집 범위 안에서 관련 보도를 찾지 못한 종목입니다.
+뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
+이 구분을 흐리지 않으려고 따로 적습니다.
+
+  Ulta Beauty(ULTA) +3.8%, CrowdStrike(CRWD) +5.8%, Deere & Company(DE) +3.9%, Veeva Systems(VEEV) +3.3%, Boston Scientific(BSX) +3.1%, Edison International(EIX) -23.1%
+
+────────────────────────
+4. 오늘의 정리
+────────────────────────
+
+오늘은 주로 실적 발표와 관련된 뉴스가 집중되었습니다. 이는 대형 기술주와 여러 주요 기업의 실적이 전체 시장에 영향을 미칠 수 있을 만큼 중요하기 때문입니다. 실적 외에도 M&A 활동과 데이터센터 및 AI 투자와 관련된 소식이 주목을 받았으며, 이는 일부 기업에 직접적인 영향을 미쳤습니다. Ulta Beauty, CrowdStrike 등 보도가 수집되지 않은 주식들도 움직였다는 점에서 모든 정보를 포괄하지 못했음을 양해 부탁드립니다.
+
+────────────────────────
+
+이 글은 뉴스 중심으로 정리한 것입니다.
+종목별 초과수익 계산 방식, 뉴스 주제 회귀 분석, 전날 신호 채점 결과는
+전체 리포트에 있습니다.
+
+본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다.
+특정 종목의 매수·매도를 권유하지 않습니다.
