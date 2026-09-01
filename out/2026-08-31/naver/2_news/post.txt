@@ -8,31 +8,31 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 732건을 주제별로 나눴습니다.
+이날 수집한 기사 756건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 532건 (전체의 73%)
+■ 실적  기사 551건 (전체의 73%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
-   · Marvell Wins Wall Street. Google Bets $12 Billion. Amazon Fears Fade.  [AMZN]
    · Despite Impressive Results, Nvidia Stock May Be Stuck in a Range - What's   [NVDA]
+   · Marvell Wins Wall Street. Google Bets $12 Billion. Amazon Fears Fade.  [AMZN]
 
 ■ M&A  기사 25건 (전체의 3%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
    · Grainger acquiring AWM in $210 million deal  [GWW]
    · AA targeted by Germany’s Allianz in £5bn takeover swoop  [TGT]
 
-■ AI/데이터센터투자  기사 6건 (전체의 1%)
+■ AI/데이터센터투자  기사 8건 (전체의 1%)
    → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
    · Microsoft’s stock seals its longest winning streak of the year as AI softw  [MSFT]
    · Broadcom or AMD? Here's Why the Market Is Pricing the Same AI Boom So Diff  [AMD, AVGO]
 
-■ 에너지  기사 3건 (전체의 0%)
-   → 유가는 에너지 섹터 이익과 동시에 물가 기대에도 반영된다
-   · Goldman Sachs sends blunt message on oil price, economy  [GS]
-
-■ 통화정책  기사 2건 (전체의 0%)
+■ 통화정책  기사 5건 (전체의 1%)
    → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
    · Think Six Months Ahead  [APO]
+
+■ 에너지  기사 5건 (전체의 1%)
+   → 유가는 에너지 섹터 이익과 동시에 물가 기대에도 반영된다
+   · Goldman Sachs sends blunt message on oil price, economy  [GS]
 
 ────────────────────────
 2. 뉴스가 있었던 종목
@@ -61,6 +61,10 @@
    +1.79%  (시장 요인 제거 후 +2.08%)
    North Star Asset Management Inc. Acquires New Shares in Amgen Inc. $AM  [MarketBeat]
 
+■ Edison International (EIX) · 유틸리티
+   -23.07%  (시장 요인 제거 후 -23.15%)
+   Southern Co stock hits 52-week low at 19.61 USD  [Investing.com]
+
 ■ PG&E Corporation (PCG) · 유틸리티
    -20.06%  (시장 요인 제거 후 -19.95%)
    Is PG&E Corp (PCG) a Bargain After 7.5% Drop? GF Value Says Unde  [GuruFocus]
@@ -68,10 +72,6 @@
 ■ Aon plc (AON) · 금융
    -9.53%  (시장 요인 제거 후 -9.17%)
    Aon close to acquiring USI Insurance from KKR in $17 billion deal, WSJ  [Reuters]
-
-■ Take-Two Interactive (TTWO) · 커뮤니케이션
-   -6.67%  (시장 요인 제거 후 -5.97%)
-   90% of GTA VI Preorders Pick $100 Edition: What Does It Mean for TTWO?  [Benzinga]
 
 ────────────────────────
 3. 뉴스를 찾지 못한 움직임
@@ -81,13 +81,13 @@
 뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
 이 구분을 흐리지 않으려고 따로 적습니다.
 
-  Ulta Beauty(ULTA) +3.8%, CrowdStrike(CRWD) +5.8%, Deere & Company(DE) +3.9%, Veeva Systems(VEEV) +3.3%, Boston Scientific(BSX) +3.1%, Edison International(EIX) -23.1%
+  Ulta Beauty(ULTA) +3.8%, CrowdStrike(CRWD) +5.8%, Deere & Company(DE) +3.9%, Veeva Systems(VEEV) +3.3%, Boston Scientific(BSX) +3.1%, Howmet Aerospace(HWM) -7.5%
 
 ────────────────────────
 4. 오늘의 정리
 ────────────────────────
 
-오늘은 주로 실적 발표와 관련된 뉴스가 집중되었습니다. 이는 대형 기술주와 여러 주요 기업의 실적이 전체 시장에 영향을 미칠 수 있을 만큼 중요하기 때문입니다. 실적 외에도 M&A 활동과 데이터센터 및 AI 투자와 관련된 소식이 주목을 받았으며, 이는 일부 기업에 직접적인 영향을 미쳤습니다. Ulta Beauty, CrowdStrike 등 보도가 수집되지 않은 주식들도 움직였다는 점에서 모든 정보를 포괄하지 못했음을 양해 부탁드립니다.
+오늘 미국 시장에서는 주로 기업 실적에 관련된 뉴스가 많이 보도되었습니다. 이는 시장 전반에 영향을 줄 수 있는 중요한 주제입니다. Nvidia와 Amazon처럼 주목받는 기업들의 실적 소식이 압도적으로 많았으며, 인수합병(M&A) 및 AI/데이터센터 투자 소식도 보고되었습니다. 보고되지 않은 주식이 존재할 수 있으며, 이는 수집 범위 밖에 있기 때문입니다.
 
 ────────────────────────
 
