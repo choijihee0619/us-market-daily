@@ -1,0 +1,101 @@
+[2026년 09월 02일 미국장] 뉴스로 보는 하루
+
+미국 시장에서 그날 실제로 보도된 뉴스를 모아 정리한 기록입니다.
+전망이나 매매 권유가 아니라, 무슨 일이 있었고 어떤 종목이 반응했는지를
+숫자와 함께 남깁니다.
+
+────────────────────────
+1. 오늘 뉴스는 어디에 몰렸나
+────────────────────────
+
+이날 수집한 기사 866건을 주제별로 나눴습니다.
+(한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
+
+■ 실적  기사 713건 (전체의 82%)
+   → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
+   · Dell’s AI servers drive a stellar earnings performance, and a raised outlo  [DELL]
+   · IBM (NYSE:IBM) Builds AI Momentum As Software Franchise Expands  [BA, CRM, IBM]
+
+■ M&A  기사 34건 (전체의 4%)
+   → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
+   · CVX Stock Extends Gains Overnight: Chevron Reportedly Nears Deal For Giant  [CVX]
+   · ServiceNow Becoming Cybersecurity Powerhouse: McDermott’s Grand Plan?  [MSFT, NOW]
+
+■ 통화정책  기사 11건 (전체의 1%)
+   → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
+   · DOJ expands beef antitrust inquiry to Amazon, Walmart, others  [AMZN, COST, KR]
+   · News | 5 things to know for Sept. 2  [BX]
+
+■ AI/데이터센터투자  기사 3건 (전체의 0%)
+   → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
+   · Which workers are using AI surprisingly often? Dry cleaners and constructi  [INTC]
+   · Palo Alto Networks’ stock falls despite strong AI cybersecurity demand  [NKE, PANW]
+
+■ 에너지  기사 3건 (전체의 0%)
+   → 유가는 에너지 섹터 이익과 동시에 물가 기대에도 반영된다
+   · The heat is on - again: Duke Energy Ohio & Kentucky customers can access t  [DUK]
+   · Global oil prices surge to a 6-week high after the U.S. strikes Iran in Ho  [TGT]
+
+────────────────────────
+2. 뉴스가 있었던 종목
+────────────────────────
+
+그날 유난히 크게 움직인 종목 중 관련 보도가 확인된 경우입니다.
+괄호 안 숫자는 시장 전체 움직임을 걷어낸 뒤 남은 변동폭입니다.
+
+■ Dell Technologies (DELL) · 정보기술
+   +15.81%  (시장 요인 제거 후 +13.45%)
+   Dell’s AI servers drive a stellar earnings performance, and a raised o  [MarketWatch Top]
+
+■ T-Mobile US (TMUS) · 커뮤니케이션
+   +2.82%  (시장 요인 제거 후 +3.50%)
+   Quantitative Investment Management LLC Makes New $1.58 Million Investm  [MarketBeat]
+
+■ Best Buy (BBY) · 경기소비재
+   +5.29%  (시장 요인 제거 후 +3.90%)
+   Vertex Pharmaceuticals stock hits all-time high at $555.84  [Investing.com]
+
+■ Nvidia (NVDA) · 정보기술
+   +3.21%  (시장 요인 제거 후 +2.74%)
+   Gary Black Warns Tesla Risks Falling Behind in the Self-Driving Race:   [Benzinga]
+
+■ Palo Alto Networks (PANW) · 정보기술
+   -9.28%  (시장 요인 제거 후 -11.36%)
+   Palo Alto Networks CEO Nikesh Arora to companies investing in AI: You   [The Times of India]
+
+■ Edison International (EIX) · 유틸리티
+   -6.14%  (시장 요인 제거 후 -6.17%)
+   Edison International (EIX) Stock Looks Cheap Even With Wildfire Risk  [Yahoo Finance]
+
+■ PG&E Corporation (PCG) · 유틸리티
+   -5.19%  (시장 요인 제거 후 -4.95%)
+   Pacific Gas & Electric Launches Strategic Review, Cuts 2027 Capital Pl  [Yahoo Finance]
+
+■ CrowdStrike (CRWD) · 정보기술
+   -5.42%  (시장 요인 제거 후 -7.62%)
+   Palo Alto Networks beats quarterly estimates on AI demand, continues a  [CNBC]
+
+────────────────────────
+3. 뉴스를 찾지 못한 움직임
+────────────────────────
+
+크게 움직였는데 수집 범위 안에서 관련 보도를 찾지 못한 종목입니다.
+뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
+이 구분을 흐리지 않으려고 따로 적습니다.
+
+  Steel Dynamics(STLD) +5.8%, Charter Communications(CHTR) +8.7%, Nucor(NUE) +4.8%, Skyworks Solutions(SWKS) +6.3%, TKO Group Holdings(TKO) +4.1%, XLB(XLB) +1.7%
+
+────────────────────────
+4. 오늘의 정리
+────────────────────────
+
+오늘 미국 주식시장의 뉴스는 주로 기업 실적에 집중되었습니다. Dell과 IBM이 AI 관련 성과를 발표하며 각각 주목을 받았습니다. 이러한 실적 뉴스는 시장 전체에 영향을 줄 수 있는 주요 이슈로, 기업 활동의 건강성을 판단하는 데 중요한 재료입니다. 기타 종목들 중에는 보도를 찾지 못한 경우도 있었으나 이들은 수집 범위 밖에 있는 정보일 수 있습니다.
+
+────────────────────────
+
+이 글은 뉴스 중심으로 정리한 것입니다.
+종목별 초과수익 계산 방식, 뉴스 주제 회귀 분석, 전날 신호 채점 결과는
+전체 리포트에 있습니다.
+
+본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다.
+특정 종목의 매수·매도를 권유하지 않습니다.
