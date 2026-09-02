@@ -8,33 +8,33 @@
 1. 오늘 뉴스는 어디에 몰렸나
 ────────────────────────
 
-이날 수집한 기사 1142건을 주제별로 나눴습니다.
+이날 수집한 기사 1307건을 주제별로 나눴습니다.
 (한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
 
-■ 실적  기사 992건 (전체의 87%)
+■ 실적  기사 1144건 (전체의 88%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
    · Tesla’s stock among S&P 500’s top gainers as investors prepare for a Cyber  [TSLA]
    · PG&E shares plunge 18% 🚩 Panic hits U.S. utility stocks exposed to wildfir  [EIX, PCG, SRE]
 
-■ M&A  기사 42건 (전체의 4%)
+■ M&A  기사 51건 (전체의 4%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
    · Centene taps a mortgage-industry AI veteran to help fix a shrinking Medica  [CNC]
    · Keurig Dr Pepper sells equity stake back to Chobani for $800M  [KDP]
 
-■ 통화정책  기사 14건 (전체의 1%)
+■ 통화정책  기사 15건 (전체의 1%)
    → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
    · Americans Stop Moving as Mortgage Lock-In Persists: Home Depot Sees 'No Si  [APO, COIN, HD]
    · Microsoft, Apple and Oracle Face Rising Rate Pressure  [AAPL, MSFT, ORCL]
 
-■ AI/데이터센터투자  기사 3건 (전체의 0%)
-   → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
-   · Intercontinental Exchange (ICE) Invests In Blockchain Trading Firm  [CME, ICE, NDAQ]
-   · Possible hyperscale data center eyed for Bow  [ES, GE, IBM]
+■ 인플레이션  기사 4건 (전체의 0%)
+   → 물가 지표는 연준 정책 기대를 통해 금리와 주식 양쪽에 반영된다
+   · Bitzero Holdings Stock Drops 4.30% as CN:AIBZ.U Faces Downside Pressure, B  [AIBZ]
+   · Sol Strategies Inc. (CN:HODL) Faces Sharp Selling Pressure as Crypto Marke  [STKE]
 
-■ 고용  기사 2건 (전체의 0%)
-   → 고용은 연준이 가장 무겁게 보는 지표다
-   · Lowe’s Foundation Launches Nation’s Largest Skilled Trades Coalition with   [BAC, DUK, LOW]
-   · New Chipotle at Clarion Mall Opening by Year’s End, Bringing About 30 Jobs  [CMG]
+■ 규제정책  기사 3건 (전체의 0%)
+   → 관세·소송·제재는 산업 전체에 동시에 걸린다
+   · Amazon’s stock slips as the FTC alleges billions of dollars in hidden ad f  [AMZN]
+   · PG&E shares plunge 18% 🚩 Panic hits U.S. utility stocks exposed to wildfir  [EIX, PCG, SRE]
 
 ────────────────────────
 2. 뉴스가 있었던 종목
@@ -71,9 +71,9 @@
    +9.93%  (시장 요인 제거 후 +11.29%)
    23 best-performing stocks of August, as the software industry continue  [MarketWatch Top]
 
-■ Apple Inc. (AAPL) · 정보기술
-   +2.61%  (시장 요인 제거 후 +2.92%)
-   Microsoft, Apple and Oracle Face Rising Rate Pressure  [FXEmpire]
+■ Kimco Realty (KIM) · 부동산
+   +1.73%  (시장 요인 제거 후 +2.19%)
+   Urban Edge selling 180,000 sq. ft. Morris Plains retail center for nea  [Real Estate NJ]
 
 ────────────────────────
 3. 뉴스를 찾지 못한 움직임
@@ -83,13 +83,13 @@
 뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
 이 구분을 흐리지 않으려고 따로 적습니다.
 
-  Regency Centers(REG) +1.7%, Kimco Realty(KIM) +1.7%, CSX Corporation(CSX) -3.6%, Union Pacific Corporation(UNP) -3.3%, Schlumberger(SLB) -4.9%
+  Regency Centers(REG) +1.7%, CSX Corporation(CSX) -3.6%, Union Pacific Corporation(UNP) -3.3%
 
 ────────────────────────
 4. 오늘의 정리
 ────────────────────────
 
-오늘의 뉴스는 실적 발표에 집중되었습니다. 테슬라와 PG&E와 같은 기업들의 실적 관련 뉴스가 시장 전반에 큰 영향을 미쳤습니다. 이는 대개 기업의 재정 상태와 미래 전망에 대한 신호로 작용하기 때문에 투자자들의 관심이 높습니다. 한편, 보도되지 않았지만 큰 움직임을 보인 종목들은 수집 범위 밖의 뉴스로 인식할 필요가 있습니다.
+오늘 미국 증시는 주로 실적 관련 뉴스에 몰렸습니다. 테슬라(TSLA)는 S&P 500 내 가장 큰 상승폭을 기록하며 주목받았고, PG&E(PCG)는 화재 책임에 대한 우려로 주가가 급락했습니다. 이러한 실적 뉴스는 전반적인 시장 분위기에 영향을 미쳤으며, 유틸리티 등 특정 섹터에도 구체적인 영향을 미쳤습니다. 보도를 찾지 못한 CSX(CSX)와 Union Pacific(UNP)는 뉴스 수집 범위 밖에 있음을 알립니다.
 
 ────────────────────────
 
