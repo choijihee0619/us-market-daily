@@ -41,28 +41,28 @@
 <p style="margin:24px 0;text-align:center;"><img src="https://raw.githubusercontent.com/choijihee0619/us-market-daily/main/assets/2026-09-02/02_factors.png" alt="" style="max-width:100%;height:auto;border-radius:4px;"></p>
 <h2 id="m2" style="font-size:21px;font-weight:700;margin:44px 0 14px;padding-bottom:9px;border-bottom:2px solid #24292f;">2. 무엇이 설명했나</h2>
 <p style="margin:14px 0;"><span style="color:#888;font-size:13px;">개별 종목의 등락은 대부분 '그 종목 고유의 사건'이 아니라 시장 전체·규모·가치·모멘텀 같은 <b>공통 요인(팩터)</b> 에 대한 노출로 설명된다. 이 블록은 그 공통 요인이 그날 얼마나 움직였는지를 먼저 본다.</span></p>
-<p style="margin:14px 0;">시장은 전반적으로 상승했으나, 팩터 기준으로 세부적인 차이가 있었다. 시장 팩터는 소폭 상승하여 전체적으로 시장 분위기가 긍정적이었지만, 모멘텀 팩터는 음(-)의 값을 기록했다. 이는 최근 12개월 동안 상승률이 높았던 종목들이 하락했음을 의미한다. 규모 팩터는 양(+)의 값을 보여 소형주가 대형주보다 우위를 보였다. 가치와 수익성 팩터는 각각 상승과 하락을 보였으며, 이는 가치주는 상대적으로 강한 반면, 수익성이 높은 기업들은 약세를 보였다.</p>
-<p style="margin:14px 0;">섹터별로는 소재와 커뮤니케이션이 두드러진 상승을 보였다. 특히 소재 섹터 ETF는 1.69% 상승하며 가장 큰 폭의 오름세를 기록했다. 개별 종목 중에서는 Dell Technologies(정보기술)가 15.81% 상승하고, Steel Dynamics(소재)도 5.79% 상승했다. 반면, 정보기술 섹터에 속한 Palo Alto Networks는 -9.28% 하락했다. 이는 팩터 노출로 설명되지 않는 잔차 부분에서 나타난 움직임이다.</p>
-<p style="margin:14px 0;">토픽 회귀 분석에서는 인공지능 및 데이터센터 투자 관련 뉴스가 부정적으로 작용한 것으로 미약하게 나타났다. in-sample R²는 6.5%로, 유의성 검정을 하지 않았기 때문에 해석에 주의가 필요하다. 큰 변동률의 개별 종목이 여러 섹터에 걸쳐 발생한 점을 보았을 때, 시장 전반의 상승만으로 설명되지 않는 개별적 이슈가 있었음을 보여준다.</p>
+<p style="margin:14px 0;">모멘텀 팩터는 음(-)의 -0.27%로 추세가 되돌려진 날이었다. 시장(MKT) 팩터는 같은 상승(+0.44%)이었으나, 규모(SMB) 팩터 역시 +0.74%로 소형주가 대형주보다 상대적으로 더 우위를 보였다. 가치(HML) 팩터도 +0.74%로, 이날은 시장 전반에 저평가주가 탄력을 받았다. 수익성(RMW)과 투자(CMA) 팩터는 각각 -0.26% 및 -0.58%로 하락해, 수익성이나 자본배분 전략에 대한 관심은 상대적으로 덜했음을 보여준다.</p>
+<p style="margin:14px 0;">섹터별로 살펴보면, 소재와 커뮤니케이션이 각각 +1.69% 및 +1.39%로 두드러진 상승을 보였고, 특히 부동산 섹터는 -0.70%로 가장 부진한 성과를 기록하였다. 웨어러블·항공전자 업체 Garmin(GRMN)는 상승했지만 정보기술 섹터의 전반적인 수익률은 편차가 있었다. 소재 섹터의 경우, Steel Dynamics와 Nucor의 둔화에도 불구하고 전반적인 상승세를 보였으며, 부동산과 정보기술 섹터 일부 기업, 특히 Palo Alto Networks는 음(-)의 잔차를 기록했다.</p>
+<p style="margin:14px 0;">토픽 회귀 분석에서 in-sample R²는 6.5%로, 유의성 검정을 하지 않았으므로 방향성 참고만 가능하다. 가이던스 관련 뉴스는 높은 계수(479.96)를 보였고, AI/데이터센터투자는 부정적인 영향을 주었다(-276.76). 뚜렷한 요소들이 굵직하게 작용했으나, 개별 종목이나 섹터 모두 이외의 영향도 있었다. 시장 하락과는 다른 섹터별 상반된 반응이 있었음을 보여주는 결과다.</p>
 <p style="margin:14px 0;"><span style="color:#888;font-size:13px;"><b>모멘텀(UMD) -0.27%</b> — 최근 약 1년간 많이 오른 종목을 사고 많이 내린 종목을 파는 가상 포트폴리오의 그날 수익률이다. <b>음(−)이다. 최근 잘 오르던 종목이 그날 오히려 더 많이 빠졌다는 뜻이다(되돌림). 최근 상승세가 강한 종목을 들고 있었다면 개별 뉴스가 없어도 손실이 났을 날이다.</b> 이 팩터를 모형에 넣지 않으면 이 움직임이 잔차에 남아 뉴스 효과로 오인된다.</span></p>
 <p style="margin:14px 0;">아래는 <b>팩터로 설명되지 않고 남은 부분(잔차)</b> 을 뉴스 토픽 노출로 회귀한 결과다. 계수가 +면 그날 그 토픽에 노출된 종목들의 잔차가 평균적으로 높았다는 뜻이고, 인과관계가 아니라 같은 날 함께 나타난 연관이다.</p>
 <table style="border-collapse:collapse;width:100%;font-size:15px;margin:16px 0;"><tbody>
 <tr><th style="border:1px solid #d8dade;padding:9px 12px;background:#f6f7f9;font-weight:600;text-align:left;">토픽</th><th style="border:1px solid #d8dade;padding:9px 12px;background:#f6f7f9;font-weight:600;text-align:left;">계수 (bp)</th></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">가이던스</td><td style="border:1px solid #d8dade;padding:9px 12px;">+479.9</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">가이던스</td><td style="border:1px solid #d8dade;padding:9px 12px;">+480.0</td></tr>
 <tr><td style="border:1px solid #d8dade;padding:9px 12px;">AI/데이터센터투자</td><td style="border:1px solid #d8dade;padding:9px 12px;">-276.8</td></tr>
 <tr><td style="border:1px solid #d8dade;padding:9px 12px;">통화정책</td><td style="border:1px solid #d8dade;padding:9px 12px;">+123.9</td></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">M&A</td><td style="border:1px solid #d8dade;padding:9px 12px;">-122.3</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">M&A</td><td style="border:1px solid #d8dade;padding:9px 12px;">-122.5</td></tr>
 <tr><td style="border:1px solid #d8dade;padding:9px 12px;">규제정책</td><td style="border:1px solid #d8dade;padding:9px 12px;">+23.4</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">지정학</td><td style="border:1px solid #d8dade;padding:9px 12px;">+15.5</td></tr>
 <tr><td style="border:1px solid #d8dade;padding:9px 12px;">고용</td><td style="border:1px solid #d8dade;padding:9px 12px;">+7.2</td></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">지정학</td><td style="border:1px solid #d8dade;padding:9px 12px;">-6.5</td></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">에너지</td><td style="border:1px solid #d8dade;padding:9px 12px;">-6.5</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">에너지</td><td style="border:1px solid #d8dade;padding:9px 12px;">-6.8</td></tr>
 </tbody></table>
 <p style="margin:14px 0;">n=297, R²=6.5%. R²는 잔차 횡단면 분산 중 토픽이 설명한 비중이다 — 나머지 94%는 이 토픽 집합으로 설명되지 않았다. 표준오차는 보고하지 않는다. 잔차가 추정된 베타에서 나온 generated regressand라 2단계 추정오차가 반영되지 않았기 때문이다. 계수는 방향성 참고용이다.</p>
 <p style="margin:24px 0;text-align:center;"><img src="https://raw.githubusercontent.com/choijihee0619/us-market-daily/main/assets/2026-09-02/03_macro.png" alt="" style="max-width:100%;height:auto;border-radius:4px;"></p>
 <h2 id="m3" style="font-size:21px;font-weight:700;margin:44px 0 14px;padding-bottom:9px;border-bottom:2px solid #24292f;">3. 설명되지 않은 움직임</h2>
 <p style="margin:14px 0;"><span style="color:#888;font-size:13px;"><b>잔차(residual)</b> 는 '그 종목이 팩터 노출만으로 움직였다면 이랬을 텐데, 실제로는 이만큼 달랐다'의 차이다. 예를 들어 시장이 -1.5% 빠진 날 어떤 종목이 -1.5% 하락했다면 시장을 따라간 것이라 잔차는 0에 가깝다. 반대로 시장이 빠진 날 +16% 오르면 팩터로 설명되지 않는 큰 양(+)의 잔차가 남는다. 그 남은 부분이 그 종목 고유의 사건 — 실적 발표, 가이던스 수정, M&A 같은 — 을 담고 있을 가능성이 높다. 이 블로그가 뉴스와 맞춰보는 대상이 바로 이 잔차다.</span></p>
-<p style="margin:14px 0;">위험모형: ff5_umd · 추정창 250거래일 · 유효 종목 519개. 잔차 표준편차 191bp.</p>
-<p style="margin:14px 0;">±2σ 이탈: 상방 5개, 하방 12개 (전체 519개 중 3.3%). <b>z</b> 는 그 종목의 잔차를 자기 과거 변동성으로 나눈 값이다. z=+3이면 평소 흔들림의 세 배만큼 위로 벗어났다는 뜻이고, 정규분포라면 ±2σ 밖은 약 4.6%만 나온다 — 그보다 많으면 그날 개별 사건이 몰렸거나 수익률 분포의 꼬리가 두껍다는 신호다.</p>
+<p style="margin:14px 0;">위험모형: ff5_umd · 추정창 250거래일 · 유효 종목 520개. 잔차 표준편차 192bp.</p>
+<p style="margin:14px 0;">±2σ 이탈: 상방 5개, 하방 12개 (전체 520개 중 3.3%). <b>z</b> 는 그 종목의 잔차를 자기 과거 변동성으로 나눈 값이다. z=+3이면 평소 흔들림의 세 배만큼 위로 벗어났다는 뜻이고, 정규분포라면 ±2σ 밖은 약 4.6%만 나온다 — 그보다 많으면 그날 개별 사건이 몰렸거나 수익률 분포의 꼬리가 두껍다는 신호다.</p>
 <table style="border-collapse:collapse;width:100%;font-size:15px;margin:16px 0;"><tbody>
 <tr><th style="border:1px solid #d8dade;padding:9px 12px;background:#f6f7f9;font-weight:600;text-align:left;">종목</th><th style="border:1px solid #d8dade;padding:9px 12px;background:#f6f7f9;font-weight:600;text-align:left;">회사</th><th style="border:1px solid #d8dade;padding:9px 12px;background:#f6f7f9;font-weight:600;text-align:left;">섹터</th><th style="border:1px solid #d8dade;padding:9px 12px;background:#f6f7f9;font-weight:600;text-align:left;">수익률</th><th style="border:1px solid #d8dade;padding:9px 12px;background:#f6f7f9;font-weight:600;text-align:left;">잔차</th><th style="border:1px solid #d8dade;padding:9px 12px;background:#f6f7f9;font-weight:600;text-align:left;">z</th><th style="border:1px solid #d8dade;padding:9px 12px;background:#f6f7f9;font-weight:600;text-align:left;">같은 날 보도된 뉴스</th></tr>
 <tr><td style="border:1px solid #d8dade;padding:9px 12px;">STLD</td><td style="border:1px solid #d8dade;padding:9px 12px;">Steel Dynamics</td><td style="border:1px solid #d8dade;padding:9px 12px;">소재</td><td style="border:1px solid #d8dade;padding:9px 12px;">+5.79%</td><td style="border:1px solid #d8dade;padding:9px 12px;">+5.87%</td><td style="border:1px solid #d8dade;padding:9px 12px;">+3.0</td><td style="border:1px solid #d8dade;padding:9px 12px;"><b>미설명</b></td></tr>
@@ -97,9 +97,9 @@
 <p style="margin:14px 0;"><span style="color:#888;font-size:13px;">일정은 FRED 릴리스 캘린더 기준이며 시각은 지표마다 다르다. 컨센서스(시장 예상치)는 무료 소스로 확보되지 않아 싣지 않는다.</span></p>
 <p style="margin:14px 0;"><span style="color:#888;font-size:13px;">본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다. 특정 종목의 매수·매도를 권유하지 않으며, 필자는 언급된 종목을 보유하고 있을 수 있습니다. 모든 수치는 발행 시점 기준이며 사후 수정될 수 있습니다.</span></p>
 <p style="margin:14px 0;">데이터 출처: Yahoo Finance · FRED (St. Louis Fed) · Kenneth R. French Data Library · SEC EDGAR</p>
-<p style="margin:14px 0;">생성 커밋: <code style="background:#f4f4f6;padding:1px 5px;border-radius:3px;font-size:13px;">db0491e</code></p>
+<p style="margin:14px 0;">생성 커밋: <code style="background:#f4f4f6;padding:1px 5px;border-radius:3px;font-size:13px;">a764e75</code></p>
 <div style="margin-top:46px;padding-top:20px;border-top:1px solid #e4e6ea;font-size:13px;color:#6e7781;line-height:1.75;">
-<p style="margin:5px 0;">이 글을 생성한 코드와 원본 데이터: <a href="https://github.com/choijihee0619/us-market-daily/commit/db0491e" style="color:#0969da;">GitHub</a></p>
+<p style="margin:5px 0;">이 글을 생성한 코드와 원본 데이터: <a href="https://github.com/choijihee0619/us-market-daily/commit/a764e75" style="color:#0969da;">GitHub</a></p>
 <p style="margin:5px 0;">본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다. 특정 종목의 매수·매도를 권유하지 않으며, 필자는 언급된 종목을 보유하고 있을 수 있습니다.</p>
 <p style="margin:5px 0;">대상 거래일 2026-09-02 (ET)</p>
 </div></div>
