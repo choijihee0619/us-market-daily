@@ -1,0 +1,101 @@
+[2026년 09월 04일 미국장] 뉴스로 보는 하루
+
+미국 시장에서 그날 실제로 보도된 뉴스를 모아 정리한 기록입니다.
+전망이나 매매 권유가 아니라, 무슨 일이 있었고 어떤 종목이 반응했는지를
+숫자와 함께 남깁니다.
+
+────────────────────────
+1. 오늘 뉴스는 어디에 몰렸나
+────────────────────────
+
+이날 수집한 기사 1150건을 주제별로 나눴습니다.
+(한 기사가 여러 주제에 걸치는 경우가 있어 아래 합계는 전체 건수와 다릅니다.)
+
+■ 실적  기사 975건 (전체의 85%)
+   → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
+   · Adobe just announced its next CEO. Here’s why its stock is dropping.  [ADBE]
+   · This subtle Microsoft change could be a big win for investors  [MSFT, TECH]
+
+■ M&A  기사 75건 (전체의 7%)
+   → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
+   · Gilinski family moves to take control of GeoPark after rights secured to V  [CVX, GPRK]
+   · Principal Financial (PFG) Moves 6.5% Higher: Will This Strength Last?  [PFG]
+
+■ 통화정책  기사 20건 (전체의 2%)
+   → 금리 경로에 대한 기대가 바뀌면 거의 모든 종목의 할인율이 함께 움직인다
+   · [U.S. Stocks] Dow Inc extends significant gains, rising $624 as expectatio  [DOW]
+   · Final Trades: FTAI Aviation, KLA Corp, Nvidia and Oracle  [KLAC, NVDA, ORCL]
+
+■ 고용  기사 6건 (전체의 1%)
+   → 고용은 연준이 가장 무겁게 보는 지표다
+   · Uber exit: Drivers brace for car loan defaults  [UBER]
+   · Cardinal Health leases Sacramento building for 100-job distribution center  [CAH]
+
+■ AI/데이터센터투자  기사 3건 (전체의 0%)
+   → 설비투자 계획 변화는 반도체·전력·냉각 등 공급망 전체로 퍼진다
+   · Here’s what Nvidia’s $13 billion Hugging Face deal means for the world of   [NVDA]
+   · Tesla investors await updates on Cybercab robotaxi touted as the ‘future o  [TSLA]
+
+────────────────────────
+2. 뉴스가 있었던 종목
+────────────────────────
+
+그날 유난히 크게 움직인 종목 중 관련 보도가 확인된 경우입니다.
+괄호 안 숫자는 시장 전체 움직임을 걷어낸 뒤 남은 변동폭입니다.
+
+■ Franklin Resources (BEN) · 금융
+   +3.52%  (시장 요인 제거 후 +3.42%)
+   Franklin Templeton Reports AUM Growth  [Intellectia AI]
+
+■ Global Payments (GPN) · 금융
+   +0.84%  (시장 요인 제거 후 +4.58%)
+   Van ECK Associates Corp Acquires 11,381 Shares of Global Payments Inc.  [MarketBeat]
+
+■ Oracle Corporation (ORCL) · 정보기술
+   +3.08%  (시장 요인 제거 후 +5.59%)
+   Final Trades: FTAI Aviation, KLA Corp, Nvidia and Oracle  [CNBC]
+
+■ PG&E Corporation (PCG) · 유틸리티
+   +2.44%  (시장 요인 제거 후 +3.20%)
+   PG&E CORP : BOFA GLOBAL RESEARCH RAISES PRICE OBJECTIVE TO $14.00 FROM  [Moomoo]
+
+■ Lululemon Athletica (LULU) · 경기소비재
+   -17.38%  (시장 요인 제거 후 -13.81%)
+   Lululemon one of bigger victims in downside in athletic wear, says Wel  [CNBC]
+
+■ Fair Isaac (FICO) · 정보기술
+   -16.68%  (시장 요인 제거 후 -12.49%)
+   Fair Isaac Shares Tumble on Federal Housing Finance Agency Directive O  [StockInvest.us]
+
+■ Autodesk (ADSK) · 정보기술
+   -8.26%  (시장 요인 제거 후 -4.13%)
+   Synopsys Fell 11% This Year. Wall Street Expects It to Gain 50% in the  [Yahoo Finance]
+
+■ Tesla, Inc. (TSLA) · 경기소비재
+   -5.92%  (시장 요인 제거 후 -4.40%)
+   Tesla investors await updates on Cybercab robotaxi touted as the ‘futu  [MarketWatch Top]
+
+────────────────────────
+3. 뉴스를 찾지 못한 움직임
+────────────────────────
+
+크게 움직였는데 수집 범위 안에서 관련 보도를 찾지 못한 종목입니다.
+뉴스가 없었다는 뜻이 아니라, 무료 수집 범위에 안 들어왔다는 뜻입니다.
+이 구분을 흐리지 않으려고 따로 적습니다.
+
+  Idexx Laboratories(IDXX) +1.2%, Best Buy(BBY) +3.2%, Aptiv(APTV) +3.1%, CRH plc(CRH) +2.4%, Estée Lauder Companies (The)(EL) +3.0%, Deckers Brands(DECK) +1.6%
+
+────────────────────────
+4. 오늘의 정리
+────────────────────────
+
+오늘 미국 증시 뉴스는 주로 기업 실적에 집중되었습니다. 이는 개별 기업의 상황을 반영하는 것으로, Adobe와 Microsoft 등의 기업이 이에 따라 반응했습니다. M&A 관련 소식과 통화정책에 대한 보도도 있었지만, 주류는 아니었습니다. 다른 많은 종목에서도 움직임이 있었으나, 그에 대한 보도를 찾지 못한 경우가 있었습니다. 이는 뉴스가 없다는 뜻이 아니라 수집 범위 밖이라는 점을 이해해 주시기 바랍니다.
+
+────────────────────────
+
+이 글은 뉴스 중심으로 정리한 것입니다.
+종목별 초과수익 계산 방식, 뉴스 주제 회귀 분석, 전날 신호 채점 결과는
+전체 리포트에 있습니다.
+
+본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다.
+특정 종목의 매수·매도를 권유하지 않습니다.
