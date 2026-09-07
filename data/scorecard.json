@@ -172,11 +172,11 @@
  },
  {
   "date": "2026-09-04",
-  "spread_bp": 38.02,
-  "top_bp": 20.07,
-  "bottom_bp": -17.94,
+  "spread_bp": 37.3,
+  "top_bp": 23.06,
+  "bottom_bp": -14.24,
   "hit": true,
-  "n": 292,
-  "rev": "bb1865f"
+  "n": 293,
+  "rev": "3d3f52c"
  }
 ]
