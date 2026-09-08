@@ -71,8 +71,16 @@ def read(name: str) -> pd.DataFrame:
     return pd.read_parquet(p)
 
 
-def upsert(name: str, df: pd.DataFrame, keys: Sequence[str] | None = None) -> int:
-    """신규 행을 병합하고 저장. 반환값은 저장 후 전체 행 수."""
+def upsert(name: str, df: pd.DataFrame, keys: Sequence[str] | None = None,
+           keep_first: Sequence[str] | None = None) -> int:
+    """신규 행을 병합하고 저장. 반환값은 저장 후 전체 행 수.
+
+    keep_first: **가장 먼저 기록된 값을 지켜야 하는 열.** 기본 동작(keep="last")은
+    사후 수정을 흡수하려는 것이라 대부분의 열에 맞지만, 수집 시각처럼 "언제 처음
+    알았나"를 담는 열에는 정반대다. 같은 기사를 다시 받으면 collected_at_utc 가
+    재수집 시각으로 덮여, 그 기사가 신호 생성 시점에 있었다는 증거가 사라진다.
+    이 열들은 기존 값이 있으면 그걸 남긴다.
+    """
     if df is None or df.empty:
         return len(read(name))
     keys = list(keys or SCHEMAS.get(name, []))
@@ -87,6 +95,18 @@ def upsert(name: str, df: pd.DataFrame, keys: Sequence[str] | None = None) -> in
     if old.empty:
         merged = df
     else:
+        for col in (keep_first or []):
+            if col not in old.columns:
+                continue
+            prior = (old.dropna(subset=[col])
+                        .drop_duplicates(subset=keys, keep="first")[list(keys) + [col]]
+                        .rename(columns={col: "__prior"}))
+            df = df.merge(prior, on=list(keys), how="left")
+            if col in df.columns:
+                df[col] = df["__prior"].where(df["__prior"].notna(), df[col])
+            else:
+                df[col] = df["__prior"]
+            df = df.drop(columns=["__prior"])
         merged = pd.concat([old, df], ignore_index=True)
     merged = merged.drop_duplicates(subset=keys, keep="last")
     sort_cols = [c for c in ("date", "ticker", "series", "published_at") if c in merged.columns]

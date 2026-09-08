@@ -160,7 +160,10 @@ def collect(cfg, session: pd.Timestamp, lookback_days: int, skip_news: bool = Fa
         hist = storage.read("news")
         nw = S.score_dataframe(nw, hist, cfg.get_path("sentiment.novelty_threshold", 0.85))
         nw = AV.seed_topics(nw)                  # AV 토픽을 초기값으로 -> LLM 호출 절감
-        storage.upsert("news", nw, ["id"])
+        # collected_at_utc 는 **처음 본 시각**이어야 한다. 기본 upsert는
+        # keep="last" 라 같은 기사를 다시 받으면 재수집 시각으로 덮이고,
+        # 그러면 "그 기사가 신호 생성 시점에 있었다"는 증거가 사라진다.
+        storage.upsert("news", nw, ["id"], keep_first=["collected_at_utc"])
         log.info("news 저장 %d행 (AV %d / RSS %d)", len(nw), len(av), len(rss))
 
 
@@ -322,6 +325,29 @@ def build_context(cfg, session: pd.Timestamp, news_win: pd.DataFrame,
     # 그런 날은 횡단면 상관이 커져 3번 블록의 개별종목 해석이 오염된다.
     ctx["upcoming"] = CAL.fetch_upcoming(env("FRED_API_KEY"), session)
     return ctx
+
+
+def _news_provenance(news_win: pd.DataFrame) -> dict:
+    """이 세션 신호를 만든 기사들의 수집 출처 요약. freeze manifest에 함께 남긴다.
+
+    나중에 "이 신호가 실시간이었나"를 물었을 때 답할 근거다. 창은 대상 거래일
+    16:00 ET에 닫히므로 collected_at 이 그보다 늦은 건 정상이다(마감 직후에
+    수집하므로). 반대로 **창보다 한참 뒤에 수집된 기사가 많으면 소급 실행이다.**
+    """
+    if news_win is None or news_win.empty:
+        return {"n": 0}
+    out: dict = {"n": int(len(news_win))}
+    if "provider" in news_win.columns:
+        out["by_provider"] = {str(k): int(v) for k, v in
+                              news_win["provider"].fillna("(미기록)").value_counts().items()}
+    if "collected_at_utc" in news_win.columns:
+        ts = pd.to_datetime(news_win["collected_at_utc"], utc=True, errors="coerce")
+        out["collected_at_min"] = str(ts.min()) if ts.notna().any() else None
+        out["collected_at_max"] = str(ts.max()) if ts.notna().any() else None
+        out["missing_collected_at"] = int(ts.isna().sum())
+    else:
+        out["missing_collected_at"] = int(len(news_win))
+    return out
 
 
 def _cum_scorecard() -> dict:
@@ -543,6 +569,8 @@ def main() -> int:
                     news_window=news_window(session),
                     provenance=provenance,
                     meta={
+                        "news_provenance": _news_provenance(news_win),
+                        "sentiment_dictionary": S.dictionary_info(),
                         "risk_model": cfg.get_path("model.risk_model"),
                         "beta_window": cfg.get_path("model.beta_window"),
                         "novelty_threshold": cfg.get_path("sentiment.novelty_threshold"),

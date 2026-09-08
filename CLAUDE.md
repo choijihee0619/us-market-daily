@@ -99,7 +99,8 @@ A, ALL, CAT, KEY, ON, IT). AV `NEWS_SENTIMENT`의 `ticker_sentiment.relevance_sc
 '종목별로 부르지 않고 토픽 배치로 부른다'는 설계는 재논의 대상이 아니다.)
 
 AV 자체 감성 점수는 산출 방식이 비공개라 보조 지표로만 저장하고, 주 분석은 재현
-가능한 Loughran-McDonald 사전을 쓴다.
+가능한 Loughran-McDonald 사전을 쓴다. **2026-09-08부터 실제로 정식 사전을 쓴다** --
+그전까지는 파일이 없어 코드 내장 축약 서브셋으로 돌고 있었다(7장 17번 (d)).
 
 ---
 
@@ -134,7 +135,7 @@ AV 자체 감성 점수는 산출 방식이 비공개라 보조 지표로만 저
 
 | 항목 | 상태 |
 |---|---|
-| 파이프라인 | 완료. 오프라인 테스트 **12종** 통과 |
+| 파이프라인 | 완료. 오프라인 테스트 **13종** 통과 |
 | 도메인 + SSL | 완료. canonical·sitemap.xml·rss 실측 정상 |
 | `.env` — FRED, Alpha Vantage, SEC_USER_AGENT, OPENAI_API_KEY | 설정됨 |
 | `.env` — GA4 Data API, AdSense OAuth | 미설정 (CSV 폴백으로 동작) |
@@ -220,6 +221,7 @@ scripts/
   check_site.py     스킨 수정 후. 배포된 HTML로 측정 설치 검증
   check_freshness.py 매일 루틴 0단계. 기록이 마지막 거래일보다 뒤처졌는지 (7장 16번)
   restore_live_snapshots.py  git 이력에서 과거 세션의 live 스냅샷 소급 복원 (7장 17번)
+  fetch_lm_dictionary.py     정식 LM 사전 수신 + 해시 기록 (파일은 커밋 안 함)
   diagnose_news.py  뉴스 태깅 진단 (relevance 임계값·미설명 원인 분해)
   make_notice.py    방법론 공지글 패키지 (원본: docs/METHODOLOGY.md)
 
@@ -559,7 +561,48 @@ docs/SESSION_GAPS.md      세션 누락 감지·복구 설계 (7장 16번). 구�
       `fetch_news` 가 지원해도 `run_daily.collect` 가 안 넘기면 소용없으므로
       collect를 실제로 호출해 인자를 확인한다
 
-    남은 것은 (c) → (d).
+    **진행: (c)(d) 완료 (2026-09-08).**
+
+    **(c) 수집 출처.** 뉴스 행에 `collected_at_utc`·`provider`·`provider_query` 를
+    넣었다. `published_at`(기사가 언제 나왔나)과 `collected_at_utc`(우리가 언제
+    알았나)는 다르고, "이게 t 시점에 쓸 수 있던 신호인가"에 답하는 건 후자다.
+    - **`storage.upsert` 에 `keep_first` 를 추가했다.** 기본 `keep="last"` 는
+      사후 수정을 흡수하려는 설계인데 수집 시각에는 정반대로 작용한다 --
+      같은 기사를 다시 받으면 재수집 시각으로 덮여 증거가 사라진다
+    - freeze manifest에 `news_provenance`(제공자별 건수, 수집 시각 min/max,
+      미기록 수)를 함께 남긴다. **창보다 한참 뒤에 수집된 기사가 많으면 소급 실행이다**
+    - 이미 쌓인 4만 행에는 이 열이 없다. 없는 값을 지어내지 않고 비워 둔다
+
+    **(d) 정식 LM 사전.** `scripts/fetch_lm_dictionary.py` 로 받는다.
+    86,553단어(부정 2,345 · 긍정 347 · 불확실 297). 내장 서브셋은 부정 약 90단어였다.
+    - **파일은 커밋하지 않는다.** SRAF 배포물이고 이 레포는 public이다. 대신
+      `data/lm_dictionary.meta.json`(출처·수신시각·sha256·단어수)을 커밋해 재현
+      가능하게 둔다. `--check` 로 해시를 대조한다
+    - **CI에도 확보 단계를 넣었다.** 안 넣으면 Actions만 서브셋으로 점수를 매겨
+      로컬과 다른 결과가 나온다. `actions/cache` 키를 meta.json 해시로 잡아
+      사전이 바뀌면 자동 갱신된다. 실패해도 파이프라인은 죽지 않고 경고만 낸다
+    - freeze manifest에 `sentiment_dictionary`(source·해시·단어수)를 남긴다
+
+    **두 사전은 호환되지 않는다. 실측(40,407건):**
+
+    | | 비영 점수 비율 | 평균 tone | 표준편차 |
+    |---|---|---|---|
+    | 정식 LM | 62.8% | +0.0672 | 0.2324 |
+    | 내장 서브셋 | 64.1% | +0.1305 | 0.2591 |
+
+    상관 **0.609**, 둘 다 비영인 20,401건 중 **부호 반전 10.8%**,
+    서브셋이 0인데 정식은 비영인 경우 12.3%. **2026-09-08 이전 감성 점수와
+    이후 점수를 같은 척도로 이어 붙이면 안 된다.** live 스냅샷은 각자 그 시점
+    사전으로 매긴 값을 유지하고 manifest가 어느 쪽인지 말해 준다.
+    latest 층 전량 재스코어링은 하지 않았다 -- 그 자체가 기록을 덮는 행위다.
+
+    **LM의 성질 하나를 알고 쓸 것.** 긍정 목록이 347단어로 좁고 공시 문서 어휘에
+    맞춰져 있다. `profit`·`record`·`beat`·`surge`·`growth` 가 **긍정이 아니고**,
+    `risk` 는 부정이 아니라 불확실 목록에 있다. `tests/test_pipeline.py` 의
+    감성 테스트가 사전 교체 때 실제로 깨져서 알았다. tone 지표는 긍정 쪽 민감도가
+    낮다 -- 버그가 아니라 성질이다.
+
+    남은 것: 없음. 다음은 2단계 분석(11~15번)과 16번의 남은 갭 2건.
 
     부수 효과 하나. live 층을 **세션별 새 경로에 추가**하면 커밋이 append-only가
     되어 로컬·Actions 동시 실행 시의 parquet 바이너리 충돌이 원리적으로 사라진다.

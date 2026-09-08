@@ -22,6 +22,10 @@ log = logging.getLogger(__name__)
 NEWS_COLS = [
     "id", "published_at", "date", "source", "headline", "summary", "url",
     "tickers", "topic", "sentiment", "novelty",
+    # 수집 출처(provenance). published_at 과 전혀 다른 것을 담는다 --
+    # 기사가 언제 나왔나(published)와 우리가 언제 그걸 알았나(collected)는
+    # 다르고, 신호가 실시간이었음을 보이려면 후자가 필요하다.
+    "collected_at_utc", "provider", "provider_query",
 ]
 
 
@@ -63,6 +67,7 @@ def fetch_rss(feeds: Iterable[dict], limit_per_feed: int = 120,
             r = requests.get(url, headers={"User-Agent": ua}, timeout=25)
             r.raise_for_status()
             parsed = feedparser.parse(r.content)
+            collected_at = pd.Timestamp.now(tz="UTC")
         except Exception as e:
             log.warning("RSS %s 수집 실패: %s", name, e)
             continue
@@ -88,6 +93,9 @@ def fetch_rss(feeds: Iterable[dict], limit_per_feed: int = 120,
                     "headline": headline,
                     "summary": _clean(e.get("summary"))[:600],
                     "url": link,
+                    "collected_at_utc": collected_at,
+                    "provider": "rss",
+                    "provider_query": url,
                 }
             )
         time.sleep(0.2)
@@ -108,6 +116,7 @@ def fetch_edgar(forms: Iterable[str], user_agent: str, count: int = 100) -> pd.D
         try:
             r = requests.get(url, headers={"User-Agent": user_agent}, timeout=25)
             r.raise_for_status()
+            collected_at = pd.Timestamp.now(tz="UTC")
         except Exception as e:
             log.warning("EDGAR %s 실패: %s", form, e)
             continue
@@ -131,6 +140,9 @@ def fetch_edgar(forms: Iterable[str], user_agent: str, count: int = 100) -> pd.D
                     "headline": title,
                     "summary": _clean(e.get("summary"))[:400],
                     "url": link,
+                    "collected_at_utc": collected_at,
+                    "provider": "edgar",
+                    "provider_query": form,
                 }
             )
         time.sleep(0.35)  # SEC 권고 10 req/s 보다 훨씬 보수적으로

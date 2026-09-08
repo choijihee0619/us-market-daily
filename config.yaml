@@ -122,6 +122,17 @@ sentiment:
   novelty_window: 5          # 최근 N일 헤드라인과의 최대 유사도로 novelty 산출
   novelty_threshold: 0.85    # 이 이상이면 재탕 기사로 간주해 가중 축소
 
+  # 정식 Loughran-McDonald 마스터 사전. 파일이 없으면 sentiment.py 가 코드 내장
+  # 축약 서브셋으로 내려간다(경고를 찍는다). 실측 결과 둘은 호환되지 않는다 --
+  # 40,407건 기준 상관 0.609, 둘 다 비영인 20,401건 중 부호 반전 10.8%.
+  #   받기: python scripts/fetch_lm_dictionary.py
+  #   확인: python scripts/fetch_lm_dictionary.py --check
+  # 파일 자체는 SRAF 배포물이라 재배포하지 않는다(.gitignore). 대신
+  # data/lm_dictionary.meta.json 에 출처·sha256·단어수를 남겨 재현 가능하게 둔다.
+  # Drive 링크가 바뀌면 아래에 새 ID나 직접 URL을 적는다(비우면 스크립트 기본값).
+  lm_file_id: ""
+  lm_dictionary_url: ""
+
 llm:
   # 2026-07-30 rule -> openai. 룰베이스로 파이프라인을 먼저 검증한 뒤 바꾼다는
   # 설계 순서를 지켰고, 그 과정에서 무증상 버그 5건을 찾았다(CLAUDE.md 4장).

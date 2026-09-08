@@ -17,3 +17,8 @@ out/*/images/
 # 데이터는 커밋한다 (재현성 + 공개 데이터셋 컨셉)
 # 단 용량이 커지면 아래 주석 해제하고 Git LFS 또는 릴리즈 첨부로 전환
 # data/*.parquet
+
+# Loughran-McDonald 정식 사전. SRAF 배포물이라 public 레포에 재배포하지 않는다.
+# 대신 data/lm_dictionary.meta.json (출처·sha256·단어수)을 커밋해 재현 가능하게 둔다.
+#   받기: python scripts/fetch_lm_dictionary.py
+data/lm_dictionary.csv

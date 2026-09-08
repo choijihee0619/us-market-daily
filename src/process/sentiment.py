@@ -11,6 +11,7 @@ data/lm_dictionary.csv 로 두면 자동으로 우선 사용한다.
 """
 from __future__ import annotations
 
+import json
 import logging
 import math
 import re
@@ -80,6 +81,35 @@ def _load_lm_dictionary() -> tuple[set[str], set[str], set[str]] | None:
 
 _loaded = _load_lm_dictionary()
 NEG, POS, UNC = _loaded if _loaded else (set(_NEG), set(_POS), set(_UNCERTAIN))
+DICT_SOURCE = "lm_master" if _loaded else "builtin_subset"
+
+if not _loaded:
+    # 조용히 내려가지 않는다. 서브셋(부정 ~90단어)과 정식 사전(부정 2,345단어)은
+    # 규모가 25배 다르고, README·CLAUDE.md는 "Loughran-McDonald 사전"이라고
+    # 적어 왔다. 어느 쪽으로 돌고 있는지는 반드시 보여야 한다.
+    log.warning("LM 정식 사전 없음 -- 코드 내장 축약 서브셋으로 점수를 매긴다 "
+                "(neg=%d pos=%d). 받으려면: python scripts/fetch_lm_dictionary.py",
+                len(NEG), len(POS))
+
+
+def dictionary_info() -> dict:
+    """지금 쓰는 사전의 신원. freeze manifest에 함께 남긴다.
+
+    사전이 바뀌면 감성 점수의 척도가 바뀐다. 어떤 스냅샷이 어떤 사전으로 매겨졌는지
+    남기지 않으면 나중에 시계열을 이어 붙일 때 구간을 구분할 수 없다.
+    """
+    info = {"source": DICT_SOURCE, "negative": len(NEG), "positive": len(POS),
+            "uncertainty": len(UNC)}
+    meta = DATA_DIR / "lm_dictionary.meta.json"
+    if DICT_SOURCE == "lm_master" and meta.exists():
+        try:
+            m = json.loads(meta.read_text(encoding="utf-8"))
+            info["sha256"] = m.get("sha256")
+            info["downloaded_at_utc"] = m.get("downloaded_at_utc")
+            info["rows"] = m.get("rows")
+        except Exception:                                  # pragma: no cover
+            pass
+    return info
 
 
 def score_text(text: str) -> dict[str, float]:

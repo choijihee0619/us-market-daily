@@ -122,6 +122,9 @@ def fetch_news(
             log.warning("AV 오류: %s", js["Error Message"])
             continue
 
+        # 응답을 받은 시각. 기사 발행 시각(published_at)과 전혀 다른 것이고,
+        # "그 기사가 신호 생성 시점에 실제로 데이터셋 안에 있었나"는 이쪽이 답한다.
+        collected_at = pd.Timestamp.now(tz="UTC")
         feed = js.get("feed", [])
         log.info("AV %s -> %d건 (호출 %d/%d)", topics, len(feed), calls, len(batches))
         # 반환 건수가 limit과 같으면 **잘린 것이다.** sort=LATEST라 창의 뒷부분만
@@ -171,6 +174,9 @@ def fetch_news(
                 "av_relevance": rel,
                 "av_topics": sorted(set(av_topics)),
                 "av_topics_raw": sorted(set(raw_topics)),
+                "collected_at_utc": collected_at,
+                "provider": "alphavantage",
+                "provider_query": topics,
             })
 
         time.sleep(13)  # 분당 5요청 제한 -> 12초 이상 간격

@@ -79,8 +79,21 @@ def test_residual_recovers_beta():
 
 
 def test_sentiment():
-    # LM 사전이 금융 문맥을 제대로 잡는지
-    assert S.score_text("Company posts record profit, raises guidance")["tone"] > 0
+    """LM 사전이 금융 문맥을 제대로 잡는지.
+
+    **두 사전 어느 쪽이 로드돼도 통과해야 한다.** 정식 LM 마스터 사전은
+    `data/lm_dictionary.csv` 가 있을 때만 쓰이고, 없으면 코드 내장 축약 서브셋으로
+    내려간다(경고를 찍는다). 그래서 여기 쓰는 단어는 양쪽에 다 있는 것으로 고른다.
+
+    이 테스트는 사전 교체(2026-09-08) 때 실제로 깨졌다. 원래 문장이
+    "Company posts record profit, raises guidance" 였는데 **정식 LM에서는
+    profit·record·raises가 전부 긍정 단어가 아니다.** LM의 긍정 목록은 347단어로
+    좁고(부정은 2,345단어) 시장 저널리즘 어휘가 아니라 공시 문서 어휘에 맞춰져
+    있다. surge·beat·growth도 긍정이 아니고, 반대로 risk는 부정이 아니라
+    불확실(uncertainty) 목록에 있다. **이 비대칭은 버그가 아니라 LM의 성질이다** --
+    tone 지표를 해석할 때 긍정 쪽 민감도가 낮다는 걸 감안해야 한다.
+    """
+    assert S.score_text("Shares gain on strong and improved outlook")["tone"] > 0
     assert S.score_text("Firm warns of losses, cuts outlook after probe")["tone"] < 0
     # 부정어 뒤집기
     assert S.score_text("results were not strong")["tone"] <= 0

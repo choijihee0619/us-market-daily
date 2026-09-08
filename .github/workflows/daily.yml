@@ -62,6 +62,27 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # 정식 Loughran-McDonald 사전은 SRAF 배포물이라 레포에 넣지 않는다.
+      # 여기서 확보하지 않으면 CI만 코드 내장 축약 서브셋으로 점수를 매기게 되고
+      # (실측 상관 0.609, 부호 반전 10.8%) 로컬과 다른 결과가 나온다.
+      # 캐시 키는 data/lm_dictionary.meta.json 의 해시라 사전이 바뀌면 자동 갱신된다.
+      - name: LM 사전 캐시
+        uses: actions/cache@v4
+        with:
+          path: data/lm_dictionary.csv
+          key: lm-dict-${{ hashFiles('data/lm_dictionary.meta.json') }}
+
+      - name: LM 사전 확보
+        run: |
+          if python scripts/fetch_lm_dictionary.py --check; then
+            echo "캐시 적중"
+          elif python scripts/fetch_lm_dictionary.py; then
+            echo "내려받음"
+          else
+            echo "::warning::LM 사전 확보 실패 -- 내장 축약 서브셋으로 진행한다. \
+            freeze manifest의 sentiment_dictionary.source 로 확인할 것"
+          fi
+
       - name: 마감 완료 여부 확인
         id: gate
         run: |

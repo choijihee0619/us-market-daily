@@ -1,0 +1,15 @@
+{
+ "bytes": 9093460,
+ "downloaded_at_utc": "2026-09-08T10:17:20+00:00",
+ "litigious": 903,
+ "negative": 2345,
+ "note": "파일 자체는 재배포하지 않는다(.gitignore). 재현하려면 이 스크립트를 돌려 같은 sha256이 나오는지 확인할 것.",
+ "positive": 347,
+ "rows": 86553,
+ "sha256": "e2d1328682bab7d2187684fb9f5420bb730401c9eefc00daf835edd203f4859d",
+ "source_page": "https://sraf.nd.edu/loughranmcdonald-master-dictionary/",
+ "source_url": "https://drive.google.com/file/d/1iq2RUf8qGFEAk1g8wQntP3habOnR3fXF/view",
+ "strong_modal": 19,
+ "uncertainty": 297,
+ "weak_modal": 27
+}

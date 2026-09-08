@@ -21,7 +21,7 @@
 
 | 항목 | 상태 |
 |---|---|
-| 파이프라인 | 동작. 오프라인 테스트 12종 통과 |
+| 파이프라인 | 동작. 오프라인 테스트 13종 통과 |
 | OOS 기록 보전 | `data/live/{세션}/` 불변 스냅샷 + 재실행 가드. 과거 25세션 소급 복원 완료 (2026-09-08) |
 | 데이터 | 가격 525종목 179,991행 (2025-03~2026-07) + 매크로·팩터·뉴스 |
 | 자동화 | GitHub Actions 일간/주간 cron 동작 확인 |
@@ -336,6 +336,7 @@ scripts/
 ├── run_analytics.py      주 1회. 유입 분석
 ├── check_site.py         배포된 HTML로 측정 설치 검증
 ├── restore_live_snapshots.py  git 이력에서 과거 세션 스냅샷 소급 복원
+├── fetch_lm_dictionary.py     정식 LM 감성사전 수신 (파일은 커밋 안 함)
 ├── diagnose_news.py      뉴스 태깅 진단
 └── make_notice.py        고정 페이지 패키지
 
