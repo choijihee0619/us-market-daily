@@ -14,6 +14,11 @@ import pandas as pd
 log = logging.getLogger(__name__)
 
 
+# 직전 관측치와 이만큼 넘게 떨어져 있으면 그 수익률은 1일치가 아니다.
+# 금->월 3일, 연휴가 끼면 4~5일. 그 위는 데이터 공백으로 본다.
+MAX_RET_GAP_DAYS = 5
+
+
 def fetch_prices(tickers: Iterable[str], start: str, end: str) -> pd.DataFrame:
     """long-format: date, ticker, close, adj_close, volume, ret"""
     import yfinance as yf
@@ -57,10 +62,29 @@ def fetch_prices(tickers: Iterable[str], start: str, end: str) -> pd.DataFrame:
     df["adj_close"] = df["adj_close"].fillna(df["close"])
 
     df = df.sort_values(["ticker", "date"])
+
+    # **순서가 중요하다. dropna가 pct_change보다 먼저 와야 한다.**
+    # yf.download는 여러 티커를 한 번에 받으면 인덱스를 합집합으로 만든다.
+    # signals.yahoo_signals의 BTC-USD가 토·일에도 거래하므로 주말 행이 생기고
+    # 주식은 그 행이 NaN이 된다. 그 상태로 pct_change를 돌리면 **월요일 수익률이
+    # 직전 행(일요일 NaN)과 비교되어 전부 NaN이 된다.** 그리고 뒤이은 dropna가
+    # 주말 행을 지워 증거까지 없앤다.
+    #
+    # 실측(2026-09-08): SPY의 월요일 행 72개 전부 ret이 NaN이었다. 가격 확정
+    # 게이트가 기준지수 ret으로 판정하므로 월요일 세션이 구조적으로 버려졌고
+    # (2026-08-10·17·24가 그렇게 사라졌다), 베타 추정창에서도 월요일이 빠졌다.
+    # 18개월간 무증상이었다.
+    df = df.dropna(subset=["adj_close"])
     df["ret"] = df.groupby("ticker")["adj_close"].pct_change()
+
+    # 행이 실제로 빠진 구간(상장 정지, 데이터 공백)에서 다일 수익률이 1일치로
+    # 둔갑하지 않게 자른다. 금->월이 3일, 연휴가 끼면 4~5일이라 그 위를 자른다.
+    gap_days = df.groupby("ticker")["date"].diff().dt.days
+    df.loc[gap_days > MAX_RET_GAP_DAYS, "ret"] = np.nan
+
     # 분할 누락 등으로 생기는 비현실적 점프 제거 (±50% 초과 일간)
     df.loc[df["ret"].abs() > 0.5, "ret"] = np.nan
-    return df.dropna(subset=["adj_close"]).reset_index(drop=True)
+    return df.reset_index(drop=True)
 
 
 def sp500_constituents() -> pd.DataFrame:

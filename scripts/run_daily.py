@@ -75,7 +75,12 @@ def resolve_universe(cfg) -> pd.DataFrame:
     return u
 
 
-def collect(cfg, session: pd.Timestamp, lookback_days: int) -> None:
+def collect(cfg, session: pd.Timestamp, lookback_days: int, skip_news: bool = False) -> None:
+    """수집. skip_news=True 면 뉴스 단계를 건너뛴다.
+
+    가격 재적재(월요일 수익률 버그 복구 등) 때 뉴스까지 부르면 AV 무료 한도
+    25요청/일을 헛되이 쓴다. 그 경우 --backfill --prices-only 로 부른다.
+    """
     universe = resolve_universe(cfg)
     names = list(universe["ticker"]) if not universe.empty else []
     names = names[: int(cfg.get_path("universe.max_names", 500))]
@@ -107,6 +112,10 @@ def collect(cfg, session: pd.Timestamp, lookback_days: int) -> None:
         fac = fac[pd.to_datetime(fac["date"]) >= pd.Timestamp(start)]
         storage.upsert("factors", fac, ["date"])
         log.info("factors 저장 %d행 (french=%d)", len(fac), len(french))
+
+    if skip_news:
+        log.info("뉴스 수집 건너뜀 (--prices-only)")
+        return
 
     providers = list(cfg.get_path("news.providers", ["rss"]))
     win_start, _ = news_window(session)
@@ -330,6 +339,9 @@ def main() -> int:
     ap.add_argument("--session", help="YYYY-MM-DD (ET 기준 거래일)")
     ap.add_argument("--lookback", type=int, default=420, help="가격 수집 소급 일수")
     ap.add_argument("--backfill", type=int, default=0, help="수집만 하고 리포트는 건너뜀")
+    ap.add_argument("--prices-only", action="store_true",
+                    help="--backfill 과 함께. 가격·매크로·팩터만 받고 뉴스는 건너뛴다 "
+                         "(AV 무료 한도를 쓰지 않는다)")
     ap.add_argument("--dry-run", action="store_true", help="외부 수집 없이 저장 데이터로만 생성")
     ap.add_argument("--force", action="store_true",
                     help="이미 freeze된 세션을 다시 처리한다. live 스냅샷은 그대로 둔다")
@@ -348,7 +360,7 @@ def main() -> int:
     log.info("대상 거래일: %s (%s)", session.date(), "EDT" if is_dst_in_us(session) else "EST")
 
     if args.backfill:
-        collect(cfg, session, args.backfill)
+        collect(cfg, session, args.backfill, skip_news=args.prices_only)
         print(storage.summary().to_string(index=False))
         return 0
 
