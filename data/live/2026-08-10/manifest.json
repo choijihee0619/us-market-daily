@@ -1,0 +1,49 @@
+{
+ "config_sha1": "da8d234b40d22dbf",
+ "frozen_at_utc": "2026-09-08T08:04:30+00:00",
+ "git_dirty": true,
+ "git_sha": "8e0c846",
+ "github_run_attempt": null,
+ "github_run_id": null,
+ "meta": {
+  "av_relevance_min": 0.25,
+  "beta_window": 250,
+  "channels": [
+   "github"
+  ],
+  "dry_run": false,
+  "llm_classify_model": "gpt-4o-mini",
+  "llm_provider": "openai",
+  "llm_write_model": "gpt-4o",
+  "novelty_threshold": 0.85,
+  "risk_model": "ff5_umd"
+ },
+ "news_window_utc": [
+  "2026-08-07 20:00:00+00:00",
+  "2026-08-10 20:00:00+00:00"
+ ],
+ "provenance": "late",
+ "rows": {
+  "news": 2152,
+  "residuals": 522,
+  "signals": 1676
+ },
+ "runner": "local",
+ "schema_version": 1,
+ "scorecard": {
+  "available": true,
+  "bottom_resid_bp": -30.39466519608148,
+  "hit": false,
+  "n": 139,
+  "n_bottom": 28,
+  "n_top": 28,
+  "spread_bp": -3.205669859805728,
+  "top_resid_bp": -33.60033505588721
+ },
+ "session": "2026-08-10",
+ "tables": {
+  "news": "세션 창 안의 기사. 감성·novelty·토픽이 그날 계산된 값 그대로다",
+  "residuals": "팩터 회귀 잔차. 이 세션의 행만",
+  "signals": "종목별 일간 집계 신호. 이 세션의 행만"
+ }
+}
