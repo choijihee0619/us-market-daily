@@ -13,10 +13,10 @@
 
 ■ 실적  기사 1069건 (전체의 84%)
    → 개별 기업 고유의 재료다. 그날 그 종목만 크게 움직이는 대표적 이유
-   · These stocks in the red-hot healthcare sector have gotten too crowded to o  [GEHC, MDT]
    · This subtle Microsoft change could be a big win for investors  [MSFT, TECH]
+   · Amgen (AMGN) Says Repatha Reduced Mortality Before a First Heart Attack or  [AMGN, COIN, GS]
 
-■ M&A  기사 79건 (전체의 6%)
+■ M&A  기사 80건 (전체의 6%)
    → 인수 대상 기업은 프리미엄이, 인수 기업은 부담이 반영되는 경향이 있다
    · Gilinski family moves to take control of GeoPark after rights secured to V  [CVX, GPRK]
    · Realty Income's Growth Continues To Be Driven by Spending Billions on Acqu  [O]
@@ -26,14 +26,14 @@
    · SanDisk Rises 8%, Micron Gains 5%: Is the NAND Pricing Cycle Still Acceler  [CBOE, MU, WDC]
    · Final Trades: FTAI Aviation, KLA Corp, Nvidia and Oracle  [KLAC, NVDA, ORCL]
 
-■ 고용  기사 7건 (전체의 1%)
+■ 고용  기사 5건 (전체의 0%)
    → 고용은 연준이 가장 무겁게 보는 지표다
    · Coca-Cola UNITED says $350M Birmingham campus exceeds original investment,  [KO]
 
-■ 규제정책  기사 4건 (전체의 0%)
+■ 규제정책  기사 5건 (전체의 0%)
    → 관세·소송·제재는 산업 전체에 동시에 걸린다
    · Federal Regulators Open Investigation After Tesla Launches Car With No Ste  [AMZN, COIN, TSLA]
-   · Boeing pays $3.1M fine over safety violations  [BA]
+   · Honolulu planning panel delays Amazon height increase decision for Kapolei  [AMZN]
 
 ────────────────────────
 2. 뉴스가 있었던 종목
@@ -88,7 +88,7 @@
 4. 오늘의 정리
 ────────────────────────
 
-오늘의 미국 증시 뉴스는 주로 실적에 몰렸습니다. 이는 기업의 성과가 시장 전반에 영향을 줄 수 있는 중요한 주제로, 여러 기업의 주가 변동을 유도했습니다. 특히 GE헬스케어, 마이크로소프트, 루루레몬과 같은 기업들이 주목을 받았으며, 각각의 실적 혹은 관련 소식에 많은 관심이 쏠렸습니다. 움직임이 있었으나 보도를 찾지 못한 종목은 뉴스가 없었다는 뜻이 아니라 수집 범위 밖이었습니다.
+오늘의 미국 시장 뉴스는 주로 '실적'이 중심이었습니다. 이는 기업의 성과와 관련된 보도가 많아 시장 전반에 걸쳐 영향을 미쳤습니다. 매칭되지 않은 Idexx Laboratories와 Best Buy 같은 종목의 정보는 수집 범위 밖의 뉴스일 수 있으니 주의 바랍니다. 개별 기업에 대한 움직임은 별도로 분석될 필요가 있습니다.
 
 ────────────────────────
 

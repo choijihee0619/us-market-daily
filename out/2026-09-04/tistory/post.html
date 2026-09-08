@@ -41,21 +41,21 @@
 <p style="margin:24px 0;text-align:center;"><img src="https://raw.githubusercontent.com/choijihee0619/us-market-daily/main/assets/2026-09-04/02_factors.png" alt="" style="max-width:100%;height:auto;border-radius:4px;"></p>
 <h2 id="m2" style="font-size:21px;font-weight:700;margin:44px 0 14px;padding-bottom:9px;border-bottom:2px solid #24292f;">2. 무엇이 설명했나</h2>
 <p style="margin:14px 0;"><span style="color:#888;font-size:13px;">개별 종목의 등락은 대부분 '그 종목 고유의 사건'이 아니라 시장 전체·규모·가치·모멘텀 같은 <b>공통 요인(팩터)</b> 에 대한 노출로 설명된다. 이 블록은 그 공통 요인이 그날 얼마나 움직였는지를 먼저 본다.</span></p>
-<p style="margin:14px 0;">모멘텀 팩터는 +2.20%로 모멘텀이 강하게 작용한 날이었다. 이는 최근 상승세가 지속된 종목들이 있음을 의미한다. 반면 시장 전체 초과수익은 -0.39%로, 전체 시장의 분위기는 하락세였다. 가치 팩터는 +1.19%로, 이 날은 저평가주가 상대적으로 좋은 성과를 보였다. 반면, 규모 팩터는 +0.66%로 소형주가 대형주에 비해 더 나은 수익을 기록했음을 보여준다.</p>
-<p style="margin:14px 0;">섹터별로 보면 정보기술(0.70%) 섹터가 상대적으로 양호한 성과를 보였으며, 반대로 경기소비재(-1.33%)와 커뮤니케이션(-1.19%)은 상대적으로 부진했다. 개별 종목 잔차를 보면, Franklin Resources(금융)와 Best Buy(경기소비재) 같은 종목들이 상대적으로 높은 잔차를 보였는데, 이는 팩터로 설명되지 않는 주가 상승분을 포함하고 있음을 시사한다. 반면, Lululemon Athletica(경기소비재)와 Fair Isaac(정보기술)은 부진했던 종목으로 기록됐다.</p>
-<p style="margin:14px 0;">토픽 회귀분석에서 in-sample R²는 1.16%로 매우 낮아, 해당 주가 움직임들을 설명하기 어려웠다. 다만, M&A 관련 뉴스가 음의 계수를 보여주는 등 특이성을 보였으나, 이는 유의성 검정을 하지 않아 참고용으로 봐야 한다. 이날의 시장 움직임은 주로 모멘텀과 개별 종목 이슈에 의해 설명된 것으로 볼 수 있다.</p>
+<p style="margin:14px 0;">모멘텀 팩터가 2.20%로 가장 크게 움직였다. 이는 최근 12개월 동안 상승률이 높은 종목들이 이날 더 상승했으며, 추세가 강화되는 방향으로 움직였음을 의미한다. 반면, 시장 전체 초과수익은 약간의 하락세를 보였고, 소형주가 대형주보다 상대적으로 강한 모습을 보였다. 가치주는 성장주에 비해 더 강세였고, 이는 투자자들이 저평가된 종목을 선호했음을 시사한다.</p>
+<p style="margin:14px 0;">섹터별로는 정보기술이 소폭 상승했으며, 경기소비재와 커뮤니케이션 섹터는 상대적으로 큰 하락폭을 기록했다. 특히 경기소비재 섹터는 1.33% 하락하며, 가장 큰 약세를 보인 섹터였다. 개별 종목으로는 경기소비재에 속한 Best Buy와 Aptiv가 각각 3.18%와 3.05% 상승했다. 이는 경기소비재 섹터 전반의 하락에도 불구하고 이 종목들이 강한 잔차 수익률을 보였음을 뜻한다. 반면 Lululemon Athletica는 경기소비재 내에서 크게 하락하며 -13.81%의 잔차를 기록했다.</p>
+<p style="margin:14px 0;">주제 회귀 분석에서는 규제정책, 소비, 통화정책이 긍정적인 계수를 보였다. M&A가 -166.63으로 가장 부정적인 영향을 미쳤다. 전체적으로 주제 계수의 R²는 1.18%로, in-sample이며 유의성 검정을 하지 않은 상태에서는 해석에 주의가 필요하다. 이는 여러 요인 중 일부가 종목 수익 변동에 기여했으나, 설명되지 않은 움직임도 상당했음을 시사한다.</p>
 <p style="margin:14px 0;"><span style="color:#888;font-size:13px;"><b>모멘텀(UMD) +2.20%</b> — 최근 약 1년간 많이 오른 종목을 사고 많이 내린 종목을 파는 가상 포트폴리오의 그날 수익률이다. <b>양(+)이다. 오르던 종목이 그날도 더 올랐다는 뜻이다(추세 지속). 최근 상승 종목에 몰려 있던 자금에 유리했던 날이다.</b> 이 팩터를 모형에 넣지 않으면 이 움직임이 잔차에 남아 뉴스 효과로 오인된다.</span></p>
 <p style="margin:14px 0;">아래는 <b>팩터로 설명되지 않고 남은 부분(잔차)</b> 을 뉴스 토픽 노출로 회귀한 결과다. 계수가 +면 그날 그 토픽에 노출된 종목들의 잔차가 평균적으로 높았다는 뜻이고, 인과관계가 아니라 같은 날 함께 나타난 연관이다.</p>
 <table style="border-collapse:collapse;width:100%;font-size:15px;margin:16px 0;"><tbody>
 <tr><th style="border:1px solid #d8dade;padding:9px 12px;background:#f6f7f9;font-weight:600;text-align:left;">토픽</th><th style="border:1px solid #d8dade;padding:9px 12px;background:#f6f7f9;font-weight:600;text-align:left;">계수 (bp)</th></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">M&A</td><td style="border:1px solid #d8dade;padding:9px 12px;">-167.0</td></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">규제정책</td><td style="border:1px solid #d8dade;padding:9px 12px;">+72.6</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">M&A</td><td style="border:1px solid #d8dade;padding:9px 12px;">-166.6</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">규제정책</td><td style="border:1px solid #d8dade;padding:9px 12px;">+72.7</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">AI/데이터센터투자</td><td style="border:1px solid #d8dade;padding:9px 12px;">-30.8</td></tr>
 <tr><td style="border:1px solid #d8dade;padding:9px 12px;">에너지</td><td style="border:1px solid #d8dade;padding:9px 12px;">-30.7</td></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">통화정책</td><td style="border:1px solid #d8dade;padding:9px 12px;">+27.6</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">통화정책</td><td style="border:1px solid #d8dade;padding:9px 12px;">+28.3</td></tr>
 <tr><td style="border:1px solid #d8dade;padding:9px 12px;">소비</td><td style="border:1px solid #d8dade;padding:9px 12px;">+26.9</td></tr>
 <tr><td style="border:1px solid #d8dade;padding:9px 12px;">가이던스</td><td style="border:1px solid #d8dade;padding:9px 12px;">+14.2</td></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">AI/데이터센터투자</td><td style="border:1px solid #d8dade;padding:9px 12px;">+11.2</td></tr>
-<tr><td style="border:1px solid #d8dade;padding:9px 12px;">실적</td><td style="border:1px solid #d8dade;padding:9px 12px;">+4.4</td></tr>
+<tr><td style="border:1px solid #d8dade;padding:9px 12px;">실적</td><td style="border:1px solid #d8dade;padding:9px 12px;">+4.5</td></tr>
 </tbody></table>
 <p style="margin:14px 0;">n=319, R²=1.2%. R²는 잔차 횡단면 분산 중 토픽이 설명한 비중이다 — 나머지 99%는 이 토픽 집합으로 설명되지 않았다. 표준오차는 보고하지 않는다. 잔차가 추정된 베타에서 나온 generated regressand라 2단계 추정오차가 반영되지 않았기 때문이다. 계수는 방향성 참고용이다.</p>
 <p style="margin:24px 0;text-align:center;"><img src="https://raw.githubusercontent.com/choijihee0619/us-market-daily/main/assets/2026-09-04/03_macro.png" alt="" style="max-width:100%;height:auto;border-radius:4px;"></p>
@@ -95,9 +95,9 @@
 <p style="margin:14px 0;"><span style="color:#888;font-size:13px;">일정은 FRED 릴리스 캘린더 기준이며 시각은 지표마다 다르다. 컨센서스(시장 예상치)는 무료 소스로 확보되지 않아 싣지 않는다.</span></p>
 <p style="margin:14px 0;"><span style="color:#888;font-size:13px;">본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다. 특정 종목의 매수·매도를 권유하지 않으며, 필자는 언급된 종목을 보유하고 있을 수 있습니다. 모든 수치는 발행 시점 기준이며 사후 수정될 수 있습니다.</span></p>
 <p style="margin:14px 0;">데이터 출처: Yahoo Finance · FRED (St. Louis Fed) · Kenneth R. French Data Library · SEC EDGAR</p>
-<p style="margin:14px 0;">생성 커밋: <code style="background:#f4f4f6;padding:1px 5px;border-radius:3px;font-size:13px;">3d3f52c</code></p>
+<p style="margin:14px 0;">생성 커밋: <code style="background:#f4f4f6;padding:1px 5px;border-radius:3px;font-size:13px;">dc4ff9f</code></p>
 <div style="margin-top:46px;padding-top:20px;border-top:1px solid #e4e6ea;font-size:13px;color:#6e7781;line-height:1.75;">
-<p style="margin:5px 0;">이 글을 생성한 코드와 원본 데이터: <a href="https://github.com/choijihee0619/us-market-daily/commit/3d3f52c" style="color:#0969da;">GitHub</a></p>
+<p style="margin:5px 0;">이 글을 생성한 코드와 원본 데이터: <a href="https://github.com/choijihee0619/us-market-daily/commit/dc4ff9f" style="color:#0969da;">GitHub</a></p>
 <p style="margin:5px 0;">본 글은 공개 데이터를 자동 수집·분석한 연구 기록이며 투자자문이 아닙니다. 특정 종목의 매수·매도를 권유하지 않으며, 필자는 언급된 종목을 보유하고 있을 수 있습니다.</p>
 <p style="margin:5px 0;">대상 거래일 2026-09-04 (ET)</p>
 </div></div>
