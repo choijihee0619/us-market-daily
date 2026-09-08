@@ -394,6 +394,12 @@ def main() -> int:
     # 숫자형 주소는 발행 시점에 URL이 정해지므로 여기서는 만들 수 없다.
     # 이미 기록된 게 있으면(재실행) 그걸 쓰고, 없으면 None으로 두고
     # 발행 후 scripts/link_post.py 가 소급 채운다.
+    # 붙여넣기 채널이 하나라도 켜져 있을 때만 발행 관련 안내를 낸다.
+    # 2026-09-08 발행 중단 이후 canonical은 영구히 None이므로, 안내를 그대로
+    # 두면 "발행 후 link_post.py 를 실행하라"는 지시가 매일 로그에 쌓인다.
+    channels = list(cfg.get_path("report.channels", ["github", "tistory", "naver"]))
+    publishing = bool({"tistory", "naver"} & set(channels))
+
     site = str(cfg.get_path("report.site_url", "") or "").rstrip("/")
     site = site if site and "example.com" not in site else ""
     mode = str(cfg.get_path("report.post_url_mode", "numeric")).lower()
@@ -409,14 +415,13 @@ def main() -> int:
                 date=session.strftime("%Y-%m-%d")
             )
             canonical = f"{site}{path}"
-        else:
+        elif publishing:
             log.info("숫자형 주소 모드 -- 발행 후 다음을 실행할 것: "
                      "python scripts/link_post.py https://도메인/글번호")
     repo_url = str(cfg.get_path("report.repo_url", "") or "") or None
     if repo_url and "USER/" in repo_url:
         repo_url = None
 
-    channels = list(cfg.get_path("report.channels", ["github", "tistory", "naver"]))
     made: list[str] = []
 
     if "github" in channels:
@@ -466,10 +471,18 @@ def main() -> int:
     print("=" * 72)
     for m in made:
         print("  " + m)
-    if canonical is None:
+    # canonical이 None인 이유는 두 가지다. site_url이 비었거나(설정 문제),
+    # 숫자형 주소라 발행 전에는 URL을 알 수 없거나(정상). 원래 이 둘을 구분하지
+    # 않고 항상 "예시값이다"라고 찍어서, 도메인을 제대로 넣은 뒤에도 매일 틀린
+    # 진단이 나왔다. 원인별로 갈라 적고, 발행을 안 하면 아예 말하지 않는다.
+    if canonical is None and publishing:
         print()
-        print("  [주의] config.yaml 의 site_url / repo_url 이 아직 예시값이다.")
-        print("         본인 도메인으로 교체해야 canonical 링크가 들어간다.")
+        if not site:
+            print("  [주의] config.yaml 의 report.site_url 이 비어 있거나 예시값이다.")
+            print("         본인 도메인으로 교체해야 canonical 링크가 들어간다.")
+        else:
+            print("  [안내] 숫자형 주소라 발행 전에는 canonical을 만들 수 없다.")
+            print("         발행 후: python scripts/link_post.py https://도메인/글번호")
     print()
     return 0
 
