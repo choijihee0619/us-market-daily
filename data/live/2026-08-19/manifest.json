@@ -1,0 +1,57 @@
+{
+ "config_sha1": "da8d234b40d22dbf",
+ "frozen_at_utc": "2026-09-08T05:42:02+00:00",
+ "git_dirty": true,
+ "git_sha": "554eb76",
+ "github_run_attempt": null,
+ "github_run_id": null,
+ "meta": {
+  "caveat": "커밋 시각은 수집 시각이 아니다. 최초 커밋 == 최초 실행이라는 가정에 의존한다. 표마다 앵커 커밋이 다를 수 있다. 실시간(live) 기록이 아니다.",
+  "reconstructed_from": {
+   "news_signals": {
+    "commit": "7cbee95ec2d5",
+    "committed_at_utc": "2026-08-19T21:22:20Z",
+    "subject": "daily: 2026-08-19"
+   },
+   "residuals": {
+    "commit": "7cbee95ec2d5",
+    "committed_at_utc": "2026-08-19T21:22:20Z",
+    "subject": "daily: 2026-08-19"
+   },
+   "scorecard": {
+    "commit": "7cbee95ec2d5",
+    "committed_at_utc": "2026-08-19T21:22:20Z",
+    "subject": "daily: 2026-08-19"
+   }
+  }
+ },
+ "news_window_utc": [
+  "2026-08-18 20:00:00+00:00",
+  "2026-08-19 20:00:00+00:00"
+ ],
+ "provenance": "reconstructed",
+ "rows": {
+  "news": 1571,
+  "residuals": 519,
+  "signals": 844
+ },
+ "runner": "local",
+ "schema_version": 1,
+ "scorecard": {
+  "available": true,
+  "bottom_resid_bp": -5.855174695708188,
+  "date": "2026-08-19 00:00:00",
+  "hit": false,
+  "n": 356,
+  "n_bottom": 72,
+  "n_top": 71,
+  "spread_bp": -66.03375433743061,
+  "top_resid_bp": -71.8889290331388
+ },
+ "session": "2026-08-19",
+ "tables": {
+  "news": "세션 창 안의 기사. 감성·novelty·토픽이 그날 계산된 값 그대로다",
+  "residuals": "팩터 회귀 잔차. 이 세션의 행만",
+  "signals": "종목별 일간 집계 신호. 이 세션의 행만"
+ }
+}

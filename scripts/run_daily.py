@@ -452,10 +452,17 @@ def main() -> int:
     if repo_url and "USER/" in repo_url:
         repo_url = None
 
-    # 이 세션이 freeze 도입(2026-09-08) 이전에 이미 처리된 적이 있는가.
-    # 아카이브 글이 먼저 있으면 지금 찍는 스냅샷은 **실시간 기록이 아니다.**
-    # github 채널이 곧 posts/ 를 덮어쓰므로 그 전에 봐 둬야 한다.
+    # 지금 찍을 스냅샷이 '실시간 기록'인가. 두 조건을 다 만족해야 live 다.
+    #   (1) 이 세션의 아카이브 글이 아직 없다 = 처음 처리한다
+    #       (github 채널이 곧 posts/ 를 덮어쓰므로 그 전에 봐 둬야 한다)
+    #   (2) 이 세션이 지금 시점의 최근 완료 거래일이다
+    # (2)가 없으면 몇 주 지난 세션을 복구 실행할 때 live로 찍힌다. 2026-08-03
+    # 미복구 건이 정확히 그 경우다 -- 아카이브가 없으니 (1)만으로는 통과한다.
+    # 표시가 틀리면 나중에 live만 걸러 쓰는 분석이 조용히 오염된다.
     prior_archive = (repo_root / "posts" / f"{session.strftime('%Y-%m-%d')}.md").exists()
+    _latest = last_completed_session()
+    is_latest = _latest is not None and pd.Timestamp(_latest).normalize() == session
+    provenance = "live" if (not prior_archive and is_latest) else "late"
 
     made: list[str] = []
 
@@ -516,7 +523,7 @@ def main() -> int:
                     residuals=resid_df,
                     scorecard=ctx.get("scorecard"),
                     news_window=news_window(session),
-                    provenance="late" if prior_archive else "live",
+                    provenance=provenance,
                     meta={
                         "risk_model": cfg.get_path("model.risk_model"),
                         "beta_window": cfg.get_path("model.beta_window"),

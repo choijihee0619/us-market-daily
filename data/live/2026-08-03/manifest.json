@@ -1,0 +1,39 @@
+{
+ "config_sha1": "da8d234b40d22dbf",
+ "frozen_at_utc": "2026-09-08T05:41:59+00:00",
+ "git_dirty": true,
+ "git_sha": "554eb76",
+ "github_run_attempt": null,
+ "github_run_id": null,
+ "meta": {
+  "caveat": "커밋 시각은 수집 시각이 아니다. 최초 커밋 == 최초 실행이라는 가정에 의존한다. 표마다 앵커 커밋이 다를 수 있다. 실시간(live) 기록이 아니다.",
+  "reconstructed_from": {
+   "news_signals": {
+    "commit": "c876aa696890",
+    "committed_at_utc": "2026-08-04T16:19:29+09:00",
+    "subject": "fix: 월요일 세션이 매주 누락되던 cron + 가격 미확정 시 빈 리포트 생성"
+   },
+   "residuals": null,
+   "scorecard": null
+  }
+ },
+ "news_window_utc": [
+  "2026-07-31 20:00:00+00:00",
+  "2026-08-03 20:00:00+00:00"
+ ],
+ "provenance": "reconstructed",
+ "rows": {
+  "news": 2582,
+  "residuals": 0,
+  "signals": 1398
+ },
+ "runner": "local",
+ "schema_version": 1,
+ "scorecard": null,
+ "session": "2026-08-03",
+ "tables": {
+  "news": "세션 창 안의 기사. 감성·novelty·토픽이 그날 계산된 값 그대로다",
+  "residuals": "팩터 회귀 잔차. 이 세션의 행만",
+  "signals": "종목별 일간 집계 신호. 이 세션의 행만"
+ }
+}
