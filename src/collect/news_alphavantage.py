@@ -124,6 +124,12 @@ def fetch_news(
 
         feed = js.get("feed", [])
         log.info("AV %s -> %d건 (호출 %d/%d)", topics, len(feed), calls, len(batches))
+        # 반환 건수가 limit과 같으면 **잘린 것이다.** sort=LATEST라 창의 뒷부분만
+        # 남고 앞부분(특히 주말을 낀 월요일 세션의 금·토·일)이 통째로 빠진다.
+        # 조용히 넘어가면 "그날 뉴스가 적었다"로 오독하게 된다.
+        if len(feed) >= limit:
+            log.warning("AV %s -> limit(%d) 도달. 창의 앞부분이 잘렸을 수 있다 "
+                        "(sort=LATEST). 커버리지 해석에 주의할 것.", topics, limit)
 
         for item in feed:
             published = _parse_ts(item.get("time_published", ""))

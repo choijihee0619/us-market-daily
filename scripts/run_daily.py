@@ -118,14 +118,20 @@ def collect(cfg, session: pd.Timestamp, lookback_days: int, skip_news: bool = Fa
         return
 
     providers = list(cfg.get_path("news.providers", ["rss"]))
-    win_start, _ = news_window(session)
+    win_start, win_end = news_window(session)
 
     # Alpha Vantage: ticker_sentiment에 relevance_score가 있어 태깅이 정확하다.
     av = pd.DataFrame()
     if "alphavantage" in providers and cfg.get_path("news.alphavantage.enabled", False):
+        # time_to를 넘기지 않으면 AV가 sort=LATEST 로 **지금까지의 최신 기사**를
+        # 돌려준다. 그러면 창보다 나중에 나온 기사가 limit을 채워 정작 창 안
+        # 기사가 밀린다. 실측(2026-09-08): 2026-08-10 세션을 그 세션 당일 밤에
+        # 돌렸을 때 AV 1,638건을 받았는데 **창 안은 0건**이었다. 같은 창을 한 달 뒤
+        # time_to와 함께 1회 호출하니 1,000건 중 998건이 창 안이었다.
         av = AV.fetch_news(
             env("ALPHAVANTAGE_API_KEY"),
             time_from=win_start,
+            time_to=win_end,
             topic_batches=cfg.get_path("news.alphavantage.topic_batches"),
             limit=int(cfg.get_path("news.alphavantage.limit", 1000)),
             relevance_min=float(cfg.get_path("news.alphavantage.relevance_min", 0.25)),
