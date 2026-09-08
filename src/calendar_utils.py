@@ -9,10 +9,15 @@
 from __future__ import annotations
 
 import datetime as dt
+import logging
 from functools import lru_cache
 from typing import Optional
 
 import pandas as pd
+
+from . import nyse_holidays as NH
+
+log = logging.getLogger(__name__)
 
 ET = "America/New_York"
 KST = "Asia/Seoul"
@@ -30,14 +35,38 @@ def _nyse():
         return None
 
 
+@lru_cache(maxsize=1)
+def _warn_fallback_once() -> None:
+    """폴백을 조용히 쓰지 않는다.
+
+    이전에는 `pandas_market_calendars` 가 없으면 **말없이** 주말 근사로 내려갔다.
+    그 패키지는 requirements.txt 에 있으므로 CI에는 있고 로컬에는 없을 수 있어,
+    같은 코드가 환경에 따라 다른 거래일을 돌려주는 상태였다. 지금은 폴백도 실제
+    NYSE 규칙(src/nyse_holidays.py)을 쓰지만, **어느 경로로 돌고 있는지는 알려준다.**
+    임시 휴장 목록이 최신인지 확인하려면 이 경고가 보여야 한다.
+    """
+    log.warning("pandas_market_calendars 없음 -- 내장 NYSE 달력(src/nyse_holidays.py)으로 "
+                "폴백한다. 정규 휴장일은 동일하고 임시 휴장은 목록 관리다.")
+
+
 def trading_days(start: str | dt.date, end: str | dt.date) -> pd.DatetimeIndex:
-    """NYSE 거래일. pandas_market_calendars가 없으면 주말만 제외하는 근사로 폴백."""
+    """NYSE 거래일.
+
+    1순위 `pandas_market_calendars`(임시 휴장까지 관리된다), 없으면 내장 달력.
+    **주말만 제외하는 근사로 내려가지 않는다** -- 그 근사는 휴장일을 거래일로
+    만들어 last_completed_session·previous_session·news_window를 한 칸씩 밀었다.
+    """
     cal = _nyse()
     if cal is not None:
         sched = cal.schedule(start_date=str(start), end_date=str(end))
         return pd.DatetimeIndex(sched.index).normalize()
-    rng = pd.bdate_range(str(start), str(end))
-    return pd.DatetimeIndex(rng).normalize()
+    _warn_fallback_once()
+    return NH.trading_days(start, end)
+
+
+def is_trading_day(day: pd.Timestamp | str) -> bool:
+    d = pd.Timestamp(day).normalize()
+    return len(trading_days(d.date(), d.date())) == 1
 
 
 def last_completed_session(now_utc: Optional[dt.datetime] = None) -> Optional[pd.Timestamp]:

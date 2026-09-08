@@ -134,7 +134,7 @@ AV 자체 감성 점수는 산출 방식이 비공개라 보조 지표로만 저
 
 | 항목 | 상태 |
 |---|---|
-| 파이프라인 | 완료. 오프라인 테스트 **9종** 통과 |
+| 파이프라인 | 완료. 오프라인 테스트 **10종** 통과 |
 | 도메인 + SSL | 완료. canonical·sitemap.xml·rss 실측 정상 |
 | `.env` — FRED, Alpha Vantage, SEC_USER_AGENT, OPENAI_API_KEY | 설정됨 |
 | `.env` — GA4 Data API, AdSense OAuth | 미설정 (CSV 폴백으로 동작) |
@@ -151,7 +151,7 @@ AV 자체 감성 점수는 산출 방식이 비공개라 보조 지표로만 저
 | 측정 점검 도구 | 완료 (`scripts/check_site.py`, `docs/SETUP_ANALYTICS.md`) |
 | 뉴스 태깅 진단 | 완료 (`scripts/diagnose_news.py`). 7장 4·5번 결론 참조 |
 | **세션 freeze** | **(a)(b) 완료 (2026-09-08).** `data/live/` 불변 층 + 재실행 가드 + 과거 25세션 소급 복원. 7장 17번 |
-| **세션 갭** | **5건** (08-03·08-10·08-17·08-24 실재 + 09-07 휴장 오탐). 7장 16번 |
+| **세션 갭** | **4건** (08-03·08-10·08-17·08-24). 09-07 오탐은 휴장일 달력으로 해소. 7장 16번 |
 
 ### 첫 실제 실행에서 드러난 것 (2026-07-30)
 
@@ -227,6 +227,7 @@ src/
   calendar_utils.py  거래일·DST·뉴스창. look-ahead 차단의 핵심
   freshness.py       세션 누락 판정. 순수 함수(gap_report)로 분리해 합성 검증
   freeze.py          세션 freeze. data/live/{세션}/ 불변 스냅샷 + 재실행 가드
+  nyse_holidays.py   NYSE 휴장일 내장 달력. pandas_market_calendars 없을 때 폴백
   storage.py         upsert parquet (latest 층). **append-only가 아니다 — keep=last**
   collect/           prices, macro, factors, news, news_alphavantage, analytics
   process/           residual, sentiment, attribution, weekly_stats
@@ -384,17 +385,36 @@ docs/SESSION_GAPS.md      세션 누락 감지·복구 설계 (7장 16번). 구�
     | 2026-08-10(월) | 커밋 자체가 없다. 그 주 08-08~08-11 사이 daily 커밋 0건 |
     | 2026-08-17(월) | 같음 |
     | 2026-08-24(월) | 같음 |
-    | 2026-09-07(월) | **오탐. Labor Day 휴장일이다** |
+    | 2026-09-07(월) | **오탐이었다.** Labor Day 휴장일. 달력 수정으로 해소 |
 
     두 가지가 드러났다.
     - **월요일이 여전히 샌다.** c876aa69(2026-08-04)의 cron `2-6`→`1-5` 수정이
       08-31(월)은 살렸지만 08-10·17·24는 못 살렸다. 원인 미상 `[검증 필요]` —
       Actions 로그를 봐야 한다. 커밋이 아예 없으니 실행이 안 됐거나 게이트에서
       멈췄다
-    - **`calendar_utils`에 휴장일 달력이 없다.** `grep holiday` 가 0건이다.
-      그래서 Labor Day가 영구히 MISSING으로 뜬다. 16번 문서가 스스로 경고한
-      거짓 양성이 실제로 발생했다 — "매일 뜨는 거짓 경고는 곧 무시되고,
-      그러면 진짜 경고도 같이 죽는다." **휴장일 달력을 넣는 게 다음 순위다.**
+    - **거래일 판정이 환경마다 달랐다. 2026-09-08 해결.**
+      처음엔 "휴장일 달력이 없다"고 적었는데 **그건 틀렸다.**
+      `trading_days()` 는 `pandas_market_calendars` 를 쓰고 그건
+      `requirements.txt` 에 있다. 즉 **CI에는 달력이 있었고 로컬에만 없었다.**
+      진짜 문제는 부재가 아니라 **조용한 폴백**이었다 — 패키지가 없으면 말없이
+      주말만 제외하는 근사로 내려갔고, 그러면 `last_completed_session`·
+      `previous_session`·`news_window` 가 휴장일만큼 한 칸씩 밀린다.
+      같은 코드가 환경에 따라 다른 거래일을 돌려주는 상태였다.
+
+      고친 방식: 폴백을 주말 근사에서 **실제 NYSE 규칙**으로 올렸다
+      (`src/nyse_holidays.py`). 더불어 폴백으로 내려갈 때 경고를 한 번 찍는다.
+      규약이 "키가 없어도 파이프라인이 끝까지 돌아야 한다"이고 테스트가 외부망
+      없이 돌아야 하므로 달력도 선택 의존성에 기대면 안 된다.
+
+      NYSE는 연방 공휴일과 다르다. Good Friday는 연방 공휴일이 아닌데 휴장하고,
+      Columbus·Veterans Day는 연방 공휴일인데 개장한다. 신정만 토요일 규칙이
+      달라서 1월 1일이 토요일이면 앞 금요일에 **연다**(다른 휴일은 당겨 쉰다).
+      임시 휴장(샌디·국장일)은 규칙으로 안 나와 목록으로 관리한다.
+
+      검증: `tests/test_nyse_calendar.py` 8종. 그중 하나가
+      `pandas_market_calendars` 와의 교차검증이고 **2024~2026 전 구간
+      753거래일이 완전히 일치**한다(패키지가 없으면 건너뛴다. CI에서는 돈다).
+      이 교차검증이 두 구현이 갈라지는 걸 잡는 장치다.
 
     08-03의 원인은 특정했다. `data/factors.parquet` 의 2026-08-03 행이
     **전 컬럼 NaN**(source=etf_proxy)이라 잔차 추정이 빈 결과를 냈다.
