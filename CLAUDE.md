@@ -134,7 +134,7 @@ AV 자체 감성 점수는 산출 방식이 비공개라 보조 지표로만 저
 
 | 항목 | 상태 |
 |---|---|
-| 파이프라인 | 완료. 오프라인 테스트 **8종** 통과 |
+| 파이프라인 | 완료. 오프라인 테스트 **9종** 통과 |
 | 도메인 + SSL | 완료. canonical·sitemap.xml·rss 실측 정상 |
 | `.env` — FRED, Alpha Vantage, SEC_USER_AGENT, OPENAI_API_KEY | 설정됨 |
 | `.env` — GA4 Data API, AdSense OAuth | 미설정 (CSV 폴백으로 동작) |
@@ -150,7 +150,7 @@ AV 자체 감성 점수는 산출 방식이 비공개라 보조 지표로만 저
 | 서치콘솔 | 도메인 속성 등록 + `sitemap.xml`·`rss` 제출 완료 |
 | 측정 점검 도구 | 완료 (`scripts/check_site.py`, `docs/SETUP_ANALYTICS.md`) |
 | 뉴스 태깅 진단 | 완료 (`scripts/diagnose_news.py`). 7장 4·5번 결론 참조 |
-| 발행한 글 | 0편 |
+| **세션 freeze** | **(a) 완료 (2026-09-08).** `data/live/` 불변 층 + 재실행 가드. 7장 17번 |
 
 ### 첫 실제 실행에서 드러난 것 (2026-07-30)
 
@@ -224,7 +224,8 @@ scripts/
 src/
   calendar_utils.py  거래일·DST·뉴스창. look-ahead 차단의 핵심
   freshness.py       세션 누락 판정. 순수 함수(gap_report)로 분리해 합성 검증
-  storage.py         append-only parquet upsert
+  freeze.py          세션 freeze. data/live/{세션}/ 불변 스냅샷 + 재실행 가드
+  storage.py         upsert parquet (latest 층). **append-only가 아니다 — keep=last**
   collect/           prices, macro, factors, news, news_alphavantage, analytics
   process/           residual, sentiment, attribution, weekly_stats
   llm/               프로바이더 어댑터 (anthropic/openai/rule)
@@ -406,6 +407,27 @@ docs/SESSION_GAPS.md      세션 누락 감지·복구 설계 (7장 16번). 구�
     (d) 정식 LM 사전 교체 + 전량 재스코어(반드시 a·b 뒤에. 재스코어 자체가
     원본을 덮는다), (e) AV `time_to` 전달 — 단 `time_to`는 published 기준
     필터라 **늦게 색인된 기사 유입을 막지 못한다.** OOS 보전은 (a)로만 된다.
+
+    **진행: (a) 완료 (2026-09-08). `src/freeze.py` + `tests/test_freeze.py` 8종.**
+    - `data/live/{세션}/` 에 news·signals·residuals parquet + `manifest.json`.
+      **한 번 쓰이면 덮어쓰기 경로가 없다.** 두 번째 쓰기는 `AlreadyFrozenError`다.
+      덮어쓰기 옵션을 만들지 않은 이유: 필요하면 덮을 수 있는 불변 층은 불변이 아니다
+    - 임시 디렉터리 → `rename` 원자적 확정. 판정 기준은 디렉터리가 아니라
+      `manifest.json` 이다. 껍데기가 남아 "이미 처리됨"으로 잠기면 그 세션의 기록이
+      영구히 빈다
+    - `manifest.json`: frozen_at_utc, provenance, git_sha·dirty, config_sha1, runner
+      (actions/local), GITHUB_RUN_ID, 뉴스창, 행수, scorecard, 모형·LLM 설정
+    - `provenance`: `live`(첫 처리) / `late`(이미 처리된 세션을 뒤늦게) /
+      `reconstructed`(소급 복원). **분석에서는 `live` 만 걸러 쓸 것.**
+      아카이브 글(`posts/{날짜}.md`)이 이미 있으면 자동으로 `late` 가 된다
+    - 재실행 가드: freeze된 세션은 수집 전에 멈춘다. 주말·공휴일 실행이 완전한
+      no-op이 되어 LLM 호출·AV 한도·빈 커밋이 전부 사라진다.
+      `--force` 로 latest 층과 아카이브만 다시 만들 수 있고 live 스냅샷은 보존된다
+    - **`--dry-run` 이 더 이상 저장소에 쓰지 않는다** (`build_context(persist=False)`).
+      이름과 달리 읽기 전용이 아니어서 리포트를 다시 뽑는 것만으로 기록이 덮였다
+
+    남은 것은 (b) → (c) → (d) → (e). **(b)가 급하다.** `data/live/` 가 비어 있는
+    동안 과거 24세션은 보호되지 않고, 그 세션들을 지금 처리하면 `late` 로 찍힌다.
 
     부수 효과 하나. live 층을 **세션별 새 경로에 추가**하면 커밋이 append-only가
     되어 로컬·Actions 동시 실행 시의 parquet 바이너리 충돌이 원리적으로 사라진다.

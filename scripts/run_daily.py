@@ -6,6 +6,10 @@
     python scripts/run_daily.py --session 2026-07-24
     python scripts/run_daily.py --backfill 30      # 과거 30일 가격/팩터만 적재
     python scripts/run_daily.py --dry-run          # 수집 없이 저장된 데이터로 리포트만
+    python scripts/run_daily.py --session X --force  # 이미 freeze된 세션을 다시 처리
+
+freeze된 세션은 기본적으로 다시 처리하지 않는다. 이유는 src/freeze.py 참조 --
+같은 세션 재실행이 그 세션의 news·signals·scorecard를 사후 데이터로 덮어 왔다.
 """
 from __future__ import annotations
 
@@ -32,6 +36,7 @@ from src.collect import news as N  # noqa: E402
 from src.collect import news_alphavantage as AV  # noqa: E402
 from src.collect import prices as P  # noqa: E402
 from src.config import OUT_DIR, env, load_config  # noqa: E402
+from src import freeze as FRZ  # noqa: E402
 from src.llm.base import get_provider  # noqa: E402
 from src.process import attribution as A  # noqa: E402
 from src.process import residual as R  # noqa: E402
@@ -195,7 +200,14 @@ def classify(cfg, session: pd.Timestamp) -> pd.DataFrame:
 
 
 def build_context(cfg, session: pd.Timestamp, news_win: pd.DataFrame,
-                  universe: pd.DataFrame | None = None) -> dict:
+                  universe: pd.DataFrame | None = None, persist: bool = True) -> dict:
+    """리포트 컨텍스트를 만든다.
+
+    persist=False 면 저장소에 쓰지 않는다. --dry-run 이 그 경우다.
+    **이전에는 --dry-run 도 residuals·signals·scorecard를 upsert했다.** 이름과 달리
+    읽기 전용이 아니어서, 리포트를 다시 뽑아보는 것만으로 그 세션의 기록이 그날
+    데이터로 덮였다. freeze가 지키려는 것과 정면으로 충돌해서 같이 고친다.
+    """
     prices = storage.read("prices")
     fac = storage.read("factors")
     mac_long = storage.read("macro")
@@ -237,7 +249,7 @@ def build_context(cfg, session: pd.Timestamp, news_win: pd.DataFrame,
         min_obs=int(cfg.get_path("model.beta_min_obs", 120)),
         shrinkage=cfg.get_path("model.beta_shrinkage", "vasicek"),
     )
-    if not resid.empty:
+    if not resid.empty and persist:
         storage.upsert("residuals", resid, ["date", "ticker"])
     ctx["resid_df"] = resid
     ctx["cross_section"] = R.cross_section_stats(
@@ -273,7 +285,9 @@ def build_context(cfg, session: pd.Timestamp, news_win: pd.DataFrame,
     sig = S.aggregate_by_ticker(news_win) if not news_win.empty else pd.DataFrame()
     if not sig.empty:
         sig["date"] = session
-        storage.upsert("signals", sig, ["date", "ticker"])
+        if persist:
+            storage.upsert("signals", sig, ["date", "ticker"])
+    ctx["signals_df"] = sig          # freeze가 이 세션의 신호 원본을 그대로 받는다
 
     all_sig = storage.read("signals")
     prev_sig = pd.DataFrame()
@@ -285,7 +299,7 @@ def build_context(cfg, session: pd.Timestamp, news_win: pd.DataFrame,
             pass
     sc = A.scorecard(prev_sig, resid)
     ctx["scorecard"] = sc
-    if sc.get("available"):
+    if sc.get("available") and persist:
         storage.upsert("scorecard", pd.DataFrame([{**sc, "date": session}]), ["date"])
     ctx["scorecard_cum"] = _cum_scorecard()
 
@@ -317,6 +331,8 @@ def main() -> int:
     ap.add_argument("--lookback", type=int, default=420, help="가격 수집 소급 일수")
     ap.add_argument("--backfill", type=int, default=0, help="수집만 하고 리포트는 건너뜀")
     ap.add_argument("--dry-run", action="store_true", help="외부 수집 없이 저장 데이터로만 생성")
+    ap.add_argument("--force", action="store_true",
+                    help="이미 freeze된 세션을 다시 처리한다. live 스냅샷은 그대로 둔다")
     ap.add_argument("--config", default=None)
     args = ap.parse_args()
 
@@ -334,6 +350,20 @@ def main() -> int:
     if args.backfill:
         collect(cfg, session, args.backfill)
         print(storage.summary().to_string(index=False))
+        return 0
+
+    # 재실행 가드. cron이 월~금이라 주말·공휴일에는 last_completed_session()이
+    # 같은 날을 계속 돌려준다. 실측으로 고유 세션 24개에 daily 커밋 51건이었고,
+    # 그 재실행이 매번 그 세션의 뉴스·신호·채점을 사후 데이터로 덮었다.
+    # 여기서 멈추면 수집·LLM 호출·커밋이 전부 일어나지 않는다(AV 무료 한도도 아낀다).
+    man = FRZ.read_manifest(session)
+    if man and not args.force:
+        log.info("%s 세션은 이미 freeze되어 있다 (frozen_at=%s, provenance=%s). "
+                 "재처리하지 않는다.", session.date(),
+                 man.get("frozen_at_utc"), man.get("provenance"))
+        log.info("  기록을 다시 만들어야 한다면: "
+                 "python scripts/run_daily.py --session %s --force", session.date())
+        log.info("  --force 를 줘도 data/live/%s 스냅샷은 덮이지 않는다.", session.date())
         return 0
 
     if not args.dry_run:
@@ -368,7 +398,7 @@ def main() -> int:
 
     # --dry-run에서도 회사명·섹터가 필요하다. 파일이 있으면 읽고, 없으면 None으로 둔다.
     universe_df = resolve_universe(cfg)
-    ctx = build_context(cfg, session, news_win, universe_df)
+    ctx = build_context(cfg, session, news_win, universe_df, persist=not args.dry_run)
 
     outdir = OUT_DIR / session.strftime("%Y-%m-%d")
     charts = C.build_all(ctx, outdir / "images", int(cfg.get_path("report.charts.dpi", 144)))
@@ -422,6 +452,11 @@ def main() -> int:
     if repo_url and "USER/" in repo_url:
         repo_url = None
 
+    # 이 세션이 freeze 도입(2026-09-08) 이전에 이미 처리된 적이 있는가.
+    # 아카이브 글이 먼저 있으면 지금 찍는 스냅샷은 **실시간 기록이 아니다.**
+    # github 채널이 곧 posts/ 를 덮어쓰므로 그 전에 봐 둬야 한다.
+    prior_archive = (repo_root / "posts" / f"{session.strftime('%Y-%m-%d')}.md").exists()
+
     made: list[str] = []
 
     if "github" in channels:
@@ -464,6 +499,42 @@ def main() -> int:
                                 article_links=bool(cfg.get_path(
                                     "report.naver_article_links", True)))
         made.append(f"naver    {p}")
+
+    # --- 세션 freeze. 이 아래로는 이 세션의 기록이 바뀌지 않는다 ---
+    # 채널 출력 뒤에 두는 이유: 앞 단계(LLM 호출 등)가 죽으면 아무것도 남기지 않고
+    # 재시도가 깨끗하게 된다. freeze를 먼저 찍으면 실패한 실행이 세션을 잠근다.
+    if not args.dry_run:
+        resid_df = ctx.get("resid_df")
+        if resid_df is None or resid_df.empty:
+            log.warning("잔차가 비어 있어 freeze하지 않는다. 다음 실행에서 다시 시도한다.")
+        else:
+            try:
+                snap = FRZ.freeze_session(
+                    session,
+                    news=news_win,
+                    signals=ctx.get("signals_df"),
+                    residuals=resid_df,
+                    scorecard=ctx.get("scorecard"),
+                    news_window=news_window(session),
+                    provenance="late" if prior_archive else "live",
+                    meta={
+                        "risk_model": cfg.get_path("model.risk_model"),
+                        "beta_window": cfg.get_path("model.beta_window"),
+                        "novelty_threshold": cfg.get_path("sentiment.novelty_threshold"),
+                        "av_relevance_min": cfg.get_path("news.alphavantage.relevance_min"),
+                        "llm_provider": cfg.get_path("llm.provider"),
+                        "llm_write_model": cfg.get_path("llm.openai_write_model"),
+                        "llm_classify_model": cfg.get_path("llm.openai_classify_model"),
+                        "channels": channels,
+                        "dry_run": False,
+                    },
+                    repo=repo_root,
+                )
+                made.append(f"freeze   {snap.relative_to(repo_root)}")
+            except FRZ.AlreadyFrozenError as e:
+                # --force 로 다시 돌린 경우가 여기다. latest 층과 아카이브는 갱신했지만
+                # live 스냅샷은 최초 실행 값 그대로 둔다. 그게 이 층의 존재 이유다.
+                log.info("%s -- live 스냅샷은 보존한다", e)
 
     print()
     print("=" * 72)

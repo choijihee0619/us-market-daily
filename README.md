@@ -21,7 +21,8 @@
 
 | 항목 | 상태 |
 |---|---|
-| 파이프라인 | 동작. 오프라인 테스트 8종 통과 |
+| 파이프라인 | 동작. 오프라인 테스트 9종 통과 |
+| OOS 기록 보전 | `data/live/{세션}/` 불변 스냅샷 + 재실행 가드 (2026-09-08) |
 | 데이터 | 가격 525종목 179,991행 (2025-03~2026-07) + 매크로·팩터·뉴스 |
 | 자동화 | GitHub Actions 일간/주간 cron 동작 확인 |
 | 출력 채널 | **2026-09-08부터 GitHub 단독** (티스토리·네이버 수동 발행 중단) |
@@ -191,7 +192,8 @@ python scripts/run_daily.py --backfill 500
 # 3) 일간 실행
 python scripts/run_daily.py
 python scripts/run_daily.py --session 2026-07-24    # 특정 거래일
-python scripts/run_daily.py --dry-run               # 수집 없이 리포트만
+python scripts/run_daily.py --dry-run               # 수집 없이 리포트만 (저장 안 함)
+python scripts/run_daily.py --session X --force     # freeze된 세션 재처리
 ```
 
 ```bash
@@ -339,7 +341,8 @@ scripts/
 src/
 ├── config.py             설정 + .env 로더
 ├── calendar_utils.py     거래일·DST·뉴스창 (look-ahead 차단)
-├── storage.py            append-only parquet upsert + as_list
+├── storage.py            parquet upsert (latest 층) + as_list
+├── freeze.py             세션 freeze. data/live/ 불변 스냅샷 + 재실행 가드
 ├── collect/
 │   ├── prices.py         yfinance, 배당조정 수익률
 │   ├── macro.py          FRED. 시리즈별 공개 지연을 그대로 보고
