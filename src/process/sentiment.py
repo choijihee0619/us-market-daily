@@ -92,6 +92,18 @@ if not _loaded:
                 len(NEG), len(POS))
 
 
+def dictionary_tag() -> str:
+    """행에 붙일 짧은 사전 식별자. 예: "lm_master:e2d1328682ba".
+
+    행마다 남기는 이유: 어떤 척도로 매긴 점수인지 **행 자체가 말하게** 하려는
+    것이다. 사전을 바꾸면 시계열이 두 구간으로 갈리는데, 파일 밖 메모에만 적어
+    두면 나중에 섞인 상태를 구분할 방법이 없다.
+    """
+    info = dictionary_info()
+    sha = info.get("sha256")
+    return f"{info['source']}:{sha[:12]}" if sha else info["source"]
+
+
 def dictionary_info() -> dict:
     """지금 쓰는 사전의 신원. freeze manifest에 함께 남긴다.
 
@@ -211,6 +223,7 @@ def score_dataframe(df: pd.DataFrame, history: pd.DataFrame | None = None,
     df["sentiment"] = scores["tone"]
     df["n_pos"], df["n_neg"], df["n_unc"] = scores["pos"], scores["neg"], scores["unc"]
     df["novelty"] = compute_novelty(df, history)
+    df["scored_with"] = dictionary_tag()
     # 재탕 기사는 가중치를 낮춘다. 그러지 않으면 같은 뉴스의 반복이 감성을 뻥튀기한다.
     w = np.where(df["novelty"] >= (1 - novelty_threshold), df["novelty"], df["novelty"] * 0.3)
     df["sentiment_w"] = df["sentiment"] * w
