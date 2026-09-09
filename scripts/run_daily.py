@@ -61,18 +61,60 @@ def git_rev() -> str | None:
         return None
 
 
-def resolve_universe(cfg) -> pd.DataFrame:
+def resolve_universe(cfg, session: pd.Timestamp | None = None) -> pd.DataFrame:
+    """그 세션의 구성종목. **세션별 스냅샷을 남긴다.**
+
+    이전에는 `data/universe_sp500.csv` 가 있으면 그대로 돌려주고 다시 받지
+    않았다. 그래서 구성종목이 2026-07-30자에 얼어 있었고, `prices.py` 의
+    `snapshot_date` 기록은 아무도 부르지 않는 죽은 경로였다(40거래일간 스냅샷 0건).
+    8장 1번이 "시간이 지나면 스냅샷이 쌓인다"고 적어 둔 것도 사실이 아니었다.
+
+    지금은 세션마다 `universe` 표에 스냅샷을 남긴다. 순서는 이렇다.
+      1. 이 세션 스냅샷이 이미 있으면 그걸 쓴다 (재실행에서 다시 긁지 않는다.
+         그리고 그게 point-in-time 관점에서도 옳다)
+      2. 없으면 위키피디아에서 받아 스냅샷으로 저장하고 csv도 갱신한다
+      3. 실패하면 **가장 최근 스냅샷 → csv** 순으로 폴백한다. 수집 실패가
+         파이프라인을 죽이면 안 된다(6장 규약)
+
+    위키피디아 목록은 '현재' 구성종목이라 과거를 소급 복원하지는 못한다.
+    오늘부터 앞으로 쌓이는 스냅샷이 point-in-time 백테스트의 재료다.
+    """
     path = Path(cfg.get_path("universe.constituents_file", "data/universe_sp500.csv"))
     if not path.is_absolute():
         path = Path(__file__).resolve().parents[1] / path
-    if path.exists():
-        return pd.read_csv(path)
-    log.info("구성종목 파일 없음 -> 위키피디아에서 수집")
+
+    snaps = storage.read("universe")
+    if session is not None and not snaps.empty:
+        d = pd.to_datetime(snaps["date"]).dt.normalize()
+        today = snaps[d == pd.Timestamp(session).normalize()]
+        if not today.empty:
+            log.info("구성종목: %s 스냅샷 재사용 (%d종목)", pd.Timestamp(session).date(), len(today))
+            return today.drop(columns=["date"], errors="ignore")
+
     u = P.sp500_constituents()
     if not u.empty:
+        if session is not None:
+            snap = u.copy()
+            snap["date"] = pd.Timestamp(session).normalize()
+            n = storage.upsert("universe", snap, ["date", "ticker"])
+            log.info("구성종목 스냅샷 저장: %s %d종목 (누적 %d행)",
+                     pd.Timestamp(session).date(), len(u), n)
         path.parent.mkdir(parents=True, exist_ok=True)
         u.to_csv(path, index=False)
-    return u
+        return u
+
+    # 수집 실패. 가장 최근 스냅샷 -> csv 순으로 내려간다
+    if not snaps.empty:
+        recent = P.universe_asof(snaps, session or pd.Timestamp.utcnow().normalize())
+        if not recent.empty:
+            asof = pd.to_datetime(recent["date"]).dt.normalize().max().date()
+            log.warning("구성종목 수집 실패 -> %s 스냅샷으로 폴백 (%d종목)", asof, len(recent))
+            return recent.drop(columns=["date"], errors="ignore")
+    if path.exists():
+        log.warning("구성종목 수집 실패 -> csv 폴백 (%s)", path.name)
+        return pd.read_csv(path)
+    log.error("구성종목을 확보하지 못했다. 종목 태깅과 회사명·섹터가 비게 된다.")
+    return pd.DataFrame()
 
 
 def collect(cfg, session: pd.Timestamp, lookback_days: int, skip_news: bool = False) -> None:
@@ -81,7 +123,7 @@ def collect(cfg, session: pd.Timestamp, lookback_days: int, skip_news: bool = Fa
     가격 재적재(월요일 수익률 버그 복구 등) 때 뉴스까지 부르면 AV 무료 한도
     25요청/일을 헛되이 쓴다. 그 경우 --backfill --prices-only 로 부른다.
     """
-    universe = resolve_universe(cfg)
+    universe = resolve_universe(cfg, session)
     names = list(universe["ticker"]) if not universe.empty else []
     names = names[: int(cfg.get_path("universe.max_names", 500))]
 
@@ -136,6 +178,8 @@ def collect(cfg, session: pd.Timestamp, lookback_days: int, skip_news: bool = Fa
             limit=int(cfg.get_path("news.alphavantage.limit", 1000)),
             relevance_min=float(cfg.get_path("news.alphavantage.relevance_min", 0.25)),
             max_calls=int(cfg.get_path("news.alphavantage.max_calls_per_day", 4)),
+            max_continuation=int(cfg.get_path(
+                "news.alphavantage.max_continuation_calls", 0)),
         )
 
     rss = pd.DataFrame()
@@ -441,7 +485,7 @@ def main() -> int:
         return 2
 
     # --dry-run에서도 회사명·섹터가 필요하다. 파일이 있으면 읽고, 없으면 None으로 둔다.
-    universe_df = resolve_universe(cfg)
+    universe_df = resolve_universe(cfg, session)
     ctx = build_context(cfg, session, news_win, universe_df, persist=not args.dry_run)
 
     outdir = OUT_DIR / session.strftime("%Y-%m-%d")

@@ -31,12 +31,19 @@
 - **임시 휴장이 있다.** 규칙으로 유도되지 않으므로 목록으로 관리한다
   (허리케인 샌디, 전직 대통령 국장일 등).
 
-## 한계
+## 반일장(조기 마감)도 다룬다
 
-**반일장(조기 마감)은 다루지 않는다.** 추수감사절 다음날, 성탄 전날, 7월 3일
-등은 13:00 ET에 마감하는데 이 모듈은 그날을 정상 거래일로만 판정한다.
-`MARKET_CLOSE_HOUR = 16` 을 그대로 쓰므로 그런 날 뉴스 창이 3시간 넓어진다.
-연 3~4일이고 신호에 미치는 영향은 `[검증 필요 — 미측정]`.
+추수감사절 다음날·성탄 전날·7월 3일은 13:00 ET에 마감한다. 이걸 무시하면 그날
+뉴스 창이 3시간 넓어져 **마감 후 뉴스가 그날 신호에 섞인다** -- look-ahead다.
+연 2~4일이라 드물지만, 드문 만큼 조용히 지나간다.
+
+규칙은 이렇다.
+  - 추수감사절 다음 금요일: 항상
+  - 12/24: **월~목일 때만.** 금요일이면 12/25가 토요일이라 12/24가 대체 휴장일이
+    되고, 토·일이면 애초에 거래일이 아니다
+  - 7/3: 7/4가 월~금이고 7/3도 거래일일 때만. 7/4가 토요일이면 7/3이 대체
+    휴장일이 되고, 일요일이면 7/3은 토요일이라 거래일이 아니다
+그리고 결과에서 휴장일·주말을 다시 걸러낸다.
 """
 from __future__ import annotations
 
@@ -91,6 +98,9 @@ class NYSECalendar(AbstractHolidayCalendar):
     ]
 
 
+EARLY_CLOSE_HOUR = 13   # ET. 정규 마감은 16:00
+
+
 @lru_cache(maxsize=8)
 def _holidays_cached(start: str, end: str) -> tuple:
     idx = NYSECalendar().holidays(pd.Timestamp(start), pd.Timestamp(end))
@@ -118,3 +128,49 @@ def trading_days(start, end) -> pd.DatetimeIndex:
 def is_trading_day(day) -> bool:
     d = pd.Timestamp(day).normalize()
     return len(trading_days(d, d)) == 1
+
+
+def _early_close_candidates(year: int) -> list[pd.Timestamp]:
+    out: list[pd.Timestamp] = []
+
+    # 추수감사절(11월 넷째 목) 다음 금요일
+    thu = pd.date_range(f"{year}-11-01", f"{year}-11-30", freq="W-THU")
+    if len(thu) >= 4:
+        out.append(pd.Timestamp(thu[3]) + pd.Timedelta(days=1))
+
+    # 성탄 전날. 월~목일 때만 (금요일이면 12/25가 토요일이라 12/24가 대체 휴장일)
+    dec24 = pd.Timestamp(year, 12, 24)
+    if dec24.dayofweek <= 3:
+        out.append(dec24)
+
+    # 7/3. 7/4가 월~금이고 7/3도 평일일 때만
+    jul4 = pd.Timestamp(year, 7, 4)
+    if jul4.dayofweek <= 4:
+        jul3 = jul4 - pd.Timedelta(days=1)
+        if jul3.dayofweek <= 4:
+            out.append(jul3)
+    return out
+
+
+@lru_cache(maxsize=8)
+def _early_closes_cached(start: str, end: str) -> tuple:
+    a, b = pd.Timestamp(start), pd.Timestamp(end)
+    hol = set(holidays(a, b))
+    days = []
+    for y in range(a.year, b.year + 1):
+        for d in _early_close_candidates(y):
+            # 휴장일·주말은 반일장이 될 수 없다
+            if a <= d <= b and d not in hol and d.dayofweek < 5:
+                days.append(d)
+    return tuple(sorted(set(days)))
+
+
+def early_closes(start, end) -> pd.DatetimeIndex:
+    """[start, end] 구간의 13:00 ET 조기 마감일."""
+    return pd.DatetimeIndex(_early_closes_cached(str(pd.Timestamp(start).date()),
+                                                 str(pd.Timestamp(end).date())))
+
+
+def is_early_close(day) -> bool:
+    d = pd.Timestamp(day).normalize()
+    return len(early_closes(d, d)) == 1

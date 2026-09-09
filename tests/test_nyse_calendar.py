@@ -21,7 +21,8 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src import nyse_holidays as NH  # noqa: E402
-from src.calendar_utils import is_trading_day, news_window, previous_session, trading_days  # noqa: E402
+from src.calendar_utils import (is_trading_day, market_close_hour, news_window,  # noqa: E402
+                                previous_session, trading_days)
 
 # 2026년 NYSE 정규 휴장일. 손으로 확인한 값이다.
 #   07-03 : 독립기념일(7/4)이 토요일이라 앞 금요일로 당겨 쉰다
@@ -106,6 +107,39 @@ def test_previous_session_skips_holiday():
     print(f"  2026-09-08 직전 세션 {prev.date()} · 창 {start} ~ {end}")
 
 
+def test_early_closes_2026():
+    """반일장은 13:00 ET에 닫는다. 16으로 보면 창이 3시간 넓어진다."""
+    got = [str(d.date()) for d in NH.early_closes("2026-01-01", "2026-12-31")]
+    # 2026-07-04가 토요일이라 7/3은 조기 마감이 아니라 **대체 휴장일**이다
+    assert got == ["2026-11-27", "2026-12-24"], got
+    assert not NH.is_trading_day("2026-07-03"), "2026-07-03은 휴장일이다"
+    assert NH.is_early_close("2026-11-27") and NH.is_early_close("2026-12-24")
+    assert not NH.is_early_close("2026-11-26"), "추수감사절 당일은 휴장이지 반일장이 아니다"
+    assert not NH.is_early_close("2026-11-30"), "그냥 월요일이다"
+    print(f"  2026 반일장 {got}")
+
+
+def test_early_close_years_with_july3():
+    """7/4 요일에 따라 7/3의 성격이 바뀐다."""
+    for y, want in ((2024, True), (2025, True)):
+        assert NH.is_early_close(f"{y}-07-03") is want, y
+    assert NH.is_early_close("2025-11-28") and NH.is_early_close("2025-12-24")
+    print("  2024·2025 7/3 반일장 확인")
+
+
+def test_market_close_hour_and_window():
+    """창의 양 끝이 각각 그날 마감 시각을 따라야 하고, 이음매가 어긋나면 안 된다."""
+    assert market_close_hour("2026-11-27") == 13
+    assert market_close_hour("2026-11-30") == 16
+    a, b = news_window("2026-11-27")
+    assert str(b) == "2026-11-27 18:00:00+00:00", b   # 13:00 EST
+    # 다음 거래일 창의 시작이 앞 창의 끝과 정확히 맞물려야 한다
+    a2, b2 = news_window("2026-11-30")
+    assert a2 == b, f"창 이음매가 어긋났다: {b} vs {a2}"
+    assert str(b2) == "2026-11-30 21:00:00+00:00", b2  # 16:00 EST
+    print(f"  11-27 창 끝 {b} == 11-30 창 시작 {a2}")
+
+
 def test_matches_market_calendars_if_installed():
     """두 구현이 갈라지면 환경마다 거래일이 달라진다. CI에는 패키지가 있다."""
     try:
@@ -120,7 +154,17 @@ def test_matches_market_calendars_if_installed():
     assert not only_mcal and not only_builtin, (
         f"두 달력이 다르다.\n  mcal에만: {[str(d.date()) for d in only_mcal]}"
         f"\n  내장에만: {[str(d.date()) for d in only_builtin]}")
-    print(f"  pandas_market_calendars와 2024~2026 전 구간 일치 ({len(want)}일)")
+
+    # 반일장도 대조한다. pmc는 market_close 시각을 준다
+    close_et = sched["market_close"].dt.tz_convert("America/New_York")
+    early_mcal = {pd.Timestamp(d).normalize()
+                  for d, h in zip(sched.index, close_et.dt.hour) if h < 16}
+    early_own = set(NH.early_closes("2024-01-01", "2026-12-31"))
+    assert early_mcal == early_own, (
+        f"반일장이 다르다.\n  mcal: {sorted(str(d.date()) for d in early_mcal)}"
+        f"\n  내장: {sorted(str(d.date()) for d in early_own)}")
+    print(f"  pandas_market_calendars와 2024~2026 전 구간 일치 "
+          f"(거래일 {len(want)}일 · 반일장 {len(early_own)}일)")
 
 
 if __name__ == "__main__":
@@ -138,6 +182,12 @@ if __name__ == "__main__":
     test_calendar_utils_uses_holidays()
     print("\n[7] 직전 세션·뉴스 창")
     test_previous_session_skips_holiday()
-    print("\n[8] pandas_market_calendars 교차검증")
+    print("\n[8] 2026 반일장")
+    test_early_closes_2026()
+    print("\n[9] 7/3 요일 의존")
+    test_early_close_years_with_july3()
+    print("\n[10] 마감 시각과 뉴스 창")
+    test_market_close_hour_and_window()
+    print("\n[11] pandas_market_calendars 교차검증")
     test_matches_market_calendars_if_installed()
     print("\n전체 통과")

@@ -69,6 +69,17 @@ def is_trading_day(day: pd.Timestamp | str) -> bool:
     return len(trading_days(d.date(), d.date())) == 1
 
 
+def market_close_hour(day: pd.Timestamp | str) -> int:
+    """그 거래일의 정규장 마감 시각(ET 기준 시).
+
+    추수감사절 다음날·성탄 전날·7월 3일은 13:00에 닫는다. 16으로 고정해 두면
+    그날 뉴스 창이 3시간 넓어져 **마감 후에 나온 기사가 그날 신호에 섞인다.**
+    창을 자르는 게 look-ahead 차단의 핵심 지점인데 거기서 새는 셈이다.
+    연 2~4일이라 드물고, 드문 만큼 조용히 지나간다.
+    """
+    return NH.EARLY_CLOSE_HOUR if NH.is_early_close(day) else MARKET_CLOSE_HOUR
+
+
 def last_completed_session(now_utc: Optional[dt.datetime] = None) -> Optional[pd.Timestamp]:
     """지금 시점에서 '마감이 완료된' 가장 최근 거래일을 반환.
 
@@ -84,7 +95,7 @@ def last_completed_session(now_utc: Optional[dt.datetime] = None) -> Optional[pd
     )
     for day in reversed(days):
         close_et = pd.Timestamp(day).tz_localize(ET) + pd.Timedelta(
-            hours=MARKET_CLOSE_HOUR, minutes=SETTLE_LAG_MIN
+            hours=market_close_hour(day), minutes=SETTLE_LAG_MIN
         )
         if now_et >= close_et:
             return pd.Timestamp(day).normalize()
@@ -108,15 +119,18 @@ def news_window(session: pd.Timestamp | str) -> tuple[pd.Timestamp, pd.Timestamp
     """
     d = pd.Timestamp(session).normalize()
     prev = previous_session(d)
-    start = pd.Timestamp(prev).tz_localize(ET) + pd.Timedelta(hours=MARKET_CLOSE_HOUR)
-    end = pd.Timestamp(d).tz_localize(ET) + pd.Timedelta(hours=MARKET_CLOSE_HOUR)
+    # 양쪽 끝의 마감 시각을 각각 그날 기준으로 잡는다. 반일장이 창의 시작일 수도
+    # 끝일 수도 있고, 두 경우가 창을 반대 방향으로 움직인다.
+    start = pd.Timestamp(prev).tz_localize(ET) + pd.Timedelta(hours=market_close_hour(prev))
+    end = pd.Timestamp(d).tz_localize(ET) + pd.Timedelta(hours=market_close_hour(d))
     return start.tz_convert("UTC"), end.tz_convert("UTC")
 
 
 def kst_publish_stamp(session: pd.Timestamp | str) -> pd.Timestamp:
     """해당 세션 리포트의 KST 발행 예정 시각 (다음 날 07:00 KST 근방)."""
     d = pd.Timestamp(session).normalize()
-    close_utc = (pd.Timestamp(d).tz_localize(ET) + pd.Timedelta(hours=MARKET_CLOSE_HOUR)).tz_convert("UTC")
+    close_utc = (pd.Timestamp(d).tz_localize(ET)
+                 + pd.Timedelta(hours=market_close_hour(d))).tz_convert("UTC")
     kst = close_utc.tz_convert(KST)
     target = kst.normalize() + pd.Timedelta(hours=7)
     if target <= kst:

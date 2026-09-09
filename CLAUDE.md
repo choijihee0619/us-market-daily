@@ -135,7 +135,7 @@ AV 자체 감성 점수는 산출 방식이 비공개라 보조 지표로만 저
 
 | 항목 | 상태 |
 |---|---|
-| 파이프라인 | 완료. 오프라인 테스트 **13종** 통과 |
+| 파이프라인 | 완료. 오프라인 테스트 **14종** 통과 |
 | 도메인 + SSL | 완료. canonical·sitemap.xml·rss 실측 정상 |
 | `.env` — FRED, Alpha Vantage, SEC_USER_AGENT, OPENAI_API_KEY | 설정됨 |
 | `.env` — GA4 Data API, AdSense OAuth | 미설정 (CSV 폴백으로 동작) |
@@ -231,7 +231,7 @@ src/
   calendar_utils.py  거래일·DST·뉴스창. look-ahead 차단의 핵심
   freshness.py       세션 누락 판정. 순수 함수(gap_report)로 분리해 합성 검증
   freeze.py          세션 freeze. data/live/{세션}/ 불변 스냅샷 + 재실행 가드
-  nyse_holidays.py   NYSE 휴장일 내장 달력. pandas_market_calendars 없을 때 폴백
+  nyse_holidays.py   NYSE 휴장일 + 반일장 내장 달력. pandas_market_calendars 폴백
   storage.py         upsert parquet (latest 층). **append-only가 아니다 — keep=last**
   collect/           prices, macro, factors, news, news_alphavantage, analytics
   process/           residual, sentiment, attribution, weekly_stats
@@ -443,10 +443,20 @@ docs/SESSION_GAPS.md      세션 누락 감지·복구 설계 (7장 16번). 구�
       달라서 1월 1일이 토요일이면 앞 금요일에 **연다**(다른 휴일은 당겨 쉰다).
       임시 휴장(샌디·국장일)은 규칙으로 안 나와 목록으로 관리한다.
 
-      검증: `tests/test_nyse_calendar.py` 8종. 그중 하나가
+      **반일장(조기 마감)도 2026-09-09에 넣었다.** 추수감사절 다음날·성탄
+      전날·7월 3일은 13:00 ET에 닫는다. 16으로 고정해 두면 그날 뉴스 창이 3시간
+      넓어져 **마감 후 기사가 그날 신호에 섞인다** -- 창을 자르는 게 look-ahead
+      차단의 핵심 지점인데 거기서 새는 셈이다. 연 2~4일이라 드물고, 드문 만큼
+      조용히 지나간다. `market_close_hour(day)` 를 만들어 `news_window`(양 끝
+      각각)·`last_completed_session`·`kst_publish_stamp`·`freshness.settle_utc`
+      가 전부 그날 기준 마감을 쓴다.
+      12/24는 월~목일 때만(금요일이면 12/25가 토요일이라 12/24가 대체 휴장일),
+      7/3은 7/4가 월~금이고 7/3도 평일일 때만이다.
+
+      검증: `tests/test_nyse_calendar.py` 11종. 그중 하나가
       `pandas_market_calendars` 와의 교차검증이고 **2024~2026 전 구간
-      753거래일이 완전히 일치**한다(패키지가 없으면 건너뛴다. CI에서는 돈다).
-      이 교차검증이 두 구현이 갈라지는 걸 잡는 장치다.
+      거래일 753일·반일장 8일이 완전히 일치**한다(패키지가 없으면 건너뛴다.
+      CI에서는 돈다). 이 교차검증이 두 구현이 갈라지는 걸 잡는 장치다.
 
     **복구 가능성 확인 완료 (2026-09-08). 결론: 가능하다.**
     저장된 뉴스만으로는 안 된다 — 창 안 AV 기사가 08-03은 2,317건인데
@@ -568,8 +578,14 @@ docs/SESSION_GAPS.md      세션 누락 감지·복구 설계 (7장 16번). 구�
       것이고, `sort=LATEST` 라 창의 앞부분이 빠진다. 특히 월요일 세션은 창이
       금요일 마감부터 3일치라 1,000건으로 부족하다. 위 실측에서도 998건이 전부
       08-10 15:07~20:00 구간이었다 — **금·토·일이 통째로 빠졌다.**
-      한 창을 하위 구간으로 쪼개 여러 번 부르는 건 25요청/일 한도와 상충한다.
-      `[검증 필요 — 커버리지 대 한도 트레이드오프 미측정]`
+      **2026-09-09 해결: 잘린 배치를 시간 역방향으로 이어 받는다.**
+      반환이 `limit` 을 채우면 그 배치에서 본 **가장 오래된 발행시각을 새
+      `time_to`** 로 삼아 같은 배치를 다시 부른다. 창 시작에 닿으면 멈춘다.
+      예산은 `news.alphavantage.max_continuation_calls`(기본 5)로 통제한다 --
+      배치 7 + 이어받기 5 = 12회, 하루에 실행이 두 번 돌아도 24/25다.
+      **이어받기는 잘렸을 때만 쓰이므로 평일 1일치 창에서는 거의 0회다.**
+      실제로 08-03·08-10 복구에서 `earnings` 배치만 상한에 걸렸다.
+      `tests/test_av_window.py` 3종 추가(이어받기 / 예산 0 / 창 시작 중단).
     - `tests/test_av_window.py` 4종. 그중 하나가 **배선 테스트**다.
       `fetch_news` 가 지원해도 `run_daily.collect` 가 안 넘기면 소용없으므로
       collect를 실제로 호출해 인자를 확인한다
@@ -656,13 +672,23 @@ docs/SESSION_GAPS.md      세션 누락 감지·복구 설계 (7장 16번). 구�
 
 ## 8. 알려진 미해결 항목
 
-1. **생존편향** — 현재 지수 구성종목을 쓴다. ~~`snapshot_date`로 매일 저장 중~~
-   **2026-09-08 정정: 스냅샷은 쌓이지 않고 있다.** `resolve_universe()`가
-   `data/universe_sp500.csv` 가 있으면 그대로 반환하고 `sp500_constituents()` 를
-   다시 부르지 않는다. 그래서 `prices.py` 의 `snapshot_date` 기록은 죽은 경로이고,
-   구성종목은 2026-07-30자에 얼어 있다(40거래일간 스냅샷 0건).
-   point-in-time 백테스트를 하려면 `data/universe/{date}.csv` 형태의 일별 저장이
-   먼저 들어가야 한다.
+1. **생존편향** — ~~`snapshot_date`로 매일 저장 중~~ **2026-09-08 정정: 스냅샷이
+   쌓이지 않고 있었다.** `resolve_universe()` 가 csv가 있으면 그대로 반환하고
+   `sp500_constituents()` 를 다시 부르지 않아 `snapshot_date` 기록이 죽은
+   경로였다(40거래일간 스냅샷 0건, 구성종목은 2026-07-30자에 동결).
+
+   **2026-09-09 해결.** 세션마다 `universe` 표에 스냅샷을 남긴다
+   (`storage` 키 `["date","ticker"]`). 순서는 ① 이 세션 스냅샷이 있으면 재사용
+   ② 없으면 수집해서 저장 ③ 실패하면 직전 스냅샷 → csv 폴백이고, **폴백은 새
+   스냅샷을 쓰지 않는다**(안 받은 걸 받은 것처럼 남기지 않는다).
+   조회는 `prices.universe_asof(snapshots, date)` — `date` **이하**의 최신
+   스냅샷을 돌려주고, 그 이전 스냅샷이 없으면 **빈 결과**를 준다. 가장 이른
+   목록을 앞당겨 쓰면 막으려던 편향을 조용히 다시 만든다.
+   `tests/test_universe.py` 4종.
+
+   **한계: 과거는 복원되지 않는다.** 위키피디아 목록은 '현재' 구성종목이라
+   2026-09-09 이전 시점은 알 수 없다. 오늘부터 쌓이는 스냅샷이 point-in-time
+   백테스트의 재료이고, 그 이전 구간은 편향이 남는다는 걸 명시하고 써야 한다.
 2. **Ken French 팩터 지연** — 일간 파일이 수 주 지연된다. 당일은 ETF 프록시로 근사하고
    확정치가 오면 upsert로 소급 교체한다. **프록시는 서술용이고 회귀 계수 추정에는
    확정 팩터를 써야 한다.** 프록시-실제 상관 0.7~0.9로 알려져 있으나 `[검증 필요]`.

@@ -29,7 +29,7 @@ from typing import Iterable, Optional
 import pandas as pd
 
 from .calendar_utils import (ET, MARKET_CLOSE_HOUR, SETTLE_LAG_MIN,
-                             last_completed_session, trading_days)
+                             last_completed_session, market_close_hour, trading_days)
 
 # 잔차를 기준 테이블로 삼는다. 가격만 있고 잔차가 없는 세션은 반쪽이므로
 # '있다'고 부를 수 없다. 잔차가 있으면 그 위의 신호·채점도 계산됐다는 뜻이다.
@@ -45,12 +45,14 @@ OK, PENDING, MISSING = "OK", "PENDING", "MISSING"
 def settle_utc(session: pd.Timestamp | str) -> pd.Timestamp:
     """그 세션의 데이터가 확정됐다고 보는 시각(UTC).
 
-    마감 16:00 ET + SETTLE_LAG_MIN. 서머타임 때문에 UTC 시각이 1시간
-    움직이므로 ET로 만든 뒤 변환한다.
+    마감 + SETTLE_LAG_MIN. 서머타임 때문에 UTC 시각이 1시간 움직이므로 ET로
+    만든 뒤 변환한다. 마감 시각은 그날 기준이다 -- 반일장은 13:00이고, 16:00으로
+    고정하면 그날 확정 판정이 3시간 늦어져 유예시간 안에 있는 세션을 MISSING으로
+    잘못 잡을 수 있다.
     """
     d = pd.Timestamp(session).normalize()
     close_et = d.tz_localize(ET) + pd.Timedelta(
-        hours=MARKET_CLOSE_HOUR, minutes=SETTLE_LAG_MIN)
+        hours=market_close_hour(d), minutes=SETTLE_LAG_MIN)
     return close_et.tz_convert("UTC")
 
 

@@ -77,12 +77,23 @@ def fetch_news(
     limit: int = 1000,
     relevance_min: float = 0.25,
     max_calls: int = 5,
+    max_continuation: int = 0,
 ) -> pd.DataFrame:
     """NEWS_SENTIMENT 수집.
 
     relevance_min: ticker_sentiment의 relevance_score 하한. AV는 스쳐 지나간 언급도
     낮은 relevance로 붙여주므로 걸러야 한다. 0.25는 보수적 기본값이며 실측 후
     조정할 것.  [검증 필요]
+
+    max_continuation: **잘린 배치를 시간 역방향으로 이어 받는 추가 호출 예산.**
+    AV는 `sort=LATEST` 라 반환이 `limit` 을 채우면 창의 **뒷부분만** 온다.
+    월요일 세션은 창이 금요일 마감부터 3일치라 이 일이 실제로 일어난다 --
+    2026-08-10 창을 1회 호출했을 때 1,000건이 전부 마지막 5시간(15:07~20:00)에
+    몰려 있었고 금·토·일이 통째로 빠졌다. 그래서 가장 오래된 기사 시각을
+    새 `time_to` 로 삼아 앞쪽을 다시 받는다.
+
+    0이면 이어받지 않는다(기본). 무료 티어 25요청/일이고 하루에 실행이 두 번
+    돌 수 있으므로 예산을 config에서 통제한다.
     """
     if not api_key:
         log.warning("ALPHAVANTAGE_API_KEY 없음 -- AV 수집 건너뜀")
@@ -91,8 +102,13 @@ def fetch_news(
     batches = list(topic_batches or DEFAULT_BATCHES)[:max_calls]
     rows: list[dict] = []
     calls = 0
+    # 잘린 배치: topics -> 그 배치에서 본 가장 오래된 발행시각.
+    # 다음 호출의 time_to 가 된다(좌폐우개라 그 기사 자체는 중복되지 않는다).
+    truncated: dict[str, pd.Timestamp] = {}
+    pending = [(t, time_to) for t in batches]
 
-    for topics in batches:
+    while pending:
+        topics, cur_to = pending.pop(0)
         params = {
             "function": "NEWS_SENTIMENT",
             "topics": topics,
@@ -101,8 +117,8 @@ def fetch_news(
             "sort": "LATEST",
             "apikey": api_key,
         }
-        if time_to is not None:
-            params["time_to"] = pd.Timestamp(time_to).tz_convert("UTC").strftime("%Y%m%dT%H%M")
+        if cur_to is not None:
+            params["time_to"] = pd.Timestamp(cur_to).tz_convert("UTC").strftime("%Y%m%dT%H%M")
 
         try:
             r = requests.get(BASE, params=params, timeout=40)
@@ -126,13 +142,27 @@ def fetch_news(
         # "그 기사가 신호 생성 시점에 실제로 데이터셋 안에 있었나"는 이쪽이 답한다.
         collected_at = pd.Timestamp.now(tz="UTC")
         feed = js.get("feed", [])
-        log.info("AV %s -> %d건 (호출 %d/%d)", topics, len(feed), calls, len(batches))
+        log.info("AV %s -> %d건 (호출 %d, 남은 이어받기 예산 %d)",
+                 topics, len(feed), calls, max_continuation - len(truncated))
+
         # 반환 건수가 limit과 같으면 **잘린 것이다.** sort=LATEST라 창의 뒷부분만
         # 남고 앞부분(특히 주말을 낀 월요일 세션의 금·토·일)이 통째로 빠진다.
         # 조용히 넘어가면 "그날 뉴스가 적었다"로 오독하게 된다.
         if len(feed) >= limit:
-            log.warning("AV %s -> limit(%d) 도달. 창의 앞부분이 잘렸을 수 있다 "
-                        "(sort=LATEST). 커버리지 해석에 주의할 것.", topics, limit)
+            oldest = min((t for t in (_parse_ts(i.get("time_published", "")) for i in feed)
+                          if t is not None), default=None)
+            if oldest is None or oldest <= pd.Timestamp(time_from):
+                log.warning("AV %s -> limit(%d) 도달. 창의 앞부분이 잘렸을 수 있다.",
+                            topics, limit)
+            elif len(truncated) < max_continuation:
+                # 가장 오래된 기사 시각을 새 time_to 로 삼아 앞쪽을 이어 받는다.
+                truncated[f"{topics}@{oldest}"] = oldest
+                pending.append((topics, oldest))
+                log.info("AV %s -> limit 도달. %s 이전 구간을 이어 받는다 (%d/%d)",
+                         topics, oldest, len(truncated), max_continuation)
+            else:
+                log.warning("AV %s -> limit(%d) 도달했으나 이어받기 예산 소진. "
+                            "%s 이전 구간이 빠진다.", topics, limit, oldest)
 
         for item in feed:
             published = _parse_ts(item.get("time_published", ""))
@@ -185,7 +215,8 @@ def fetch_news(
         return pd.DataFrame()
 
     df = pd.DataFrame(rows).drop_duplicates(subset=["id"])
-    log.info("AV 수집 완료: %d건 (고유), 호출 %d회", len(df), calls)
+    log.info("AV 수집 완료: %d건 (고유), 호출 %d회 (이어받기 %d회)",
+             len(df), calls, len(truncated))
     return df
 
 

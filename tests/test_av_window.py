@@ -109,8 +109,75 @@ def test_limit_reached_warns():
     print(f"  경고 발생: {records[0][:60]}...")
 
 
+def _feed_at(n: int, hhmm_list) -> dict:
+    """발행시각을 지정해 만드는 피드. 이어받기 경계 검증용."""
+    items = []
+    for i in range(n):
+        ts = hhmm_list[i % len(hhmm_list)]
+        items.append({"title": f"h{ts}-{i}", "url": f"https://example.com/{ts}-{i}",
+                      "time_published": ts,
+                      "overall_sentiment_score": 0.0, "overall_sentiment_label": "Neutral",
+                      "ticker_sentiment": [{"ticker": "AAPL", "relevance_score": "0.9"}],
+                      "topics": [{"topic": "Earnings"}]})
+    return {"feed": items}
+
+
+def test_truncated_batch_is_continued():
+    """limit을 채우면 가장 오래된 기사 시각을 새 time_to 로 삼아 앞쪽을 이어 받는다."""
+    seen: list = []
+    calls = {"n": 0}
+
+    def fake_get(url, params=None, timeout=None):
+        seen.append(dict(params or {}))
+        calls["n"] += 1
+        if calls["n"] == 1:
+            # 창의 뒷부분만 꽉 채워 돌려준다 (08-10 15:00~20:00 실측 재현)
+            return _Resp(_feed_at(10, ["20260810T190000", "20260810T150000"]))
+        return _Resp(_feed_at(3, ["20260808T100000"]))       # 앞부분
+
+    AV.requests.get = fake_get                               # type: ignore[attr-defined]
+    AV.time.sleep = lambda *_: None                          # type: ignore[attr-defined]
+    df = AV.fetch_news("KEY", time_from=WIN_START, time_to=WIN_END,
+                       topic_batches=["earnings"], limit=10, max_calls=1,
+                       max_continuation=2)
+    assert len(seen) == 2, f"이어받기 호출이 없다: {len(seen)}회"
+    assert seen[1]["time_to"] == "20260810T1500", f"이어받기 time_to가 틀렸다: {seen[1]}"
+    assert seen[1]["time_from"] == seen[0]["time_from"], "time_from 은 그대로여야 한다"
+    got = set(pd.to_datetime(df["published_at"], utc=True).dt.strftime("%m-%d"))
+    assert "08-08" in got, f"앞쪽 구간을 못 받았다: {got}"
+    print(f"  1차 {seen[0].get('time_to')} -> 2차 {seen[1]['time_to']} · 수집 {len(df)}건 {sorted(got)}")
+
+
+def test_no_continuation_when_budget_zero():
+    """기본값 0이면 이어받지 않는다. 예산은 config가 통제한다."""
+    seen: list = []
+    AV.requests.get = _capture_get(_feed_at(10, ["20260810T150000"]), seen)  # type: ignore[attr-defined]
+    AV.time.sleep = lambda *_: None                          # type: ignore[attr-defined]
+    AV.fetch_news("KEY", time_from=WIN_START, time_to=WIN_END,
+                  topic_batches=["earnings"], limit=10, max_calls=1, max_continuation=0)
+    assert len(seen) == 1, f"예산 0인데 추가 호출이 났다: {len(seen)}회"
+    print("  예산 0 -> 추가 호출 없음")
+
+
+def test_continuation_stops_at_window_start():
+    """창 시작에 닿으면 더 받지 않는다. 무한 루프와 예산 낭비를 막는다."""
+    seen: list = []
+    # 가장 오래된 기사가 창 시작(08-07 20:00)보다 앞이면 더 받을 게 없다
+    AV.requests.get = _capture_get(_feed_at(10, ["20260807T190000"]), seen)  # type: ignore[attr-defined]
+    AV.time.sleep = lambda *_: None                          # type: ignore[attr-defined]
+    AV.fetch_news("KEY", time_from=WIN_START, time_to=WIN_END,
+                  topic_batches=["earnings"], limit=10, max_calls=1, max_continuation=5)
+    assert len(seen) == 1, f"창 밖까지 이어받았다: {len(seen)}회"
+    print("  창 시작 도달 -> 이어받기 중단")
+
+
 def test_collect_passes_window_end():
-    """배선 확인. fetch_news가 지원해도 run_daily가 안 넘기면 소용없다."""
+    """배선 확인. fetch_news가 지원해도 run_daily가 안 넘기면 소용없다.
+
+    **주의: rd.AV 는 새 모듈이 아니라 이미 임포트된 같은 모듈 객체다.**
+    `rd.AV.fetch_news = ...` 는 프로세스 전체에 남아 뒤 테스트가 실제 코드를
+    못 타게 만든다. 실제로 5번 테스트가 호출 0회로 실패해서 알았다. 반드시 되돌린다.
+    """
     import importlib.util
 
     spec = importlib.util.spec_from_file_location(
@@ -132,8 +199,15 @@ def test_collect_passes_window_end():
         seen.update(kw)
         return empty
 
+    original = rd.AV.fetch_news
     rd.AV.fetch_news = fake_av
+    try:
+        _assert_collect_wiring(rd, seen)
+    finally:
+        rd.AV.fetch_news = original          # 전역 오염을 남기지 않는다
 
+
+def _assert_collect_wiring(rd, seen: dict) -> None:
     cfg = rd.load_config()
     cfg["news"]["providers"] = ["alphavantage"]
     cfg["news"]["alphavantage"]["enabled"] = True
@@ -156,4 +230,10 @@ if __name__ == "__main__":
     test_limit_reached_warns()
     print("\n[4] run_daily.collect 배선")
     test_collect_passes_window_end()
+    print("\n[5] 잘린 배치 이어받기")
+    test_truncated_batch_is_continued()
+    print("\n[6] 예산 0이면 이어받지 않음")
+    test_no_continuation_when_budget_zero()
+    print("\n[7] 창 시작에서 중단")
+    test_continuation_stops_at_window_start()
     print("\n전체 통과")

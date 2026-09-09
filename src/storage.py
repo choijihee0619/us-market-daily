@@ -22,6 +22,9 @@ SCHEMAS: dict[str, list[str]] = {
     "residuals": ["date", "ticker"],
     "signals": ["date", "ticker"],
     "scorecard": ["date"],
+    # 지수 구성종목의 시점별 스냅샷. date는 관측일(세션)이다.
+    # 생존편향을 피하려면 백테스트가 이 표를 봐야 한다(8장 1번).
+    "universe": ["date", "ticker"],
 }
 
 

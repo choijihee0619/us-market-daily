@@ -21,7 +21,7 @@
 
 | 항목 | 상태 |
 |---|---|
-| 파이프라인 | 동작. 오프라인 테스트 13종 통과 |
+| 파이프라인 | 동작. 오프라인 테스트 14종 통과 |
 | OOS 기록 보전 | `data/live/{세션}/` 불변 스냅샷 + 재실행 가드. 과거 25세션 소급 복원 완료 (2026-09-08) |
 | 데이터 | 가격 525종목 179,991행 (2025-03~2026-07) + 매크로·팩터·뉴스 |
 | 자동화 | GitHub Actions 일간/주간 cron 동작 확인 |
@@ -343,7 +343,7 @@ scripts/
 src/
 ├── config.py             설정 + .env 로더
 ├── calendar_utils.py     거래일·DST·뉴스창 (look-ahead 차단)
-├── nyse_holidays.py      NYSE 휴장일 내장 달력 (외부 패키지 없이 동작)
+├── nyse_holidays.py      NYSE 휴장일·반일장 내장 달력 (외부 패키지 없이 동작)
 ├── storage.py            parquet upsert (latest 층) + as_list
 ├── freeze.py             세션 freeze. data/live/ 불변 스냅샷 + 재실행 가드
 ├── collect/

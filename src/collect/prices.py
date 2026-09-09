@@ -123,3 +123,22 @@ def sp500_constituents() -> pd.DataFrame:
     df["ticker"] = df["ticker"].str.replace(".", "-", regex=False)  # BRK.B -> BRK-B
     df["snapshot_date"] = pd.Timestamp.utcnow().tz_localize(None).normalize()
     return df
+
+
+def universe_asof(snapshots: pd.DataFrame, date) -> pd.DataFrame:
+    """`date` 시점에 우리가 알고 있던 구성종목.
+
+    **가장 최근 스냅샷이 아니라 `date` 이하의 최신 스냅샷을 쓴다.** 이게
+    생존편향을 막는 지점이다 -- 지금 구성종목으로 과거를 보면 그 사이 편입된
+    종목의 성과가 소급 반영되고 퇴출된 종목은 사라진다.
+
+    `date` 이전 스냅샷이 없으면 **빈 DataFrame을 돌려준다.** 가장 이른 스냅샷을
+    끌어다 쓰지 않는다 -- 그건 모르는 걸 아는 척하는 것이고, 조용히 편향을 만든다.
+    """
+    if snapshots is None or snapshots.empty or "date" not in snapshots.columns:
+        return pd.DataFrame()
+    d = pd.to_datetime(snapshots["date"]).dt.tz_localize(None).dt.normalize()
+    prior = d[d <= pd.Timestamp(date).normalize()]
+    if prior.empty:
+        return pd.DataFrame()
+    return snapshots[d == prior.max()].copy()
