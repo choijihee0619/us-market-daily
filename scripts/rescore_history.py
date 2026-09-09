@@ -17,7 +17,27 @@
              sentiment_w = sentiment x w(novelty)
              signals    (세션별 종목 집계 = 위 값의 함수)
              scorecard  (전일 신호 대 당일 잔차)
+  선택       residuals  (--residuals). 아래 참조
   그대로 둠  novelty
+
+## --residuals: 월요일 수익률 버그의 잔재
+
+2026-09-08에 `yf.download` 합집합 인덱스 때문에 월요일 수익률이 전부 NaN이던
+버그를 고치고 가격을 다시 받았다. 그런데 **그 전에 계산된 잔차는 월요일이 빠진
+베타 추정창 위에 서 있다.** 실측(2026-09-09): 수정 전 세션들의 저장 잔차와 지금
+가격으로 다시 계산한 잔차의 상관이 0.988~0.995, |차이| 중위 13~17bp였다.
+수정 후 계산된 2026-09-08은 상관 1.0000으로 완전히 같다.
+
+그대로 두면 **표본 전반부와 후반부가 다른 방식으로 만들어진다.** 사전 교체 때
+피하려던 것과 같은 이음매다. Fama-MacBeth 계수 스케일이 1.4bp 수준이라
+13~17bp 차이는 작지 않다.
+
+잔차를 다시 계산하면 채점도 따라 바뀌므로 **순서를 이 스크립트가 소유한다** --
+residuals -> signals -> scorecard. 두 군데서 따로 만들면 어긋난다.
+
+주의: 지금 가격·팩터에는 Ken French 확정치 같은 사후 갱신이 이미 반영돼 있다.
+그래서 재계산은 ex-post 값이고, 그게 latest 층의 정의다. ex-ante 값은
+`data/live/` 스냅샷이 들고 있다.
 
 **novelty를 다시 계산하지 않는 이유가 중요하다.** novelty는 과거 헤드라인과의
 비교라서 이력 의존적이다. 지금 저장소 전체를 놓고 일괄 계산하면 그 세션 시점에
@@ -53,6 +73,7 @@ from src.calendar_utils import news_window, previous_session  # noqa: E402
 from src.collect import news as N  # noqa: E402
 from src.config import DATA_DIR, load_config  # noqa: E402
 from src.process import attribution as A  # noqa: E402
+from src.process import residual as R  # noqa: E402
 from src.process import sentiment as S  # noqa: E402
 
 META_PATH = DATA_DIR / "rescore.meta.json"
@@ -85,6 +106,56 @@ def _rescore_news(news: pd.DataFrame, thr: float) -> tuple[pd.DataFrame, dict]:
         "mean_after": float(after[both].mean()) if both.any() else None,
     }
     return out, delta
+
+
+def _rebuild_residuals(cfg, sessions: list[pd.Timestamp]) -> tuple[pd.DataFrame, dict]:
+    """지금 가격·팩터로 세션별 잔차를 다시 추정한다."""
+    px, fac = storage.read("prices"), storage.read("factors")
+    old = storage.read("residuals")
+    od = pd.to_datetime(old["date"]).dt.normalize() if not old.empty else None
+
+    frames, diffs = [], []
+    for s in sessions:
+        new = R.estimate_residuals(
+            px, fac, s,
+            spec=cfg.get_path("model.risk_model", "ff5_umd"),
+            window=int(cfg.get_path("model.beta_window", 250)),
+            min_obs=int(cfg.get_path("model.beta_min_obs", 120)),
+            shrinkage=cfg.get_path("model.beta_shrinkage", "vasicek"),
+        )
+        if new.empty:
+            print(f"  [주의] {pd.Timestamp(s).date()} 잔차가 비었다. 기존 값을 유지한다.")
+            continue
+        new = new.copy()
+        new["date"] = s
+        frames.append(new)
+        if od is not None:
+            prev = old[od == s][["ticker", "residual"]]
+            if not prev.empty:
+                m = prev.merge(new[["ticker", "residual"]], on="ticker",
+                               suffixes=("_old", "_new")).dropna()
+                if len(m):
+                    diffs.append({
+                        "session": str(pd.Timestamp(s).date()),
+                        "n": int(len(m)),
+                        "corr": float(m["residual_old"].corr(m["residual_new"])),
+                        "median_abs_bp": float((m["residual_new"] - m["residual_old"]).abs().median() * 1e4),
+                    })
+    out = pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
+    corrs = [d["corr"] for d in diffs]
+    meds = [d["median_abs_bp"] for d in diffs]
+    summary = {
+        "sessions": len(frames),
+        "compared": len(diffs),
+        "min_corr": float(min(corrs)) if corrs else None,
+        "changed_sessions": int(sum(1 for c in corrs if c < 0.9999)),
+        "median_abs_bp_median": float(np.median(meds)) if meds else None,
+        "median_abs_bp_max": float(max(meds)) if meds else None,
+        # 세션별 상세를 남긴다. 어느 세션이 얼마나 움직였는지는 나중에
+        # "표본 전반부가 왜 다른가"를 물을 때 유일한 근거가 된다.
+        "per_session": sorted(diffs, key=lambda x: x["corr"]),
+    }
+    return out, summary
 
 
 def _rebuild_signals(news: pd.DataFrame, sessions: list[pd.Timestamp]) -> pd.DataFrame:
@@ -135,9 +206,48 @@ def _rebuild_scorecard(signals: pd.DataFrame, resid: pd.DataFrame,
     return pd.DataFrame(rows), diffs
 
 
+def _rewrite_scorecard_json(sc: pd.DataFrame) -> int:
+    """data/scorecard.json 을 scorecard 표에서 다시 만든다.
+
+    이 파일은 대시보드용 **파생 뷰**이지 별도 기록이 아니다
+    (`github_archive.append_scorecard_json` 이 매 실행마다 한 행씩 덧붙인다).
+    그런데 덧붙이기만 하므로 채점을 다시 계산하면 그대로 남아 parquet과
+    어긋난다. 실측(2026-09-09): 23항목이 남아 있었고 07-30이 json −97.27 대
+    parquet −50.05 였다. **같은 레포 안에 서로 다른 채점표가 두 개 있는 상태다.**
+    파생 뷰는 원본에서 다시 만든다.
+
+    `rev`(그때 git 해시)는 재계산으로 알 수 없으므로 기존 값을 살려 옮긴다.
+    """
+    path = DATA_DIR / "scorecard.json"
+    old_rev: dict[str, object] = {}
+    if path.exists():
+        try:
+            old_rev = {r["date"]: r.get("rev")
+                       for r in json.loads(path.read_text(encoding="utf-8"))}
+        except Exception:                                   # pragma: no cover
+            old_rev = {}
+
+    rows = []
+    for _, r in sc.sort_values("date").iterrows():
+        d = pd.Timestamp(r["date"]).strftime("%Y-%m-%d")
+        rows.append({
+            "date": d,
+            "spread_bp": round(float(r["spread_bp"]), 2),
+            "top_bp": round(float(r["top_resid_bp"]), 2),
+            "bottom_bp": round(float(r["bottom_resid_bp"]), 2),
+            "hit": bool(r["hit"]),
+            "n": int(r["n"]),
+            "rev": old_rev.get(d),
+        })
+    path.write_text(json.dumps(rows, ensure_ascii=False, indent=1), encoding="utf-8")
+    return len(rows)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--residuals", action="store_true",
+                    help="지금 가격·팩터로 잔차도 다시 추정한다 (월요일 버그 잔재 제거)")
     args = ap.parse_args()
 
     cfg = load_config()
@@ -158,6 +268,23 @@ def main() -> int:
     sessions = sorted(pd.to_datetime(resid["date"]).dt.normalize().unique())
     print(f"뉴스 {len(news):,}행 · 잔차 보유 세션 {len(sessions)}개 "
           f"({sessions[0].date()} ~ {sessions[-1].date()})")
+
+    resid_summary = None
+    if args.residuals:
+        resid2, resid_summary = _rebuild_residuals(cfg, sessions)
+        print()
+        print("[잔차 재추정]")
+        print(f"  세션 {resid_summary['sessions']}개 · 값이 달라진 세션 "
+              f"{resid_summary['changed_sessions']}/{resid_summary['compared']}")
+        if resid_summary["min_corr"] is not None:
+            print(f"  최저 상관 {resid_summary['min_corr']:.4f} · |차이| 중위의 중위 "
+                  f"{resid_summary['median_abs_bp_median']:.2f}bp "
+                  f"(최대 {resid_summary['median_abs_bp_max']:.2f}bp)")
+        if not resid2.empty and not args.dry_run:
+            storage.upsert("residuals", resid2, ["date", "ticker"])
+            resid = storage.read("residuals")
+        elif not resid2.empty:
+            resid = resid2
 
     news2, d = _rescore_news(news, thr)
     print()
@@ -195,12 +322,15 @@ def main() -> int:
         storage.upsert("signals", signals2, ["date", "ticker"])
     if not sc2.empty:
         storage.upsert("scorecard", sc2, ["date"])
+        n_json = _rewrite_scorecard_json(storage.read("scorecard"))
+        print(f"  data/scorecard.json 재생성: {n_json}행 (파생 뷰라 원본에서 다시 만든다)")
 
     META_PATH.write_text(json.dumps({
         "rescored_at_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "dictionary": S.dictionary_tag(),
         "dictionary_info": info,
         "sentiment_delta": d,
+        "residuals_rebuilt": resid_summary,
         "sessions": [str(s.date()) for s in sessions],
         "scorecard_hit_flips": flips,
         "scope": ("latest 층만. data/live/ 스냅샷은 건드리지 않는다. "
