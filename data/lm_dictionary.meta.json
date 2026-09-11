@@ -1,6 +1,6 @@
 {
  "bytes": 9093460,
- "downloaded_at_utc": "2026-09-10T22:49:08+00:00",
+ "downloaded_at_utc": "2026-09-11T00:14:13+00:00",
  "litigious": 903,
  "negative": 2345,
  "note": "파일 자체는 재배포하지 않는다(.gitignore). 재현하려면 이 스크립트를 돌려 같은 sha256이 나오는지 확인할 것.",
