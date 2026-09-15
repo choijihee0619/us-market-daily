@@ -1,0 +1,69 @@
+{
+ "config_sha1": "f48e017646d7bbe2",
+ "frozen_at_utc": "2026-09-15T23:16:29+00:00",
+ "git_dirty": true,
+ "git_sha": "21b35d0",
+ "github_run_attempt": "1",
+ "github_run_id": "35034590187",
+ "meta": {
+  "av_relevance_min": 0.25,
+  "beta_window": 250,
+  "channels": [
+   "github"
+  ],
+  "dry_run": false,
+  "llm_classify_model": "gpt-4o-mini",
+  "llm_provider": "openai",
+  "llm_write_model": "gpt-4o",
+  "news_provenance": {
+   "by_provider": {
+    "alphavantage": 803,
+    "edgar": 130,
+    "rss": 11
+   },
+   "collected_at_max": "2026-09-15 23:15:43.224808+00:00",
+   "collected_at_min": "2026-09-14 23:35:14.562848+00:00",
+   "missing_collected_at": 0,
+   "n": 944
+  },
+  "novelty_threshold": 0.85,
+  "risk_model": "ff5_umd",
+  "sentiment_dictionary": {
+   "downloaded_at_utc": "2026-09-15T23:13:21+00:00",
+   "negative": 2345,
+   "positive": 347,
+   "rows": 86553,
+   "sha256": "e2d1328682bab7d2187684fb9f5420bb730401c9eefc00daf835edd203f4859d",
+   "source": "lm_master",
+   "uncertainty": 297
+  }
+ },
+ "news_window_utc": [
+  "2026-09-14 20:00:00+00:00",
+  "2026-09-15 20:00:00+00:00"
+ ],
+ "provenance": "live",
+ "rows": {
+  "news": 944,
+  "residuals": 522,
+  "signals": 677
+ },
+ "runner": "github-actions",
+ "schema_version": 1,
+ "scorecard": {
+  "available": true,
+  "bottom_resid_bp": 31.22594783946706,
+  "hit": true,
+  "n": 378,
+  "n_bottom": 76,
+  "n_top": 76,
+  "spread_bp": 12.39490545822211,
+  "top_resid_bp": 43.620853297689166
+ },
+ "session": "2026-09-15",
+ "tables": {
+  "news": "세션 창 안의 기사. 감성·novelty·토픽이 그날 계산된 값 그대로다",
+  "residuals": "팩터 회귀 잔차. 이 세션의 행만",
+  "signals": "종목별 일간 집계 신호. 이 세션의 행만"
+ }
+}
