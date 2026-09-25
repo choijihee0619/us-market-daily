@@ -358,5 +358,14 @@
   "hit": true,
   "n": 432,
   "rev": "6afe8fb"
+ },
+ {
+  "date": "2026-09-25",
+  "spread_bp": -1.02,
+  "top_bp": 1.82,
+  "bottom_bp": 2.84,
+  "hit": false,
+  "n": 418,
+  "rev": "52db294"
  }
 ]
