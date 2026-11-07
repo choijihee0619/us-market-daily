@@ -439,5 +439,14 @@
   "hit": false,
   "n": 24,
   "rev": "62f4381"
+ },
+ {
+  "date": "2026-11-06",
+  "spread_bp": -55.05,
+  "top_bp": 47.47,
+  "bottom_bp": 102.51,
+  "hit": false,
+  "n": 28,
+  "rev": "d29881c"
  }
 ]
