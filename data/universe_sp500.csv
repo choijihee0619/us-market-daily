@@ -1,504 +1,504 @@
 ticker,name,sector,industry,snapshot_date
-MMM,3M,Industrials,Industrial Conglomerates,2026-11-07
-AOS,A. O. Smith,Industrials,Building Products,2026-11-07
-ABT,Abbott Laboratories,Health Care,Health Care Equipment,2026-11-07
-ABBV,AbbVie,Health Care,Biotechnology,2026-11-07
-ACN,Accenture,Information Technology,IT Consulting & Other Services,2026-11-07
-ADBE,Adobe Inc.,Information Technology,Application Software,2026-11-07
-AMD,Advanced Micro Devices,Information Technology,Semiconductors,2026-11-07
-AES,AES Corporation,Utilities,Independent Power Producers & Energy Traders,2026-11-07
-AFL,Aflac,Financials,Life & Health Insurance,2026-11-07
-A,Agilent Technologies,Health Care,Life Sciences Tools & Services,2026-11-07
-APD,Air Products,Materials,Industrial Gases,2026-11-07
-ABNB,Airbnb,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-07
-AKAM,Akamai Technologies,Information Technology,Internet Services & Infrastructure,2026-11-07
-ALB,Albemarle Corporation,Materials,Specialty Chemicals,2026-11-07
-ARE,Alexandria Real Estate Equities,Real Estate,Office REITs,2026-11-07
-ALGN,Align Technology,Health Care,Health Care Supplies,2026-11-07
-ALLE,Allegion,Industrials,Building Products,2026-11-07
-LNT,Alliant Energy,Utilities,Electric Utilities,2026-11-07
-ALL,Allstate,Financials,Property & Casualty Insurance,2026-11-07
-GOOGL,Alphabet Inc. (Class A),Communication Services,Interactive Media & Services,2026-11-07
-GOOG,Alphabet Inc. (Class C),Communication Services,Interactive Media & Services,2026-11-07
-MO,Altria,Consumer Staples,Tobacco,2026-11-07
-AMZN,Amazon,Consumer Discretionary,Broadline Retail,2026-11-07
-AMCR,Amcor,Materials,Paper & Plastic Packaging Products & Materials,2026-11-07
-AEE,Ameren,Utilities,Multi-Utilities,2026-11-07
-AEP,American Electric Power,Utilities,Electric Utilities,2026-11-07
-AXP,American Express,Financials,Consumer Finance,2026-11-07
-AIG,American International Group,Financials,Multi-line Insurance,2026-11-07
-AMT,American Tower,Real Estate,Telecom Tower REITs,2026-11-07
-AWK,American Water Works,Utilities,Water Utilities,2026-11-07
-AMP,Ameriprise Financial,Financials,Asset Management & Custody Banks,2026-11-07
-AME,Ametek,Industrials,Electrical Components & Equipment,2026-11-07
-AMGN,Amgen,Health Care,Biotechnology,2026-11-07
-APH,Amphenol,Information Technology,Electronic Components,2026-11-07
-ADI,Analog Devices,Information Technology,Semiconductors,2026-11-07
-AON,Aon plc,Financials,Insurance Brokers,2026-11-07
-APA,APA Corporation,Energy,Oil & Gas Exploration & Production,2026-11-07
-APO,Apollo Global Management,Financials,Asset Management & Custody Banks,2026-11-07
-AAPL,Apple Inc.,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-07
-AMAT,Applied Materials,Information Technology,Semiconductor Materials & Equipment,2026-11-07
-APP,AppLovin,Communication Services,Advertising,2026-11-07
-APTV,Aptiv,Consumer Discretionary,Automotive Parts & Equipment,2026-11-07
-ACGL,Arch Capital Group,Financials,Property & Casualty Insurance,2026-11-07
-ADM,Archer Daniels Midland,Consumer Staples,Agricultural Products & Services,2026-11-07
-ARES,Ares Management,Financials,Asset Management & Custody Banks,2026-11-07
-ANET,Arista Networks,Information Technology,Communications Equipment,2026-11-07
-AJG,Arthur J. Gallagher & Co.,Financials,Insurance Brokers,2026-11-07
-AIZ,Assurant,Financials,Multi-line Insurance,2026-11-07
-T,AT&T,Communication Services,Integrated Telecommunication Services,2026-11-07
-ATO,Atmos Energy,Utilities,Gas Utilities,2026-11-07
-ADSK,Autodesk,Information Technology,Application Software,2026-11-07
-ADP,Automatic Data Processing,Industrials,Human Resource & Employment Services,2026-11-07
-AZO,AutoZone,Consumer Discretionary,Automotive Retail,2026-11-07
-AVY,Avery Dennison,Materials,Paper & Plastic Packaging Products & Materials,2026-11-07
-AXON,Axon Enterprise,Industrials,Aerospace & Defense,2026-11-07
-BKR,Baker Hughes,Energy,Oil & Gas Equipment & Services,2026-11-07
-BALL,Ball Corporation,Materials,"Metal, Glass & Plastic Containers",2026-11-07
-BAC,Bank of America,Financials,Diversified Banks,2026-11-07
-BAX,Baxter International,Health Care,Health Care Equipment,2026-11-07
-BDX,Becton Dickinson,Health Care,Health Care Equipment,2026-11-07
-BRK-B,Berkshire Hathaway,Financials,Multi-Sector Holdings,2026-11-07
-BBY,Best Buy,Consumer Discretionary,Computer & Electronics Retail,2026-11-07
-TECH,Bio-Techne,Health Care,Life Sciences Tools & Services,2026-11-07
-BIIB,Biogen,Health Care,Biotechnology,2026-11-07
-BLK,BlackRock,Financials,Asset Management & Custody Banks,2026-11-07
-BX,Blackstone Inc.,Financials,Asset Management & Custody Banks,2026-11-07
-XYZ,"Block, Inc.",Financials,Transaction & Payment Processing Services,2026-11-07
-BE,Bloom Energy,Industrials,Electrical Components & Equipment,2026-11-07
-BNY,BNY Mellon,Financials,Asset Management & Custody Banks,2026-11-07
-BA,Boeing,Industrials,Aerospace & Defense,2026-11-07
-BKNG,Booking Holdings,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-07
-BSX,Boston Scientific,Health Care,Health Care Equipment,2026-11-07
-BMY,Bristol Myers Squibb,Health Care,Pharmaceuticals,2026-11-07
-AVGO,Broadcom,Information Technology,Semiconductors,2026-11-07
-BR,Broadridge Financial Solutions,Industrials,Data Processing & Outsourced Services,2026-11-07
-BRO,Brown & Brown,Financials,Insurance Brokers,2026-11-07
-BF-B,Brown–Forman,Consumer Staples,Distillers & Vintners,2026-11-07
-BG,Bunge Global,Consumer Staples,Agricultural Products & Services,2026-11-07
-BXP,"BXP, Inc.",Real Estate,Office REITs,2026-11-07
-CHRW,C.H. Robinson,Industrials,Air Freight & Logistics,2026-11-07
-CDNS,Cadence Design Systems,Information Technology,Application Software,2026-11-07
-CPT,Camden Property Trust,Real Estate,Multi-Family Residential REITs,2026-11-07
-COF,Capital One,Financials,Consumer Finance,2026-11-07
-CAH,Cardinal Health,Health Care,Health Care Distributors,2026-11-07
-CCL,Carnival Corporation,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-07
-CARR,Carrier Global,Industrials,Building Products,2026-11-07
-CVNA,Carvana,Consumer Discretionary,Automotive Retail,2026-11-07
-CASY,Casey's,Consumer Staples,Food Retail,2026-11-07
-CAT,Caterpillar Inc.,Industrials,Construction Machinery & Heavy Transportation Equipment,2026-11-07
-CBOE,Cboe Global Markets,Financials,Financial Exchanges & Data,2026-11-07
-CBRE,CBRE Group,Real Estate,Real Estate Services,2026-11-07
-CDW,CDW Corporation,Information Technology,Technology Distributors,2026-11-07
-COR,Cencora,Health Care,Health Care Distributors,2026-11-07
-CNC,Centene Corporation,Health Care,Managed Health Care,2026-11-07
-CNP,CenterPoint Energy,Utilities,Multi-Utilities,2026-11-07
-CF,CF Industries,Materials,Fertilizers & Agricultural Chemicals,2026-11-07
-CRL,Charles River Laboratories,Health Care,Life Sciences Tools & Services,2026-11-07
-SCHW,Charles Schwab Corporation,Financials,Investment Banking & Brokerage,2026-11-07
-CHTR,Charter Communications,Communication Services,Cable & Satellite,2026-11-07
-CVX,Chevron Corporation,Energy,Integrated Oil & Gas,2026-11-07
-CMG,Chipotle Mexican Grill,Consumer Discretionary,Restaurants,2026-11-07
-CB,Chubb Limited,Financials,Property & Casualty Insurance,2026-11-07
-CHD,Church & Dwight,Consumer Staples,Household Products,2026-11-07
-CIEN,Ciena,Information Technology,Communications Equipment,2026-11-07
-CI,Cigna,Health Care,Health Care Services,2026-11-07
-CINF,Cincinnati Financial,Financials,Property & Casualty Insurance,2026-11-07
-CTAS,Cintas,Industrials,Diversified Support Services,2026-11-07
-CSCO,Cisco,Information Technology,Communications Equipment,2026-11-07
-C,Citigroup,Financials,Diversified Banks,2026-11-07
-CFG,Citizens Financial Group,Financials,Regional Banks,2026-11-07
-CLX,Clorox,Consumer Staples,Household Products,2026-11-07
-CME,CME Group,Financials,Financial Exchanges & Data,2026-11-07
-CMS,CMS Energy,Utilities,Multi-Utilities,2026-11-07
-KO,Coca-Cola Company (The),Consumer Staples,Soft Drinks & Non-alcoholic Beverages,2026-11-07
-CTSH,Cognizant,Information Technology,IT Consulting & Other Services,2026-11-07
-COHR,Coherent Corp.,Information Technology,Electronic Components,2026-11-07
-COIN,Coinbase,Financials,Financial Exchanges & Data,2026-11-07
-CL,Colgate-Palmolive,Consumer Staples,Household Products,2026-11-07
-CMCSA,Comcast,Communication Services,Cable & Satellite,2026-11-07
-FIX,Comfort Systems USA,Industrials,Construction & Engineering,2026-11-07
-COP,ConocoPhillips,Energy,Oil & Gas Exploration & Production,2026-11-07
-ED,Consolidated Edison,Utilities,Multi-Utilities,2026-11-07
-STZ,Constellation Brands,Consumer Staples,Distillers & Vintners,2026-11-07
-CEG,Constellation Energy,Utilities,Electric Utilities,2026-11-07
-COO,Cooper Companies (The),Health Care,Health Care Supplies,2026-11-07
-CPRT,Copart,Industrials,Diversified Support Services,2026-11-07
-GLW,Corning Inc.,Information Technology,Electronic Components,2026-11-07
-CPAY,Corpay,Financials,Transaction & Payment Processing Services,2026-11-07
-CSGP,CoStar Group,Real Estate,Real Estate Services,2026-11-07
-COST,Costco,Consumer Staples,Consumer Staples Merchandise Retail,2026-11-07
-CRH,CRH plc,Materials,Construction Materials,2026-11-07
-CRWD,CrowdStrike,Information Technology,Systems Software,2026-11-07
-CCI,Crown Castle,Real Estate,Telecom Tower REITs,2026-11-07
-CSX,CSX Corporation,Industrials,Rail Transportation,2026-11-07
-CMI,Cummins,Industrials,Construction Machinery & Heavy Transportation Equipment,2026-11-07
-CVS,CVS Health,Health Care,Health Care Services,2026-11-07
-DHR,Danaher Corporation,Health Care,Life Sciences Tools & Services,2026-11-07
-DRI,Darden Restaurants,Consumer Discretionary,Restaurants,2026-11-07
-DDOG,Datadog,Information Technology,Application Software,2026-11-07
-DVA,DaVita,Health Care,Health Care Services,2026-11-07
-DECK,Deckers Brands,Consumer Discretionary,Footwear,2026-11-07
-DE,Deere & Company,Industrials,Agricultural & Farm Machinery,2026-11-07
-DELL,Dell Technologies,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-07
-DAL,Delta Air Lines,Industrials,Passenger Airlines,2026-11-07
-DVN,Devon Energy,Energy,Oil & Gas Exploration & Production,2026-11-07
-DXCM,Dexcom,Health Care,Health Care Equipment,2026-11-07
-FANG,Diamondback Energy,Energy,Oil & Gas Exploration & Production,2026-11-07
-DLR,Digital Realty,Real Estate,Data Center REITs,2026-11-07
-DG,Dollar General,Consumer Staples,Consumer Staples Merchandise Retail,2026-11-07
-DLTR,Dollar Tree,Consumer Staples,Consumer Staples Merchandise Retail,2026-11-07
-D,Dominion Energy,Utilities,Multi-Utilities,2026-11-07
-DPZ,Domino's,Consumer Discretionary,Restaurants,2026-11-07
-DASH,DoorDash,Consumer Discretionary,Specialized Consumer Services,2026-11-07
-DOV,Dover Corporation,Industrials,Industrial Machinery & Supplies & Components,2026-11-07
-DOW,Dow Inc.,Materials,Commodity Chemicals,2026-11-07
-DHI,D. R. Horton,Consumer Discretionary,Homebuilding,2026-11-07
-DTE,DTE Energy,Utilities,Multi-Utilities,2026-11-07
-DUK,Duke Energy,Utilities,Electric Utilities,2026-11-07
-DD,DuPont,Industrials,Industrial Conglomerates,2026-11-07
-ETN,Eaton Corporation,Industrials,Electrical Components & Equipment,2026-11-07
-EBAY,eBay Inc.,Consumer Discretionary,Broadline Retail,2026-11-07
-ECHO,EchoStar,Communication Services,Wireless Telecommunication Services,2026-11-07
-ECL,Ecolab,Materials,Specialty Chemicals,2026-11-07
-EIX,Edison International,Utilities,Electric Utilities,2026-11-07
-EW,Edwards Lifesciences,Health Care,Health Care Equipment,2026-11-07
-ELV,Elevance Health,Health Care,Managed Health Care,2026-11-07
-EME,Emcor,Industrials,Construction & Engineering,2026-11-07
-EMR,Emerson Electric,Industrials,Electrical Components & Equipment,2026-11-07
-ETR,Entergy,Utilities,Electric Utilities,2026-11-07
-EOG,EOG Resources,Energy,Oil & Gas Exploration & Production,2026-11-07
-EQT,EQT Corporation,Energy,Oil & Gas Exploration & Production,2026-11-07
-EFX,Equifax,Industrials,Research & Consulting Services,2026-11-07
-EQIX,Equinix,Real Estate,Data Center REITs,2026-11-07
-ERIE,Erie Indemnity,Financials,Insurance Brokers,2026-11-07
-ESS,Essex Property Trust,Real Estate,Multi-Family Residential REITs,2026-11-07
-EL,Estée Lauder Companies (The),Consumer Staples,Personal Care Products,2026-11-07
-EG,Everest Group,Financials,Reinsurance,2026-11-07
-EVRG,Evergy,Utilities,Electric Utilities,2026-11-07
-P,Everpure,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-07
-ES,Eversource Energy,Utilities,Electric Utilities,2026-11-07
-EXC,Exelon,Utilities,Electric Utilities,2026-11-07
-EXE,Expand Energy,Energy,Oil & Gas Exploration & Production,2026-11-07
-EXPE,Expedia Group,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-07
-EXPD,Expeditors International,Industrials,Air Freight & Logistics,2026-11-07
-EXR,Extra Space Storage,Real Estate,Self-Storage REITs,2026-11-07
-XOM,ExxonMobil,Energy,Integrated Oil & Gas,2026-11-07
-FFIV,"F5, Inc.",Information Technology,Communications Equipment,2026-11-07
-FDS,FactSet,Financials,Financial Exchanges & Data,2026-11-07
-FICO,Fair Isaac,Information Technology,Application Software,2026-11-07
-FAST,Fastenal,Industrials,Trading Companies & Distributors,2026-11-07
-FRT,Federal Realty Investment Trust,Real Estate,Retail REITs,2026-11-07
-FDX,FedEx,Industrials,Air Freight & Logistics,2026-11-07
-FDXF,FedEx Freight,Industrials,Cargo Ground Transportation,2026-11-07
-FERG,Ferguson Enterprises,Industrials,Trading Companies & Distributors,2026-11-07
-FIS,Fidelity National Information Services,Financials,Transaction & Payment Processing Services,2026-11-07
-FITB,Fifth Third Bancorp,Financials,Regional Banks,2026-11-07
-FSLR,First Solar,Information Technology,Semiconductors,2026-11-07
-FE,FirstEnergy,Utilities,Electric Utilities,2026-11-07
-FISV,Fiserv,Financials,Transaction & Payment Processing Services,2026-11-07
-FLEX,Flex Ltd.,Information Technology,Electronic Manufacturing Services,2026-11-07
-F,Ford Motor Company,Consumer Discretionary,Automobile Manufacturers,2026-11-07
-FTNT,Fortinet,Information Technology,Systems Software,2026-11-07
-FTV,Fortive,Industrials,Industrial Machinery & Supplies & Components,2026-11-07
-FOXA,Fox Corporation (Class A),Communication Services,Broadcasting,2026-11-07
-FOX,Fox Corporation (Class B),Communication Services,Broadcasting,2026-11-07
-BEN,Franklin Resources,Financials,Asset Management & Custody Banks,2026-11-07
-FCX,Freeport-McMoRan,Materials,Copper,2026-11-07
-GRMN,Garmin,Consumer Discretionary,Consumer Electronics,2026-11-07
-IT,Gartner,Information Technology,IT Consulting & Other Services,2026-11-07
-GE,GE Aerospace,Industrials,Aerospace & Defense,2026-11-07
-GEHC,GE HealthCare,Health Care,Health Care Equipment,2026-11-07
-GEV,GE Vernova,Industrials,Heavy Electrical Equipment,2026-11-07
-GEN,Gen Digital,Information Technology,Systems Software,2026-11-07
-GNRC,Generac,Industrials,Heavy Electrical Equipment,2026-11-07
-GD,General Dynamics,Industrials,Aerospace & Defense,2026-11-07
-GIS,General Mills,Consumer Staples,Packaged Foods & Meats,2026-11-07
-GM,General Motors,Consumer Discretionary,Automobile Manufacturers,2026-11-07
-GPC,Genuine Parts Company,Consumer Discretionary,Distributors,2026-11-07
-GILD,Gilead Sciences,Health Care,Biotechnology,2026-11-07
-GPN,Global Payments,Financials,Transaction & Payment Processing Services,2026-11-07
-GL,Globe Life,Financials,Life & Health Insurance,2026-11-07
-GDDY,GoDaddy,Information Technology,Internet Services & Infrastructure,2026-11-07
-GS,Goldman Sachs,Financials,Investment Banking & Brokerage,2026-11-07
-HAL,Halliburton,Energy,Oil & Gas Equipment & Services,2026-11-07
-HIG,Hartford (The),Financials,Property & Casualty Insurance,2026-11-07
-HAS,Hasbro,Consumer Discretionary,Leisure Products,2026-11-07
-HCA,HCA Healthcare,Health Care,Health Care Facilities,2026-11-07
-DOC,Healthpeak Properties,Real Estate,Health Care REITs,2026-11-07
-HSIC,Henry Schein,Health Care,Health Care Distributors,2026-11-07
-HSY,Hershey Company (The),Consumer Staples,Packaged Foods & Meats,2026-11-07
-HPE,Hewlett Packard Enterprise,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-07
-HLT,Hilton Worldwide,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-07
-HD,Home Depot (The),Consumer Discretionary,Home Improvement Retail,2026-11-07
-HONA,Honeywell Aerospace,Industrials,Aerospace & Defense,2026-11-07
-HON,Honeywell Technologies,Industrials,Industrial Conglomerates,2026-11-07
-HRL,Hormel Foods,Consumer Staples,Packaged Foods & Meats,2026-11-07
-HST,Host Hotels & Resorts,Real Estate,Hotel & Resort REITs,2026-11-07
-HWM,Howmet Aerospace,Industrials,Aerospace & Defense,2026-11-07
-HPQ,HP Inc.,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-07
-HUBB,Hubbell Incorporated,Industrials,Industrial Machinery & Supplies & Components,2026-11-07
-HUM,Humana,Health Care,Managed Health Care,2026-11-07
-HBAN,Huntington Bancshares,Financials,Regional Banks,2026-11-07
-HII,Huntington Ingalls Industries,Industrials,Aerospace & Defense,2026-11-07
-IBM,IBM,Information Technology,IT Consulting & Other Services,2026-11-07
-IEX,IDEX Corporation,Industrials,Industrial Machinery & Supplies & Components,2026-11-07
-IDXX,Idexx Laboratories,Health Care,Health Care Equipment,2026-11-07
-ITW,Illinois Tool Works,Industrials,Industrial Machinery & Supplies & Components,2026-11-07
-ILMN,"Illumina, Inc.",Health Care,Life Sciences Tools & Services,2026-11-07
-INCY,Incyte,Health Care,Biotechnology,2026-11-07
-IR,Ingersoll Rand,Industrials,Industrial Machinery & Supplies & Components,2026-11-07
-PODD,Insulet Corporation,Health Care,Health Care Equipment,2026-11-07
-INTC,Intel,Information Technology,Semiconductors,2026-11-07
-IBKR,Interactive Brokers,Financials,Investment Banking & Brokerage,2026-11-07
-ICE,Intercontinental Exchange,Financials,Financial Exchanges & Data,2026-11-07
-IFF,International Flavors & Fragrances,Materials,Specialty Chemicals,2026-11-07
-IP,International Paper,Materials,Paper & Plastic Packaging Products & Materials,2026-11-07
-INTU,Intuit,Information Technology,Application Software,2026-11-07
-ISRG,Intuitive Surgical,Health Care,Health Care Equipment,2026-11-07
-IVZ,Invesco,Financials,Asset Management & Custody Banks,2026-11-07
-INVH,Invitation Homes,Real Estate,Single-Family Residential REITs,2026-11-07
-IQV,IQVIA,Health Care,Life Sciences Tools & Services,2026-11-07
-IRM,Iron Mountain,Real Estate,Other Specialized REITs,2026-11-07
-JBHT,J.B. Hunt,Industrials,Cargo Ground Transportation,2026-11-07
-JBL,Jabil,Information Technology,Electronic Manufacturing Services,2026-11-07
-JKHY,Jack Henry & Associates,Financials,Transaction & Payment Processing Services,2026-11-07
-J,Jacobs Solutions,Industrials,Construction & Engineering,2026-11-07
-JNJ,Johnson & Johnson,Health Care,Pharmaceuticals,2026-11-07
-JCI,Johnson Controls,Industrials,Building Products,2026-11-07
-JPM,JPMorgan Chase,Financials,Diversified Banks,2026-11-07
-KDP,Keurig Dr Pepper,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,2026-11-07
-KEY,KeyCorp,Financials,Regional Banks,2026-11-07
-KEYS,Keysight Technologies,Information Technology,Electronic Equipment & Instruments,2026-11-07
-KMB,Kimberly-Clark,Consumer Staples,Household Products,2026-11-07
-KIM,Kimco Realty,Real Estate,Retail REITs,2026-11-07
-KMI,Kinder Morgan,Energy,Oil & Gas Storage & Transportation,2026-11-07
-KKR,KKR & Co.,Financials,Asset Management & Custody Banks,2026-11-07
-KLAC,KLA Corporation,Information Technology,Semiconductor Materials & Equipment,2026-11-07
-KHC,Kraft Heinz,Consumer Staples,Packaged Foods & Meats,2026-11-07
-KR,Kroger,Consumer Staples,Food Retail,2026-11-07
-LHX,L3Harris,Industrials,Aerospace & Defense,2026-11-07
-LH,Labcorp,Health Care,Health Care Services,2026-11-07
-LRCX,Lam Research,Information Technology,Semiconductor Materials & Equipment,2026-11-07
-LVS,Las Vegas Sands,Consumer Discretionary,Casinos & Gaming,2026-11-07
-LDOS,Leidos,Industrials,Diversified Support Services,2026-11-07
-LEN,Lennar,Consumer Discretionary,Homebuilding,2026-11-07
-LII,Lennox International,Industrials,Building Products,2026-11-07
-LLY,Lilly (Eli),Health Care,Pharmaceuticals,2026-11-07
-LIN,Linde plc,Materials,Industrial Gases,2026-11-07
-LYV,Live Nation Entertainment,Communication Services,Movies & Entertainment,2026-11-07
-LMT,Lockheed Martin,Industrials,Aerospace & Defense,2026-11-07
-L,Loews Corporation,Financials,Multi-line Insurance,2026-11-07
-LOW,Lowe's,Consumer Discretionary,Home Improvement Retail,2026-11-07
-LULU,Lululemon Athletica,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",2026-11-07
-LITE,Lumentum,Information Technology,Communications Equipment,2026-11-07
-LYB,LyondellBasell,Materials,Specialty Chemicals,2026-11-07
-MTB,M&T Bank,Financials,Regional Banks,2026-11-07
-MPC,Marathon Petroleum,Energy,Oil & Gas Refining & Marketing,2026-11-07
-MAR,Marriott International,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-07
-MRSH,Marsh McLennan,Financials,Insurance Brokers,2026-11-07
-MLM,Martin Marietta Materials,Materials,Construction Materials,2026-11-07
-MRVL,Marvell Technology,Information Technology,Semiconductors,2026-11-07
-MAS,Masco,Industrials,Building Products,2026-11-07
-MA,Mastercard,Financials,Transaction & Payment Processing Services,2026-11-07
-MKC,McCormick & Company,Consumer Staples,Packaged Foods & Meats,2026-11-07
-MCD,McDonald's,Consumer Discretionary,Restaurants,2026-11-07
-MCK,McKesson,Health Care,Health Care Distributors,2026-11-07
-MDT,Medtronic,Health Care,Health Care Equipment,2026-11-07
-MRK,Merck & Co.,Health Care,Pharmaceuticals,2026-11-07
-META,Meta Platforms,Communication Services,Interactive Media & Services,2026-11-07
-MET,MetLife,Financials,Life & Health Insurance,2026-11-07
-MTD,Mettler Toledo,Health Care,Life Sciences Tools & Services,2026-11-07
-MGM,MGM Resorts,Consumer Discretionary,Casinos & Gaming,2026-11-07
-MCHP,Microchip Technology,Information Technology,Semiconductors,2026-11-07
-MU,Micron Technology,Information Technology,Semiconductors,2026-11-07
-MSFT,Microsoft,Information Technology,Systems Software,2026-11-07
-MAA,Mid-America Apartment Communities,Real Estate,Multi-Family Residential REITs,2026-11-07
-MRNA,Moderna,Health Care,Biotechnology,2026-11-07
-MDLZ,Mondelez International,Consumer Staples,Packaged Foods & Meats,2026-11-07
-MPWR,Monolithic Power Systems,Information Technology,Semiconductors,2026-11-07
-MNST,Monster Beverage,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,2026-11-07
-MCO,Moody's Corporation,Financials,Financial Exchanges & Data,2026-11-07
-MS,Morgan Stanley,Financials,Investment Banking & Brokerage,2026-11-07
-MOS,Mosaic Company (The),Materials,Fertilizers & Agricultural Chemicals,2026-11-07
-MSI,Motorola Solutions,Information Technology,Communications Equipment,2026-11-07
-MSCI,MSCI,Financials,Financial Exchanges & Data,2026-11-07
-NDAQ,"Nasdaq, Inc.",Financials,Financial Exchanges & Data,2026-11-07
-NTAP,NetApp,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-07
-NFLX,Netflix,Communication Services,Movies & Entertainment,2026-11-07
-NEM,Newmont,Materials,Gold,2026-11-07
-NWSA,News Corp (Class A),Communication Services,Publishing,2026-11-07
-NWS,News Corp (Class B),Communication Services,Publishing,2026-11-07
-NEE,NextEra Energy,Utilities,Multi-Utilities,2026-11-07
-NKE,"Nike, Inc.",Consumer Discretionary,"Apparel, Accessories & Luxury Goods",2026-11-07
-NI,NiSource,Utilities,Multi-Utilities,2026-11-07
-NDSN,Nordson Corporation,Industrials,Industrial Machinery & Supplies & Components,2026-11-07
-NSC,Norfolk Southern,Industrials,Rail Transportation,2026-11-07
-NTRS,Northern Trust,Financials,Asset Management & Custody Banks,2026-11-07
-NOC,Northrop Grumman,Industrials,Aerospace & Defense,2026-11-07
-NCLH,Norwegian Cruise Line Holdings,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-07
-NRG,NRG Energy,Utilities,Independent Power Producers & Energy Traders,2026-11-07
-NUE,Nucor,Materials,Steel,2026-11-07
-NVDA,Nvidia,Information Technology,Semiconductors,2026-11-07
-NVR,"NVR, Inc.",Consumer Discretionary,Homebuilding,2026-11-07
-NXPI,NXP Semiconductors,Information Technology,Semiconductors,2026-11-07
-ORLY,O'Reilly Automotive,Consumer Discretionary,Automotive Retail,2026-11-07
-OXY,Occidental Petroleum,Energy,Oil & Gas Exploration & Production,2026-11-07
-OKTA,"Okta, Inc.",Information Technology,Application Software,2026-11-07
-ODFL,Old Dominion,Industrials,Cargo Ground Transportation,2026-11-07
-OMC,Omnicom Group,Communication Services,Advertising,2026-11-07
-ON,ON Semiconductor,Information Technology,Semiconductors,2026-11-07
-OKE,Oneok,Energy,Oil & Gas Storage & Transportation,2026-11-07
-ORCL,Oracle Corporation,Information Technology,Application Software,2026-11-07
-OTIS,Otis Worldwide,Industrials,Industrial Machinery & Supplies & Components,2026-11-07
-PCAR,Paccar,Industrials,Construction Machinery & Heavy Transportation Equipment,2026-11-07
-PKG,Packaging Corporation of America,Materials,Paper & Plastic Packaging Products & Materials,2026-11-07
-PLTR,Palantir Technologies,Information Technology,Application Software,2026-11-07
-PANW,Palo Alto Networks,Information Technology,Systems Software,2026-11-07
-PH,Parker Hannifin,Industrials,Industrial Machinery & Supplies & Components,2026-11-07
-PAYX,Paychex,Industrials,Human Resource & Employment Services,2026-11-07
-PYPL,PayPal,Financials,Transaction & Payment Processing Services,2026-11-07
-PNR,Pentair,Industrials,Industrial Machinery & Supplies & Components,2026-11-07
-PEP,PepsiCo,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,2026-11-07
-PFE,Pfizer,Health Care,Pharmaceuticals,2026-11-07
-PCG,PG&E Corporation,Utilities,Multi-Utilities,2026-11-07
-PM,Philip Morris International,Consumer Staples,Tobacco,2026-11-07
-PSX,Phillips 66,Energy,Oil & Gas Refining & Marketing,2026-11-07
-PNW,Pinnacle West Capital,Utilities,Multi-Utilities,2026-11-07
-PNC,PNC Financial Services,Financials,Diversified Banks,2026-11-07
-PPG,PPG Industries,Materials,Specialty Chemicals,2026-11-07
-PPL,PPL Corporation,Utilities,Electric Utilities,2026-11-07
-PFG,Principal Financial Group,Financials,Life & Health Insurance,2026-11-07
-PG,Procter & Gamble,Consumer Staples,Personal Care Products,2026-11-07
-PGR,Progressive Corporation,Financials,Property & Casualty Insurance,2026-11-07
-PLD,Prologis,Real Estate,Industrial REITs,2026-11-07
-PRU,Prudential Financial,Financials,Life & Health Insurance,2026-11-07
-PTC,PTC Inc.,Information Technology,Application Software,2026-11-07
-PEG,Public Service Enterprise Group,Utilities,Electric Utilities,2026-11-07
-PSA,Public Storage,Real Estate,Self-Storage REITs,2026-11-07
-PHM,PulteGroup,Consumer Discretionary,Homebuilding,2026-11-07
-Q,Qnity Electronics,Information Technology,Semiconductor Materials & Equipment,2026-11-07
-QCOM,Qualcomm,Information Technology,Semiconductors,2026-11-07
-PWR,Quanta Services,Industrials,Construction & Engineering,2026-11-07
-DGX,Quest Diagnostics,Health Care,Health Care Services,2026-11-07
-RL,Ralph Lauren Corporation,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",2026-11-07
-RJF,Raymond James Financial,Financials,Investment Banking & Brokerage,2026-11-07
-RDDT,Reddit,Communication Services,Interactive Media & Services,2026-11-07
-O,Realty Income,Real Estate,Retail REITs,2026-11-07
-REG,Regency Centers,Real Estate,Retail REITs,2026-11-07
-REGN,Regeneron Pharmaceuticals,Health Care,Biotechnology,2026-11-07
-RF,Regions Financial Corporation,Financials,Regional Banks,2026-11-07
-RSG,Republic Services,Industrials,Environmental & Facilities Services,2026-11-07
-RMD,ResMed,Health Care,Health Care Equipment,2026-11-07
-RVTY,Revvity,Health Care,Health Care Equipment,2026-11-07
-HOOD,Robinhood Markets,Financials,Investment Banking & Brokerage,2026-11-07
-ROK,Rockwell Automation,Industrials,Electrical Components & Equipment,2026-11-07
-ROL,"Rollins, Inc.",Industrials,Environmental & Facilities Services,2026-11-07
-ROP,Roper Technologies,Information Technology,Electronic Equipment & Instruments,2026-11-07
-ROST,Ross Stores,Consumer Discretionary,Apparel Retail,2026-11-07
-RCL,Royal Caribbean Group,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-07
-RTX,RTX Corporation,Industrials,Aerospace & Defense,2026-11-07
-SPGI,S&P Global,Financials,Financial Exchanges & Data,2026-11-07
-CRM,Salesforce,Information Technology,Application Software,2026-11-07
-SNDK,Sandisk,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-07
-SBAC,SBA Communications,Real Estate,Telecom Tower REITs,2026-11-07
-SLB,Schlumberger,Energy,Oil & Gas Equipment & Services,2026-11-07
-STX,Seagate Technology,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-07
-SRE,Sempra,Utilities,Multi-Utilities,2026-11-07
-NOW,ServiceNow,Information Technology,Systems Software,2026-11-07
-SHW,Sherwin-Williams,Materials,Specialty Chemicals,2026-11-07
-SPG,Simon Property Group,Real Estate,Retail REITs,2026-11-07
-SKYD,Skydance,Communication Services,Movies & Entertainment,2026-11-07
-SWKS,Skyworks Solutions,Information Technology,Semiconductors,2026-11-07
-SJM,J.M. Smucker Company (The),Consumer Staples,Packaged Foods & Meats,2026-11-07
-SW,Smurfit Westrock,Materials,Paper & Plastic Packaging Products & Materials,2026-11-07
-SNA,Snap-on,Industrials,Industrial Machinery & Supplies & Components,2026-11-07
-SOLV,Solventum,Health Care,Health Care Technology,2026-11-07
-SO,Southern Company,Utilities,Electric Utilities,2026-11-07
-LUV,Southwest Airlines,Industrials,Passenger Airlines,2026-11-07
-SWK,Stanley Black & Decker,Industrials,Industrial Machinery & Supplies & Components,2026-11-07
-SBUX,Starbucks,Consumer Discretionary,Restaurants,2026-11-07
-STT,State Street Corporation,Financials,Asset Management & Custody Banks,2026-11-07
-STLD,Steel Dynamics,Materials,Steel,2026-11-07
-STE,Steris,Health Care,Health Care Equipment,2026-11-07
-SYK,Stryker Corporation,Health Care,Health Care Equipment,2026-11-07
-SMCI,Supermicro,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-07
-SYF,Synchrony Financial,Financials,Consumer Finance,2026-11-07
-SNPS,Synopsys,Information Technology,Application Software,2026-11-07
-SYY,Sysco,Consumer Staples,Food Distributors,2026-11-07
-TMUS,T-Mobile US,Communication Services,Wireless Telecommunication Services,2026-11-07
-TROW,T. Rowe Price,Financials,Asset Management & Custody Banks,2026-11-07
-TTWO,Take-Two Interactive,Communication Services,Interactive Home Entertainment,2026-11-07
-TPR,"Tapestry, Inc.",Consumer Discretionary,"Apparel, Accessories & Luxury Goods",2026-11-07
-TRGP,Targa Resources,Energy,Oil & Gas Storage & Transportation,2026-11-07
-TGT,Target Corporation,Consumer Staples,Consumer Staples Merchandise Retail,2026-11-07
-TEL,TE Connectivity,Information Technology,Electronic Manufacturing Services,2026-11-07
-TDY,Teledyne Technologies,Information Technology,Electronic Equipment & Instruments,2026-11-07
-TER,Teradyne,Information Technology,Semiconductor Materials & Equipment,2026-11-07
-TSLA,"Tesla, Inc.",Consumer Discretionary,Automobile Manufacturers,2026-11-07
-TXN,Texas Instruments,Information Technology,Semiconductors,2026-11-07
-TPL,Texas Pacific Land Corporation,Energy,Oil & Gas Exploration & Production,2026-11-07
-TXT,Textron,Industrials,Aerospace & Defense,2026-11-07
-TMO,Thermo Fisher Scientific,Health Care,Life Sciences Tools & Services,2026-11-07
-TJX,TJX Companies,Consumer Discretionary,Apparel Retail,2026-11-07
-TKO,TKO Group Holdings,Communication Services,Movies & Entertainment,2026-11-07
-TSCO,Tractor Supply,Consumer Discretionary,Other Specialty Retail,2026-11-07
-TT,Trane Technologies,Industrials,Building Products,2026-11-07
-TDG,TransDigm Group,Industrials,Aerospace & Defense,2026-11-07
-TRV,Travelers Companies (The),Financials,Property & Casualty Insurance,2026-11-07
-TRMB,Trimble Inc.,Information Technology,Application Software,2026-11-07
-TFC,Truist Financial,Financials,Diversified Banks,2026-11-07
-TWLO,Twilio,Information Technology,Systems Software,2026-11-07
-TYL,Tyler Technologies,Information Technology,Application Software,2026-11-07
-TSN,Tyson Foods,Consumer Staples,Packaged Foods & Meats,2026-11-07
-USB,U.S. Bancorp,Financials,Diversified Banks,2026-11-07
-UBER,Uber,Industrials,Passenger Ground Transportation,2026-11-07
-UDR,"UDR, Inc.",Real Estate,Multi-Family Residential REITs,2026-11-07
-ULTA,Ulta Beauty,Consumer Discretionary,Other Specialty Retail,2026-11-07
-UNP,Union Pacific Corporation,Industrials,Rail Transportation,2026-11-07
-UAL,United Airlines Holdings,Industrials,Passenger Airlines,2026-11-07
-UPS,United Parcel Service,Industrials,Air Freight & Logistics,2026-11-07
-URI,United Rentals,Industrials,Trading Companies & Distributors,2026-11-07
-UNH,UnitedHealth Group,Health Care,Managed Health Care,2026-11-07
-UHS,Universal Health Services,Health Care,Health Care Facilities,2026-11-07
-VLO,Valero Energy,Energy,Oil & Gas Refining & Marketing,2026-11-07
-VEEV,Veeva Systems,Health Care,Health Care Technology,2026-11-07
-VTR,Ventas,Real Estate,Health Care REITs,2026-11-07
-VLTO,Veralto,Industrials,Environmental & Facilities Services,2026-11-07
-VRSN,Verisign,Information Technology,Internet Services & Infrastructure,2026-11-07
-VRSK,Verisk Analytics,Industrials,Research & Consulting Services,2026-11-07
-VZ,Verizon,Communication Services,Integrated Telecommunication Services,2026-11-07
-VRTX,Vertex Pharmaceuticals,Health Care,Biotechnology,2026-11-07
-VRT,Vertiv,Industrials,Electrical Components & Equipment,2026-11-07
-VTRS,Viatris,Health Care,Pharmaceuticals,2026-11-07
-VICI,Vici Properties,Real Estate,Hotel & Resort REITs,2026-11-07
-V,Visa Inc.,Financials,Transaction & Payment Processing Services,2026-11-07
-VST,Vistra Corp.,Utilities,Electric Utilities,2026-11-07
-VMRK,Vivmark Residential,Real Estate,Multi-Family Residential REITs,2026-11-07
-VMC,Vulcan Materials Company,Materials,Construction Materials,2026-11-07
-VYLR,Vylor,Consumer Staples,Agricultural Products & Services,2026-11-07
-WRB,W. R. Berkley Corporation,Financials,Property & Casualty Insurance,2026-11-07
-GWW,W. W. Grainger,Industrials,Industrial Machinery & Supplies & Components,2026-11-07
-WAB,Wabtec,Industrials,Construction Machinery & Heavy Transportation Equipment,2026-11-07
-WMT,Walmart,Consumer Staples,Consumer Staples Merchandise Retail,2026-11-07
-DIS,Walt Disney Company (The),Communication Services,Movies & Entertainment,2026-11-07
-WM,Waste Management,Industrials,Environmental & Facilities Services,2026-11-07
-WAT,Waters Corporation,Health Care,Life Sciences Tools & Services,2026-11-07
-WEC,WEC Energy Group,Utilities,Electric Utilities,2026-11-07
-WFC,Wells Fargo,Financials,Diversified Banks,2026-11-07
-WELL,Welltower,Real Estate,Health Care REITs,2026-11-07
-WST,West Pharmaceutical Services,Health Care,Health Care Supplies,2026-11-07
-WDC,Western Digital,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-07
-WY,Weyerhaeuser,Real Estate,Timber REITs,2026-11-07
-WSM,"Williams-Sonoma, Inc.",Consumer Discretionary,Homefurnishing Retail,2026-11-07
-WMB,Williams Companies,Energy,Oil & Gas Storage & Transportation,2026-11-07
-WTW,Willis Towers Watson,Financials,Insurance Brokers,2026-11-07
-WDAY,"Workday, Inc.",Information Technology,Application Software,2026-11-07
-WYNN,Wynn Resorts,Consumer Discretionary,Casinos & Gaming,2026-11-07
-XEL,Xcel Energy,Utilities,Multi-Utilities,2026-11-07
-XYL,Xylem Inc.,Industrials,Industrial Machinery & Supplies & Components,2026-11-07
-YUM,Yum! Brands,Consumer Discretionary,Restaurants,2026-11-07
-ZBRA,Zebra Technologies,Information Technology,Electronic Equipment & Instruments,2026-11-07
-ZBH,Zimmer Biomet,Health Care,Health Care Equipment,2026-11-07
-ZTS,Zoetis,Health Care,Pharmaceuticals,2026-11-07
+MMM,3M,Industrials,Industrial Conglomerates,2026-11-10
+AOS,A. O. Smith,Industrials,Building Products,2026-11-10
+ABT,Abbott Laboratories,Health Care,Health Care Equipment,2026-11-10
+ABBV,AbbVie,Health Care,Biotechnology,2026-11-10
+ACN,Accenture,Information Technology,IT Consulting & Other Services,2026-11-10
+ADBE,Adobe Inc.,Information Technology,Application Software,2026-11-10
+AMD,Advanced Micro Devices,Information Technology,Semiconductors,2026-11-10
+AES,AES Corporation,Utilities,Independent Power Producers & Energy Traders,2026-11-10
+AFL,Aflac,Financials,Life & Health Insurance,2026-11-10
+A,Agilent Technologies,Health Care,Life Sciences Tools & Services,2026-11-10
+APD,Air Products,Materials,Industrial Gases,2026-11-10
+ABNB,Airbnb,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-10
+AKAM,Akamai Technologies,Information Technology,Internet Services & Infrastructure,2026-11-10
+ALB,Albemarle Corporation,Materials,Specialty Chemicals,2026-11-10
+ARE,Alexandria Real Estate Equities,Real Estate,Office REITs,2026-11-10
+ALGN,Align Technology,Health Care,Health Care Supplies,2026-11-10
+ALLE,Allegion,Industrials,Building Products,2026-11-10
+LNT,Alliant Energy,Utilities,Electric Utilities,2026-11-10
+ALL,Allstate,Financials,Property & Casualty Insurance,2026-11-10
+GOOGL,Alphabet Inc. (Class A),Communication Services,Interactive Media & Services,2026-11-10
+GOOG,Alphabet Inc. (Class C),Communication Services,Interactive Media & Services,2026-11-10
+MO,Altria,Consumer Staples,Tobacco,2026-11-10
+AMZN,Amazon,Consumer Discretionary,Broadline Retail,2026-11-10
+AMCR,Amcor,Materials,Paper & Plastic Packaging Products & Materials,2026-11-10
+AEE,Ameren,Utilities,Multi-Utilities,2026-11-10
+AEP,American Electric Power,Utilities,Electric Utilities,2026-11-10
+AXP,American Express,Financials,Consumer Finance,2026-11-10
+AIG,American International Group,Financials,Multi-line Insurance,2026-11-10
+AMT,American Tower,Real Estate,Telecom Tower REITs,2026-11-10
+AWK,American Water Works,Utilities,Water Utilities,2026-11-10
+AMP,Ameriprise Financial,Financials,Asset Management & Custody Banks,2026-11-10
+AME,Ametek,Industrials,Electrical Components & Equipment,2026-11-10
+AMGN,Amgen,Health Care,Biotechnology,2026-11-10
+APH,Amphenol,Information Technology,Electronic Components,2026-11-10
+ADI,Analog Devices,Information Technology,Semiconductors,2026-11-10
+AON,Aon plc,Financials,Insurance Brokers,2026-11-10
+APA,APA Corporation,Energy,Oil & Gas Exploration & Production,2026-11-10
+APO,Apollo Global Management,Financials,Asset Management & Custody Banks,2026-11-10
+AAPL,Apple Inc.,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-10
+AMAT,Applied Materials,Information Technology,Semiconductor Materials & Equipment,2026-11-10
+APP,AppLovin,Communication Services,Advertising,2026-11-10
+APTV,Aptiv,Consumer Discretionary,Automotive Parts & Equipment,2026-11-10
+ACGL,Arch Capital Group,Financials,Property & Casualty Insurance,2026-11-10
+ADM,Archer Daniels Midland,Consumer Staples,Agricultural Products & Services,2026-11-10
+ARES,Ares Management,Financials,Asset Management & Custody Banks,2026-11-10
+ANET,Arista Networks,Information Technology,Communications Equipment,2026-11-10
+AJG,Arthur J. Gallagher & Co.,Financials,Insurance Brokers,2026-11-10
+AIZ,Assurant,Financials,Multi-line Insurance,2026-11-10
+T,AT&T,Communication Services,Integrated Telecommunication Services,2026-11-10
+ATO,Atmos Energy,Utilities,Gas Utilities,2026-11-10
+ADSK,Autodesk,Information Technology,Application Software,2026-11-10
+ADP,Automatic Data Processing,Industrials,Human Resource & Employment Services,2026-11-10
+AZO,AutoZone,Consumer Discretionary,Automotive Retail,2026-11-10
+AVY,Avery Dennison,Materials,Paper & Plastic Packaging Products & Materials,2026-11-10
+AXON,Axon Enterprise,Industrials,Aerospace & Defense,2026-11-10
+BKR,Baker Hughes,Energy,Oil & Gas Equipment & Services,2026-11-10
+BALL,Ball Corporation,Materials,"Metal, Glass & Plastic Containers",2026-11-10
+BAC,Bank of America,Financials,Diversified Banks,2026-11-10
+BAX,Baxter International,Health Care,Health Care Equipment,2026-11-10
+BDX,Becton Dickinson,Health Care,Health Care Equipment,2026-11-10
+BRK-B,Berkshire Hathaway,Financials,Multi-Sector Holdings,2026-11-10
+BBY,Best Buy,Consumer Discretionary,Computer & Electronics Retail,2026-11-10
+TECH,Bio-Techne,Health Care,Life Sciences Tools & Services,2026-11-10
+BIIB,Biogen,Health Care,Biotechnology,2026-11-10
+BLK,BlackRock,Financials,Asset Management & Custody Banks,2026-11-10
+BX,Blackstone Inc.,Financials,Asset Management & Custody Banks,2026-11-10
+XYZ,"Block, Inc.",Financials,Transaction & Payment Processing Services,2026-11-10
+BE,Bloom Energy,Industrials,Electrical Components & Equipment,2026-11-10
+BNY,BNY Mellon,Financials,Asset Management & Custody Banks,2026-11-10
+BA,Boeing,Industrials,Aerospace & Defense,2026-11-10
+BKNG,Booking Holdings,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-10
+BSX,Boston Scientific,Health Care,Health Care Equipment,2026-11-10
+BMY,Bristol Myers Squibb,Health Care,Pharmaceuticals,2026-11-10
+AVGO,Broadcom,Information Technology,Semiconductors,2026-11-10
+BR,Broadridge Financial Solutions,Industrials,Data Processing & Outsourced Services,2026-11-10
+BRO,Brown & Brown,Financials,Insurance Brokers,2026-11-10
+BF-B,Brown–Forman,Consumer Staples,Distillers & Vintners,2026-11-10
+BG,Bunge Global,Consumer Staples,Agricultural Products & Services,2026-11-10
+BXP,"BXP, Inc.",Real Estate,Office REITs,2026-11-10
+CHRW,C.H. Robinson,Industrials,Air Freight & Logistics,2026-11-10
+CDNS,Cadence Design Systems,Information Technology,Application Software,2026-11-10
+CPT,Camden Property Trust,Real Estate,Multi-Family Residential REITs,2026-11-10
+COF,Capital One,Financials,Consumer Finance,2026-11-10
+CAH,Cardinal Health,Health Care,Health Care Distributors,2026-11-10
+CCL,Carnival Corporation,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-10
+CARR,Carrier Global,Industrials,Building Products,2026-11-10
+CVNA,Carvana,Consumer Discretionary,Automotive Retail,2026-11-10
+CASY,Casey's,Consumer Staples,Food Retail,2026-11-10
+CAT,Caterpillar Inc.,Industrials,Construction Machinery & Heavy Transportation Equipment,2026-11-10
+CBOE,Cboe Global Markets,Financials,Financial Exchanges & Data,2026-11-10
+CBRE,CBRE Group,Real Estate,Real Estate Services,2026-11-10
+CDW,CDW Corporation,Information Technology,Technology Distributors,2026-11-10
+COR,Cencora,Health Care,Health Care Distributors,2026-11-10
+CNC,Centene Corporation,Health Care,Managed Health Care,2026-11-10
+CNP,CenterPoint Energy,Utilities,Multi-Utilities,2026-11-10
+CF,CF Industries,Materials,Fertilizers & Agricultural Chemicals,2026-11-10
+CRL,Charles River Laboratories,Health Care,Life Sciences Tools & Services,2026-11-10
+SCHW,Charles Schwab Corporation,Financials,Investment Banking & Brokerage,2026-11-10
+CHTR,Charter Communications,Communication Services,Cable & Satellite,2026-11-10
+CVX,Chevron Corporation,Energy,Integrated Oil & Gas,2026-11-10
+CMG,Chipotle Mexican Grill,Consumer Discretionary,Restaurants,2026-11-10
+CB,Chubb Limited,Financials,Property & Casualty Insurance,2026-11-10
+CHD,Church & Dwight,Consumer Staples,Household Products,2026-11-10
+CIEN,Ciena,Information Technology,Communications Equipment,2026-11-10
+CI,Cigna,Health Care,Health Care Services,2026-11-10
+CINF,Cincinnati Financial,Financials,Property & Casualty Insurance,2026-11-10
+CTAS,Cintas,Industrials,Diversified Support Services,2026-11-10
+CSCO,Cisco,Information Technology,Communications Equipment,2026-11-10
+C,Citigroup,Financials,Diversified Banks,2026-11-10
+CFG,Citizens Financial Group,Financials,Regional Banks,2026-11-10
+CLX,Clorox,Consumer Staples,Household Products,2026-11-10
+CME,CME Group,Financials,Financial Exchanges & Data,2026-11-10
+CMS,CMS Energy,Utilities,Multi-Utilities,2026-11-10
+KO,Coca-Cola Company (The),Consumer Staples,Soft Drinks & Non-alcoholic Beverages,2026-11-10
+CTSH,Cognizant,Information Technology,IT Consulting & Other Services,2026-11-10
+COHR,Coherent Corp.,Information Technology,Electronic Components,2026-11-10
+COIN,Coinbase,Financials,Financial Exchanges & Data,2026-11-10
+CL,Colgate-Palmolive,Consumer Staples,Household Products,2026-11-10
+CMCSA,Comcast,Communication Services,Cable & Satellite,2026-11-10
+FIX,Comfort Systems USA,Industrials,Construction & Engineering,2026-11-10
+COP,ConocoPhillips,Energy,Oil & Gas Exploration & Production,2026-11-10
+ED,Consolidated Edison,Utilities,Multi-Utilities,2026-11-10
+STZ,Constellation Brands,Consumer Staples,Distillers & Vintners,2026-11-10
+CEG,Constellation Energy,Utilities,Electric Utilities,2026-11-10
+COO,Cooper Companies (The),Health Care,Health Care Supplies,2026-11-10
+CPRT,Copart,Industrials,Diversified Support Services,2026-11-10
+GLW,Corning Inc.,Information Technology,Electronic Components,2026-11-10
+CPAY,Corpay,Financials,Transaction & Payment Processing Services,2026-11-10
+CSGP,CoStar Group,Real Estate,Real Estate Services,2026-11-10
+COST,Costco,Consumer Staples,Consumer Staples Merchandise Retail,2026-11-10
+CRH,CRH plc,Materials,Construction Materials,2026-11-10
+CRWD,CrowdStrike,Information Technology,Systems Software,2026-11-10
+CCI,Crown Castle,Real Estate,Telecom Tower REITs,2026-11-10
+CSX,CSX Corporation,Industrials,Rail Transportation,2026-11-10
+CMI,Cummins,Industrials,Construction Machinery & Heavy Transportation Equipment,2026-11-10
+CVS,CVS Health,Health Care,Health Care Services,2026-11-10
+DHR,Danaher Corporation,Health Care,Life Sciences Tools & Services,2026-11-10
+DRI,Darden Restaurants,Consumer Discretionary,Restaurants,2026-11-10
+DDOG,Datadog,Information Technology,Application Software,2026-11-10
+DVA,DaVita,Health Care,Health Care Services,2026-11-10
+DECK,Deckers Brands,Consumer Discretionary,Footwear,2026-11-10
+DE,Deere & Company,Industrials,Agricultural & Farm Machinery,2026-11-10
+DELL,Dell Technologies,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-10
+DAL,Delta Air Lines,Industrials,Passenger Airlines,2026-11-10
+DVN,Devon Energy,Energy,Oil & Gas Exploration & Production,2026-11-10
+DXCM,Dexcom,Health Care,Health Care Equipment,2026-11-10
+FANG,Diamondback Energy,Energy,Oil & Gas Exploration & Production,2026-11-10
+DLR,Digital Realty,Real Estate,Data Center REITs,2026-11-10
+DG,Dollar General,Consumer Staples,Consumer Staples Merchandise Retail,2026-11-10
+DLTR,Dollar Tree,Consumer Staples,Consumer Staples Merchandise Retail,2026-11-10
+D,Dominion Energy,Utilities,Multi-Utilities,2026-11-10
+DPZ,Domino's,Consumer Discretionary,Restaurants,2026-11-10
+DASH,DoorDash,Consumer Discretionary,Specialized Consumer Services,2026-11-10
+DOV,Dover Corporation,Industrials,Industrial Machinery & Supplies & Components,2026-11-10
+DOW,Dow Inc.,Materials,Commodity Chemicals,2026-11-10
+DHI,D. R. Horton,Consumer Discretionary,Homebuilding,2026-11-10
+DTE,DTE Energy,Utilities,Multi-Utilities,2026-11-10
+DUK,Duke Energy,Utilities,Electric Utilities,2026-11-10
+DD,DuPont,Industrials,Industrial Conglomerates,2026-11-10
+ETN,Eaton Corporation,Industrials,Electrical Components & Equipment,2026-11-10
+EBAY,eBay Inc.,Consumer Discretionary,Broadline Retail,2026-11-10
+ECHO,EchoStar,Communication Services,Wireless Telecommunication Services,2026-11-10
+ECL,Ecolab,Materials,Specialty Chemicals,2026-11-10
+EIX,Edison International,Utilities,Electric Utilities,2026-11-10
+EW,Edwards Lifesciences,Health Care,Health Care Equipment,2026-11-10
+ELV,Elevance Health,Health Care,Managed Health Care,2026-11-10
+EME,Emcor,Industrials,Construction & Engineering,2026-11-10
+EMR,Emerson Electric,Industrials,Electrical Components & Equipment,2026-11-10
+ETR,Entergy,Utilities,Electric Utilities,2026-11-10
+EOG,EOG Resources,Energy,Oil & Gas Exploration & Production,2026-11-10
+EQT,EQT Corporation,Energy,Oil & Gas Exploration & Production,2026-11-10
+EFX,Equifax,Industrials,Research & Consulting Services,2026-11-10
+EQIX,Equinix,Real Estate,Data Center REITs,2026-11-10
+ERIE,Erie Indemnity,Financials,Insurance Brokers,2026-11-10
+ESS,Essex Property Trust,Real Estate,Multi-Family Residential REITs,2026-11-10
+EL,Estée Lauder Companies (The),Consumer Staples,Personal Care Products,2026-11-10
+EG,Everest Group,Financials,Reinsurance,2026-11-10
+EVRG,Evergy,Utilities,Electric Utilities,2026-11-10
+P,Everpure,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-10
+ES,Eversource Energy,Utilities,Electric Utilities,2026-11-10
+EXC,Exelon,Utilities,Electric Utilities,2026-11-10
+EXE,Expand Energy,Energy,Oil & Gas Exploration & Production,2026-11-10
+EXPE,Expedia Group,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-10
+EXPD,Expeditors International,Industrials,Air Freight & Logistics,2026-11-10
+EXR,Extra Space Storage,Real Estate,Self-Storage REITs,2026-11-10
+XOM,ExxonMobil,Energy,Integrated Oil & Gas,2026-11-10
+FFIV,"F5, Inc.",Information Technology,Communications Equipment,2026-11-10
+FDS,FactSet,Financials,Financial Exchanges & Data,2026-11-10
+FICO,Fair Isaac,Information Technology,Application Software,2026-11-10
+FAST,Fastenal,Industrials,Trading Companies & Distributors,2026-11-10
+FRT,Federal Realty Investment Trust,Real Estate,Retail REITs,2026-11-10
+FDX,FedEx,Industrials,Air Freight & Logistics,2026-11-10
+FDXF,FedEx Freight,Industrials,Cargo Ground Transportation,2026-11-10
+FERG,Ferguson Enterprises,Industrials,Trading Companies & Distributors,2026-11-10
+FIS,Fidelity National Information Services,Financials,Transaction & Payment Processing Services,2026-11-10
+FITB,Fifth Third Bancorp,Financials,Regional Banks,2026-11-10
+FSLR,First Solar,Information Technology,Semiconductors,2026-11-10
+FE,FirstEnergy,Utilities,Electric Utilities,2026-11-10
+FISV,Fiserv,Financials,Transaction & Payment Processing Services,2026-11-10
+FLEX,Flex Ltd.,Information Technology,Electronic Manufacturing Services,2026-11-10
+F,Ford Motor Company,Consumer Discretionary,Automobile Manufacturers,2026-11-10
+FTNT,Fortinet,Information Technology,Systems Software,2026-11-10
+FTV,Fortive,Industrials,Industrial Machinery & Supplies & Components,2026-11-10
+FOXA,Fox Corporation (Class A),Communication Services,Broadcasting,2026-11-10
+FOX,Fox Corporation (Class B),Communication Services,Broadcasting,2026-11-10
+BEN,Franklin Resources,Financials,Asset Management & Custody Banks,2026-11-10
+FCX,Freeport-McMoRan,Materials,Copper,2026-11-10
+GRMN,Garmin,Consumer Discretionary,Consumer Electronics,2026-11-10
+IT,Gartner,Information Technology,IT Consulting & Other Services,2026-11-10
+GE,GE Aerospace,Industrials,Aerospace & Defense,2026-11-10
+GEHC,GE HealthCare,Health Care,Health Care Equipment,2026-11-10
+GEV,GE Vernova,Industrials,Heavy Electrical Equipment,2026-11-10
+GEN,Gen Digital,Information Technology,Systems Software,2026-11-10
+GNRC,Generac,Industrials,Heavy Electrical Equipment,2026-11-10
+GD,General Dynamics,Industrials,Aerospace & Defense,2026-11-10
+GIS,General Mills,Consumer Staples,Packaged Foods & Meats,2026-11-10
+GM,General Motors,Consumer Discretionary,Automobile Manufacturers,2026-11-10
+GPC,Genuine Parts Company,Consumer Discretionary,Distributors,2026-11-10
+GILD,Gilead Sciences,Health Care,Biotechnology,2026-11-10
+GPN,Global Payments,Financials,Transaction & Payment Processing Services,2026-11-10
+GL,Globe Life,Financials,Life & Health Insurance,2026-11-10
+GDDY,GoDaddy,Information Technology,Internet Services & Infrastructure,2026-11-10
+GS,Goldman Sachs,Financials,Investment Banking & Brokerage,2026-11-10
+HAL,Halliburton,Energy,Oil & Gas Equipment & Services,2026-11-10
+HIG,Hartford (The),Financials,Property & Casualty Insurance,2026-11-10
+HAS,Hasbro,Consumer Discretionary,Leisure Products,2026-11-10
+HCA,HCA Healthcare,Health Care,Health Care Facilities,2026-11-10
+DOC,Healthpeak Properties,Real Estate,Health Care REITs,2026-11-10
+HSIC,Henry Schein,Health Care,Health Care Distributors,2026-11-10
+HSY,Hershey Company (The),Consumer Staples,Packaged Foods & Meats,2026-11-10
+HPE,Hewlett Packard Enterprise,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-10
+HLT,Hilton Worldwide,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-10
+HD,Home Depot (The),Consumer Discretionary,Home Improvement Retail,2026-11-10
+HONA,Honeywell Aerospace,Industrials,Aerospace & Defense,2026-11-10
+HON,Honeywell Technologies,Industrials,Industrial Conglomerates,2026-11-10
+HRL,Hormel Foods,Consumer Staples,Packaged Foods & Meats,2026-11-10
+HST,Host Hotels & Resorts,Real Estate,Hotel & Resort REITs,2026-11-10
+HWM,Howmet Aerospace,Industrials,Aerospace & Defense,2026-11-10
+HPQ,HP Inc.,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-10
+HUBB,Hubbell Incorporated,Industrials,Industrial Machinery & Supplies & Components,2026-11-10
+HUM,Humana,Health Care,Managed Health Care,2026-11-10
+HBAN,Huntington Bancshares,Financials,Regional Banks,2026-11-10
+HII,Huntington Ingalls Industries,Industrials,Aerospace & Defense,2026-11-10
+IBM,IBM,Information Technology,IT Consulting & Other Services,2026-11-10
+IEX,IDEX Corporation,Industrials,Industrial Machinery & Supplies & Components,2026-11-10
+IDXX,Idexx Laboratories,Health Care,Health Care Equipment,2026-11-10
+ITW,Illinois Tool Works,Industrials,Industrial Machinery & Supplies & Components,2026-11-10
+ILMN,"Illumina, Inc.",Health Care,Life Sciences Tools & Services,2026-11-10
+INCY,Incyte,Health Care,Biotechnology,2026-11-10
+IR,Ingersoll Rand,Industrials,Industrial Machinery & Supplies & Components,2026-11-10
+PODD,Insulet Corporation,Health Care,Health Care Equipment,2026-11-10
+INTC,Intel,Information Technology,Semiconductors,2026-11-10
+IBKR,Interactive Brokers,Financials,Investment Banking & Brokerage,2026-11-10
+ICE,Intercontinental Exchange,Financials,Financial Exchanges & Data,2026-11-10
+IFF,International Flavors & Fragrances,Materials,Specialty Chemicals,2026-11-10
+IP,International Paper,Materials,Paper & Plastic Packaging Products & Materials,2026-11-10
+INTU,Intuit,Information Technology,Application Software,2026-11-10
+ISRG,Intuitive Surgical,Health Care,Health Care Equipment,2026-11-10
+IVZ,Invesco,Financials,Asset Management & Custody Banks,2026-11-10
+INVH,Invitation Homes,Real Estate,Single-Family Residential REITs,2026-11-10
+IQV,IQVIA,Health Care,Life Sciences Tools & Services,2026-11-10
+IRM,Iron Mountain,Real Estate,Other Specialized REITs,2026-11-10
+JBHT,J.B. Hunt,Industrials,Cargo Ground Transportation,2026-11-10
+JBL,Jabil,Information Technology,Electronic Manufacturing Services,2026-11-10
+JKHY,Jack Henry & Associates,Financials,Transaction & Payment Processing Services,2026-11-10
+J,Jacobs Solutions,Industrials,Construction & Engineering,2026-11-10
+JNJ,Johnson & Johnson,Health Care,Pharmaceuticals,2026-11-10
+JCI,Johnson Controls,Industrials,Building Products,2026-11-10
+JPM,JPMorgan Chase,Financials,Diversified Banks,2026-11-10
+KDP,Keurig Dr Pepper,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,2026-11-10
+KEY,KeyCorp,Financials,Regional Banks,2026-11-10
+KEYS,Keysight Technologies,Information Technology,Electronic Equipment & Instruments,2026-11-10
+KMB,Kimberly-Clark,Consumer Staples,Household Products,2026-11-10
+KIM,Kimco Realty,Real Estate,Retail REITs,2026-11-10
+KMI,Kinder Morgan,Energy,Oil & Gas Storage & Transportation,2026-11-10
+KKR,KKR & Co.,Financials,Asset Management & Custody Banks,2026-11-10
+KLAC,KLA Corporation,Information Technology,Semiconductor Materials & Equipment,2026-11-10
+KHC,Kraft Heinz,Consumer Staples,Packaged Foods & Meats,2026-11-10
+KR,Kroger,Consumer Staples,Food Retail,2026-11-10
+LHX,L3Harris,Industrials,Aerospace & Defense,2026-11-10
+LH,Labcorp,Health Care,Health Care Services,2026-11-10
+LRCX,Lam Research,Information Technology,Semiconductor Materials & Equipment,2026-11-10
+LVS,Las Vegas Sands,Consumer Discretionary,Casinos & Gaming,2026-11-10
+LDOS,Leidos,Industrials,Diversified Support Services,2026-11-10
+LEN,Lennar,Consumer Discretionary,Homebuilding,2026-11-10
+LII,Lennox International,Industrials,Building Products,2026-11-10
+LLY,Lilly (Eli),Health Care,Pharmaceuticals,2026-11-10
+LIN,Linde plc,Materials,Industrial Gases,2026-11-10
+LYV,Live Nation Entertainment,Communication Services,Movies & Entertainment,2026-11-10
+LMT,Lockheed Martin,Industrials,Aerospace & Defense,2026-11-10
+L,Loews Corporation,Financials,Multi-line Insurance,2026-11-10
+LOW,Lowe's,Consumer Discretionary,Home Improvement Retail,2026-11-10
+LULU,Lululemon Athletica,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",2026-11-10
+LITE,Lumentum,Information Technology,Communications Equipment,2026-11-10
+LYB,LyondellBasell,Materials,Specialty Chemicals,2026-11-10
+MTB,M&T Bank,Financials,Regional Banks,2026-11-10
+MPC,Marathon Petroleum,Energy,Oil & Gas Refining & Marketing,2026-11-10
+MAR,Marriott International,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-10
+MRSH,Marsh McLennan,Financials,Insurance Brokers,2026-11-10
+MLM,Martin Marietta Materials,Materials,Construction Materials,2026-11-10
+MRVL,Marvell Technology,Information Technology,Semiconductors,2026-11-10
+MAS,Masco,Industrials,Building Products,2026-11-10
+MA,Mastercard,Financials,Transaction & Payment Processing Services,2026-11-10
+MKC,McCormick & Company,Consumer Staples,Packaged Foods & Meats,2026-11-10
+MCD,McDonald's,Consumer Discretionary,Restaurants,2026-11-10
+MCK,McKesson,Health Care,Health Care Distributors,2026-11-10
+MDT,Medtronic,Health Care,Health Care Equipment,2026-11-10
+MRK,Merck & Co.,Health Care,Pharmaceuticals,2026-11-10
+META,Meta Platforms,Communication Services,Interactive Media & Services,2026-11-10
+MET,MetLife,Financials,Life & Health Insurance,2026-11-10
+MTD,Mettler Toledo,Health Care,Life Sciences Tools & Services,2026-11-10
+MGM,MGM Resorts,Consumer Discretionary,Casinos & Gaming,2026-11-10
+MCHP,Microchip Technology,Information Technology,Semiconductors,2026-11-10
+MU,Micron Technology,Information Technology,Semiconductors,2026-11-10
+MSFT,Microsoft,Information Technology,Systems Software,2026-11-10
+MAA,Mid-America Apartment Communities,Real Estate,Multi-Family Residential REITs,2026-11-10
+MRNA,Moderna,Health Care,Biotechnology,2026-11-10
+MDLZ,Mondelez International,Consumer Staples,Packaged Foods & Meats,2026-11-10
+MPWR,Monolithic Power Systems,Information Technology,Semiconductors,2026-11-10
+MNST,Monster Beverage,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,2026-11-10
+MCO,Moody's Corporation,Financials,Financial Exchanges & Data,2026-11-10
+MS,Morgan Stanley,Financials,Investment Banking & Brokerage,2026-11-10
+MOS,Mosaic Company (The),Materials,Fertilizers & Agricultural Chemicals,2026-11-10
+MSI,Motorola Solutions,Information Technology,Communications Equipment,2026-11-10
+MSCI,MSCI,Financials,Financial Exchanges & Data,2026-11-10
+NDAQ,"Nasdaq, Inc.",Financials,Financial Exchanges & Data,2026-11-10
+NTAP,NetApp,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-10
+NFLX,Netflix,Communication Services,Movies & Entertainment,2026-11-10
+NEM,Newmont,Materials,Gold,2026-11-10
+NWSA,News Corp (Class A),Communication Services,Publishing,2026-11-10
+NWS,News Corp (Class B),Communication Services,Publishing,2026-11-10
+NEE,NextEra Energy,Utilities,Multi-Utilities,2026-11-10
+NKE,"Nike, Inc.",Consumer Discretionary,"Apparel, Accessories & Luxury Goods",2026-11-10
+NI,NiSource,Utilities,Multi-Utilities,2026-11-10
+NDSN,Nordson Corporation,Industrials,Industrial Machinery & Supplies & Components,2026-11-10
+NSC,Norfolk Southern,Industrials,Rail Transportation,2026-11-10
+NTRS,Northern Trust,Financials,Asset Management & Custody Banks,2026-11-10
+NOC,Northrop Grumman,Industrials,Aerospace & Defense,2026-11-10
+NCLH,Norwegian Cruise Line Holdings,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-10
+NRG,NRG Energy,Utilities,Independent Power Producers & Energy Traders,2026-11-10
+NUE,Nucor,Materials,Steel,2026-11-10
+NVDA,Nvidia,Information Technology,Semiconductors,2026-11-10
+NVR,"NVR, Inc.",Consumer Discretionary,Homebuilding,2026-11-10
+NXPI,NXP Semiconductors,Information Technology,Semiconductors,2026-11-10
+ORLY,O'Reilly Automotive,Consumer Discretionary,Automotive Retail,2026-11-10
+OXY,Occidental Petroleum,Energy,Oil & Gas Exploration & Production,2026-11-10
+OKTA,"Okta, Inc.",Information Technology,Application Software,2026-11-10
+ODFL,Old Dominion,Industrials,Cargo Ground Transportation,2026-11-10
+OMC,Omnicom Group,Communication Services,Advertising,2026-11-10
+ON,ON Semiconductor,Information Technology,Semiconductors,2026-11-10
+OKE,Oneok,Energy,Oil & Gas Storage & Transportation,2026-11-10
+ORCL,Oracle Corporation,Information Technology,Application Software,2026-11-10
+OTIS,Otis Worldwide,Industrials,Industrial Machinery & Supplies & Components,2026-11-10
+PCAR,Paccar,Industrials,Construction Machinery & Heavy Transportation Equipment,2026-11-10
+PKG,Packaging Corporation of America,Materials,Paper & Plastic Packaging Products & Materials,2026-11-10
+PLTR,Palantir Technologies,Information Technology,Application Software,2026-11-10
+PANW,Palo Alto Networks,Information Technology,Systems Software,2026-11-10
+PH,Parker Hannifin,Industrials,Industrial Machinery & Supplies & Components,2026-11-10
+PAYX,Paychex,Industrials,Human Resource & Employment Services,2026-11-10
+PYPL,PayPal,Financials,Transaction & Payment Processing Services,2026-11-10
+PNR,Pentair,Industrials,Industrial Machinery & Supplies & Components,2026-11-10
+PEP,PepsiCo,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,2026-11-10
+PFE,Pfizer,Health Care,Pharmaceuticals,2026-11-10
+PCG,PG&E Corporation,Utilities,Multi-Utilities,2026-11-10
+PM,Philip Morris International,Consumer Staples,Tobacco,2026-11-10
+PSX,Phillips 66,Energy,Oil & Gas Refining & Marketing,2026-11-10
+PNW,Pinnacle West Capital,Utilities,Multi-Utilities,2026-11-10
+PNC,PNC Financial Services,Financials,Diversified Banks,2026-11-10
+PPG,PPG Industries,Materials,Specialty Chemicals,2026-11-10
+PPL,PPL Corporation,Utilities,Electric Utilities,2026-11-10
+PFG,Principal Financial Group,Financials,Life & Health Insurance,2026-11-10
+PG,Procter & Gamble,Consumer Staples,Personal Care Products,2026-11-10
+PGR,Progressive Corporation,Financials,Property & Casualty Insurance,2026-11-10
+PLD,Prologis,Real Estate,Industrial REITs,2026-11-10
+PRU,Prudential Financial,Financials,Life & Health Insurance,2026-11-10
+PTC,PTC Inc.,Information Technology,Application Software,2026-11-10
+PEG,Public Service Enterprise Group,Utilities,Electric Utilities,2026-11-10
+PSA,Public Storage,Real Estate,Self-Storage REITs,2026-11-10
+PHM,PulteGroup,Consumer Discretionary,Homebuilding,2026-11-10
+Q,Qnity Electronics,Information Technology,Semiconductor Materials & Equipment,2026-11-10
+QCOM,Qualcomm,Information Technology,Semiconductors,2026-11-10
+PWR,Quanta Services,Industrials,Construction & Engineering,2026-11-10
+DGX,Quest Diagnostics,Health Care,Health Care Services,2026-11-10
+RL,Ralph Lauren Corporation,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",2026-11-10
+RJF,Raymond James Financial,Financials,Investment Banking & Brokerage,2026-11-10
+RDDT,Reddit,Communication Services,Interactive Media & Services,2026-11-10
+O,Realty Income,Real Estate,Retail REITs,2026-11-10
+REG,Regency Centers,Real Estate,Retail REITs,2026-11-10
+REGN,Regeneron Pharmaceuticals,Health Care,Biotechnology,2026-11-10
+RF,Regions Financial Corporation,Financials,Regional Banks,2026-11-10
+RSG,Republic Services,Industrials,Environmental & Facilities Services,2026-11-10
+RMD,ResMed,Health Care,Health Care Equipment,2026-11-10
+RVTY,Revvity,Health Care,Health Care Equipment,2026-11-10
+HOOD,Robinhood Markets,Financials,Investment Banking & Brokerage,2026-11-10
+ROK,Rockwell Automation,Industrials,Electrical Components & Equipment,2026-11-10
+ROL,"Rollins, Inc.",Industrials,Environmental & Facilities Services,2026-11-10
+ROP,Roper Technologies,Information Technology,Electronic Equipment & Instruments,2026-11-10
+ROST,Ross Stores,Consumer Discretionary,Apparel Retail,2026-11-10
+RCL,Royal Caribbean Group,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2026-11-10
+RTX,RTX Corporation,Industrials,Aerospace & Defense,2026-11-10
+SPGI,S&P Global,Financials,Financial Exchanges & Data,2026-11-10
+CRM,Salesforce,Information Technology,Application Software,2026-11-10
+SNDK,Sandisk,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-10
+SBAC,SBA Communications,Real Estate,Telecom Tower REITs,2026-11-10
+SLB,Schlumberger,Energy,Oil & Gas Equipment & Services,2026-11-10
+STX,Seagate Technology,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-10
+SRE,Sempra,Utilities,Multi-Utilities,2026-11-10
+NOW,ServiceNow,Information Technology,Systems Software,2026-11-10
+SHW,Sherwin-Williams,Materials,Specialty Chemicals,2026-11-10
+SPG,Simon Property Group,Real Estate,Retail REITs,2026-11-10
+SKYD,Skydance,Communication Services,Movies & Entertainment,2026-11-10
+SWKS,Skyworks Solutions,Information Technology,Semiconductors,2026-11-10
+SJM,J.M. Smucker Company (The),Consumer Staples,Packaged Foods & Meats,2026-11-10
+SW,Smurfit Westrock,Materials,Paper & Plastic Packaging Products & Materials,2026-11-10
+SNA,Snap-on,Industrials,Industrial Machinery & Supplies & Components,2026-11-10
+SOLV,Solventum,Health Care,Health Care Technology,2026-11-10
+SO,Southern Company,Utilities,Electric Utilities,2026-11-10
+LUV,Southwest Airlines,Industrials,Passenger Airlines,2026-11-10
+SWK,Stanley Black & Decker,Industrials,Industrial Machinery & Supplies & Components,2026-11-10
+SBUX,Starbucks,Consumer Discretionary,Restaurants,2026-11-10
+STT,State Street Corporation,Financials,Asset Management & Custody Banks,2026-11-10
+STLD,Steel Dynamics,Materials,Steel,2026-11-10
+STE,Steris,Health Care,Health Care Equipment,2026-11-10
+SYK,Stryker Corporation,Health Care,Health Care Equipment,2026-11-10
+SMCI,Supermicro,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-10
+SYF,Synchrony Financial,Financials,Consumer Finance,2026-11-10
+SNPS,Synopsys,Information Technology,Application Software,2026-11-10
+SYY,Sysco,Consumer Staples,Food Distributors,2026-11-10
+TMUS,T-Mobile US,Communication Services,Wireless Telecommunication Services,2026-11-10
+TROW,T. Rowe Price,Financials,Asset Management & Custody Banks,2026-11-10
+TTWO,Take-Two Interactive,Communication Services,Interactive Home Entertainment,2026-11-10
+TPR,"Tapestry, Inc.",Consumer Discretionary,"Apparel, Accessories & Luxury Goods",2026-11-10
+TRGP,Targa Resources,Energy,Oil & Gas Storage & Transportation,2026-11-10
+TGT,Target Corporation,Consumer Staples,Consumer Staples Merchandise Retail,2026-11-10
+TEL,TE Connectivity,Information Technology,Electronic Manufacturing Services,2026-11-10
+TDY,Teledyne Technologies,Information Technology,Electronic Equipment & Instruments,2026-11-10
+TER,Teradyne,Information Technology,Semiconductor Materials & Equipment,2026-11-10
+TSLA,"Tesla, Inc.",Consumer Discretionary,Automobile Manufacturers,2026-11-10
+TXN,Texas Instruments,Information Technology,Semiconductors,2026-11-10
+TPL,Texas Pacific Land Corporation,Energy,Oil & Gas Exploration & Production,2026-11-10
+TXT,Textron,Industrials,Aerospace & Defense,2026-11-10
+TMO,Thermo Fisher Scientific,Health Care,Life Sciences Tools & Services,2026-11-10
+TJX,TJX Companies,Consumer Discretionary,Apparel Retail,2026-11-10
+TKO,TKO Group Holdings,Communication Services,Movies & Entertainment,2026-11-10
+TSCO,Tractor Supply,Consumer Discretionary,Other Specialty Retail,2026-11-10
+TT,Trane Technologies,Industrials,Building Products,2026-11-10
+TDG,TransDigm Group,Industrials,Aerospace & Defense,2026-11-10
+TRV,Travelers Companies (The),Financials,Property & Casualty Insurance,2026-11-10
+TRMB,Trimble Inc.,Information Technology,Application Software,2026-11-10
+TFC,Truist Financial,Financials,Diversified Banks,2026-11-10
+TWLO,Twilio,Information Technology,Systems Software,2026-11-10
+TYL,Tyler Technologies,Information Technology,Application Software,2026-11-10
+TSN,Tyson Foods,Consumer Staples,Packaged Foods & Meats,2026-11-10
+USB,U.S. Bancorp,Financials,Diversified Banks,2026-11-10
+UBER,Uber,Industrials,Passenger Ground Transportation,2026-11-10
+UDR,"UDR, Inc.",Real Estate,Multi-Family Residential REITs,2026-11-10
+ULTA,Ulta Beauty,Consumer Discretionary,Other Specialty Retail,2026-11-10
+UNP,Union Pacific Corporation,Industrials,Rail Transportation,2026-11-10
+UAL,United Airlines Holdings,Industrials,Passenger Airlines,2026-11-10
+UPS,United Parcel Service,Industrials,Air Freight & Logistics,2026-11-10
+URI,United Rentals,Industrials,Trading Companies & Distributors,2026-11-10
+UNH,UnitedHealth Group,Health Care,Managed Health Care,2026-11-10
+UHS,Universal Health Services,Health Care,Health Care Facilities,2026-11-10
+VLO,Valero Energy,Energy,Oil & Gas Refining & Marketing,2026-11-10
+VEEV,Veeva Systems,Health Care,Health Care Technology,2026-11-10
+VTR,Ventas,Real Estate,Health Care REITs,2026-11-10
+VLTO,Veralto,Industrials,Environmental & Facilities Services,2026-11-10
+VRSN,Verisign,Information Technology,Internet Services & Infrastructure,2026-11-10
+VRSK,Verisk Analytics,Industrials,Research & Consulting Services,2026-11-10
+VZ,Verizon,Communication Services,Integrated Telecommunication Services,2026-11-10
+VRTX,Vertex Pharmaceuticals,Health Care,Biotechnology,2026-11-10
+VRT,Vertiv,Industrials,Electrical Components & Equipment,2026-11-10
+VTRS,Viatris,Health Care,Pharmaceuticals,2026-11-10
+VICI,Vici Properties,Real Estate,Hotel & Resort REITs,2026-11-10
+V,Visa Inc.,Financials,Transaction & Payment Processing Services,2026-11-10
+VST,Vistra Corp.,Utilities,Electric Utilities,2026-11-10
+VMRK,Vivmark Residential,Real Estate,Multi-Family Residential REITs,2026-11-10
+VMC,Vulcan Materials Company,Materials,Construction Materials,2026-11-10
+VYLR,Vylor,Consumer Staples,Agricultural Products & Services,2026-11-10
+WRB,W. R. Berkley Corporation,Financials,Property & Casualty Insurance,2026-11-10
+GWW,W. W. Grainger,Industrials,Industrial Machinery & Supplies & Components,2026-11-10
+WAB,Wabtec,Industrials,Construction Machinery & Heavy Transportation Equipment,2026-11-10
+WMT,Walmart,Consumer Staples,Consumer Staples Merchandise Retail,2026-11-10
+DIS,Walt Disney Company (The),Communication Services,Movies & Entertainment,2026-11-10
+WM,Waste Management,Industrials,Environmental & Facilities Services,2026-11-10
+WAT,Waters Corporation,Health Care,Life Sciences Tools & Services,2026-11-10
+WEC,WEC Energy Group,Utilities,Electric Utilities,2026-11-10
+WFC,Wells Fargo,Financials,Diversified Banks,2026-11-10
+WELL,Welltower,Real Estate,Health Care REITs,2026-11-10
+WST,West Pharmaceutical Services,Health Care,Health Care Supplies,2026-11-10
+WDC,Western Digital,Information Technology,"Technology Hardware, Storage & Peripherals",2026-11-10
+WY,Weyerhaeuser,Real Estate,Timber REITs,2026-11-10
+WSM,"Williams-Sonoma, Inc.",Consumer Discretionary,Homefurnishing Retail,2026-11-10
+WMB,Williams Companies,Energy,Oil & Gas Storage & Transportation,2026-11-10
+WTW,Willis Towers Watson,Financials,Insurance Brokers,2026-11-10
+WDAY,"Workday, Inc.",Information Technology,Application Software,2026-11-10
+WYNN,Wynn Resorts,Consumer Discretionary,Casinos & Gaming,2026-11-10
+XEL,Xcel Energy,Utilities,Multi-Utilities,2026-11-10
+XYL,Xylem Inc.,Industrials,Industrial Machinery & Supplies & Components,2026-11-10
+YUM,Yum! Brands,Consumer Discretionary,Restaurants,2026-11-10
+ZBRA,Zebra Technologies,Information Technology,Electronic Equipment & Instruments,2026-11-10
+ZBH,Zimmer Biomet,Health Care,Health Care Equipment,2026-11-10
+ZTS,Zoetis,Health Care,Pharmaceuticals,2026-11-10
